@@ -199,6 +199,8 @@ void draw(){
    respawnY=(int)level.SpawnY;
    respawnStage=level.mainStage;
    
+   overview_saveLevel.draw();
+   
  }//end of level over view
  
  
@@ -372,6 +374,13 @@ void mouseClicked(){
         if(overviewSelection>=level.stages.size()){
         overviewSelection=-1;
       }
+      }
+      
+      if(overview_saveLevel.isMouseOver()){
+        println("saving level");
+      level.save(); 
+      gmillis=millis()+400;
+      println("save complete");
       }
       if(overviewSelection!=-1){
         if(level.stages.get(overviewSelection).type.equals("stage")){
