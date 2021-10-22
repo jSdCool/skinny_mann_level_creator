@@ -1,0 +1,24 @@
+[
+  {
+    "mainStage": 2,
+    "coins": 9,
+    "level_id": 586154716,
+    "name": "my_level",
+    "spawnX": 20,
+    "spawn pointX": 20,
+    "game version": "0.1.0_ALFA",
+    "spawn pointY": 535,
+    "spawnY": 535,
+	"author": "jSdCool"
+  },
+  {
+    "name": "example 1",
+    "location": "\\example 1.json",
+    "type": "stage"
+  },
+  {
+    "name": "exaple 2",
+    "location": "\\exaple 2.json",
+    "type": "stage"
+  }
+]

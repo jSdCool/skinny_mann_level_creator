@@ -1,0 +1,39 @@
+[
+  {
+    "mainStage": 0,
+    "coins": 1,
+    "author": "jSdCool",
+    "level_id": -1,
+    "spawnX": 20,
+    "name": "bata",
+    "spawn pointX": 20,
+    "spawn pointY": 700,
+    "game version": "0.0.0.4",
+    "spawnY": 700
+  },
+  {
+    "name": "level_2",
+    "location": "\\level_2.json",
+    "type": "stage"
+  },
+  {
+    "name": "level_3",
+    "location": "\\level_3.json",
+    "type": "stage"
+  },
+  {
+    "name": "LEVEL_4",
+    "location": "\\LEVEL_4.json",
+    "type": "stage"
+  },
+  {
+    "name": "Level_5",
+    "location": "\\Level_5.json",
+    "type": "stage"
+  },
+  {
+    "name": "test",
+    "location": "\\test.json",
+    "type": "stage"
+  }
+]

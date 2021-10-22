@@ -1,0 +1,22 @@
+[
+  {
+    "name": "exaple 2",
+    "type": "stage"
+  },
+  {
+    "dx": 460,
+    "color": -16732415,
+    "dy": 160,
+    "x": 0,
+    "y": 550,
+    "type": "ground"
+  },
+  {
+    "link Index": 1,
+    "x": 85,
+    "y": 496,
+    "type": "interdimentional Portal",
+    "linkY": 541,
+    "linkX": 776
+  }
+]

@@ -1,0 +1,144 @@
+[
+  {
+    "name": "example 1",
+    "type": "stage"
+  },
+  {
+    "dx": 610,
+    "color": -16732415,
+    "dy": 180,
+    "x": 0,
+    "y": 540,
+    "type": "ground"
+  },
+  {"type": "deleted"},
+  {
+    "coin id": 1,
+    "x": 181,
+    "y": 508,
+    "type": "coin"
+  },
+  {
+    "coin id": 2,
+    "x": 244,
+    "y": 503,
+    "type": "coin"
+  },
+  {
+    "coin id": 3,
+    "x": 297,
+    "y": 506,
+    "type": "coin"
+  },
+  {
+    "coin id": 4,
+    "x": 411,
+    "y": 506,
+    "type": "coin"
+  },
+  {
+    "coin id": 5,
+    "x": 479,
+    "y": 506,
+    "type": "coin"
+  },
+  {
+    "coin id": 6,
+    "x": 342,
+    "y": 504,
+    "type": "coin"
+  },
+  {
+    "coin id": 7,
+    "x": 590,
+    "y": 511,
+    "type": "coin"
+  },
+  {
+    "coin id": 8,
+    "x": 527,
+    "y": 512,
+    "type": "coin"
+  },
+  {
+    "color": -16732415,
+    "rotation": 2,
+    "y1": 540,
+    "x1": 610,
+    "y2": 720,
+    "x2": 1150,
+    "type": "sloap"
+  },
+  {
+    "dx": 20,
+    "color": -16732415,
+    "dy": 10,
+    "x": 500,
+    "y": 530,
+    "type": "ground"
+  },
+  {
+    "dx": 10,
+    "color": -16732415,
+    "dy": 10,
+    "x": 490,
+    "y": 520,
+    "type": "ground"
+  },
+  {
+    "dx": 20,
+    "color": -16732415,
+    "dy": 20,
+    "x": 480,
+    "y": 520,
+    "type": "ground"
+  },
+  {
+    "dx": 10,
+    "color": -16732415,
+    "dy": 10,
+    "x": 480,
+    "y": 510,
+    "type": "ground"
+  },
+  {
+    "dx": 10,
+    "color": -16732415,
+    "dy": 40,
+    "x": 470,
+    "y": 500,
+    "type": "ground"
+  },
+  {
+    "link Index": 2,
+    "x": 776,
+    "y": 541,
+    "type": "interdimentional Portal",
+    "linkY": 496,
+    "linkX": 85
+  },
+  {
+    "dx": 620,
+    "color": -16732415,
+    "dy": 130,
+    "x": 1920,
+    "y": 590,
+    "type": "ground"
+  },
+  {
+    "link Index": 1,
+    "x": 1132,
+    "y": 661,
+    "type": "interdimentional Portal",
+    "linkY": 534,
+    "linkX": 1974
+  },
+  {
+    "link Index": 1,
+    "x": 1974,
+    "y": 534,
+    "type": "interdimentional Portal",
+    "linkY": 661,
+    "linkX": 1132
+  }
+]

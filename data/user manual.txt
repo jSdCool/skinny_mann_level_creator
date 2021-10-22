@@ -1,0 +1,109 @@
+how to use the skinny mann level creator
+
+*note it may be nessarry to manualy edit the level file in sime instances
+
+
+if you can be bother to read this check out the tutorial playlist here: I have not created it yet pls contact jSdCool with any questions
+
+
+the basics:
+after loading or creating a new level you are placed into the editor
+at the top there are sevaral squares with are tools to use while making the level
+the first square is the pause/play simulation button
+when clicked it will eather pause or un pause the "simulation"
+then the triangel is visible the "simulation" is paused, this menas charicters wont move and you are basicly in edit mode
+*note you can also edit the level when the "simulation" is not paused
+when in edit mode (paused simulation) you can use the left and right arrow keys to move the camera left and right
+when in simulation mode you can use a/d to mode left and right and space to make the mann jump
+
+
+
+How to ground tool:
+the ground tool is next to the pause/play button
+when selected the user can click and drag a box across the screen that the player can stand on
+under the tools 3 black bars will appear, these are RGB sliders
+click and drag the white boxes on the left to select colors    this will be the color of the ground that is drawn
+*note for the colors of the terain that are used in the built in game levels look in the color info.txt file
+
+
+
+How to checkpoint tool:
+the checkpoint tool is next to the ground tool
+when selected click on the screen to place a checkpoint
+when the player is standing on the checkpoint there spawn point will be reset to that point
+
+
+How to finish line tool:
+the finish line tool is next to the checkpoint tool 
+click anywhere on the screenw to place a finish line 
+the levcel will be complete when the player stand in its hitbox
+
+How to delete tool:
+the delete tool is next to the finish line tool
+simply click on any thing pervously placed down to remove it
+
+How to move player tool:
+the move player tool is next to the delete tool
+this tool move the player to the mouse position when clicked
+
+How to grid mode:
+the grid mode tool is next to the move player tool:
+when activated any ground that is drawn will automaticly snap to an invisible grid of the size specified on the tool
+to change the size of the grid simply scroll up or down on your mouse while grid mode is on
+
+How to advanced:
+for all advanced actions you will need to manualy edit the level file 
+for now the level file will be named "levelnamwe".json
+it is recomended that you use a texteditor like notepad++ to open this file but notepad will allso do fine
+
+Tweaking level settings:
+the verry first groop of things in this file will look like this,
+{
+    "level type": "level",
+    "level_id": XXXXXXXXX,
+    "name": "test",
+    "spawnX": 20,
+    "spawn pointX": 20,
+    "game version": "0.0.0.4_BETA",
+    "spawn pointY": 700,
+    "spawnY": 700
+  },
+
+editing this grop will be most of what you will probubly want to do
+leave the level type, level_id, and name feild alone
+if you want a coustome level spawn position then change the spawn pointX and spawn pointY values
+additinaly change the spawnX and spawnY values to make the player tart at those positions
+
+updating to a newer game version:
+to do this it may be a case of simply editing the game version feild however more may need to be added in the futcher
+
+
+
+accual objects:
+{
+    "dx": 260,
+    "color": -16777215,
+    "dy": 180,
+    "x": 200,
+    "y": 360,
+    "type": "ground"
+  },
+{
+    "x": 2691,
+    "y": 367,
+    "type": "check point"
+  },
+{
+    "x": 2595,
+    "y": 163,
+    "type": "goal"
+  }
+
+these are the structures for the ground checkoints and finish lines
+edit thees values for fine tuning of your level
+
+removing exess text:
+if oyou have ever deleted thing you will see
+{"type": "deleted"},
+theese can simply be removed bu pressing ctrl + f 
+sweitching to find and replace and leveing the replace feild blank

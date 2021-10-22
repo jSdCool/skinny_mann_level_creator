@@ -1,0 +1,2 @@
+grass color 175 green
+platforms: 145 red 77 green
