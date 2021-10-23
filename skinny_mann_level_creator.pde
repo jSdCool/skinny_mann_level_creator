@@ -13,7 +13,7 @@ loadJSONArray("data/colors.json");
     coin3D.scale(3);
 }
 boolean startup=true,editing_level=true,player1_moving_right=false,player1_moving_left=false,dev_mode=false,player1_jumping=false,loading=false,newLevel=false,simulating=false,entering_file_path=false,coursor=false,level_complete=false,dead=false,entering_name=false,cam_left=false,cam_right=false,drawing=false,draw=false,extra=false,ground=false,check_point=false,goal=false,deleteing=false,delete=false,moving_player=false,grid_mode=false,holo_gram=false,editingStage=false,levelOverview=false,newFile=false,drawCoins=false,drawingPortal=false,drawingPortal2=false,drawingPortal3=false,E_pressed=false,saveColors=false,sloap=false,loopThread2=true,cam_up=false,cam_down=false,holoTriangle=false,dethPlane=false,setPlayerPosTo=false,e3DMode=false,WPressed=false,SPressed=false,draw3DSwitch1=false,draw3DSwitch2=false,checkpointIn3DStage=false,shadow3D=true,tutorialMode=false;
-String file_path,new_name="my_level",GAME_version="0.4.0_Early_Access",EDITOR_version="0.0.1.5_EAc",rootPath="",coursorr="",newFileName="",newLevelType="2D",stageType="",author="your name here",displayText="";
+String file_path,new_name="my_level",GAME_version="0.4.1_Early_Access",EDITOR_version="0.0.1.6_EAc",rootPath="",coursorr="",newFileName="",newLevelType="2D",stageType="",author="your name here",displayText="";
 //int player1 []={20,700,1,0,1,0};
 Player player1 =new Player(20,699,1,"red");
 int camPos=0,camPosY=0,death_cool_down,start_down,eadgeScroleDist=100,respawnX=20,respawnY=700,spdelay=0,Color=0,RedPos=0,BluePos=0,GreenPos=0,RC=0,GC=0,BC=0,grid_size=10,filesScrole=0,overviewSelection=-1,portalIndex1,stageIndex,preSI,respawnStage,setPlayerPosX,setPlayerPosY,setPlayerPosZ,startingDepth=0,totalDepth=300,respawnZ=50,coinRotation=0,coinCount=0,gmillis=0,eadgeScroleDistV=100,currentStageIndex,tutorialDrawLimit=0,displayTextUntill=0;
@@ -54,8 +54,8 @@ void draw(){
     textAlign(BOTTOM,LEFT);
     text("new",210,370);
     text("load",810,370);
-    fill(255);
-    textSize(10);
+    fill(0);
+    textSize(15);
     text("game ver: "+GAME_version+ "  editor ver: "+EDITOR_version,0,718);
     fill(0);
     textSize(15);
@@ -237,7 +237,7 @@ void draw(){
    if(overviewSelection!=-1){
     rect(0,overviewSelection*60+80,1280,60);
     infos=mainIndex.getJSONObject(overviewSelection+1);
-    if(infos.getString("type").equals("stage")||infos.getString("type").equals("3Dstage")){
+    if(level.stages.get(overviewSelection).type.equals("stage")||level.stages.get(overviewSelection).type.equals("3Dstage")){
      selectStage.draw();
       textAlign(LEFT, BOTTOM);
       stroke(0,255,0);
@@ -252,20 +252,13 @@ void draw(){
    line(0,80,1280,80);
    fill(0);
    textSize(30);
-   for(int i=1;i<11&&i+filesScrole<mainIndex.size();i++){
-     JSONObject indexs=mainIndex.getJSONObject(i);
+   for(int i=0; i < 11 && i + filesScrole < level.stages.size();i++){
+     
      fill(0);
-     String displayName=indexs.getString("name"),type=indexs.getString("type");
-     text(displayName,80,130+60*(i-1));
-     if(type.equals("coins")){
-       drawCoin(40,110+60*(i-1),4);
-       coinsIndex=i;
-       //coins=loadJSONArray(rootPath+mainIndex.getJSONObject(i).getString("location"));
-       
-     }
+     String displayName=level.stages.get(i).name,type=level.stages.get(i).type;
+     text(displayName,80,130+60*(i));
      if(type.equals("stage")){
-      drawWorldSymbol(20,90+60*(i-1)); 
-      
+      drawWorldSymbol(20,90+60*(i)); 
      }
    }
    textAlign(CENTER, CENTER);
@@ -448,20 +441,12 @@ void mouseClicked(){
         overviewSelection=-1;
       }
       }
-       JSONObject infos;
+
       if(overviewSelection!=-1){
-        infos=mainIndex.getJSONObject(overviewSelection+1);
-        if(infos.getString("type").equals("stage")||infos.getString("type").equals("3Dstage")){
-          //if(edditStage.isMouseOver()){
-          //  file_path=rootPath+infos.getString("location");
-          //  editingStage=true;
-          //  levelOverview=false;
-          //  stageIndex=overviewSelection+1;
-          //}
+        if(level.stages.get(overviewSelection).type.equals("stage")||level.stages.get(overviewSelection).type.equals("3Dstage")){
           if(selectStage.isMouseOver()){
             editingStage=true;
             levelOverview=false;
-            //file_path=rootPath+infos.getString("location");
             drawingPortal2=false;
             drawingPortal3=true;
             camPos=0;

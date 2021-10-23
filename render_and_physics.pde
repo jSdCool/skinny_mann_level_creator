@@ -722,7 +722,7 @@ boolean player_kill(float x,float y){
 
 int colid_index(float x,float y){
  Stage stage=level.stages.get(currentStageIndex);
-  for(int i=stage.parts.size()-1;i>=0;i++){
+  for(int i=stage.parts.size()-1;i>=0;i--){
     if(stage.parts.get(i).colide(x,y,true)){
       return i; 
     }

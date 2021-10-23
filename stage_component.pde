@@ -24,7 +24,7 @@ class Level{
    respawnStage=currentStageIndex;
    for(int i=1;i<file.size();i++){
      job=file.getJSONObject(i);
-    stages.add( new Stage(loadJSONArray(rootPath+job.getString("location"))));
+    stages.add(new Stage(loadJSONArray(rootPath+job.getString("location"))));
    }
    coins=new ArrayList<Boolean>();
    for(int i=0;i<numOfCoins;i++){
@@ -75,6 +75,7 @@ class Stage{
   Stage(String Name,String Type){
     name=Name;
     type=Type;
+    is3D=type.equals("3Dstage");
   }
   
   void load(JSONArray file){
@@ -850,7 +851,7 @@ int direction;
     direction=data.getInt("rotation");
   }
   HoloTriangle(float x1,float y1,float x2,float y2,int rot,int fcolor){
-    type="sloap";
+    type="holoTriangle";
     x=x1;
     y=y1;
     dx=x2;
@@ -944,6 +945,7 @@ class SWon3D extends StageComponent{//ground component
     x=X;
     y=Y;
     z=Z;
+    type="3DonSW";
   }
   JSONObject save(boolean stage_3D){
     JSONObject part=new JSONObject();
@@ -994,6 +996,7 @@ class SWoff3D extends StageComponent{//ground component
     x=X;
     y=Y;
     z=Z;
+    type="3DoffSW";
   }
   JSONObject save(boolean stage_3D){
     JSONObject part=new JSONObject();
