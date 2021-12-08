@@ -3,14 +3,16 @@ void settings(){
 }
 
 void setup(){
+  textSize(80);
 loadJSONArray("data/colors.json");
  frameRate(60);
   surface.setTitle("skinny mann level creator");
   scr2 =new ColorSelectorScreen();
   colors=loadJSONArray("data/colors.json");
   thread("thrdCalc2");
-    coin3D=loadShape("data\\modles\\coin\\tinker.obj");
+    coin3D=loadShape("data/modles/coin/tinker.obj");
     coin3D.scale(3);
+  initlizeButtons();
 }
 boolean startup=true,editing_level=true,player1_moving_right=false,player1_moving_left=false,dev_mode=false,player1_jumping=false,loading=false,newLevel=false,simulating=false,entering_file_path=false,coursor=false,level_complete=false,dead=false,entering_name=false,cam_left=false,cam_right=false,drawing=false,draw=false,extra=false,ground=false,check_point=false,goal=false,deleteing=false,delete=false,moving_player=false,grid_mode=false,holo_gram=false,editingStage=false,levelOverview=false,newFile=false,drawCoins=false,drawingPortal=false,drawingPortal2=false,drawingPortal3=false,E_pressed=false,saveColors=false,sloap=false,loopThread2=true,cam_up=false,cam_down=false,holoTriangle=false,dethPlane=false,setPlayerPosTo=false,e3DMode=false,WPressed=false,SPressed=false,draw3DSwitch1=false,draw3DSwitch2=false,checkpointIn3DStage=false,shadow3D=true,tutorialMode=false;
 String file_path,new_name="my_level",GAME_version="0.4.1_Early_Access",EDITOR_version="0.0.1.6_EAc",rootPath="",coursorr="",newFileName="",newLevelType="2D",stageType="",author="your name here",displayText="";
@@ -234,10 +236,8 @@ void draw(){
    fill(#7CC7FF);
    stroke(#7CC7FF);
    strokeWeight(0);
-   JSONObject infos;
    if(overviewSelection!=-1){
     rect(0,overviewSelection*60+80,1280,60);
-    infos=mainIndex.getJSONObject(overviewSelection+1);
     if(level.stages.get(overviewSelection).type.equals("stage")||level.stages.get(overviewSelection).type.equals("3Dstage")){
      selectStage.draw();
       textAlign(LEFT, BOTTOM);
@@ -315,7 +315,7 @@ void mouseClicked(){
        }
        if(mouseX >=40 && mouseX <= 240 && mouseY >= 400 && mouseY <= 440){
          try{
-           mainIndex=loadJSONArray(rootPath+"\\index.json");
+           mainIndex=loadJSONArray(rootPath+"/index.json");
          entering_file_path=false;
          loading=false;
          levelOverview=true;

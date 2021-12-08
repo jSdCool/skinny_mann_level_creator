@@ -12,12 +12,12 @@
   },
   {
     "name": "stage1",
-    "location": "\\stage1.json",
+    "location": "/stage1.json",
     "type": "stage"
   },
   {
     "name": "stage 2",
-    "location": "\\stage 2.json",
+    "location": "/stage 2.json",
     "type": "stage"
   }
 ]
