@@ -3,11 +3,11 @@ void settings(){
 }
 
 void setup(){
-  textSize(80);
+  textSize(80);//make text not fuzzy
 loadJSONArray("data/colors.json");
  frameRate(60);
   surface.setTitle("skinny mann level creator");
-  scr2 =new ColorSelectorScreen();
+  scr2 =new ToolBox();
   colors=loadJSONArray("data/colors.json");
   thread("thrdCalc2");
     coin3D=loadShape("data/modles/coin/tinker.obj");
@@ -15,19 +15,18 @@ loadJSONArray("data/colors.json");
   initlizeButtons();
 }
 boolean startup=true,editing_level=true,player1_moving_right=false,player1_moving_left=false,dev_mode=false,player1_jumping=false,loading=false,newLevel=false,simulating=false,entering_file_path=false,coursor=false,level_complete=false,dead=false,entering_name=false,cam_left=false,cam_right=false,drawing=false,draw=false,extra=false,ground=false,check_point=false,goal=false,deleteing=false,delete=false,moving_player=false,grid_mode=false,holo_gram=false,editingStage=false,levelOverview=false,newFile=false,drawCoins=false,drawingPortal=false,drawingPortal2=false,drawingPortal3=false,E_pressed=false,saveColors=false,sloap=false,loopThread2=true,cam_up=false,cam_down=false,holoTriangle=false,dethPlane=false,setPlayerPosTo=false,e3DMode=false,WPressed=false,SPressed=false,draw3DSwitch1=false,draw3DSwitch2=false,checkpointIn3DStage=false,shadow3D=true,tutorialMode=false;
-String file_path,new_name="my_level",GAME_version="0.4.1_Early_Access",EDITOR_version="0.0.1.6_EAc",rootPath="",coursorr="",newFileName="",newLevelType="2D",stageType="",author="your name here",displayText="";
+String file_path,new_name="my_level",GAME_version="0.4.1_Early_Access",EDITOR_version="0.0.1.7_EAc",rootPath="",coursorr="",newFileName="",newLevelType="2D",stageType="",author="your name here",displayText="";
 //int player1 []={20,700,1,0,1,0};
 Player player1 =new Player(20,699,1,"red");
 int camPos=0,camPosY=0,death_cool_down,start_down,eadgeScroleDist=100,respawnX=20,respawnY=700,spdelay=0,Color=0,RedPos=0,BluePos=0,GreenPos=0,RC=0,GC=0,BC=0,grid_size=10,filesScrole=0,overviewSelection=-1,portalIndex1,stageIndex,preSI,respawnStage,setPlayerPosX,setPlayerPosY,setPlayerPosZ,startingDepth=0,totalDepth=300,respawnZ=50,coinRotation=0,coinCount=0,gmillis=0,eadgeScroleDistV=100,currentStageIndex,tutorialDrawLimit=0,displayTextUntill=0;
-int buttonMin=40,buttonMax=1050,coinsIndex,triangleMode=0;
+int buttonMin=0,buttonMax=0,coinsIndex,triangleMode=0;
 JSONArray mainIndex/*,coins*/,colors;
 JSONObject portalStage1,portalStage2;
 float downX,downY,upX,upY,Scale=1;
-ColorSelectorScreen scr2 ;
+ToolBox scr2 ;
 PShape coin3D;
 Level level;
 ArrayList<Boolean> coins = new ArrayList<Boolean>();
-
 void draw(){
   
   if(frameCount%20==0){
@@ -53,9 +52,9 @@ void draw(){
     rect(800,300,200,80);
     fill(0);
     textSize(80);
-    textAlign(BOTTOM,LEFT);
-    text("new",210,370);
-    text("load",810,370);
+    textAlign(LEFT,BOTTOM);
+    text("new",210,370+15);
+    text("load",810,370+15);
     fill(0);
     textSize(15);
     text("game ver: "+GAME_version+ "  editor ver: "+EDITOR_version,0,718);
@@ -88,7 +87,7 @@ void draw(){
     rect(40,400,200,40);
     fill(0);
     textSize(40);
-    text("load",50,435);
+    text("load",50,435+10);
   }
   if(newLevel){
     background(#48EDD8);
@@ -109,7 +108,7 @@ void draw(){
     rect(40,400,200,40);
     fill(0);
     textSize(40);
-    text("start",50,435);
+    text("start",50,435+10);
     stroke(0);
     strokeWeight(1);
     line(40,152,800,152);
