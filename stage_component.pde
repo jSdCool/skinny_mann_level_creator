@@ -635,9 +635,10 @@ class Interdimentional_Portal extends StageComponent{//ground component
     linkY=data.getFloat("linkY");
     linkIndex=data.getInt("link Index")-1;
     if(stage_3D){
-     z=data.getFloat("z"); 
+     
     }
     try{
+      z=data.getFloat("z"); 
         linkZ=data.getFloat("linkZ");
       }catch(Throwable e){
       linkZ=-1;

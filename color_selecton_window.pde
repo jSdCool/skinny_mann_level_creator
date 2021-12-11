@@ -1,12 +1,13 @@
 class ToolBox extends PApplet {
   
-  public ToolBox() {
+  public ToolBox(int miliOffset) {
     super();
     PApplet.runSketch(new String[]{this.getClass().getName()}, this);
+    millisOffset=miliOffset;
   }
   
   public int redVal=0,greenVal=0,blueVal=0,CC=0;
-  int rsp=0,gsp=0,bsp=0,selectedColor=0;
+  int rsp=0,gsp=0,bsp=0,selectedColor=0,millisOffset;
   String page="colors";
   Button colorPage,toolsPage,draw_coin,draw_portal,draw_sloap,draw_holoTriangle,draw_dethPlane,toggle3DMode,switch3D1,switch3D2,saveLevel,exitStageEdit; 
   
@@ -116,6 +117,7 @@ class ToolBox extends PApplet {
      triangle(50,50+100,75,65+100,50,80+100);
     }
     
+    if(!e3DMode){
     strokeWeight(0);
     if(ground){
       fill(#F2F258);
@@ -288,7 +290,7 @@ class ToolBox extends PApplet {
     fill(-114431);
     stroke(-114431);
     rect(825,65+100,40,20);
-    
+    }
     saveLevel.draw();
     
     textAlign(LEFT,BOTTOM);
@@ -301,6 +303,7 @@ class ToolBox extends PApplet {
       textSize(15);
       text("play/pause the simulation",mouseX,mouseY+5);
       }
+      if(!e3DMode){
     if(mouseX >=100 && mouseX <= 140 && mouseY >= 40+100 && mouseY <= 90+100){
       stroke(0);  
       fill(200);
@@ -425,6 +428,7 @@ class ToolBox extends PApplet {
       fill(0);
       textSize(15);
       text("deth plane",mouseX,mouseY+5);
+      }
       }
       if(saveLevel.isMouseOver()){
         stroke(0);  
@@ -959,14 +963,27 @@ turnThingsOff();
         if(toggle3DMode.isMouseOver()){
         e3DMode=false;
       }
+      if(mouseX >=40 && mouseX <= 270 && mouseY >= 40+100 && mouseY <= 90+100){
+        if(mouseX >=40 && mouseX <= 90 && mouseY >= 40+100 && mouseY <= 90+100){
+          extra=true;
+          if(extra&&simulating){
+             simulating=false; 
+             extra=false;
+          }
+          if(extra&&!simulating){
+             simulating=true; 
+             extra=false;
+          }
+        }
+      }
       }//end of 3D mode is on 
       }
       
       if(saveLevel.isMouseOver()){
        println("saving level");
       level.save(); 
-      gmillis=millis()+400;
-      println("save complete");
+      gmillis=millis()+400+millisOffset;
+      println("save complete"+gmillis);
      }
      }//end of edditing stage
    }
@@ -974,13 +991,13 @@ turnThingsOff();
   
   public void mouseDragged(){
    if(page.equals("colors")){
-   if(mouseX >= 100-25 && mouseX <= 1180-25 && mouseY >= 150+100 && mouseY <= 200+100){
+   if(mouseX >= 100-25 && mouseX <= 1180-25 && mouseY >= 150 && mouseY <= 200){
      rsp=mouseX-75;
    }
-   if(mouseX >= 100-25 && mouseX <= 1180-25 && mouseY >= 300+100 && mouseY <= 350+100){
+   if(mouseX >= 100-25 && mouseX <= 1180-25 && mouseY >= 300 && mouseY <= 350){
      gsp=mouseX-75;
    }
-   if(mouseX >= 100-25 && mouseX <= 1180-25 && mouseY >= 450+100 && mouseY <= 500+100){
+   if(mouseX >= 100-25 && mouseX <= 1180-25 && mouseY >= 450 && mouseY <= 500){
      bsp=mouseX-75;
    }
    }//end of if pages is colors
@@ -1110,10 +1127,7 @@ class Button{
   /**
   @deprecated 
   */
-  public Button setTextFactor(float factor){
-    //textScaleFactor=factor;
-    return this;
-  }
+
   public Button setTextColor(int c){
    textcolor=c;
     return this;
