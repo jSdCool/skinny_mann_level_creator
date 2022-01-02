@@ -1,5 +1,5 @@
 class Player{
- public float x,y,z=0,scale,timeInAir=0,jumpDist=0,animationCooldown;
+ public float x,y,z=0,scale,timeInAir=0,jumpDist=0,animationCooldown,verticalVelocity=0;
  int pose=1;
  String shirt;
  boolean jumping=false;

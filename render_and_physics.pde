@@ -91,9 +91,9 @@ void playerPhysics(){
 
 if(!e3DMode){         
          if(player1_moving_right){//move the player right
-          float newpos=player1.getX()+mspc*0.2;
+          float newpos=player1.getX()+mspc*0.4;//calculate new position
           
-          if(!level_colide(newpos+10,player1.getY())){
+          if(!level_colide(newpos+10,player1.getY())){//check if the player can walk up "stairs"
             if(!level_colide(newpos+10,player1.getY()-25)){
               if(!level_colide(newpos+10,player1.getY()-50)){
                 if(!level_colide(newpos+10,player1.getY()-75)){
@@ -101,7 +101,7 @@ if(!e3DMode){
                 }
               }
             }
-          }else if((!level_colide(newpos+10,player1.getY()-10)&&!level_colide(newpos+10,player1.getY()-50)&&!level_colide(newpos+10,player1.getY()-75))&&player1.getAirTime()==0){
+          }else if((!level_colide(newpos+10,player1.getY()-10)&&!level_colide(newpos+10,player1.getY()-50)&&!level_colide(newpos+10,player1.getY()-75))&&player1.getAirTime()==0){//check if the new posaition would place the player inside of a wall
            if(!level_colide(newpos+10,player1.getY()-1)){//autojump
              player1.setX(newpos);
              player1.setY(player1.getY()-1);
@@ -155,7 +155,7 @@ if(!e3DMode){
          }
          
          if(player1_moving_left){//player moving left
-          float newpos=player1.getX()-mspc*0.2;
+          float newpos=player1.getX()-mspc*0.4;//calculte new position
           if(!level_colide(newpos-10,player1.getY())){
             if(!level_colide(newpos-10,player1.getY()-25)){
               if(!level_colide(newpos-10,player1.getY()-50)){
@@ -224,67 +224,43 @@ if(!e3DMode){
          
          
          if(simulating)//--------------------------------------------------------------------------------------------------remove this line in the final game
-         if(!player1_jumping||!player1.isJumping()){//gravity
-           float pd=1;
-            if(!level_colide(player1.getX()-10,player1.getY()+pd)&&!level_colide(player1.getX()-5,player1.getY()+pd)&&!level_colide(player1.getX(),player1.getY()+pd)&&!level_colide(player1.getX()+5,player1.getY()+pd)&&!level_colide(player1.getX()+10,player1.getY()+pd)){
-              pd=mspc*0.2;//gravity movement
-              //wasDP=false;
-              if(!level_colide(player1.getX()-10,player1.getY()+pd)&&!level_colide(player1.getX()-5,player1.getY()+pd)&&!level_colide(player1.getX(),player1.getY()+pd)&&!level_colide(player1.getX()+5,player1.getY()+pd)&&!level_colide(player1.getX()+10,player1.getY()+pd)){
-              player1.setY(player1.getY()+pd);
-              player1.setAirTime(60);
-              }else{
-               while((!level_colide(player1.getX()-10,player1.getY()+pd)&&!level_colide(player1.getX()-5,player1.getY()+pd)&&!level_colide(player1.getX(),player1.getY()+pd)&&!level_colide(player1.getX()+5,player1.getY()+pd)&&!level_colide(player1.getX()+10,player1.getY()+pd))&&pd>0){
-                pd--; 
-               }
-               if(pd>0){
-                 player1.setY(player1.getY()+pd);
-               }
-              }
-            }else{
-               player1.setAirTime(0);
-               
-            }
+         if(true){//gravity
+           float pd = (player1.verticalVelocity*mspc+0.5*gravity*(float)Math.pow(mspc,2))+player1.y;
+
+           if((!level_colide(player1.getX()-10,pd+1)&&!level_colide(player1.getX()-5,pd+1)&&!level_colide(player1.getX(),pd+1)&&!level_colide(player1.getX()+5,pd+1)&&!level_colide(player1.getX()+10,pd+1))){
+             if((!level_colide(player1.getX()-10,pd-75-1)&&!level_colide(player1.getX()-5,pd-75-1)&&!level_colide(player1.getX(),pd-75-1)&&!level_colide(player1.getX()+5,pd-75-1)&&!level_colide(player1.getX()+10,pd-75-1))||player1.verticalVelocity>0){
+             player1.verticalVelocity=player1.verticalVelocity+gravity*mspc;
+             player1.y=pd;
+             }else{
+               player1.verticalVelocity=0;
+             }
+           }else{
+             player1.verticalVelocity=0;
+           }
          }
-         
+
+             
+         //death plane 
          if(player_kill(player1.getX()-10,player1.getY()+1)||player_kill(player1.getX()-5,player1.getY()+1)||player_kill(player1.getX(),player1.getY()+1)||player_kill(player1.getX()+5,player1.getY()+1)||player_kill(player1.getX()+10,player1.getY()+1)){
            dead=true;    
            death_cool_down=0;
          }
          
-         
+         //in ground detection and rectification
          if(!(!level_colide(player1.getX()-10,player1.getY())&&!level_colide(player1.getX()-5,player1.getY())&&!level_colide(player1.getX(),player1.getY())&&!level_colide(player1.getX()+5,player1.getY())&&!level_colide(player1.getX()+10,player1.getY()))){
            player1.setY(player1.getY()-1);
+           player1.verticalVelocity=0;
          }
          
          
          if(player1_jumping){//jumping
-          if(player1.getAirTime()==0){
-            player1.setJumping(true);
+          if(!(!level_colide(player1.getX()-10,player1.getY()+2)&&!level_colide(player1.getX()-5,player1.getY()+2)&&!level_colide(player1.getX(),player1.getY()+2)&&!level_colide(player1.getX()+5,player1.getY()+2)&&!level_colide(player1.getX()+10,player1.getY()+2))){
+            player1.verticalVelocity=-0.75;  //if the player is on the ground and they are trying to jump then set thire verticle velocity
           }
-          if(player1.getAirTime()<14&&player1.isJumping()){//jumping
-            float pp=(0.1953333*mspc);
-            if(!level_colide(player1.getX()-10,player1.getY()-75-pp)&&!level_colide(player1.getX()-5,player1.getY()-75-pp)&&!level_colide(player1.getX(),player1.getY()-75-pp)&&!level_colide(player1.getX()+5,player1.getY()-75-pp)&&!level_colide(player1.getX()+10,player1.getY()-75-pp)){
-              player1.setY(player1.getY()-pp);
-              player1.setAirTime(player1.getAirTime()+mspc*0.010);
-              player1.jumpDist+=pp;
-            }else{
-              player1.setJumping(false);
-              player1.jumpDist=0;
-            }
-          }else{
-            if(player1.getAirTime()<16&&player1.isJumping()){
-              player1.setAirTime(player1.getAirTime()+mspc*0.010);
-              //player1.setY(player1.getY()+(player1.jumpDist-293));
-              player1.jumpDist=293;//in the futchre use this varible to judge wether the jump is at the max height
-            }else{
-            player1.setJumping(false);
-            player1.jumpDist=0;
-            }
-          }
-         }else{
-           player1.setJumping(false);
-           player1.jumpDist=0;
+         }else if(player1.verticalVelocity<0){//if the player stops pressing space bar then start moving the player down
+           player1.verticalVelocity=0.01;
          }
+         
          
          if(simulating)//--------------------------------------------------------------------------------------------------remove this line in the final game
          if(player1.getX()-camPos>(1280-eadgeScroleDist)){

@@ -22,7 +22,7 @@ int camPos=0,camPosY=0,death_cool_down,start_down,eadgeScroleDist=100,respawnX=2
 int buttonMin=0,buttonMax=0,coinsIndex,triangleMode=0;
 JSONArray mainIndex/*,coins*/,colors;
 JSONObject portalStage1,portalStage2;
-float downX,downY,upX,upY,Scale=1;
+float downX,downY,upX,upY,Scale=1,gravity=0.001;
 ToolBox scr2 ;
 PShape coin3D;
 Level level;
@@ -136,6 +136,7 @@ void draw(){
         stageEditGUI();
         
        // playerPhysics();
+       
  }
  
  if(levelOverview){
