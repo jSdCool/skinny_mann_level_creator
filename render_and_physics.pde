@@ -101,7 +101,7 @@ if(!e3DMode){
                 }
               }
             }
-          }else if((!level_colide(newpos+10,player1.getY()-10)&&!level_colide(newpos+10,player1.getY()-50)&&!level_colide(newpos+10,player1.getY()-75))&&player1.getAirTime()==0){//check if the new posaition would place the player inside of a wall
+          }else if((!level_colide(newpos+10,player1.getY()-10)&&!level_colide(newpos+10,player1.getY()-50)&&!level_colide(newpos+10,player1.getY()-75))&&player1.verticalVelocity>0.001){//check if the new posaition would place the player inside of a wall
            if(!level_colide(newpos+10,player1.getY()-1)){//autojump
              player1.setX(newpos);
              player1.setY(player1.getY()-1);
@@ -164,7 +164,7 @@ if(!e3DMode){
                 }
               }
             }
-          }else if((!level_colide(newpos-10,player1.getY()-10)&&!level_colide(newpos-10,player1.getY()-50)&&!level_colide(newpos-10,player1.getY()-75))&&player1.getAirTime()==0){
+          }else if((!level_colide(newpos-10,player1.getY()-10)&&!level_colide(newpos-10,player1.getY()-50)&&!level_colide(newpos-10,player1.getY()-75))&&player1.verticalVelocity>0.001){
            if(!level_colide(newpos+10,player1.getY()-1)){//auto jump
              player1.setX(newpos);
              player1.setY(player1.getY()-1);
