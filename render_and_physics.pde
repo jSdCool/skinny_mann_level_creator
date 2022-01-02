@@ -48,7 +48,7 @@ void stageLevelDraw(){
             }
            }
            if(shadowHit){//if solid ground was found under the player then draw the shadow
-            translate(player1.x,shadowAltitude-1,player1.z);
+            translate(player1.x,shadowAltitude-1.1,player1.z);
             fill(0,127);
             rotateX(radians(90));
             ellipse(0,0,40,40);
@@ -225,10 +225,10 @@ if(!e3DMode){
          
          if(simulating)//--------------------------------------------------------------------------------------------------remove this line in the final game
          if(true){//gravity
-           float pd = (player1.verticalVelocity*mspc+0.5*gravity*(float)Math.pow(mspc,2))+player1.y;
+           float pd = (player1.verticalVelocity*mspc+0.5*gravity*(float)Math.pow(mspc,2))+player1.y;//calculate the new verticle position the player shoud be at
 
-           if((!level_colide(player1.getX()-10,pd)&&!level_colide(player1.getX()-5,pd)&&!level_colide(player1.getX(),pd)&&!level_colide(player1.getX()+5,pd)&&!level_colide(player1.getX()+10,pd))){
-             if((!level_colide(player1.getX()-10,pd-75-1)&&!level_colide(player1.getX()-5,pd-75-1)&&!level_colide(player1.getX(),pd-75-1)&&!level_colide(player1.getX()+5,pd-75-1)&&!level_colide(player1.getX()+10,pd-75-1))||player1.verticalVelocity>0.001){
+           if((!level_colide(player1.getX()-10,pd)&&!level_colide(player1.getX()-5,pd)&&!level_colide(player1.getX(),pd)&&!level_colide(player1.getX()+5,pd)&&!level_colide(player1.getX()+10,pd))){//check if that location would be inside of the ground
+             if((!level_colide(player1.getX()-10,pd-75-1)&&!level_colide(player1.getX()-5,pd-75-1)&&!level_colide(player1.getX(),pd-75-1)&&!level_colide(player1.getX()+5,pd-75-1)&&!level_colide(player1.getX()+10,pd-75-1))||player1.verticalVelocity>0.001){//check if that location would cause the player's head to be indide of something
              player1.verticalVelocity=player1.verticalVelocity+gravity*mspc;
              player1.y=pd;
              }else{
@@ -565,67 +565,36 @@ if(!e3DMode){
          
          
          if(simulating)//--------------------------------------------------------------------------------------------------remove this line in the final game
-         if(!player1_jumping||!player1.isJumping()){//gravity
-           float pd=1;
-            if(!level_colide(player1.getX(),player1.getY()+pd,player1.z+7)&&!level_colide(player1.getX(),player1.getY()+pd,player1.z-7)){
-              pd=mspc*0.2;//gravity movement
-              //wasDP=false;
-              if(!level_colide(player1.getX(),player1.getY()+pd,player1.z+7)&&!level_colide(player1.getX(),player1.getY()+pd,player1.z-7)){
-              player1.setY(player1.getY()+pd);
-              player1.setAirTime(60);
-              }else{
-               while((!level_colide(player1.getX(),player1.getY()+pd,player1.z+7)&&!level_colide(player1.getX(),player1.getY()+pd,player1.z-7))&&pd>0){
-                pd--; 
-               }
-               if(pd>0){
-                 player1.setY(player1.getY()+pd);
-               }
-              }
-            }else{
-               player1.setAirTime(0);
-               
-            }
+         
+         if(true){//gravity
+           float pd = (player1.verticalVelocity*mspc+0.5*gravity*(float)Math.pow(mspc,2))+player1.y;//calculate the new verticle position the player shoud be at
+
+           if(!level_colide(player1.getX(),pd,player1.z+7)&&!level_colide(player1.getX(),pd,player1.z-7)){//check if that location would be inside of the ground
+             if((!level_colide(player1.getX()-10,pd-75-1,player1.z)&&!level_colide(player1.getX()-5,pd-75-1,player1.z)&&!level_colide(player1.getX(),pd-75-1,player1.z)&&!level_colide(player1.getX()+5,pd-75-1,player1.z)&&!level_colide(player1.getX()+10,pd-75-1,player1.z))||player1.verticalVelocity>0.001){//check if that location would cause the player's head to be indide of something 
+             player1.verticalVelocity=player1.verticalVelocity+gravity*mspc;
+             player1.y=pd;
+             }else{
+               player1.verticalVelocity=0;
+             }
+           }else{
+             player1.verticalVelocity=0;
+           }
          }
          
-         //if(player_kill(player1.getX()-10,player1.getY()+1)||player_kill(player1.getX()-5,player1.getY()+1)||player_kill(player1.getX(),player1.getY()+1)||player_kill(player1.getX()+5,player1.getY()+1)||player_kill(player1.getX()+10,player1.getY()+1)){
-         //  dead=true;          
-         //}
-         
-         
+         //in ground detection and rectification
          if(!(!level_colide(player1.getX(),player1.getY(),player1.z+7)&&!level_colide(player1.getX(),player1.getY(),player1.z-7))){
            player1.setY(player1.getY()-1);
+           player1.verticalVelocity=0;
          }
-         
-         
-         if(player1_jumping){//jumping
-          if(player1.getAirTime()==0){
-            player1.setJumping(true);
+
+          if(player1_jumping){//jumping
+          if(!(!level_colide(player1.getX(),player1.y+2,player1.z+7)&&!level_colide(player1.getX(),player1.y+2,player1.z-7))){
+            player1.verticalVelocity=-0.75;  //if the player is on the ground and they are trying to jump then set thire verticle velocity
           }
-          if(player1.getAirTime()<14&&player1.isJumping()){//jumping
-            float pp=(0.1953333*mspc);
-            if(!level_colide(player1.getX()-10,player1.getY()-75-pp,player1.z)&&!level_colide(player1.getX()-5,player1.getY()-75-pp,player1.z)&&!level_colide(player1.getX(),player1.getY()-75-pp,player1.z)&&!level_colide(player1.getX()+5,player1.getY()-75-pp,player1.z)&&!level_colide(player1.getX()+10,player1.getY()-75-pp,player1.z)){
-              player1.setY(player1.getY()-pp);
-              player1.setAirTime(player1.getAirTime()+mspc*0.010);
-              player1.jumpDist+=pp;
-            }else{
-              player1.setJumping(false);
-              player1.jumpDist=0;
-            }
-          }else{
-            if(player1.getAirTime()<16&&player1.isJumping()){
-              player1.setAirTime(player1.getAirTime()+mspc*0.010);
-              //player1.setY(player1.getY()+(player1.jumpDist-293));
-              player1.jumpDist=293;//in the futchre use this varible to judge wether the jump is at the max height
-            }else{
-            player1.setJumping(false);
-            player1.jumpDist=0;
-            }
-          }
-         }else{
-           player1.setJumping(false);
-           player1.jumpDist=0;
+         }else if(player1.verticalVelocity<0){//if the player stops pressing space bar then start moving the player down
+           player1.verticalVelocity=0.01;
          }
-         
+
          
          
          
