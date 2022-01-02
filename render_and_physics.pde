@@ -227,8 +227,8 @@ if(!e3DMode){
          if(true){//gravity
            float pd = (player1.verticalVelocity*mspc+0.5*gravity*(float)Math.pow(mspc,2))+player1.y;
 
-           if((!level_colide(player1.getX()-10,pd+1)&&!level_colide(player1.getX()-5,pd+1)&&!level_colide(player1.getX(),pd+1)&&!level_colide(player1.getX()+5,pd+1)&&!level_colide(player1.getX()+10,pd+1))){
-             if((!level_colide(player1.getX()-10,pd-75-1)&&!level_colide(player1.getX()-5,pd-75-1)&&!level_colide(player1.getX(),pd-75-1)&&!level_colide(player1.getX()+5,pd-75-1)&&!level_colide(player1.getX()+10,pd-75-1))||player1.verticalVelocity>0){
+           if((!level_colide(player1.getX()-10,pd)&&!level_colide(player1.getX()-5,pd)&&!level_colide(player1.getX(),pd)&&!level_colide(player1.getX()+5,pd)&&!level_colide(player1.getX()+10,pd))){
+             if((!level_colide(player1.getX()-10,pd-75-1)&&!level_colide(player1.getX()-5,pd-75-1)&&!level_colide(player1.getX(),pd-75-1)&&!level_colide(player1.getX()+5,pd-75-1)&&!level_colide(player1.getX()+10,pd-75-1))||player1.verticalVelocity>0.001){
              player1.verticalVelocity=player1.verticalVelocity+gravity*mspc;
              player1.y=pd;
              }else{
