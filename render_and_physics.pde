@@ -290,7 +290,7 @@ if(!e3DMode){
 
 
          if(player1_moving_right){//move the player right
-          float newpos=player1.getX()+mspc*0.2;
+          float newpos=player1.getX()+mspc*0.4;
           
           if(!level_colide(newpos+10,player1.getY(),player1.z-7)&&!level_colide(newpos+10,player1.getY(),player1.z+7)){
             if(!level_colide(newpos+10,player1.getY()-25,player1.z-7)&&!level_colide(newpos+10,player1.getY()-25,player1.z+7)){
@@ -358,7 +358,7 @@ if(!e3DMode){
          }
          
          if(player1_moving_left){//player moving left
-          float newpos=player1.getX()-mspc*0.2;
+          float newpos=player1.getX()-mspc*0.4;
           if(!level_colide(newpos-10,player1.getY(),player1.z-7)&&!level_colide(newpos-10,player1.getY(),player1.z+7)){
             if(!level_colide(newpos-10,player1.getY()-25,player1.z-7)&&!level_colide(newpos-10,player1.getY()-25,player1.z+7)){
               if(!level_colide(newpos-10,player1.getY()-50,player1.z-7)&&!level_colide(newpos-10,player1.getY()-50,player1.z+7)){
@@ -425,7 +425,7 @@ if(!e3DMode){
          }
          
          if(WPressed){
-           float newpos=player1.z-mspc*0.2;
+           float newpos=player1.z-mspc*0.4;
           if(!level_colide(player1.x,player1.getY(),newpos-10)){
             if(!level_colide(player1.x,player1.getY()-25,newpos-10)){
               if(!level_colide(player1.x,player1.getY()-50,newpos-10)){
@@ -492,7 +492,7 @@ if(!e3DMode){
          }
          
          if(SPressed){
-           float newpos=player1.z+mspc*0.2;
+           float newpos=player1.z+mspc*0.4;
           if(!level_colide(player1.x,player1.getY(),newpos+10)){
             if(!level_colide(player1.x,player1.getY()-25,newpos+10)){
               if(!level_colide(player1.x,player1.getY()-50,newpos+10)){
