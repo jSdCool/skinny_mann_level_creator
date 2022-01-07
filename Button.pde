@@ -1,9 +1,10 @@
-//button class V1.1.1
+//button class V1.1.2
 class Button{
-  private int x,y,lengthX,lengthY,fColor=#FFFFFF,sColor=#AAAAAA,textcolor=0;
+  protected float x,y,lengthX,lengthY;
+  private int fColor=#FFFFFF,sColor=#AAAAAA,textcolor=0;
   private String text="";
   private float textScaleFactor=2.903,strokeWeight=3;
-  Button(int X,int Y,int DX,int DY){
+  Button(float X,float Y,float DX,float DY){
   x=X;
   y=Y;
   lengthX=DX;
@@ -11,7 +12,7 @@ class Button{
   findTextScale();
   strokeWeight=3;
   }
-  Button(int X,int Y,int DX,int DY,String Text){
+  Button(float X,float Y,float DX,float DY,String Text){
   x=X;
   y=Y;
   lengthX=DX;
@@ -20,7 +21,7 @@ class Button{
   findTextScale();
   strokeWeight=3;
   }
-  Button(int X,int Y,int DX,int DY,int c1,int c2){
+  Button(float X,float Y,float DX,float DY,int c1,int c2){
   x=X;
   y=Y;
   lengthX=DX;
@@ -30,7 +31,7 @@ class Button{
   findTextScale();
   strokeWeight=3;
   }
-  Button(int X,int Y,int DX,int DY,String Text,int c1,int c2){
+  Button(float X,float Y,float DX,float DY,String Text,int c1,int c2){
   x=X;
   y=Y;
   lengthX=DX;
@@ -90,9 +91,8 @@ class Button{
     return "button at:"+x+" "+y+" length: "+lengthX+" height: "+lengthY+" with text: "+text+" and a color of: "+fColor;
   }
   
-  /**
-  @deprecated 
-  */
+
+  @Deprecated
   public Button setTextFactor(float factor){
     //textScaleFactor=factor;
     return this;
@@ -102,7 +102,7 @@ class Button{
     return this;
   }
   public Button setX(float X){
-   x=(int)X;
+   x=X;
     return this;
   }
   public Button setStrokeWeight(float s){
