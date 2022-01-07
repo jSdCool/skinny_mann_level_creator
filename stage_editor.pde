@@ -503,6 +503,13 @@ void stageEditGUI(){
         drawCheckPoint(mouseX,mouseY);
       }
     }
+    if(drawingSign){
+      if(grid_mode){
+       drawSign(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size-camPos , Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size+camPosY,Scale); 
+      }else{
+      drawSign(mouseX,mouseY,Scale);
+      }  
+  }
     
     
     //the accual gut part
@@ -765,17 +772,14 @@ void stageEditGUI(){
       drawCoin(mouseX,mouseY,3);
       }  
   }
-    
-    
-     
-    
-    
-    
-    
-    
-    
-      
-    
+    if(drawingSign){
+      if(grid_mode){
+       drawSign(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size-camPos , Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size+camPosY,Scale); 
+      }else{
+      drawSign(mouseX,mouseY,Scale);
+      }  
+  }
+
     
       }//end of is 3d mode off if statment 
       else{//if 3dmode is on
@@ -932,6 +936,23 @@ void GUImouseClicked(){
         draw=true;
       }
      }
+     if(drawingSign&&!e3DMode){
+       String tpe = level.stages.get(currentStageIndex).type;
+       if(tpe.equals("stage")){
+      if(grid_mode){
+       level.stages.get(currentStageIndex).parts.add(new WritableSign(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size , Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size)); 
+      }else{
+      level.stages.get(currentStageIndex).parts.add(new WritableSign((int)mouseX+camPos,(int)mouseY-camPosY));
+      }  
+       }
+       if(tpe.equals("3Dstage")){
+      if(grid_mode){
+       level.stages.get(currentStageIndex).parts.add(new WritableSign(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size , Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size,startingDepth)); 
+      }else{
+      level.stages.get(currentStageIndex).parts.add(new WritableSign((int)mouseX+camPos,(int)mouseY-camPosY,startingDepth));
+      }  
+       }
+  }
      
      
      }//end of eddit stage 

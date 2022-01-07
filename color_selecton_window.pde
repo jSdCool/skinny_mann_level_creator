@@ -9,7 +9,7 @@ class ToolBox extends PApplet {
   public int redVal=0,greenVal=0,blueVal=0,CC=0;
   int rsp=0,gsp=0,bsp=0,selectedColor=0,millisOffset;
   String page="colors";
-  Button colorPage,toolsPage,draw_coin,draw_portal,draw_sloap,draw_holoTriangle,draw_dethPlane,toggle3DMode,switch3D1,switch3D2,saveLevel,exitStageEdit; 
+  Button colorPage,toolsPage,draw_coin,draw_portal,draw_sloap,draw_holoTriangle,draw_dethPlane,toggle3DMode,switch3D1,switch3D2,saveLevel,exitStageEdit,sign; 
   
  public void settings(){
   size(1280,720); 
@@ -21,13 +21,14 @@ class ToolBox extends PApplet {
   toggle3DMode=new Button(820,40+100,50,50,"  3D  ",255,203).setStrokeWeight(5);
   switch3D1=new Button(880,40+100,50,50,255,203).setStrokeWeight(5);
   switch3D2=new Button(940,40+100,50,50,255,203).setStrokeWeight(5);
-  saveLevel=new Button(1000,40+100,50,50,"save",255,203);
+  saveLevel=new Button(1000,40+100,50,50,"save",255,203).setStrokeWeight(5);
   draw_sloap=new Button(700,40+100,50,50,255,203).setStrokeWeight(5);
   draw_holoTriangle=new Button(760,40+100,50,50,255,203).setStrokeWeight(5);
   draw_dethPlane=new Button(820,40+100,50,50,255,203).setStrokeWeight(5);
   draw_coin=new Button(580,40+100,50,50,255,203).setStrokeWeight(5);
   draw_portal=new Button(640,40+100,50,50,255,203).setStrokeWeight(5);
   exitStageEdit= new Button(520,40+100,50,50," < ",255,203).setStrokeWeight(5);
+  sign=new Button(1060,140,50,50,255,203).setStrokeWeight(5);
  }
  
  
@@ -293,6 +294,13 @@ class ToolBox extends PApplet {
     }
     saveLevel.draw();
     
+    if(drawingSign){
+      sign.setColor(255,#F2F258);
+    }else{
+      sign.setColor(255,203);
+    }
+    sign.draw();
+    
     textAlign(LEFT,BOTTOM);
     if(mouseX >=40 && mouseX <= 90 && mouseY >= 40+100 && mouseY <= 90+100){
       stroke(0);  
@@ -438,6 +446,15 @@ class ToolBox extends PApplet {
       fill(0);
       textSize(15);
       text("save level",mouseX,mouseY+5);
+      }
+      if(sign.isMouseOver()){
+        stroke(0);  
+      fill(200);
+        strokeWeight(2);
+        rect(mouseX-4,mouseY-13,textWidth("sign"),16);
+      fill(0);
+      textSize(15);
+      text("sign",mouseX,mouseY+5);
       }
       if(level.stages.get(currentStageIndex).type.equals("3Dstage")){
       
@@ -874,6 +891,10 @@ turnThingsOff();
         editingStage=false;
        
       }
+      if(sign.isMouseOver()){
+        turnThingsOff();
+        drawingSign=true;
+      }
       }
       
       if(level.stages.get(currentStageIndex).type.equals("3Dstage")){
@@ -959,6 +980,10 @@ turnThingsOff();
         turnThingsOff();
         drawCoins=true;
       }
+      if(sign.isMouseOver()){
+        turnThingsOff();
+        drawingSign=true;
+      }
       }else{
         if(toggle3DMode.isMouseOver()){
         e3DMode=false;
@@ -975,6 +1000,10 @@ turnThingsOff();
              extra=false;
           }
         }
+      }
+      if(sign.isMouseOver()){
+        turnThingsOff();
+        drawingSign=true;
       }
       }//end of 3D mode is on 
       }
@@ -1186,6 +1215,20 @@ void drawCheckPoint(float x,float y){
             stroke(#EA0202);
             strokeWeight(0);
             triangle(x*Scale,(y-60)*Scale,x*Scale,(y-40)*Scale,(x+30)*Scale,(y-50)*Scale); 
+}
+
+void drawSign(float x,float y,float Scale){
+  fill(#A54A00);
+  rect((x-5)*Scale,(y-30)*Scale,10*Scale,30*Scale);
+  rect((x-35)*Scale,(y-65)*Scale,70*Scale,40*Scale);
+  fill(#C4C4C4);
+  rect((x-33)*Scale,(y-63)*Scale,66*Scale,36*Scale);
+  fill(#767675);
+  rect((x-30)*Scale,(y-58)*Scale,60*Scale,2*Scale);
+  rect((x-30)*Scale,(y-52)*Scale,60*Scale,2*Scale);
+  rect((x-30)*Scale,(y-46)*Scale,60*Scale,2*Scale);
+  rect((x-30)*Scale,(y-40)*Scale,60*Scale,2*Scale);
+  rect((x-30)*Scale,(y-34)*Scale,60*Scale,2*Scale);
 }
 
 void draw_mann(float x, float y,int pose,float scale,String shirt_color){

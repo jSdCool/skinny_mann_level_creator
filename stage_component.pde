@@ -121,6 +121,9 @@ class Stage{
        if(otype.equals("3DoffSW")){
          parts.add(new SWoff3D(ob,is3D));
        }
+       if(otype.equals("WritableSign")){
+         parts.add(new WritableSign(ob,is3D));
+       }
       }catch(Throwable e){
         
         }
@@ -1033,4 +1036,57 @@ class SWoff3D extends StageComponent{//ground component
   return false;
   }
   
+}
+
+class WritableSign extends StageComponent{
+  String contents;
+  WritableSign(JSONObject data,boolean stage_3D){
+    type="WritableSign";
+    x=data.getFloat("x");
+    y=data.getFloat("y");
+    if(stage_3D){
+     z=data.getFloat("z"); 
+    }
+    contents=data.getString("contents");
+  }
+  WritableSign(float X,float Y){
+    x=X;
+    y=Y;
+    contents="";
+    type="WritableSign";
+  }
+  WritableSign(float X,float Y,float Z){
+    x=X;
+    y=Y;
+    z=Z;
+    contents="";
+    type="WritableSign";
+  }
+  
+  void draw(){
+    drawSign(Scale*(x-camPos),Scale*(y+camPosY),Scale);
+  }
+  void draw3D(){
+    drawSign(x,y,z,Scale);
+  }
+  boolean colide(float x,float y,boolean c){
+  if(c){
+    if(x >= (this.x)-35 && x <= (this.x) + 35 && y >= (this.y) - 65 && y <= this.y){
+      return true;
+    }
+  }
+  return false;
+  }
+  
+  JSONObject save(boolean stage_3D){
+    JSONObject part=new JSONObject();
+    part.setFloat("x",x);
+    part.setFloat("y",y);
+    if(stage_3D){
+    part.setFloat("z",z);
+    }
+    part.setString("type",type);
+    part.setString("contents",contents);
+    return part;
+   }
 }

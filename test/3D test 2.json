@@ -215,5 +215,12 @@
     "type": "interdimentional Portal",
     "linkY": 136,
     "linkX": 4158
+  },
+  {
+    "contents": "",
+    "x": 460,
+    "y": 600,
+    "z": 470,
+    "type": "WritableSign"
   }
 ]
