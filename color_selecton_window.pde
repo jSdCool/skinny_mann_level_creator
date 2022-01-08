@@ -9,7 +9,7 @@ class ToolBox extends PApplet {
   public int redVal=0, greenVal=0, blueVal=0, CC=0;
   int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset;
   String page="colors";
-  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select;
+  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select,selectionPage;
 
   public void settings() {
     size(1280, 720);
@@ -17,6 +17,7 @@ class ToolBox extends PApplet {
   void setup() {
     colorPage=new Button(50, 50, 100, 50, "colors/depth");
     toolsPage=new Button(155, 50, 100, 50, "tools");
+    selectionPage=new Button(260, 50, 100, 50, "selection");
 
     toggle3DMode=new Button(820, 40+100, 50, 50, "  3D  ", 255, 203).setStrokeWeight(5);
     switch3D1=new Button(880, 40+100, 50, 50, 255, 203).setStrokeWeight(5);
@@ -95,11 +96,13 @@ class ToolBox extends PApplet {
       }
       colorPage.draw();
       toolsPage.draw();
+      selectionPage.draw();
     }//end of if page is colors
     if (page.equals("tools")) {
       background(255*0.5);
       colorPage.draw();
       toolsPage.draw();
+      selectionPage.draw();
 
       if (editingStage) {
 
@@ -781,7 +784,32 @@ class ToolBox extends PApplet {
         text("you are not currently editing a stage", 300, 300);
       }
     }//end of if page is tools
-  }
+    if (page.equals("selection")) {
+      background(#790101);
+      colorPage.draw();
+      toolsPage.draw();
+      selectionPage.draw();
+      
+      if(selectedIndex==-1){
+        fill(0);
+        textSize(20);
+        textAlign(CENTER,CENTER);
+        text("nothing is selected",width/2,height/2);
+      }else{
+        StageComponent thing = level.stages.get(currentStageIndex).parts.get(selectedIndex);
+        String type=thing.type;
+        if(type.equals("WritableSign")){
+          
+        }else{
+          fill(0);
+        textSize(20);
+        textAlign(CENTER,CENTER);
+        text("this object does not have any\nproperties that can be changed",width/2,height/2);
+        }
+      }//end of thing is selected
+
+    }//end of selection page
+  }//end of draw
 
   public void mouseClicked() {
     if (page.equals("colors")) {
@@ -822,6 +850,9 @@ class ToolBox extends PApplet {
     }
     if (toolsPage.isMouseOver()) {
       page="tools";
+    }
+    if (selectionPage.isMouseOver()) {
+      page="selection";
     }
 
     if (page.equals("tools")) {
@@ -998,6 +1029,10 @@ class ToolBox extends PApplet {
             if (sign.isMouseOver()) {
               turnThingsOff();
               drawingSign=true;
+            }
+            if (select.isMouseOver()) {
+              turnThingsOff();
+              selecting=true;
             }
           } else {
             if (toggle3DMode.isMouseOver()) {

@@ -907,6 +907,10 @@ void GUImouseClicked() {
         }
       }
     }
+    
+    if(selecting){
+     selectedIndex=colid_index(mouseX+camPos,mouseY-camPosY); 
+    }
   }//end of eddit stage
 }
 

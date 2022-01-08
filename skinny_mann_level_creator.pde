@@ -19,7 +19,7 @@ String file_path, new_name="my_level", GAME_version="0.4.3_Early_Access", EDITOR
 //int player1 []={20,700,1,0,1,0};
 Player player1 =new Player(20, 699, 1, "red");
 int camPos=0, camPosY=0, death_cool_down, start_down, eadgeScroleDist=300, respawnX=20, respawnY=700, spdelay=0, Color=0, RedPos=0, BluePos=0, GreenPos=0, RC=0, GC=0, BC=0, grid_size=10, filesScrole=0, overviewSelection=-1, portalIndex1, stageIndex, preSI, respawnStage, setPlayerPosX, setPlayerPosY, setPlayerPosZ, startingDepth=0, totalDepth=300, respawnZ=50, coinRotation=0, coinCount=0, gmillis=0, eadgeScroleDistV=250, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0;
-int buttonMin=0, buttonMax=0, coinsIndex, triangleMode=0;
+int buttonMin=0, buttonMax=0, coinsIndex, triangleMode=0,selectedIndex=-1;
 JSONArray mainIndex/*,coins*/, colors;
 JSONObject portalStage1, portalStage2;
 float downX, downY, upX, upY, Scale=1, gravity=0.001;
@@ -704,6 +704,7 @@ void turnThingsOff() {
   draw3DSwitch2=false;
   drawingSign=false;
   selecting=false;
+  selectedIndex=-1;
 }
 
 int curMills=0, lasMills=0, mspc=0;

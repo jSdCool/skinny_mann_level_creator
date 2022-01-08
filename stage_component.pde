@@ -215,9 +215,7 @@ class Ground extends StageComponent {//ground component
   }
 
   void draw() {
-    noStroke();
     fill(ccolor);
-    stroke(ccolor);
     rect(Scale*(x-camPos)-1, Scale*(y+camPosY)-1, Scale*dx+2, Scale*dy+2);
   }
 
@@ -294,9 +292,7 @@ class Holo extends StageComponent {//ground component
   }
 
   void draw() {
-    noStroke();
     fill(ccolor);
-    //stroke(ccolor);
     rect(Scale*(x-camPos)-1, Scale*(y+camPosY)-1, Scale*dx+2, Scale*dy+2);
   }
 
@@ -311,7 +307,7 @@ class Holo extends StageComponent {//ground component
   boolean colide(float x, float y, boolean c) {
     if (c) {
       float x2 = this.x+dx, y2=this.y+dy;
-      if (x >= x && this.x <= x2 && y >= this.y && y <= y2/* terain hit box*/) {
+      if (x >= this.x && x <= x2 && y >= this.y && y <= y2/* terain hit box*/) {
         return true;
       }
     }
@@ -362,9 +358,7 @@ class DethPlane extends StageComponent {//ground component
   }
 
   void draw() {
-    noStroke();
     fill(-114431);
-    stroke(-114431);
     rect(Scale*(x-camPos)-1, Scale*(y+camPosY)-1, Scale*dx+2, Scale*dy+2);
   }
 
@@ -428,7 +422,6 @@ class CheckPoint extends StageComponent {//ground component
   }
 
   void draw() {
-    noStroke();
     float playx=player1.getX();
     boolean po=false;
     if (playx>=x-5 && playx<= x+5 && y-50 <= player1.getY() && y>=player1.getY()-10) {
@@ -445,11 +438,8 @@ class CheckPoint extends StageComponent {//ground component
       fill(#E5C402);
     else
       fill(#B9B9B9);
-    strokeWeight(0);
     rect((x2-3)*Scale, (y2-60)*Scale, 5*Scale, 60*Scale);
     fill(#EA0202);
-    stroke(#EA0202);
-    strokeWeight(0);
     triangle(x2*Scale, (y2-60)*Scale, x2*Scale, (y2-40)*Scale, (x2+30)*Scale, (y2-50)*Scale);
   }
 
@@ -520,15 +510,12 @@ class Goal extends StageComponent {//ground component
   }
 
   void draw() {
-    noStroke();
     float x2 = x-camPos, y2 = y;
     fill(255);
-    stroke(255);
     rect(Scale*x2, Scale*(y2+camPosY), Scale*50, Scale*50);
     rect(Scale*(x2+100), Scale*(y2+camPosY), Scale*50, Scale*50);
     rect(Scale*(x2+200), Scale*(y2+camPosY), Scale*50, Scale*50);
     fill(0);
-    stroke(0);
     rect(Scale*(x2+50), Scale*(y2+camPosY), Scale*50, Scale*50);
     rect(Scale*(x2+150), Scale*(y2+camPosY), Scale*50, Scale*50);
 
@@ -620,7 +607,7 @@ class Coin extends StageComponent {//ground component
 
   boolean colide(float x, float y, boolean c) {
     if (c) {
-      if (Math.sqrt(Math.pow((x)-this.x, 2)+Math.pow(y-this.y, 2))<30) {
+      if (Math.sqrt(Math.pow(x-this.x, 2)+Math.pow(y-this.y, 2))<19) {
         return true;
       }
     }
@@ -670,15 +657,13 @@ class Interdimentional_Portal extends StageComponent {//ground component
     if ((playx>x-25&&playx<x+25&&playy>y-50&&playy<y+60)) {
       fill(255);
       textSize(Scale*20);
-      //textAlign(CENTER,CENTER);
-      //text("press E",Scale*(playx-camPos),Scale*(playy-90+camPosY));
       displayText="Press E";
       displayTextUntill=millis()+100;
     }
 
     if (E_pressed&&(playx>x-25&&playx<x+25&&playy>y-50&&playy<y+60)) {
       E_pressed=false;
-
+      selectedIndex=-1;
       stageIndex=linkIndex;
       currentStageIndex=linkIndex;
 
@@ -714,7 +699,7 @@ class Interdimentional_Portal extends StageComponent {//ground component
 
     if (E_pressed&&(playx>x-25&&playx<x+25&&playy>y-50&&playy<y+60)) {
       E_pressed=false;
-
+      selectedIndex=-1;
       stageIndex=linkIndex;
       currentStageIndex=linkIndex;
 
@@ -781,9 +766,7 @@ class Sloap extends StageComponent {//ground component
   }
 
   void draw() {
-    noStroke();
     fill(ccolor);
-    stroke(ccolor);
     if (direction==0) {
       triangle(Scale*(x-camPos), Scale*(y+camPosY), Scale*(dx-camPos), Scale*(dy+camPosY), Scale*(dx-camPos), Scale*(y+camPosY));
     }
@@ -874,9 +857,7 @@ class HoloTriangle extends StageComponent {//ground component
   }
 
   void draw() {
-    noStroke();
     fill(ccolor);
-    stroke(ccolor);
     if (direction==0) {
       triangle(Scale*(x-camPos), Scale*(y+camPosY), Scale*(dx-camPos), Scale*(dy+camPosY), Scale*(dx-camPos), Scale*(y+camPosY));
     }

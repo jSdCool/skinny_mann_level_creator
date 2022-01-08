@@ -1,5 +1,4 @@
 void drawCoin(float x, float y, float Scale) {
-  strokeWeight(0);
   fill(#FCC703);
   circle(x, y, 12*Scale);
   fill(255, 255, 0);
@@ -28,7 +27,6 @@ void drawWorldSymbol(float x, float y) {
 
 void drawPortal(float x, float y, float scale) {
   fill(0);
-  strokeWeight(0);
   ellipse(x, y, 50*scale, 100*scale);
   fill(#AE00FA);
   ellipse(x, y, 35*scale, 80*scale);
@@ -40,7 +38,6 @@ void drawPortal(float x, float y, float scale) {
 
 void draw3DSwitch1(float x, float y, float Scale) {
   fill(196);
-  strokeWeight(0);
   rect((x-20)*Scale, (y-5)*Scale, 40*Scale, 5*Scale);
   fill(#FAB800);
   rect((x-10)*Scale, (y-10)*Scale, 20*Scale, 5*Scale);
@@ -59,7 +56,6 @@ void draw3DSwitch1(float x, float y, float z, float Scale) {
 
 void draw3DSwitch2(float x, float y, float Scale) {
   fill(196);
-  strokeWeight(0);
   rect((x-20)*Scale, (y-5)*Scale, 40*Scale, 5*Scale);
 }
 
@@ -76,11 +72,8 @@ void draw3DSwitch2(float x, float y, float z, float Scale) {
 
 void drawCheckPoint(float x, float y) {
   fill(#B9B9B9);
-  strokeWeight(0);
   rect((x-3)*Scale, (y-60)*Scale, 5*Scale, 60*Scale);
   fill(#EA0202);
-  stroke(#EA0202);
-  strokeWeight(0);
   triangle(x*Scale, (y-60)*Scale, x*Scale, (y-40)*Scale, (x+30)*Scale, (y-50)*Scale);
 }
 

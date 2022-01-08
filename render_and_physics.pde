@@ -4,12 +4,24 @@ float DY=sin(radians(yangle))*dist, hd=cos(radians(yangle))*dist, DX=sin(radians
 
 void stageLevelDraw() {
   Stage stage=level.stages.get(currentStageIndex);
+  int selectIndex=-1;
+  if(selecting){
+    selectIndex=colid_index(mouseX+camPos,mouseY-camPosY);
+  }
   if (stage.type.equals("stage")) {
     e3DMode=false;
     camera();
     for (int i=0; stageLoopCondishen(i, stage); i++) {
       strokeWeight(0);
       noStroke();
+      if(selectIndex==i){
+       stroke(#FFFF00);
+       strokeWeight(2);
+      }
+      if(selectedIndex==i){
+       stroke(#0A03FF);
+       strokeWeight(2);
+      }
       stage.parts.get(i).draw();
     }
 
@@ -59,6 +71,16 @@ void stageLevelDraw() {
     } else {//redner the level in 2D
       camera();
       for (int i=0; stageLoopCondishen(i, stage); i++) {
+        strokeWeight(0);
+       noStroke(); 
+        if(selectIndex==i){
+       stroke(#FFFF00);
+       strokeWeight(2);
+      }
+      if(selectedIndex==i){
+       stroke(#0A03FF);
+       strokeWeight(2);
+      }
         stage.parts.get(i).draw();
       }
       draw_mann(Scale*(player1.getX()-camPos), Scale*(player1.getY()+camPosY), player1.getPose(), Scale*player1.getScale(), player1.getColor());
