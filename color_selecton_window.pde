@@ -10,6 +10,7 @@ class ToolBox extends PApplet {
   int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset;
   String page="colors";
   Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select,selectionPage;
+  boolean typingSign=false;
 
   public void settings() {
     size(1280, 720);
@@ -790,7 +791,7 @@ class ToolBox extends PApplet {
       toolsPage.draw();
       selectionPage.draw();
       
-      if(selectedIndex==-1){
+      if(selectedIndex==-1){//if nothing is selected
         fill(0);
         textSize(20);
         textAlign(CENTER,CENTER);
@@ -798,8 +799,18 @@ class ToolBox extends PApplet {
       }else{
         StageComponent thing = level.stages.get(currentStageIndex).parts.get(selectedIndex);
         String type=thing.type;
-        if(type.equals("WritableSign")){
-          
+        if(type.equals("WritableSign")){//if the current selected object is a sign
+          fill(0);
+        textSize(25);
+        textAlign(CENTER,CENTER);
+        text("sign contents",width/2,height*0.2);
+        textAlign(CENTER,TOP);
+        String contents=thing.getData();
+        if(typingSign){
+         contents+=coursorr; 
+        }
+        text(contents,width/2,height*0.25);
+        rect(width*0.05,height*0.29,width*0.9,2);
         }else{
           fill(0);
         textSize(20);
@@ -1069,6 +1080,20 @@ class ToolBox extends PApplet {
           println("save complete"+gmillis);
         }
       }//end of edditing stage
+    }//end of tools
+    
+    if (page.equals("selection")) {
+      if(selectedIndex!=-1){
+        StageComponent thing = level.stages.get(currentStageIndex).parts.get(selectedIndex);
+        String type=thing.type;
+        if(type.equals("WritableSign")){//if the current selected object is a sign
+          if(mouseX>=width*0.05&&mouseX<=width*0.9&&mouseY>=height*0.21&&mouseY<=height*0.29){
+           typingSign=true; 
+          }else{
+            typingSign=false;
+          }
+        }
+      }//if something is elected
     }
   }
 
@@ -1108,10 +1133,22 @@ class ToolBox extends PApplet {
   }
 
 
-
-
-
-
+void keyPressed(){
+  
+  if (page.equals("selection")) {
+    if(selectedIndex!=-1){
+        StageComponent thing = level.stages.get(currentStageIndex).parts.get(selectedIndex);
+        String type=thing.type;
+        if(type.equals("WritableSign")){//if the current selected object is a sign
+          if(typingSign){
+            
+            thing.setData(getInput(thing.getData(),3,keyCode,key));
+            println(key+" "+keyCode);
+          }
+        }
+    }
+  }//end of page is selection
+}//end of keypressed
 
 
 

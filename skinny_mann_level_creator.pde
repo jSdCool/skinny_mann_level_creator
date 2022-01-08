@@ -643,32 +643,44 @@ void mouseWheel(MouseEvent event) {
 
 
 
-char getCh(int mode) {
+char getCh(int mode,char leter) {
   if (mode==0) {
-    if (Character.isLetter(key)||key==' ') {
-      return key;
+    if (Character.isLetter(leter)||leter==' ') {//mode 0 letters numbers and spcaes
+      return leter;
     }
-    if (keyCode==32) {
+    if (leter==32) {
       return ' ';
     }
 
-    if (key=='1'||key=='2'||key=='3'||key=='4'||key=='5'||key=='6'||key=='7'||key=='8'||key=='9'||key=='0')
-      return key;
+    if (leter=='1'||leter=='2'||leter=='3'||leter=='4'||leter=='5'||leter=='6'||leter=='7'||leter=='8'||leter=='9'||leter=='0')
+      return leter;
   }
-  if (mode==1) {
-    if (key=='1'||key=='2'||key=='3'||key=='4'||key=='5'||key=='6'||key=='7'||key=='8'||key=='9'||key=='0')
-      return key;
+  if (mode==1) {//mode 1 number only
+    if (leter=='1'||leter=='2'||leter=='3'||leter=='4'||leter=='5'||leter=='6'||leter=='7'||leter=='8'||leter=='9'||leter=='0')
+      return leter;
   }
-  if (mode==2) {
-    if (key=='1'||key=='2'||key=='3'||key=='4'||key=='5'||key=='6'||key=='7'||key=='8'||key=='9'||key=='0'||key=='.')
-      return key;
+  if (mode==2) {//mode 2 ip mode(numbers and .)
+    if (leter=='1'||leter=='2'||leter=='3'||leter=='4'||leter=='5'||leter=='6'||leter=='7'||leter=='8'||leter=='9'||leter=='0'||leter=='.')
+      return leter;
+  }
+  if(mode==3){//mode 3 mode 0 but also allows line returns
+    if (Character.isLetter(leter)||leter==' ') {//mode 0 letters numbers and spcaes
+      return leter;
+    }
+    if (leter==32) {
+      return ' ';
+    }
+
+    if (leter=='1'||leter=='2'||leter=='3'||leter=='4'||leter=='5'||leter=='6'||leter=='7'||leter=='8'||leter=='9'||leter=='0'||leter=='\n')
+      return leter;
+
   }
 
   return 0;
 }
 
-String doBackspace(String imp) {
-  if (keyCode==8) {
+String doBackspace(String imp,int code) {
+  if (code==8) {
     if (imp.length()>1) {
       return imp.substring(0, imp.length()-1);
     } else if (imp.length()==1) {
@@ -678,12 +690,16 @@ String doBackspace(String imp) {
   return imp;
 }
 
-String getInput(String in, int x) {
-  if (getCh(x)!=0) {
-    in+=getCh(x);
+String getInput(String in, int x,int code,char leter) {//code and leter exsist to allow sub windows to use this function correctly they shoud send the keyCode and key vaible in respectivlky 
+  if (getCh(x,leter)!=0) {
+    in+=getCh(x,leter);
   }
-  in=doBackspace(in);
+  in=doBackspace(in,code);
   return in;
+}
+
+String getInput(String in, int x) {//for use in the main sketch whre keyCode and key are the same as used here
+  return getInput(in,x,keyCode,key);
 }
 
 void turnThingsOff() {

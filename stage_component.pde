@@ -165,6 +165,11 @@ abstract class StageComponent {//the base class for all components that exsist i
   JSONObject save(boolean stage_3D) {
     return null;
   };
+  void setData(String data){}
+  
+  String getData(){
+   return null; 
+  }
 }
 
 class Ground extends StageComponent {//ground component
@@ -1063,5 +1068,13 @@ class WritableSign extends StageComponent {
     part.setString("type", type);
     part.setString("contents", contents);
     return part;
+  }
+  
+  void setData(String data){
+   contents=data; 
+  }
+  
+  String getData(){
+   return contents; 
   }
 }
