@@ -8,6 +8,10 @@ void stageLevelDraw() {
   if(selecting){
     selectIndex=colid_index(mouseX+camPos,mouseY-camPosY);
   }
+  if (E_pressed&&viewingItemContents) {
+        E_pressed=false;
+        viewingItemContents=false;
+      }
   if (stage.type.equals("stage")) {
     e3DMode=false;
     camera();
@@ -23,6 +27,9 @@ void stageLevelDraw() {
        strokeWeight(2);
       }
       stage.parts.get(i).draw();
+      if(viewingItemContents&&viewingItemIndex==-1){
+        viewingItemIndex=i;
+      }
     }
 
 
@@ -45,6 +52,9 @@ void stageLevelDraw() {
         strokeWeight(0);
         noStroke();
         stage.parts.get(i).draw3D();
+        if(viewingItemContents&&viewingItemIndex==-1){
+        viewingItemIndex=i;
+      }
       }
 
       draw_mann_3D(player1.x, player1.y, player1.z, player1.getPose(), Scale*player1.getScale(), player1.getColor());
@@ -82,6 +92,10 @@ void stageLevelDraw() {
        strokeWeight(2);
       }
         stage.parts.get(i).draw();
+        
+        if(viewingItemContents&&viewingItemIndex==-1){
+          viewingItemIndex=i;
+        }
       }
       draw_mann(Scale*(player1.getX()-camPos), Scale*(player1.getY()+camPosY), player1.getPose(), Scale*player1.getScale(), player1.getColor());
     }
@@ -98,8 +112,27 @@ void stageLevelDraw() {
     strokeWeight(Scale*10);
     rect(Scale*550, Scale*450, Scale*200, Scale*40);
     fill(0);
-    textSize(Scale*40);
+    textSize(Scale*40); //<>//
     text("continue", Scale*565, Scale*480);
+  }
+  
+  if(viewingItemContents){
+   engageHUDPosition(); 
+   StageComponent item = level.stages.get(currentStageIndex).parts.get(viewingItemIndex);
+   if(item.type.equals("WritableSign")){//if your are reeding a sign then show the contents of the sign
+     fill(#A54A00);
+     rect(width*0.05,height*0.05,width*0.9,height*0.9);
+     fill(#C4C4C4);
+     rect(width*0.1,height*0.1,width*0.8,height*0.8);
+     textAlign(CENTER,CENTER);
+     textSize(50*Scale);
+     fill(0);
+     text(item.getData(),width/2,height/2);
+     textSize(20*Scale);
+     text("press E to continue",width/2,height*0.85);
+     displayTextUntill=millis()-1;
+   }
+   disEngageHUDPosition();
   }
 }
 //////////////////////////////////////////-----------------------------------------------------
@@ -108,6 +141,14 @@ void stageLevelDraw() {
 
 void playerPhysics() {
 
+  if(viewingItemContents){//stop movment while intertacting with an object
+    player1_moving_right=false;
+    player1_moving_left=false;
+    player1_jumping=false;
+    WPressed=false;
+    SPressed=false;
+    
+  }
 
   if (!e3DMode) {
     if (player1_moving_right) {//move the player right

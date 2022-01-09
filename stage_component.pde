@@ -694,10 +694,6 @@ class Interdimentional_Portal extends StageComponent {//ground component
     if ((playx>x-25&&playx<x+25&&playy>y-50&&playy<y+60&& player1.z >= z-20 && player1.z <= z+20)) {
       fill(255);
       textSize(20);
-      //textAlign(CENTER,CENTER);
-      //translate(0,0,player1.z);
-      //text("press E",(playx),(playy-90));
-      //translate(0,0,-player1.z);
       displayText="Press E";
       displayTextUntill=millis()+100;
     }
@@ -1045,9 +1041,34 @@ class WritableSign extends StageComponent {
 
   void draw() {
     drawSign(Scale*(x-camPos), Scale*(y+camPosY), Scale);
+    
+    float playx=player1.getX(), playy=player1.getY();
+    if (playx>x-35&&playx<x+35&&playy>y-40&&playy<y) {//display the press e message to the player
+      fill(255);
+      textSize(Scale*20);
+      displayText="Press E";
+      displayTextUntill=millis()+100;
+      
+      if (E_pressed) {
+        E_pressed=false;
+        viewingItemContents=true;
+      }
+    }
   }
   void draw3D() {
     drawSign(x, y, z, Scale);
+    
+    float playx=player1.getX(), playy=player1.getY();
+    if (playx>x-35&&playx<x+35&&playy>y-40&&playy<y&& player1.z >= z-20 && player1.z <= z+20) {
+      fill(255);
+      textSize(20);
+      displayText="Press E";
+      displayTextUntill=millis()+100;
+      if (E_pressed) {
+        E_pressed=false;
+        viewingItemContents=true;
+      }
+    }
   }
   boolean colide(float x, float y, boolean c) {
     if (c) {
