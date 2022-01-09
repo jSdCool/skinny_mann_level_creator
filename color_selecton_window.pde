@@ -1143,7 +1143,6 @@ void keyPressed(){
           if(typingSign){
             
             thing.setData(getInput(thing.getData(),3,keyCode,key));
-            println(key+" "+keyCode);
           }
         }
     }

@@ -50,5 +50,10 @@
     "name": "sagasdaserghw",
     "location": "/sagasdaserghw.json",
     "type": "stage"
+  },
+  {
+    "name": "signs and sloaps",
+    "location": "/signs and sloaps.json",
+    "type": "stage"
   }
 ]

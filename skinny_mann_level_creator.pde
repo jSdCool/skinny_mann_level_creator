@@ -117,7 +117,7 @@ void draw() {
 
 
   if (editingStage) {
-    background(7646207);
+    //background(7646207);
     if (!simulating) {
       if (cam_left&&camPos>0) {
         camPos-=4;

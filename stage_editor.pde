@@ -920,7 +920,7 @@ void GUImousePressed() {
       if (mouseX >=buttonMin && mouseX <= buttonMax && mouseY >= 40 && mouseY <= 90) {
         return;
       }
-      if (mouseX >=35 && mouseX <= 280 && mouseY >= 95 && mouseY <= 150) {
+      if (mouseX >=0 && mouseX <= 280 && mouseY >= 0 && mouseY <= 150) {
         return;
       } else {
         downX=mouseX;
@@ -937,7 +937,7 @@ void GUImouseReleased() {
       if (mouseX >=buttonMin && mouseX <= buttonMax && mouseY >= 40 && mouseY <= 90) {
         return;
       }
-      if (mouseX >=35 && mouseX <= 280 && mouseY >= 95 && mouseY <= 150) {
+      if (mouseX >=0 && mouseX <= 280 && mouseY >= 0 && mouseY <= 150) {
         return;
       } else {
         upX=mouseX;

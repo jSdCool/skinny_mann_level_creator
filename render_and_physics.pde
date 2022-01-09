@@ -4,6 +4,7 @@ float DY=sin(radians(yangle))*dist, hd=cos(radians(yangle))*dist, DX=sin(radians
 
 void stageLevelDraw() {
   Stage stage=level.stages.get(currentStageIndex);
+  background(stage.skyColor);
   int selectIndex=-1;
   if(selecting){
     selectIndex=colid_index(mouseX+camPos,mouseY-camPosY);
@@ -11,6 +12,7 @@ void stageLevelDraw() {
   if (E_pressed&&viewingItemContents) {
         E_pressed=false;
         viewingItemContents=false;
+        viewingItemIndex=-1;
       }
   if (stage.type.equals("stage")) {
     e3DMode=false;
@@ -110,9 +112,9 @@ void stageLevelDraw() {
     fill(255, 126, 0);
     stroke(255, 0, 0);
     strokeWeight(Scale*10);
-    rect(Scale*550, Scale*450, Scale*200, Scale*40);
+    rect(Scale*550, Scale*450, Scale*200, Scale*40); //<>//
     fill(0);
-    textSize(Scale*40); //<>//
+    textSize(Scale*40);
     text("continue", Scale*565, Scale*480);
   }
   
@@ -153,7 +155,6 @@ void playerPhysics() {
   if (!e3DMode) {
     if (player1_moving_right) {//move the player right
       float newpos=player1.getX()+mspc*0.4;//calculate new position
-
       if (!level_colide(newpos+10, player1.getY())) {//check if the player can walk up "stairs"
         if (!level_colide(newpos+10, player1.getY()-25)) {
           if (!level_colide(newpos+10, player1.getY()-50)) {
@@ -162,7 +163,7 @@ void playerPhysics() {
             }
           }
         }
-      } else if ((!level_colide(newpos+10, player1.getY()-10)&&!level_colide(newpos+10, player1.getY()-50)&&!level_colide(newpos+10, player1.getY()-75))&&player1.verticalVelocity>0.001) {//check if the new posaition would place the player inside of a wall
+      } else if ((!level_colide(newpos+10, player1.getY()-10)&&!level_colide(newpos+10, player1.getY()-50)&&!level_colide(newpos+10, player1.getY()-75))&&player1.verticalVelocity<0.008) {//check if the new posaition would place the player inside of a wall
         if (!level_colide(newpos+10, player1.getY()-1)) {//autojump
           player1.setX(newpos);
           player1.setY(player1.getY()-1);
@@ -217,7 +218,7 @@ void playerPhysics() {
             }
           }
         }
-      } else if ((!level_colide(newpos-10, player1.getY()-10)&&!level_colide(newpos-10, player1.getY()-50)&&!level_colide(newpos-10, player1.getY()-75))&&player1.verticalVelocity>0.001) {
+      } else if ((!level_colide(newpos-10, player1.getY()-10)&&!level_colide(newpos-10, player1.getY()-50)&&!level_colide(newpos-10, player1.getY()-75))&&player1.verticalVelocity<0.008) {
         if (!level_colide(newpos+10, player1.getY()-1)) {//auto jump
           player1.setX(newpos);
           player1.setY(player1.getY()-1);
@@ -342,7 +343,7 @@ void playerPhysics() {
             }
           }
         }
-      } else if ((!level_colide(newpos+10, player1.getY()-10, player1.z)&&!level_colide(newpos+10, player1.getY()-50, player1.z)&&!level_colide(newpos+10, player1.getY()-75, player1.z))&&player1.verticalVelocity>0.001) {
+      } else if ((!level_colide(newpos+10, player1.getY()-10, player1.z)&&!level_colide(newpos+10, player1.getY()-50, player1.z)&&!level_colide(newpos+10, player1.getY()-75, player1.z))&&player1.verticalVelocity<0.008) {
         if (!level_colide(newpos+10, player1.getY()-1, player1.z)) {//autojump
           player1.setX(newpos);
           player1.setY(player1.getY()-1);
@@ -400,7 +401,7 @@ void playerPhysics() {
             }
           }
         }
-      } else if ((!level_colide(newpos-10, player1.getY()-10, player1.z)&&!level_colide(newpos-10, player1.getY()-50, player1.z)&&!level_colide(newpos-10, player1.getY()-75, player1.z))&&player1.verticalVelocity>0.001) {
+      } else if ((!level_colide(newpos-10, player1.getY()-10, player1.z)&&!level_colide(newpos-10, player1.getY()-50, player1.z)&&!level_colide(newpos-10, player1.getY()-75, player1.z))&&player1.verticalVelocity<0.008) {
         if (!level_colide(newpos+10, player1.getY()-1, player1.z)) {//auto jump
           player1.setX(newpos);
           player1.setY(player1.getY()-1);
@@ -458,7 +459,7 @@ void playerPhysics() {
             }
           }
         }
-      } else if ((!level_colide(player1.x, player1.getY()-10, newpos-10)&&!level_colide(player1.x, player1.getY()-50, newpos-10)&&!level_colide(player1.x, player1.getY()-75, newpos-10))&&player1.verticalVelocity>0.001) {
+      } else if ((!level_colide(player1.x, player1.getY()-10, newpos-10)&&!level_colide(player1.x, player1.getY()-50, newpos-10)&&!level_colide(player1.x, player1.getY()-75, newpos-10))&&player1.verticalVelocity<0.008) {
         if (!level_colide(player1.x, player1.getY()-1, newpos-10)) {//auto jump
           player1.z=newpos;
           player1.setY(player1.getY()-1);
@@ -516,7 +517,7 @@ void playerPhysics() {
             }
           }
         }
-      } else if ((!level_colide(player1.x, player1.getY()-10, newpos+10)&&!level_colide(player1.x, player1.getY()-50, newpos+10)&&!level_colide(player1.x, player1.getY()-75, newpos+10))&&player1.verticalVelocity>0.001) {
+      } else if ((!level_colide(player1.x, player1.getY()-10, newpos+10)&&!level_colide(player1.x, player1.getY()-50, newpos+10)&&!level_colide(player1.x, player1.getY()-75, newpos+10))&&player1.verticalVelocity<0.008) {
         if (!level_colide(player1.x, player1.getY()-1, newpos-10)) {//auto jump
           player1.z=newpos;
           player1.setY(player1.getY()-1);
