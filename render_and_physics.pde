@@ -342,7 +342,7 @@ void playerPhysics() {
             }
           }
         }
-      } else if ((!level_colide(newpos+10, player1.getY()-10, player1.z)&&!level_colide(newpos+10, player1.getY()-50, player1.z)&&!level_colide(newpos+10, player1.getY()-75, player1.z))&&player1.getAirTime()==0) {
+      } else if ((!level_colide(newpos+10, player1.getY()-10, player1.z)&&!level_colide(newpos+10, player1.getY()-50, player1.z)&&!level_colide(newpos+10, player1.getY()-75, player1.z))&&player1.verticalVelocity>0.001) {
         if (!level_colide(newpos+10, player1.getY()-1, player1.z)) {//autojump
           player1.setX(newpos);
           player1.setY(player1.getY()-1);
@@ -400,7 +400,7 @@ void playerPhysics() {
             }
           }
         }
-      } else if ((!level_colide(newpos-10, player1.getY()-10, player1.z)&&!level_colide(newpos-10, player1.getY()-50, player1.z)&&!level_colide(newpos-10, player1.getY()-75, player1.z))&&player1.getAirTime()==0) {
+      } else if ((!level_colide(newpos-10, player1.getY()-10, player1.z)&&!level_colide(newpos-10, player1.getY()-50, player1.z)&&!level_colide(newpos-10, player1.getY()-75, player1.z))&&player1.verticalVelocity>0.001) {
         if (!level_colide(newpos+10, player1.getY()-1, player1.z)) {//auto jump
           player1.setX(newpos);
           player1.setY(player1.getY()-1);
@@ -458,7 +458,7 @@ void playerPhysics() {
             }
           }
         }
-      } else if ((!level_colide(player1.x, player1.getY()-10, newpos-10)&&!level_colide(player1.x, player1.getY()-50, newpos-10)&&!level_colide(player1.x, player1.getY()-75, newpos-10))&&player1.getAirTime()==0) {
+      } else if ((!level_colide(player1.x, player1.getY()-10, newpos-10)&&!level_colide(player1.x, player1.getY()-50, newpos-10)&&!level_colide(player1.x, player1.getY()-75, newpos-10))&&player1.verticalVelocity>0.001) {
         if (!level_colide(player1.x, player1.getY()-1, newpos-10)) {//auto jump
           player1.z=newpos;
           player1.setY(player1.getY()-1);
@@ -516,7 +516,7 @@ void playerPhysics() {
             }
           }
         }
-      } else if ((!level_colide(player1.x, player1.getY()-10, newpos+10)&&!level_colide(player1.x, player1.getY()-50, newpos+10)&&!level_colide(player1.x, player1.getY()-75, newpos+10))&&player1.getAirTime()==0) {
+      } else if ((!level_colide(player1.x, player1.getY()-10, newpos+10)&&!level_colide(player1.x, player1.getY()-50, newpos+10)&&!level_colide(player1.x, player1.getY()-75, newpos+10))&&player1.verticalVelocity>0.001) {
         if (!level_colide(player1.x, player1.getY()-1, newpos-10)) {//auto jump
           player1.z=newpos;
           player1.setY(player1.getY()-1);

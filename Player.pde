@@ -1,5 +1,5 @@
 class Player {
-  public float x, y, z=0, scale, timeInAir=0, jumpDist=0, animationCooldown, verticalVelocity=0;
+  public float x, y, z=0, scale, animationCooldown, verticalVelocity=0;
   int pose=1;
   String shirt;
   boolean jumping=false;
@@ -49,13 +49,6 @@ class Player {
   }
   public String toString() {
     return "x "+x+" y "+y+" scale "+scale+" pose "+pose ;
-  }
-  public Player setAirTime(float at) {
-    timeInAir=at;
-    return this;
-  }
-  public Float getAirTime() {
-    return timeInAir;
   }
   public Player setJumping(boolean a) {
     jumping=a;
