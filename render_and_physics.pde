@@ -620,9 +620,10 @@ void playerPhysics() {
     }
   }
   if (setPlayerPosTo) {
-    player1.setX(setPlayerPosX).setY(setPlayerPosY);
-    player1.z=setPlayerPosZ;
+    player1.setX(tpCords[0]).setY(tpCords[1]);
+    player1.z=tpCords[2];
     setPlayerPosTo=false;
+    player1.verticalVelocity=0;
   }
   //////////////////////////////
 }

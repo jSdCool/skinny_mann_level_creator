@@ -797,7 +797,11 @@ void GUImouseClicked() {
         if (level.stages.get(currentStageIndex).type.equals("3Dstage")) {
           player1.z=startingDepth;
         }
+        tpCords[0]=mouseX+camPos;
+        tpCords[1]=mouseY-camPosY;
+        tpCords[2]=startingDepth;
       }
+      setPlayerPosTo=true;
     }
     if (drawCoins) {
       if (mouseX >=buttonMin && mouseX <= buttonMax && mouseY >= 40 && mouseY <= 90) {
