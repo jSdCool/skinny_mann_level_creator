@@ -747,3 +747,7 @@ void thrdCalc2() {
     //println(mspc);
   }
 }
+
+boolean gameVersionCompatibilityCheck(String vers){//returns ture if the inputed version id compatible
+ return true; 
+}

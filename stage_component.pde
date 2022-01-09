@@ -22,6 +22,10 @@ class Level {
     respawnX=(int)RewspawnX;
     respawnY=(int)RespawnY;
     respawnStage=currentStageIndex;
+    if(!gameVersionCompatibilityCheck(createdVersion)){
+     return; 
+    }
+    
     for (int i=1; i<file.size(); i++) {
       job=file.getJSONObject(i);
       stages.add(new Stage(loadJSONArray(rootPath+job.getString("location"))));
@@ -50,7 +54,7 @@ class Level {
     head.setFloat("spawn pointX", RewspawnX);
     head.setFloat("spawn pointY", RespawnY);
     head.setString("name", name);
-    head.setString("game version", createdVersion);
+    head.setString("game version", GAME_version);
     head.setString("author", author);
     index.setJSONObject(0, head);
     for (int i=1; i<stages.size()+1; i++) {
@@ -68,7 +72,7 @@ class Stage {
   public ArrayList<StageComponent> parts = new ArrayList<>();
   public boolean is3D=false;
   public String type, name;
-  public int stageID;
+  public int stageID,skyColor=#74ABFF;
   Stage(JSONArray file) {//single varible instance for a stage
     load(file);
   }
@@ -81,6 +85,11 @@ class Stage {
   void load(JSONArray file) {
     type=file.getJSONObject(0).getString("type");
     name=file.getJSONObject(0).getString("name");
+    try{
+      skyColor=file.getJSONObject(0).getInt("sky color");
+    }catch(Throwable e){
+      
+    }
 
     if (type.equals("stage")||type.equals("3Dstage")) {
       is3D=type.equals("3Dstage");
@@ -136,6 +145,7 @@ class Stage {
     JSONObject head=new JSONObject();
     head.setString("name", name);
     head.setString("type", type);
+    head.setInt("sky color",skyColor);
     staeg.setJSONObject(0, head);
     for (int i=0; i<parts.size(); i++) {
       staeg.setJSONObject(i+1, parts.get(i).save(is3D));
