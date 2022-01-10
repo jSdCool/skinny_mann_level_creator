@@ -172,9 +172,8 @@ abstract class StageComponent {//the base class for all components that exsist i
   boolean colideDethPlane(float x, float Y) {
     return false;
   };
-  JSONObject save(boolean stage_3D) {
-    return null;
-  };
+  abstract JSONObject save(boolean stage_3D);
+  
   void setData(String data){}
   
   String getData(){
