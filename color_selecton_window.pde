@@ -9,8 +9,8 @@ class ToolBox extends PApplet {
   public int redVal=0, greenVal=0, blueVal=0, CC=0;
   int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset;
   String page="colors";
-  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select,selectionPage;
-  boolean typingSign=false;
+  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select,selectionPage,stageSettings,skyColorB1,setSkyColor,resetSkyColor;
+  boolean typingSign=false,settingSkyColor=false;
 
   public void settings() {
     size(1280, 720);
@@ -19,6 +19,7 @@ class ToolBox extends PApplet {
     colorPage=new Button(50, 50, 100, 50, "colors/depth");
     toolsPage=new Button(155, 50, 100, 50, "tools");
     selectionPage=new Button(260, 50, 100, 50, "selection");
+    stageSettings=new Button(365, 50, 100, 50, "stage settings");
 
     toggle3DMode=new Button(820, 40+100, 50, 50, "  3D  ", 255, 203).setStrokeWeight(5);
     switch3D1=new Button(880, 40+100, 50, 50, 255, 203).setStrokeWeight(5);
@@ -32,6 +33,9 @@ class ToolBox extends PApplet {
     exitStageEdit= new Button(520, 40+100, 50, 50, " < ", 255, 203).setStrokeWeight(5);
     sign=new Button(1060, 140, 50, 50, 255, 203).setStrokeWeight(5);
     select=new Button(1120, 140, 50, 50, "select", 255, 203).setStrokeWeight(5);
+    skyColorB1=new Button(150,165,40,40, 255, 203).setStrokeWeight(0);
+    setSkyColor=new Button(300,580,100,30,"set sky color").setStrokeWeight(2);
+    resetSkyColor=new Button(200,165,40,40,"reset", 255, 203).setStrokeWeight(0);
   }
 
 
@@ -98,12 +102,16 @@ class ToolBox extends PApplet {
       colorPage.draw();
       toolsPage.draw();
       selectionPage.draw();
+      stageSettings.draw();
+      if(settingSkyColor)
+      setSkyColor.draw();
     }//end of if page is colors
     if (page.equals("tools")) {
       background(255*0.5);
       colorPage.draw();
       toolsPage.draw();
       selectionPage.draw();
+      stageSettings.draw();
 
       if (editingStage) {
 
@@ -790,6 +798,7 @@ class ToolBox extends PApplet {
       colorPage.draw();
       toolsPage.draw();
       selectionPage.draw();
+      stageSettings.draw();
       
       if(selectedIndex==-1){//if nothing is selected
         fill(0);
@@ -820,6 +829,28 @@ class ToolBox extends PApplet {
       }//end of thing is selected
 
     }//end of selection page
+    if(page.equals("stage settings")){
+      background(#92CED8);
+      colorPage.draw();
+      toolsPage.draw();
+      selectionPage.draw();
+      stageSettings.draw();
+      if(editingStage){
+        fill(0);
+        textSize(25);
+        textAlign(LEFT,CENTER);
+        text("stage name: "+level.stages.get(currentStageIndex).name,50,150);
+        text("sky color: ",50,180);
+        skyColorB1.setColor(level.stages.get(currentStageIndex).skyColor,0);
+        skyColorB1.draw();
+        resetSkyColor.draw();
+      }else{//end of editing stage
+        fill(0);
+        textSize(30);
+        textAlign(CENTER,CENTER);
+        text("you are not currently editing a stage",width/2,height/2);
+      }//end of not editing stage
+    }//end of stage settings page
   }//end of draw
 
   public void mouseClicked() {
@@ -854,6 +885,13 @@ class ToolBox extends PApplet {
         colors.setJSONObject(colors.size(), colo);
         saveColors=true;
       }
+      if(settingSkyColor){
+        if(setSkyColor.isMouseOver()){
+          settingSkyColor=false;
+          page="stage settings";
+          level.stages.get(currentStageIndex).skyColor=CC;
+        }
+      }
     }//end of if pages is colors
 
     if (colorPage.isMouseOver()) {
@@ -864,6 +902,9 @@ class ToolBox extends PApplet {
     }
     if (selectionPage.isMouseOver()) {
       page="selection";
+    }
+    if (stageSettings.isMouseOver()) {
+      page="stage settings";
     }
 
     if (page.equals("tools")) {
@@ -1094,7 +1135,18 @@ class ToolBox extends PApplet {
           }
         }
       }//if something is elected
-    }
+    }//end of page is selection
+    if(page.equals("stage settings")){
+      if(editingStage){
+       if(skyColorB1.isMouseOver()){
+         settingSkyColor=true;
+         page="colors";
+       }//end of clicked on skyColorB1
+       if(resetSkyColor.isMouseOver()){
+         level.stages.get(currentStageIndex).skyColor=#74ABFF;
+       }//end of clicked on reset sky color
+      }//end of editing stage
+    }//end of page is stage settings
   }
 
   public void mouseDragged() {
