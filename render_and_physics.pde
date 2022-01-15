@@ -7,7 +7,7 @@ void stageLevelDraw() {
   background(stage.skyColor);
   int selectIndex=-1;
   if(selecting){
-    selectIndex=colid_index(mouseX+camPos,mouseY-camPosY);
+    selectIndex=colid_index(mouseX+camPos,mouseY-camPosY,stage);
   }
   if (E_pressed&&viewingItemContents) {
         E_pressed=false;
@@ -135,6 +135,33 @@ void stageLevelDraw() {
      displayTextUntill=millis()-1;
    }
    disEngageHUDPosition();
+  }
+}
+
+void blueprintEditDraw(){
+  int selectIndex=-1;
+  if(selecting){
+    selectIndex=colid_index(mouseX+camPos,mouseY-camPosY,workingBlueprint);
+  }
+  if (workingBlueprint.type.equals("blueprint")) {
+    e3DMode=false;
+    camera();
+    for (int i=0; stageLoopCondishen(i, workingBlueprint); i++) {
+      strokeWeight(0);
+      noStroke();
+      if(selectIndex==i){
+       stroke(#FFFF00);
+       strokeWeight(2);
+      }
+      if(selectedIndex==i){
+       stroke(#0A03FF);
+       strokeWeight(2);
+      }
+      workingBlueprint.parts.get(i).draw();
+      if(viewingItemContents&&viewingItemIndex==-1){
+        viewingItemIndex=i;
+      }
+    }
   }
 }
 //////////////////////////////////////////-----------------------------------------------------
@@ -663,8 +690,7 @@ boolean player_kill(float x, float y) {
   return false;
 }
 
-int colid_index(float x, float y) {
-  Stage stage=level.stages.get(currentStageIndex);
+int colid_index(float x, float y,Stage stage) {
   for (int i=stage.parts.size()-1; i>=0; i--) {
     if (stage.parts.get(i).colide(x, y, true)) {
       return i;

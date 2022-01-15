@@ -14,7 +14,7 @@ void setup() {
   coin3D.scale(3);
   initlizeButtons();
 }
-boolean startup=true, editing_level=true, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, loading=false, newLevel=false, simulating=false, entering_file_path=false, coursor=false, level_complete=false, dead=false, entering_name=false, cam_left=false, cam_right=false, drawing=false, draw=false, extra=false, ground=false, check_point=false, goal=false, deleteing=false, delete=false, moving_player=false, grid_mode=false, holo_gram=false, editingStage=false, levelOverview=false, newFile=false, drawCoins=false, drawingPortal=false, drawingPortal2=false, drawingPortal3=false, E_pressed=false, saveColors=false, sloap=false, loopThread2=true, cam_up=false, cam_down=false, holoTriangle=false, dethPlane=false, setPlayerPosTo=false, e3DMode=false, WPressed=false, SPressed=false, draw3DSwitch1=false, draw3DSwitch2=false, checkpointIn3DStage=false, shadow3D=true, tutorialMode=false, drawingSign=false, selecting=false,viewingItemContents=false,loadingBlueprint=false,creatingNewBlueprint=false;
+boolean startup=true, editing_level=true, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, loading=false, newLevel=false, simulating=false, entering_file_path=false, coursor=false, level_complete=false, dead=false, entering_name=false, cam_left=false, cam_right=false, drawing=false, draw=false, extra=false, ground=false, check_point=false, goal=false, deleteing=false, delete=false, moving_player=false, grid_mode=false, holo_gram=false, editingStage=false, levelOverview=false, newFile=false, drawCoins=false, drawingPortal=false, drawingPortal2=false, drawingPortal3=false, E_pressed=false, saveColors=false, sloap=false, loopThread2=true, cam_up=false, cam_down=false, holoTriangle=false, dethPlane=false, setPlayerPosTo=false, e3DMode=false, WPressed=false, SPressed=false, draw3DSwitch1=false, draw3DSwitch2=false, checkpointIn3DStage=false, shadow3D=true, tutorialMode=false, drawingSign=false, selecting=false,viewingItemContents=false,loadingBlueprint=false,creatingNewBlueprint=false,editingBlueprint=false;
 String file_path, new_name="my_level", GAME_version="0.5.0_Early_Access", EDITOR_version="0.0.1.8_EAc", rootPath="", coursorr="", newFileName="", newLevelType="2D", stageType="", author="your name here", displayText="";
 //int player1 []={20,700,1,0,1,0};
 Player player1 =new Player(20, 699, 1, "red");
@@ -28,6 +28,7 @@ ToolBox scr2 ;
 PShape coin3D;
 Level level;
 ArrayList<Boolean> coins = new ArrayList<Boolean>();
+Stage workingBlueprint;
 void draw() {
 
   if (frameCount%20==0) {
@@ -303,6 +304,16 @@ void draw() {
     createBlueprintGo.setText("load");
     createBlueprintGo.draw();
   }//end of loading blueprint
+  if(editingBlueprint){
+    background(7646207);
+    fill(0);
+    strokeWeight(0);
+    rect(width/2-0.5,0,1,height);
+    rect(0,height/2-0.5,width,1);
+    
+    stageEditGUI();//overlays when placing things
+  }
+  
 
   engageHUDPosition();
   fill(255);
@@ -495,9 +506,20 @@ void mouseClicked() {
           }
         }
       }
-    }
-  }
-}
+    }//end of drawing portal 2
+    if(creatingNewBlueprint){
+      if(createBlueprintGo.isMouseOver()){
+        if(new_name!=null&&!new_name.equals("")){//is something was entered
+          workingBlueprint=new Stage(new_name,"blueprint");
+          entering_name=false;
+          creatingNewBlueprint=false;
+          editingBlueprint=true;
+        }
+      }
+    }//end of creating new bluepint
+    
+  }//end of left mouse button clicked
+}//end of mouse clicked
 
 void keyPressed() {
   if (key == ESC) {

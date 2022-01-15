@@ -12,9 +12,15 @@ void stageEditGUI() {
 
   Color=(int)(RC*Math.pow(16, 4)+GC*Math.pow(16, 2)+BC+adj)-16777215;
   Color=scr2.CC;
+  Stage current=null;
+  if(editingStage){
+    current=level.stages.get(currentStageIndex);
+  }
+  if(editingBlueprint){
+    current=workingBlueprint;
+  }
 
-
-  if (level.stages.get(currentStageIndex).type.equals("stage")) {
+  if (current.type.equals("stage")) {
 
     if (drawing) {
       fill(Color);
@@ -324,7 +330,7 @@ void stageEditGUI() {
     }
 
     if (deleteing&&delete) {
-      int index=colid_index(mouseX+camPos, mouseY-camPosY);
+      int index=colid_index(mouseX+camPos, mouseY-camPosY,level.stages.get(currentStageIndex));
       if (index==-1) {
       } else {
         level.stages.get(currentStageIndex).parts.remove(index);
@@ -497,7 +503,7 @@ void stageEditGUI() {
     //the accual gut part
   }
 
-  if (level.stages.get(currentStageIndex).type.equals("3Dstage")) {
+  if (current.type.equals("3Dstage")) {
 
     if (!e3DMode) {
 
@@ -662,7 +668,7 @@ void stageEditGUI() {
       }
 
       if (deleteing&&delete) {
-        int index=colid_index(mouseX+camPos, mouseY-camPosY);
+        int index=colid_index(mouseX+camPos, mouseY-camPosY,level.stages.get(currentStageIndex));
         if (index==-1) {
         } else {
           level.stages.get(currentStageIndex).parts.remove(index);
@@ -913,7 +919,7 @@ void GUImouseClicked() {
     }
     
     if(selecting){
-     selectedIndex=colid_index(mouseX+camPos,mouseY-camPosY); 
+     selectedIndex=colid_index(mouseX+camPos,mouseY-camPosY,level.stages.get(currentStageIndex)); 
     }
   }//end of eddit stage
 }
