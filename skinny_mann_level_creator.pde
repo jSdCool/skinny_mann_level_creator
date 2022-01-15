@@ -14,7 +14,7 @@ void setup() {
   coin3D.scale(3);
   initlizeButtons();
 }
-boolean startup=true, editing_level=true, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, loading=false, newLevel=false, simulating=false, entering_file_path=false, coursor=false, level_complete=false, dead=false, entering_name=false, cam_left=false, cam_right=false, drawing=false, draw=false, extra=false, ground=false, check_point=false, goal=false, deleteing=false, delete=false, moving_player=false, grid_mode=false, holo_gram=false, editingStage=false, levelOverview=false, newFile=false, drawCoins=false, drawingPortal=false, drawingPortal2=false, drawingPortal3=false, E_pressed=false, saveColors=false, sloap=false, loopThread2=true, cam_up=false, cam_down=false, holoTriangle=false, dethPlane=false, setPlayerPosTo=false, e3DMode=false, WPressed=false, SPressed=false, draw3DSwitch1=false, draw3DSwitch2=false, checkpointIn3DStage=false, shadow3D=true, tutorialMode=false, drawingSign=false, selecting=false,viewingItemContents=false;
+boolean startup=true, editing_level=true, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, loading=false, newLevel=false, simulating=false, entering_file_path=false, coursor=false, level_complete=false, dead=false, entering_name=false, cam_left=false, cam_right=false, drawing=false, draw=false, extra=false, ground=false, check_point=false, goal=false, deleteing=false, delete=false, moving_player=false, grid_mode=false, holo_gram=false, editingStage=false, levelOverview=false, newFile=false, drawCoins=false, drawingPortal=false, drawingPortal2=false, drawingPortal3=false, E_pressed=false, saveColors=false, sloap=false, loopThread2=true, cam_up=false, cam_down=false, holoTriangle=false, dethPlane=false, setPlayerPosTo=false, e3DMode=false, WPressed=false, SPressed=false, draw3DSwitch1=false, draw3DSwitch2=false, checkpointIn3DStage=false, shadow3D=true, tutorialMode=false, drawingSign=false, selecting=false,viewingItemContents=false,loadingBlueprint=false,creatingNewBlueprint=false;
 String file_path, new_name="my_level", GAME_version="0.5.0_Early_Access", EDITOR_version="0.0.1.8_EAc", rootPath="", coursorr="", newFileName="", newLevelType="2D", stageType="", author="your name here", displayText="";
 //int player1 []={20,700,1,0,1,0};
 Player player1 =new Player(20, 699, 1, "red");
@@ -64,6 +64,8 @@ void draw() {
     text("author: "+author+coursorr, 10, 30);
     strokeWeight(0);
     rect(60, 31, textWidth(author), 1);
+    newBlueprint.draw();
+    loadBlueprint.draw();
   }
   if (loading) {
     background(#48EDD8);
@@ -268,7 +270,39 @@ void draw() {
     textSize(90);
     text("select destenation stage", 640, 30);
     textAlign(LEFT, BOTTOM);
-  }
+  }//end of drawing portal2
+  
+  if(creatingNewBlueprint){
+    background(#48EDD8);
+    fill(0);
+    textSize(20);
+    text("enter blueprint name", 40, 100);
+    if (new_name!=null) {
+        text(new_name+coursorr, 40, 150);
+    } else if (coursor) {
+      text("|", 40, 150);
+    }
+    createBlueprintGo.draw();
+    stroke(0);
+    strokeWeight(1);
+    line(40, 152, 800, 152);
+  }//end of creating new blueprint
+  if(loadingBlueprint){
+    background(#48EDD8);
+    fill(0);
+    textSize(20);
+    text("enter blueprint name", 40, 100);
+    if (new_name!=null) {
+        text(new_name+coursorr, 40, 150);
+    } else if (coursor) {
+      text("|", 40, 150);
+    }
+    stroke(0);
+    strokeWeight(1);
+    line(40, 152, 1200, 152);
+    createBlueprintGo.setText("load");
+    createBlueprintGo.draw();
+  }//end of loading blueprint
 
   engageHUDPosition();
   fill(255);
@@ -287,7 +321,7 @@ void draw() {
   }
 
   disEngageHUDPosition();
-}
+}//end of draw
 
 
 void mouseClicked() {
@@ -302,6 +336,18 @@ void mouseClicked() {
       if (mouseX >=800 && mouseX <= 1000 && mouseY >= 300 && mouseY <= 380) {
         startup=false;
         loading=true;
+      }
+      if(newBlueprint.isMouseOver()){
+        startup=false;
+        creatingNewBlueprint=true;
+        new_name="my blueprint";
+        entering_name=true;
+      }
+      if(loadBlueprint.isMouseOver()){
+        startup=false;
+        loadingBlueprint=true;
+        new_name="";
+        entering_name=true;
       }
     }
     if (loading) {
