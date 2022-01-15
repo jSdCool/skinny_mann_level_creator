@@ -686,11 +686,12 @@ class Interdimentional_Portal extends StageComponent {//ground component
       if (linkZ!=-1) {
         setPlayerPosZ=(int)linkZ;
         player1.z=linkZ;
+        tpCords[2]=linkZ;
       }
       player1.setX(linkX).setY(linkY);
       setPlayerPosTo=true;
-      setPlayerPosX=(int)linkX;
-      setPlayerPosY=(int)linkY;
+      tpCords[0]=(int)linkX;
+      tpCords[1]=(int)linkY;
       gmillis=millis()+850;
     }
   }
@@ -718,11 +719,12 @@ class Interdimentional_Portal extends StageComponent {//ground component
       if (linkZ!=-1) {
         setPlayerPosZ=(int)linkZ;
         player1.z=linkZ;
+        tpCords[2]=linkZ;
       }
       player1.setX(linkX).setY(linkY);
       setPlayerPosTo=true;
-      setPlayerPosX=(int)linkX;
-      setPlayerPosY=(int)linkY;
+      tpCords[0]=(int)linkX;
+      tpCords[1]=(int)linkY;
       gmillis=millis()+850;
     }
   }
