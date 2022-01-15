@@ -79,7 +79,7 @@ class Stage {
   Stage(String Name, String Type) {
     name=Name;
     type=Type;
-    is3D=type.equals("3Dstage");
+    is3D=type.equals("3Dstage")||type.equals("3D blueprint");
   }
 
   void load(JSONArray file) {
@@ -91,7 +91,7 @@ class Stage {
       
     }
 
-    if (type.equals("stage")||type.equals("3Dstage")) {
+    if (type.equals("stage")||type.equals("3Dstage")||type.equals("blueprint")||type.equals("3D blueprint")) {
       is3D=type.equals("3Dstage");
       for (int i=1; i<file.size(); i++) {
         try {
@@ -154,6 +154,7 @@ class Stage {
     return "/"+name+".json";
   }
 }
+
 
 abstract class StageComponent {//the base class for all components that exsist inside a stage
   public float x, y, z, dx, dy, dz;
