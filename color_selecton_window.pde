@@ -9,7 +9,7 @@ class ToolBox extends PApplet {
   public int redVal=0, greenVal=0, blueVal=0, CC=0;
   int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset;
   String page="colors";
-  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select,selectionPage,stageSettings,skyColorB1,setSkyColor,resetSkyColor;
+  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select,selectionPage,stageSettings,skyColorB1,setSkyColor,resetSkyColor,placeBlueprint;
   boolean typingSign=false,settingSkyColor=false;
 
   public void settings() {
@@ -36,6 +36,7 @@ class ToolBox extends PApplet {
     skyColorB1=new Button(150,165,40,40, 255, 203).setStrokeWeight(0);
     setSkyColor=new Button(300,580,100,30,"set sky color").setStrokeWeight(2);
     resetSkyColor=new Button(200,165,40,40,"reset", 255, 203).setStrokeWeight(0);
+    placeBlueprint=new Button(1180, 140, 50, 50, #0F1AD3, 203).setStrokeWeight(5);
   }
 
 
@@ -303,7 +304,18 @@ class ToolBox extends PApplet {
           fill(-114431);
           stroke(-114431);
           rect(825, 65+100, 40, 20);
-        }
+          
+          if(selectingBlueprint){
+            placeBlueprint.setColor(#0F1AD3, #F2F258);
+          }else if(blueprintSelected){
+            placeBlueprint.setColor(#0F1AD3,#07F5EF);
+          }else{
+            placeBlueprint.setColor(#0F1AD3,203);
+          }
+          placeBlueprint.draw();
+        }//end of not in 3D mode
+        
+        
         saveLevel.draw();
 
         if (drawingSign) {
@@ -457,7 +469,16 @@ class ToolBox extends PApplet {
             textSize(15);
             text("deth plane", mouseX, mouseY+5);
           }
-        }
+          if(placeBlueprint.isMouseOver()){
+            stroke(0);
+            fill(200);
+            strokeWeight(2);
+            textSize(15);
+            rect(mouseX-4, mouseY-13, textWidth("place blueprint")+8, 16);
+            fill(0);
+            text("place blueprint", mouseX, mouseY+5);
+          }
+        }//end of not 3d mode
         if (saveLevel.isMouseOver()) {
           stroke(0);
           fill(200);
@@ -480,7 +501,7 @@ class ToolBox extends PApplet {
           stroke(0);
           fill(200);
           strokeWeight(2);
-          rect(mouseX-4, mouseY-13, textWidth("sign"), 16);
+          rect(mouseX-4, mouseY-13, textWidth("select"), 16);
           fill(0);
           textSize(15);
           text("select", mouseX, mouseY+5);
