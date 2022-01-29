@@ -592,7 +592,12 @@ class Coin extends StageComponent {//ground component
 
   void draw() {
     float playx=player1.getX(), playy=player1.getY();
-    boolean collected=coins.get(coinId);
+    boolean collected;
+    if(editingBlueprint){
+      collected=false;
+    }else{
+      collected=coins.get(coinId);
+    }
     float x2=x-camPos;
     if (!collected) {
       drawCoin(Scale*x2, Scale*(y+camPosY), Scale*3);

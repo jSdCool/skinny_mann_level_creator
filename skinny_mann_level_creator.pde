@@ -310,7 +310,7 @@ void draw() {
     strokeWeight(0);
     rect(width/2-0.5,0,1,height);
     rect(0,height/2-0.5,width,1);
-    
+    blueprintEditDraw();
     stageEditGUI();//overlays when placing things
   }
   
@@ -514,6 +514,8 @@ void mouseClicked() {
           entering_name=false;
           creatingNewBlueprint=false;
           editingBlueprint=true;
+          camPos=-640;
+          camPosY=360;
         }
       }
     }//end of creating new bluepint
@@ -570,7 +572,7 @@ void keyPressed() {
 
 
 
-  if (editingStage) {
+  if (editingStage||editingBlueprint) {
     if (key=='r'||key=='R') {
       triangleMode++;
       if (triangleMode==4)
@@ -669,13 +671,13 @@ void keyReleased() {
 }
 
 void mousePressed() {
-  if (editingStage) {
+  if (editingStage||editingBlueprint) {
     GUImousePressed();
   }
 }
 
 void mouseReleased() {
-  if (editingStage) {
+  if (editingStage||editingBlueprint) {
     GUImouseReleased();
   }
 }
