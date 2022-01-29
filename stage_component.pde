@@ -28,6 +28,7 @@ class Level {
     
     for (int i=1; i<file.size(); i++) {
       job=file.getJSONObject(i);
+      if(job.getString("type").equals("stage")&&job.getString("type").equals("3Dstage"))
       stages.add(new Stage(loadJSONArray(rootPath+job.getString("location"))));
     }
     coins=new ArrayList<Boolean>();

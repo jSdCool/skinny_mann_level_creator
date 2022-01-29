@@ -9,7 +9,7 @@ class ToolBox extends PApplet {
   public int redVal=0, greenVal=0, blueVal=0, CC=0;
   int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset;
   String page="colors";
-  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select,selectionPage,stageSettings,skyColorB1,setSkyColor,resetSkyColor,placeBlueprint,nexBlueprint,prevBlueprint;
+  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select,selectionPage,stageSettings,skyColorB1,setSkyColor,resetSkyColor,placeBlueprint,nexBlueprint,prevBlueprint,playSound;
   boolean typingSign=false,settingSkyColor=false;
 
   public void settings() {
@@ -39,6 +39,7 @@ class ToolBox extends PApplet {
     placeBlueprint=new Button(1180, 140, 50, 50, #0F1AD3, 203).setStrokeWeight(5);
     nexBlueprint=new Button(width/2+200, height*0.7-25, 50, 50,">", 255, 203).setStrokeWeight(5);
     prevBlueprint=new Button(width/2-200, height*0.7-25, 50, 50,"<", 255, 203).setStrokeWeight(5);
+    playSound=new Button(40,200,50,50,255, 203).setStrokeWeight(5);
   }
 
 
@@ -313,6 +314,14 @@ class ToolBox extends PApplet {
             placeBlueprint.setColor(#0F1AD3,203);
           }
           placeBlueprint.draw();
+          
+          if(placingSound){
+            playSound.setColor(255, #F2F258);
+          }else{
+            playSound.setColor(255, 203);
+          }
+          playSound.draw();
+          drawSpeakericon(this,playSound.x+playSound.lengthX/2,playSound.y+playSound.lengthY/2,0.5);
         }//end of not in 3D mode
         
         
@@ -477,6 +486,15 @@ class ToolBox extends PApplet {
             rect(mouseX-4, mouseY-13, textWidth("place blueprint")+8, 16);
             fill(0);
             text("place blueprint", mouseX, mouseY+5);
+          }
+          if(playSound.isMouseOver()){
+            stroke(0);
+            fill(200);
+            strokeWeight(2);
+            textSize(15);
+            rect(mouseX-4, mouseY-13, textWidth("place sound")+8, 16);
+            fill(0);
+            text("place sound", mouseX, mouseY+5);
           }
         }//end of not 3d mode
         if (saveLevel.isMouseOver()) {

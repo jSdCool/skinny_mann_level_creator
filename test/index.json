@@ -55,5 +55,10 @@
     "name": "signs and sloaps",
     "location": "/signs and sloaps.json",
     "type": "stage"
+  },
+  {
+    "name": "yoho",
+    "location": "/yoho.json",
+    "type": "stage"
   }
 ]
