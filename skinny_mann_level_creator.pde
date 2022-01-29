@@ -140,7 +140,7 @@ void draw() {
     stageLevelDraw();
     stageEditGUI();
 
-    if(selectingBlueprint){
+    if(selectingBlueprint&&blueprints.length!=0){
       generateDisplayBlueprint();
       renderBlueprint();
     }

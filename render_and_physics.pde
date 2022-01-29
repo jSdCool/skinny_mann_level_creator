@@ -112,7 +112,7 @@ void stageLevelDraw() {
     fill(255, 126, 0);
     stroke(255, 0, 0);
     strokeWeight(Scale*10);
-    rect(Scale*550, Scale*450, Scale*200, Scale*40); //<>// //<>//
+    rect(Scale*550, Scale*450, Scale*200, Scale*40); //<>//
     fill(0);
     textSize(Scale*40);
     text("continue", Scale*565, Scale*480);

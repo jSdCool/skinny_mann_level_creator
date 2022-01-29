@@ -13,10 +13,10 @@ void stageEditGUI() {
   Color=(int)(RC*Math.pow(16, 4)+GC*Math.pow(16, 2)+BC+adj)-16777215;
   Color=scr2.CC;
   Stage current=null;
-  if(editingStage){
+  if (editingStage) {
     current=level.stages.get(currentStageIndex);
   }
-  if(editingBlueprint){
+  if (editingBlueprint) {
     current=workingBlueprint;
   }
 
@@ -185,7 +185,7 @@ void stageEditGUI() {
         }
       }
 
-     current.parts.add(new Ground(X1, Y1, XD, YD, Color));
+      current.parts.add(new Ground(X1, Y1, XD, YD, Color));
       draw=false;
     }
 
@@ -247,7 +247,7 @@ void stageEditGUI() {
           return;
         }
       }
-     current.parts.add(new Holo(X1, Y1, XD, YD, Color));
+      current.parts.add(new Holo(X1, Y1, XD, YD, Color));
       draw=false;
     }
 
@@ -309,33 +309,33 @@ void stageEditGUI() {
           return;
         }
       }
-     current.parts.add(new DethPlane(X1, Y1, XD, YD));
+      current.parts.add(new DethPlane(X1, Y1, XD, YD));
       draw=false;
     }
 
 
     if (check_point&&draw) {
       if (grid_mode) {
-       current.parts.add(new CheckPoint(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size));
+        current.parts.add(new CheckPoint(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size));
       } else {
-       current.parts.add(new CheckPoint((int)mouseX+camPos, (int)mouseY-camPosY));
+        current.parts.add(new CheckPoint((int)mouseX+camPos, (int)mouseY-camPosY));
       }
       draw=false;
     }
     if (goal&&draw) {
       if (grid_mode) {
-       current.parts.add(new Goal(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size));
+        current.parts.add(new Goal(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size));
       } else {
-       current.parts.add(new Goal((int)mouseX+camPos, (int)mouseY-camPosY));
+        current.parts.add(new Goal((int)mouseX+camPos, (int)mouseY-camPosY));
       }
       draw=false;
     }
 
     if (deleteing&&delete) {
-      int index=colid_index(mouseX+camPos, mouseY-camPosY,current);
+      int index=colid_index(mouseX+camPos, mouseY-camPosY, current);
       if (index==-1) {
       } else {
-       current.parts.remove(index);
+        current.parts.remove(index);
       }
       delete=false;
     }
@@ -422,7 +422,7 @@ void stageEditGUI() {
         }
       }
 
-     current.parts.add(new Sloap(X1, Y1, X2, Y2, triangleMode, Color));
+      current.parts.add(new Sloap(X1, Y1, X2, Y2, triangleMode, Color));
       draw=false;
     }
 
@@ -483,7 +483,7 @@ void stageEditGUI() {
           return;
         }
       }
-     current.parts.add(new HoloTriangle(X1, Y1, X2, Y2, triangleMode, Color));
+      current.parts.add(new HoloTriangle(X1, Y1, X2, Y2, triangleMode, Color));
       draw=false;
     }
     if (check_point) {
@@ -604,7 +604,7 @@ void stageEditGUI() {
             return;
           }
         }
-       current.parts.add(new Ground(X1, Y1, startingDepth, XD, YD, totalDepth, Color));
+        current.parts.add(new Ground(X1, Y1, startingDepth, XD, YD, totalDepth, Color));
         draw=false;
       }
       if (draw&&holo_gram) {
@@ -665,15 +665,15 @@ void stageEditGUI() {
             return;
           }
         }
-       current.parts.add(new Holo(X1, Y1, startingDepth, XD, YD, totalDepth, Color));
+        current.parts.add(new Holo(X1, Y1, startingDepth, XD, YD, totalDepth, Color));
         draw=false;
       }
 
       if (deleteing&&delete) {
-        int index=colid_index(mouseX+camPos, mouseY-camPosY,level.stages.get(currentStageIndex));
+        int index=colid_index(mouseX+camPos, mouseY-camPosY, level.stages.get(currentStageIndex));
         if (index==-1) {
         } else {
-         current.parts.remove(index);
+          current.parts.remove(index);
         }
         delete=false;
       }
@@ -693,27 +693,27 @@ void stageEditGUI() {
       }
       if (draw3DSwitch1&&draw) {
         if (grid_mode) {
-         current.parts.add(new SWon3D(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size, startingDepth));
+          current.parts.add(new SWon3D(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size, startingDepth));
         } else {
-         current.parts.add(new SWon3D((int)mouseX+camPos, (int)mouseY-camPosY, startingDepth));
+          current.parts.add(new SWon3D((int)mouseX+camPos, (int)mouseY-camPosY, startingDepth));
         }
         draw=false;
       }
 
       if (draw3DSwitch2&&draw) {
         if (grid_mode) {
-         current.parts.add(new SWoff3D(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size, startingDepth));
+          current.parts.add(new SWoff3D(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size, startingDepth));
         } else {
-         current.parts.add(new SWoff3D((int)mouseX+camPos, (int)mouseY-camPosY, startingDepth));
+          current.parts.add(new SWoff3D((int)mouseX+camPos, (int)mouseY-camPosY, startingDepth));
         }
         draw=false;
       }
 
       if (check_point&&draw) {
         if (grid_mode) {
-         current.parts.add(new CheckPoint(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size, startingDepth));
+          current.parts.add(new CheckPoint(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size, startingDepth));
         } else {
-         current.parts.add(new CheckPoint((int)mouseX+camPos, (int)mouseY-camPosY, startingDepth));
+          current.parts.add(new CheckPoint((int)mouseX+camPos, (int)mouseY-camPosY, startingDepth));
         }
         draw=false;
       }
@@ -766,16 +766,16 @@ void stageEditGUI() {
 
 void GUImouseClicked() {
   if (editingStage||editingBlueprint) {
-    
 
 
-Stage current=null;
-  if(editingStage){
-    current=level.stages.get(currentStageIndex);
-  }
-  if(editingBlueprint){
-    current=workingBlueprint;
-  }
+
+    Stage current=null;
+    if (editingStage) {
+      current=level.stages.get(currentStageIndex);
+    }
+    if (editingBlueprint) {
+      current=workingBlueprint;
+    }
 
 
     if (check_point) {
@@ -812,97 +812,92 @@ Stage current=null;
     }
     if (drawCoins) {
       println("peepee poopoo");
-        String tpe = current.type;
-        //Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size , Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size
-        if (grid_mode) {
-          if (tpe.equals("stage")) {
-            current.parts.add(new Coin(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size, level.numOfCoins));
-          }
-          if (tpe.equals("3Dstage")) {
-            current.parts.add(new Coin(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size, startingDepth, level.numOfCoins));
-          }
-          if(tpe.equals("blueprint")){
-            current.parts.add(new Coin(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size, 0));
-          }
-        } else {
-          if (tpe.equals("stage")) {
-            current.parts.add(new Coin((int)mouseX+camPos, (int)mouseY-camPosY, level.numOfCoins));
-          }
-          if (tpe.equals("3Dstage")) {
-            current.parts.add(new Coin((int)mouseX+camPos, (int)mouseY-camPosY, startingDepth, level.numOfCoins));
-          }
-          if(tpe.equals("blueprint")){
-            current.parts.add(new Coin((int)mouseX+camPos, (int)mouseY-camPosY, startingDepth, 0));
-          }
+      String tpe = current.type;
+      //Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size , Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size
+      if (grid_mode) {
+        if (tpe.equals("stage")) {
+          current.parts.add(new Coin(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size, level.numOfCoins));
         }
-        if(editingStage){
+        if (tpe.equals("3Dstage")) {
+          current.parts.add(new Coin(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size, startingDepth, level.numOfCoins));
+        }
+        if (tpe.equals("blueprint")) {
+          current.parts.add(new Coin(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size, 0));
+        }
+      } else {
+        if (tpe.equals("stage")) {
+          current.parts.add(new Coin((int)mouseX+camPos, (int)mouseY-camPosY, level.numOfCoins));
+        }
+        if (tpe.equals("3Dstage")) {
+          current.parts.add(new Coin((int)mouseX+camPos, (int)mouseY-camPosY, startingDepth, level.numOfCoins));
+        }
+        if (tpe.equals("blueprint")) {
+          current.parts.add(new Coin((int)mouseX+camPos, (int)mouseY-camPosY, startingDepth, 0));
+        }
+      }
+      if (editingStage) {
         level.numOfCoins++;
         level.reloadCoins();
-        }
-      
+      }
     }
     if (drawingPortal) {
-      
-        portalStage1=new JSONObject();
-        portalStage2=new JSONObject();
-        portalStage1.setString("type", "interdimentional Portal");
-        portalStage2.setString("type", "interdimentional Portal");
-        if (grid_mode) {
-          portalStage1.setInt("x", Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size);
-          portalStage1.setInt("y", Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size);
-          portalStage2.setInt("linkX", Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size);
-          portalStage2.setInt("linkY", Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size);
-        } else {
-          portalStage1.setInt("x", mouseX+camPos);
-          portalStage1.setInt("y", mouseY-camPosY);
-          portalStage2.setInt("linkX", mouseX+camPos);
-          portalStage2.setInt("linkY", mouseY-camPosY);
-        }
-        if (stageType.equals("3Dstage")) {
-          portalStage1.setInt("z", startingDepth);
-          portalStage2.setInt("linkZ", startingDepth);
-        }
-        portalStage2.setInt("link Index", currentStageIndex+1);
-        drawingPortal=false;
-        drawingPortal2=true;
-        editingStage=false;
-        preSI=currentStageIndex;
-      
+
+      portalStage1=new JSONObject();
+      portalStage2=new JSONObject();
+      portalStage1.setString("type", "interdimentional Portal");
+      portalStage2.setString("type", "interdimentional Portal");
+      if (grid_mode) {
+        portalStage1.setInt("x", Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size);
+        portalStage1.setInt("y", Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size);
+        portalStage2.setInt("linkX", Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size);
+        portalStage2.setInt("linkY", Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size);
+      } else {
+        portalStage1.setInt("x", mouseX+camPos);
+        portalStage1.setInt("y", mouseY-camPosY);
+        portalStage2.setInt("linkX", mouseX+camPos);
+        portalStage2.setInt("linkY", mouseY-camPosY);
+      }
+      if (stageType.equals("3Dstage")) {
+        portalStage1.setInt("z", startingDepth);
+        portalStage2.setInt("linkZ", startingDepth);
+      }
+      portalStage2.setInt("link Index", currentStageIndex+1);
+      drawingPortal=false;
+      drawingPortal2=true;
+      editingStage=false;
+      preSI=currentStageIndex;
     }
     if (drawingPortal3) {
-      
-        if (grid_mode) {
-          portalStage2.setInt("x", Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size);
-          portalStage2.setInt("y", Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size);
-          portalStage1.setInt("linkX", Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size);
-          portalStage1.setInt("linkY", Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size);
-        } else {
-          portalStage2.setInt("x", mouseX+camPos);
-          portalStage2.setInt("y", mouseY-camPosY);
-          portalStage1.setInt("linkX", mouseX+camPos);
-          portalStage1.setInt("linkY", mouseY-camPosY);
-        }
-        portalStage1.setInt("link Index", currentStageIndex+1);
-        if (stageType.equals("3Dstage")) {
-          portalStage2.setInt("z", startingDepth);
-          portalStage1.setInt("linkZ", startingDepth);
-        }
-        level.stages.get(currentStageIndex).parts.add(new Interdimentional_Portal(portalStage2, level.stages.get(currentStageIndex).is3D));
-        level.stages.get(preSI).parts.add(new Interdimentional_Portal(portalStage1, level.stages.get(preSI).is3D));
-        portalStage2=null;
-        portalStage1=null;
-        drawingPortal3=false;
-      
+
+      if (grid_mode) {
+        portalStage2.setInt("x", Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size);
+        portalStage2.setInt("y", Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size);
+        portalStage1.setInt("linkX", Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size);
+        portalStage1.setInt("linkY", Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size);
+      } else {
+        portalStage2.setInt("x", mouseX+camPos);
+        portalStage2.setInt("y", mouseY-camPosY);
+        portalStage1.setInt("linkX", mouseX+camPos);
+        portalStage1.setInt("linkY", mouseY-camPosY);
+      }
+      portalStage1.setInt("link Index", currentStageIndex+1);
+      if (stageType.equals("3Dstage")) {
+        portalStage2.setInt("z", startingDepth);
+        portalStage1.setInt("linkZ", startingDepth);
+      }
+      level.stages.get(currentStageIndex).parts.add(new Interdimentional_Portal(portalStage2, level.stages.get(currentStageIndex).is3D));
+      level.stages.get(preSI).parts.add(new Interdimentional_Portal(portalStage1, level.stages.get(preSI).is3D));
+      portalStage2=null;
+      portalStage1=null;
+      drawingPortal3=false;
     }
     if (draw3DSwitch1) {
-      
-        draw=true;
-      
+
+      draw=true;
     }
     if (draw3DSwitch2) {
-      
-        draw=true;
-      
+
+      draw=true;
     }
     if (drawingSign&&!e3DMode) {
       String tpe = level.stages.get(currentStageIndex).type;
@@ -921,9 +916,48 @@ Stage current=null;
         }
       }
     }
-    
-    if(selecting){
-     selectedIndex=colid_index(mouseX+camPos,mouseY-camPosY,current); 
+
+    if (selecting) {
+      selectedIndex=colid_index(mouseX+camPos, mouseY-camPosY, current);
+    }
+    if (selectingBlueprint&&blueprints.length!=0) {
+      StageComponent tmp;
+      int ix, iy;
+      if (grid_mode) {
+        ix=Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size;
+        iy=Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size;
+      } else {
+        ix=mouseX+camPos;
+        iy=mouseY-camPosY;
+      }
+      for (int i=0; i<blueprints[currentBluieprintIndex].parts.size(); i++) {
+        tmp=blueprints[currentBluieprintIndex].parts.get(i);
+        if (tmp instanceof Ground) {
+          Ground g=(Ground)tmp;
+          current.parts.add(new Ground(g.x+ix, g.y+iy, g.dx, g.dy, g.ccolor));
+        }
+        if (tmp instanceof Holo) {
+          Holo g=(Holo)tmp;
+          current.parts.add(new Holo(g.x+ix, g.y+iy, g.dx, g.dy, g.ccolor));
+        }
+        if (tmp instanceof CheckPoint) {
+          CheckPoint g=(CheckPoint)tmp;
+          current.parts.add(new CheckPoint(g.x+iy, g.y+ix, g.z));
+        }
+        if (tmp instanceof Coin) {
+          Coin g=(Coin)tmp;
+          current.parts.add(new Coin(g.x+ix, g.y+iy, g.z, level.numOfCoins));
+          level.numOfCoins++;
+        }
+        if (tmp instanceof Sloap) {
+          Sloap g=(Sloap)tmp;
+          current.parts.add(new Sloap(g.x+ix, g.y+iy, g.dx+ix, g.dy+iy, g.direction, g.ccolor));
+        }
+        if (tmp instanceof HoloTriangle) {
+          HoloTriangle g=(HoloTriangle)tmp;
+         current.parts.add(new HoloTriangle(g.x+ix, g.y+iy, g.dx+ix, g.dy+iy, g.direction, g.ccolor));
+        }
+      }
     }
   }//end of eddit stage
 }
@@ -931,11 +965,10 @@ Stage current=null;
 void GUImousePressed() {
   if (mouseButton==LEFT) {
     if (ground||holo_gram||sloap||holoTriangle||dethPlane) {
-      
-        downX=mouseX;
-        downY=mouseY;
-        drawing=true;
-      
+
+      downX=mouseX;
+      downY=mouseY;
+      drawing=true;
     }
   }
 }
@@ -943,12 +976,11 @@ void GUImousePressed() {
 void GUImouseReleased() {
   if (mouseButton==LEFT) {
     if ((ground||holo_gram||sloap||holoTriangle||dethPlane)&&drawing) {
-      
-        upX=mouseX;
-        upY=mouseY;
-        drawing=false;
-        draw=true;
-      
+
+      upX=mouseX;
+      upY=mouseY;
+      drawing=false;
+      draw=true;
     }
   }
 }
@@ -1121,21 +1153,21 @@ void disEngageHUDPosition() {
   hint(ENABLE_DEPTH_TEST);
 }
 
-void generateDisplayBlueprint(){
- displayBlueprint=new Stage("tmp","blueprint"); 
- int ix,iy;
- if(grid_mode){
-  ix=Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size;
-  iy=Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size;
- }else{
-   ix=mouseX;
-   iy=mouseY;
- }
+void generateDisplayBlueprint() {
+  displayBlueprint=new Stage("tmp", "blueprint");
+  int ix, iy;
+  if (grid_mode) {
+    ix=Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size;
+    iy=Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size;
+  } else {
+    ix=mouseX+camPos;
+    iy=mouseY-camPosY;
+  }
 
 
-  for(int i=0;i<blueprints[currentBluieprintIndex].parts.size();i++){
+  for (int i=0; i<blueprints[currentBluieprintIndex].parts.size(); i++) {
     displayBlueprint.parts.add(blueprints[currentBluieprintIndex].parts.get(i).copy());
-    if(displayBlueprint.parts.get(i).type.equals("sloap")||displayBlueprint.parts.get(i).type.equals("holoTriangle")){
+    if (displayBlueprint.parts.get(i).type.equals("sloap")||displayBlueprint.parts.get(i).type.equals("holoTriangle")) {
       displayBlueprint.parts.get(i).dx+=ix;
       displayBlueprint.parts.get(i).dy+=iy;
     }
@@ -1145,8 +1177,8 @@ void generateDisplayBlueprint(){
   }
 }
 
-void renderBlueprint(){
- for(int i=0;i<displayBlueprint.parts.size();i++){
-   displayBlueprint.parts.get(i).draw();
- }
+void renderBlueprint() {
+  for (int i=0; i<displayBlueprint.parts.size(); i++) {
+    displayBlueprint.parts.get(i).draw();
+  }
 }
