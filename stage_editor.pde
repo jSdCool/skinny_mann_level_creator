@@ -1120,3 +1120,33 @@ void disEngageHUDPosition() {
   //translate(-1*(player1.x+DX),-1*(player1.y-DY),-1*(player1.z-DZ));
   hint(ENABLE_DEPTH_TEST);
 }
+
+void generateDisplayBlueprint(){
+ displayBlueprint=new Stage("tmp","blueprint"); 
+ int ix,iy;
+ if(grid_mode){
+  ix=Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size;
+  iy=Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size;
+ }else{
+   ix=mouseX;
+   iy=mouseY;
+ }
+
+
+  for(int i=0;i<blueprints[currentBluieprintIndex].parts.size();i++){
+    displayBlueprint.parts.add(blueprints[currentBluieprintIndex].parts.get(i).copy());
+    if(displayBlueprint.parts.get(i).type.equals("sloap")||displayBlueprint.parts.get(i).type.equals("holoTriangle")){
+      displayBlueprint.parts.get(i).dx+=ix;
+      displayBlueprint.parts.get(i).dy+=iy;
+    }
+    displayBlueprint.parts.get(i).x+=ix;
+    displayBlueprint.parts.get(i).y+=iy;
+    println(displayBlueprint.parts.get(i).x);
+  }
+}
+
+void renderBlueprint(){
+ for(int i=0;i<displayBlueprint.parts.size();i++){
+   displayBlueprint.parts.get(i).draw();
+ }
+}

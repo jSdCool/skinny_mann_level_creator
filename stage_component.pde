@@ -82,6 +82,7 @@ class Stage {
     is3D=type.equals("3Dstage")||type.equals("3D blueprint");
   }
 
+
   void load(JSONArray file) {
     type=file.getJSONObject(0).getString("type");
     name=file.getJSONObject(0).getString("name");
@@ -180,6 +181,7 @@ abstract class StageComponent {//the base class for all components that exsist i
   String getData(){
    return null; 
   }
+  abstract StageComponent copy();
 }
 
 class Ground extends StageComponent {//ground component
@@ -212,6 +214,9 @@ class Ground extends StageComponent {//ground component
     dy=DY;
     dz=DZ;
     ccolor=fcolor;
+  }
+  StageComponent copy(){
+   return new Ground(x,y,z,dx,dy,dz,ccolor); 
   }
 
   JSONObject save(boolean stage_3D) {
@@ -290,6 +295,9 @@ class Holo extends StageComponent {//ground component
     dz=DZ;
     ccolor=fcolor;
   }
+  StageComponent copy(){
+   return new Holo(x,y,z,dx,dy,dz,ccolor); 
+  }
 
   JSONObject save(boolean stage_3D) {
     JSONObject part=new JSONObject();
@@ -357,6 +365,9 @@ class DethPlane extends StageComponent {//ground component
     dx=DX;
     dy=DY;
   }
+  StageComponent copy(){
+   return new DethPlane(x,y,dx,dy); 
+  }
 
   JSONObject save(boolean stage_3D) {
     JSONObject part=new JSONObject();
@@ -423,6 +434,9 @@ class CheckPoint extends StageComponent {//ground component
     x=X;
     y=Y;
     z=Z;
+  }
+  StageComponent copy(){
+   return new CheckPoint(x,y,z); 
   }
 
   JSONObject save(boolean stage_3D) {
@@ -513,6 +527,10 @@ class Goal extends StageComponent {//ground component
     x=X;
     y=Y;
   }
+  
+  StageComponent copy(){
+   return new Goal(x,y); 
+  }
   JSONObject save(boolean stage_3D) {
     JSONObject part=new JSONObject();
     part.setFloat("x", x);
@@ -577,6 +595,9 @@ class Coin extends StageComponent {//ground component
     coinId=ind;
     type="coin";
     z=Z;
+  }
+  StageComponent copy(){
+   return new Coin(x,y,z,coinId); 
   }
   JSONObject save(boolean stage_3D) {
     JSONObject part=new JSONObject();
@@ -654,6 +675,9 @@ class Interdimentional_Portal extends StageComponent {//ground component
     catch(Throwable e) {
       linkZ=-1;
     }
+  }
+  StageComponent copy(){
+   return null; 
   }
 
   JSONObject save(boolean stage_3D) {
@@ -770,6 +794,9 @@ class Sloap extends StageComponent {//ground component
     direction=rot;
     ccolor=fcolor;
   }
+  StageComponent copy(){
+   return new Sloap(x,y,dx,dy,direction,ccolor); 
+  }
 
   JSONObject save(boolean stage_3D) {
     JSONObject part=new JSONObject();
@@ -861,6 +888,9 @@ class HoloTriangle extends StageComponent {//ground component
     direction=rot;
     ccolor=fcolor;
   }
+  StageComponent copy(){
+   return new HoloTriangle(x,y,dx,dy,direction,ccolor); 
+  }
 
   JSONObject save(boolean stage_3D) {
     JSONObject part=new JSONObject();
@@ -946,6 +976,9 @@ class SWon3D extends StageComponent {//ground component
     z=Z;
     type="3DonSW";
   }
+  StageComponent copy(){
+   return new SWon3D(x,y,z); 
+  }
   JSONObject save(boolean stage_3D) {
     JSONObject part=new JSONObject();
     part.setFloat("x", x);
@@ -995,6 +1028,9 @@ class SWoff3D extends StageComponent {//ground component
     y=Y;
     z=Z;
     type="3DoffSW";
+  }
+  StageComponent copy(){
+   return new SWoff3D(x,y,z); 
   }
   JSONObject save(boolean stage_3D) {
     JSONObject part=new JSONObject();
@@ -1054,6 +1090,11 @@ class WritableSign extends StageComponent {
     z=Z;
     contents="";
     type="WritableSign";
+  }
+  StageComponent copy(){
+    WritableSign e=new WritableSign(x,y,z);
+    e.contents=contents;
+   return  e;
   }
 
   void draw() {

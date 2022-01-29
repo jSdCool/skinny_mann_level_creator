@@ -28,7 +28,7 @@ ToolBox scr2 ;
 PShape coin3D;
 Level level;
 ArrayList<Boolean> coins = new ArrayList<Boolean>();
-Stage workingBlueprint,blueprints[];
+Stage workingBlueprint,blueprints[],displayBlueprint;
 void draw() {
 
   if (frameCount%20==0) {
@@ -140,7 +140,10 @@ void draw() {
     stageLevelDraw();
     stageEditGUI();
 
-    // playerPhysics();
+    if(selectingBlueprint){
+      generateDisplayBlueprint();
+      renderBlueprint();
+    }
   }
 
   if (levelOverview) {
