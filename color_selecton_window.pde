@@ -1368,6 +1368,12 @@ class ToolBox extends PApplet {
             turnThingsOff();
             holoTriangle=true;
           }
+          if (saveLevel.isMouseOver()) {
+          println("saving blueprint");
+          workingBlueprint.save();
+          gmillis=millis()+400+millisOffset;
+          println("save complete"+gmillis);
+        }
             
         }//end of type is blueprint
       }//end of editing blueprint

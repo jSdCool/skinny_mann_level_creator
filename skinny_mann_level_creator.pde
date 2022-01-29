@@ -516,9 +516,23 @@ void mouseClicked() {
           editingBlueprint=true;
           camPos=-640;
           camPosY=360;
+          rootPath=System.getenv("appdata")+"/CBi-games/skinny mann level creator/blueprints";
         }
       }
     }//end of creating new bluepint
+    if(loadingBlueprint){
+      if(createBlueprintGo.isMouseOver()){
+        if(new_name!=null&&!new_name.equals("")){//is something was entered
+        rootPath=System.getenv("appdata")+"/CBi-games/skinny mann level creator/blueprints";
+          workingBlueprint=new Stage(loadJSONArray(rootPath+"/"+new_name+".json"));
+          entering_name=false;
+          loadingBlueprint=false;
+          editingBlueprint=true;
+          camPos=-640;
+          camPosY=360;
+        }
+      }
+    }//end of loading blueprint
     
   }//end of left mouse button clicked
 }//end of mouse clicked
