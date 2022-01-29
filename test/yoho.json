@@ -4991,5 +4991,11 @@
     "x": 1170,
     "y": 290,
     "type": "ground"
+  },
+  {
+    "sound key": "boop3",
+    "x": 200,
+    "y": 664,
+    "type": "sound box"
   }
 ]

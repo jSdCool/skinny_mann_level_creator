@@ -3,6 +3,7 @@ class Level {
   public int mainStage, numOfCoins, levelID;
   public String name, createdVersion;
   public float SpawnX, SpawnY, RewspawnX, RespawnY;
+  public HashMap<String, StageSound> sounds=new HashMap<>();
 
   Level(JSONArray file) {
     JSONObject job =file.getJSONObject(0);
@@ -22,15 +23,19 @@ class Level {
     respawnX=(int)RewspawnX;
     respawnY=(int)RespawnY;
     respawnStage=currentStageIndex;
-    if(!gameVersionCompatibilityCheck(createdVersion)){
-     return; 
+    if (!gameVersionCompatibilityCheck(createdVersion)) {
+      return;
     }
-    
+
     for (int i=1; i<file.size(); i++) {
       job=file.getJSONObject(i);
-      if(job.getString("type").equals("stage")&&job.getString("type").equals("3Dstage"))
-      stages.add(new Stage(loadJSONArray(rootPath+job.getString("location"))));
+      if (job.getString("type").equals("stage")||job.getString("type").equals("3Dstage"))
+        stages.add(new Stage(loadJSONArray(rootPath+job.getString("location"))));
+      if (job.getString("type").equals("sound")) {
+        sounds.put(job.getString("name"), new StageSound(job));
+      }
     }
+
     coins=new ArrayList<Boolean>();
     for (int i=0; i<numOfCoins; i++) {
       coins.add(false);
@@ -65,6 +70,11 @@ class Level {
       stg.setString("location", stages.get(i-1).save());
       index.setJSONObject(i, stg);
     }
+    String[] keys=new String[1];
+    keys=(String[])sounds.keySet().toArray(keys);
+    for (int i=0; i<keys.length; i++) {
+      index.setJSONObject(index.size(), sounds.get(keys[i]).save());
+    }
     saveJSONArray(index, rootPath+"/index.json");
   }
 }
@@ -73,7 +83,7 @@ class Stage {
   public ArrayList<StageComponent> parts = new ArrayList<>();
   public boolean is3D=false;
   public String type, name;
-  public int stageID,skyColor=#74ABFF;
+  public int stageID, skyColor=#74ABFF;
   Stage(JSONArray file) {//single varible instance for a stage
     load(file);
   }
@@ -87,10 +97,10 @@ class Stage {
   void load(JSONArray file) {
     type=file.getJSONObject(0).getString("type");
     name=file.getJSONObject(0).getString("name");
-    try{
+    try {
       skyColor=file.getJSONObject(0).getInt("sky color");
-    }catch(Throwable e){
-      
+    }
+    catch(Throwable e) {
     }
 
     if (type.equals("stage")||type.equals("3Dstage")||type.equals("blueprint")||type.equals("3D blueprint")) {
@@ -147,7 +157,7 @@ class Stage {
     JSONObject head=new JSONObject();
     head.setString("name", name);
     head.setString("type", type);
-    head.setInt("sky color",skyColor);
+    head.setInt("sky color", skyColor);
     staeg.setJSONObject(0, head);
     for (int i=0; i<parts.size(); i++) {
       staeg.setJSONObject(i+1, parts.get(i).save(is3D));
@@ -176,11 +186,12 @@ abstract class StageComponent {//the base class for all components that exsist i
     return false;
   };
   abstract JSONObject save(boolean stage_3D);
-  
-  void setData(String data){}
-  
-  String getData(){
-   return null; 
+
+  void setData(String data) {
+  }
+
+  String getData() {
+    return null;
   }
   abstract StageComponent copy();
 }
@@ -216,8 +227,8 @@ class Ground extends StageComponent {//ground component
     dz=DZ;
     ccolor=fcolor;
   }
-  StageComponent copy(){
-   return new Ground(x,y,z,dx,dy,dz,ccolor); 
+  StageComponent copy() {
+    return new Ground(x, y, z, dx, dy, dz, ccolor);
   }
 
   JSONObject save(boolean stage_3D) {
@@ -296,8 +307,8 @@ class Holo extends StageComponent {//ground component
     dz=DZ;
     ccolor=fcolor;
   }
-  StageComponent copy(){
-   return new Holo(x,y,z,dx,dy,dz,ccolor); 
+  StageComponent copy() {
+    return new Holo(x, y, z, dx, dy, dz, ccolor);
   }
 
   JSONObject save(boolean stage_3D) {
@@ -366,8 +377,8 @@ class DethPlane extends StageComponent {//ground component
     dx=DX;
     dy=DY;
   }
-  StageComponent copy(){
-   return new DethPlane(x,y,dx,dy); 
+  StageComponent copy() {
+    return new DethPlane(x, y, dx, dy);
   }
 
   JSONObject save(boolean stage_3D) {
@@ -436,8 +447,8 @@ class CheckPoint extends StageComponent {//ground component
     y=Y;
     z=Z;
   }
-  StageComponent copy(){
-   return new CheckPoint(x,y,z); 
+  StageComponent copy() {
+    return new CheckPoint(x, y, z);
   }
 
   JSONObject save(boolean stage_3D) {
@@ -528,9 +539,9 @@ class Goal extends StageComponent {//ground component
     x=X;
     y=Y;
   }
-  
-  StageComponent copy(){
-   return new Goal(x,y); 
+
+  StageComponent copy() {
+    return new Goal(x, y);
   }
   JSONObject save(boolean stage_3D) {
     JSONObject part=new JSONObject();
@@ -597,8 +608,8 @@ class Coin extends StageComponent {//ground component
     type="coin";
     z=Z;
   }
-  StageComponent copy(){
-   return new Coin(x,y,z,coinId); 
+  StageComponent copy() {
+    return new Coin(x, y, z, coinId);
   }
   JSONObject save(boolean stage_3D) {
     JSONObject part=new JSONObject();
@@ -615,9 +626,9 @@ class Coin extends StageComponent {//ground component
   void draw() {
     float playx=player1.getX(), playy=player1.getY();
     boolean collected;
-    if(editingBlueprint){
+    if (editingBlueprint) {
       collected=false;
-    }else{
+    } else {
       collected=coins.get(coinId);
     }
     float x2=x-camPos;
@@ -677,8 +688,8 @@ class Interdimentional_Portal extends StageComponent {//ground component
       linkZ=-1;
     }
   }
-  StageComponent copy(){
-   return null; 
+  StageComponent copy() {
+    return null;
   }
 
   JSONObject save(boolean stage_3D) {
@@ -795,8 +806,8 @@ class Sloap extends StageComponent {//ground component
     direction=rot;
     ccolor=fcolor;
   }
-  StageComponent copy(){
-   return new Sloap(x,y,dx,dy,direction,ccolor); 
+  StageComponent copy() {
+    return new Sloap(x, y, dx, dy, direction, ccolor);
   }
 
   JSONObject save(boolean stage_3D) {
@@ -889,8 +900,8 @@ class HoloTriangle extends StageComponent {//ground component
     direction=rot;
     ccolor=fcolor;
   }
-  StageComponent copy(){
-   return new HoloTriangle(x,y,dx,dy,direction,ccolor); 
+  StageComponent copy() {
+    return new HoloTriangle(x, y, dx, dy, direction, ccolor);
   }
 
   JSONObject save(boolean stage_3D) {
@@ -977,8 +988,8 @@ class SWon3D extends StageComponent {//ground component
     z=Z;
     type="3DonSW";
   }
-  StageComponent copy(){
-   return new SWon3D(x,y,z); 
+  StageComponent copy() {
+    return new SWon3D(x, y, z);
   }
   JSONObject save(boolean stage_3D) {
     JSONObject part=new JSONObject();
@@ -1030,8 +1041,8 @@ class SWoff3D extends StageComponent {//ground component
     z=Z;
     type="3DoffSW";
   }
-  StageComponent copy(){
-   return new SWoff3D(x,y,z); 
+  StageComponent copy() {
+    return new SWoff3D(x, y, z);
   }
   JSONObject save(boolean stage_3D) {
     JSONObject part=new JSONObject();
@@ -1092,22 +1103,22 @@ class WritableSign extends StageComponent {
     contents="";
     type="WritableSign";
   }
-  StageComponent copy(){
-    WritableSign e=new WritableSign(x,y,z);
+  StageComponent copy() {
+    WritableSign e=new WritableSign(x, y, z);
     e.contents=contents;
-   return  e;
+    return  e;
   }
 
   void draw() {
     drawSign(Scale*(x-camPos), Scale*(y+camPosY), Scale);
-    
+
     float playx=player1.getX(), playy=player1.getY();
     if (playx>x-35&&playx<x+35&&playy>y-40&&playy<y) {//display the press e message to the player
       fill(255);
       textSize(Scale*20);
       displayText="Press E";
       displayTextUntill=millis()+100;
-      
+
       if (E_pressed) {
         E_pressed=false;
         viewingItemContents=true;
@@ -1116,7 +1127,7 @@ class WritableSign extends StageComponent {
   }
   void draw3D() {
     drawSign(x, y, z, Scale);
-    
+
     float playx=player1.getX(), playy=player1.getY();
     if (playx>x-35&&playx<x+35&&playy>y-40&&playy<y&& player1.z >= z-20 && player1.z <= z+20) {
       fill(255);
@@ -1149,12 +1160,93 @@ class WritableSign extends StageComponent {
     part.setString("contents", contents);
     return part;
   }
-  
-  void setData(String data){
-   contents=data; 
+
+  void setData(String data) {
+    contents=data;
   }
-  
-  String getData(){
-   return contents; 
+
+  String getData() {
+    return contents;
+  }
+}
+
+class SoundBox extends StageComponent {
+  String soundKey="";
+
+  SoundBox(float X, float Y) {
+    x=X;
+    y=Y;
+    type = "sound box";
+  }
+  SoundBox(JSONObject data) {
+    type = "sound box";
+    x=data.getFloat("x");
+    y=data.getFloat("y");
+    soundKey=data.getString("sound key");
+  }
+
+  void draw() {
+    drawSoundBox(x, y);
+    if (player1.getX()>=x-30&&player1.getX()<=x+30&&player1.y>=y-30&&player1.getY()<y+30) {
+      displayText="Press E";
+      displayTextUntill=millis()+100;
+      if(E_pressed){
+      try {
+        StageSound sound = level.sounds.get(soundKey);
+        if (!sound.sound.isPlaying()) {
+          sound.sound.play();
+        }
+      }catch(Exception e) {}
+    }}
+  }
+
+  boolean colide(float x, float y, boolean c) {
+    if (c) {
+      if (x >= (this.x)-30 && x <= (this.x) + 30 && y >= (this.y) - 30 && y <= this.y+30) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  JSONObject save(boolean stage_3D) {
+    JSONObject part=new JSONObject();
+    part.setFloat("x", x);
+    part.setFloat("y", y);
+    part.setString("type", type);
+    part.setString("sound key", soundKey);
+    return part;
+  }
+
+  StageComponent copy() {
+    SoundBox e=new SoundBox(x, y);
+    e.soundKey=soundKey;
+    return  e;
+  }
+
+  void setData(String data) {
+    soundKey=data;
+  }
+
+  String getData() {
+    return soundKey;
+  }
+}
+
+class StageSound {
+  String path, name, type="sound";
+  protected SoundFile sound;
+  StageSound(JSONObject input) {
+    name=input.getString("name");
+    path=input.getString("location");
+    sound= new SoundFile(primaryWindow, rootPath+path);
+  }
+
+  JSONObject save() {
+    JSONObject out=new JSONObject();
+    out.setString("location", path);
+    out.setString("name", name);
+    out.setString("type", type);
+    return out;
   }
 }

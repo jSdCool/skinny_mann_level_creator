@@ -60,5 +60,20 @@
     "name": "yoho",
     "location": "/yoho.json",
     "type": "stage"
+  },
+  {
+    "name": "boop",
+    "location": "/smpl.wav",
+    "type": "sound"
+  },
+  {
+    "name": "boop3",
+    "location": "/smpl.wav",
+    "type": "sound"
+  },
+  {
+    "name": "boop2",
+    "location": "/smpl.wav",
+    "type": "sound"
   }
 ]

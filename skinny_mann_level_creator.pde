@@ -1,3 +1,5 @@
+import processing.sound.*;
+
 void settings() {
   size(1280, 720, P3D);
 }
@@ -29,6 +31,7 @@ PShape coin3D;
 Level level;
 ArrayList<Boolean> coins = new ArrayList<Boolean>();
 Stage workingBlueprint,blueprints[],displayBlueprint;
+PApplet primaryWindow=this;
 void draw() {
 
   if (frameCount%20==0) {
@@ -810,6 +813,7 @@ void turnThingsOff() {
   selecting=false;
   selectedIndex=-1;
   selectingBlueprint=false;
+  placingSound=false;
 }
 
 int curMills=0, lasMills=0, mspc=0;

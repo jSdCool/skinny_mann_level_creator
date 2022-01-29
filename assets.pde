@@ -134,3 +134,8 @@ void drawSpeakericon(PApplet screen,float x,float y,float scale){
   screen.rect(x+15*scale,y-20*scale,5*scale,40*scale);
   screen.rect(x+25*scale,y-30*scale,5*scale,60*scale);
 }
+
+void drawSoundBox(float x,float y){
+ fill(#F2C007,127);
+ rect(x-30,y-30,60,60);
+}

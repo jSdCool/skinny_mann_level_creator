@@ -9,7 +9,7 @@ class ToolBox extends PApplet {
   public int redVal=0, greenVal=0, blueVal=0, CC=0;
   int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset;
   String page="colors";
-  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select,selectionPage,stageSettings,skyColorB1,setSkyColor,resetSkyColor,placeBlueprint,nexBlueprint,prevBlueprint,playSound;
+  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select,selectionPage,stageSettings,skyColorB1,setSkyColor,resetSkyColor,placeBlueprint,nexBlueprint,prevBlueprint,playSound,nextSound,prevSound;
   boolean typingSign=false,settingSkyColor=false;
 
   public void settings() {
@@ -40,6 +40,8 @@ class ToolBox extends PApplet {
     nexBlueprint=new Button(width/2+200, height*0.7-25, 50, 50,">", 255, 203).setStrokeWeight(5);
     prevBlueprint=new Button(width/2-200, height*0.7-25, 50, 50,"<", 255, 203).setStrokeWeight(5);
     playSound=new Button(40,200,50,50,255, 203).setStrokeWeight(5);
+    nextSound=new Button(width/2+300, height*0.4-25, 50, 50,">", 255, 203).setStrokeWeight(5);
+    prevSound=new Button(width/2-300, height*0.4-25, 50, 50,"<", 255, 203).setStrokeWeight(5);
   }
 
 
@@ -1080,6 +1082,32 @@ class ToolBox extends PApplet {
         }
         text(contents,width/2,height*0.25);
         rect(width*0.05,height*0.29,width*0.9,2);
+        }else if(type.equals("sound box")){
+          if(level.sounds.size()==0){
+            fill(0);
+            textSize(20);
+            textAlign(CENTER,CENTER);
+            text("this level does not have any sounds currently",width/2,height/2);
+          }else{
+            int fileind=0;
+            String[] keys=new String[1];
+            keys=level.sounds.keySet().toArray(keys);
+            String current=thing.getData();
+            for(int i=0;i<keys.length;i++){
+             if(keys[i].equals(current)){
+               fileind=i;
+               break;
+             }
+            } 
+            fill(0);
+            textSize(25);
+            text("current sound: "+keys[fileind],width/2,height*0.4);
+            thing.setData(keys[fileind]);
+            if(fileind>0)
+            prevSound.draw();
+            if(fileind<keys.length-1)
+            nextSound.draw();
+          }
         }else{
           fill(0);
         textSize(20);
@@ -1283,6 +1311,10 @@ class ToolBox extends PApplet {
            if(currentBluieprintIndex<blueprints.length-1&&nexBlueprint.isMouseOver())
            currentBluieprintIndex++;
           }
+          if(playSound.isMouseOver()){
+            turnThingsOff();
+           placingSound=true; 
+          }
         }
 
         if (level.stages.get(currentStageIndex).type.equals("3Dstage")) {
@@ -1472,6 +1504,25 @@ class ToolBox extends PApplet {
            typingSign=true; 
           }else{
             typingSign=false;
+          }
+        }else if(type.equals("sound box")){
+          if(level.sounds.size()==0){
+          }else{
+            int fileind=0;
+            String[] keys=new String[1];
+            keys=level.sounds.keySet().toArray(keys);
+            String current=thing.getData();
+            for(int i=0;i<keys.length;i++){
+             if(keys[i].equals(current)){
+               fileind=i;
+               break;
+             }
+            } 
+
+            if(fileind>0&&prevSound.isMouseOver())
+            thing.setData(keys[fileind-1]);
+            if(fileind<keys.length-1&&nextSound.isMouseOver())
+            thing.setData(keys[fileind+1]);
           }
         }
       }//if something is elected
