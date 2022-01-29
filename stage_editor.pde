@@ -119,6 +119,7 @@ void stageEditGUI() {
         } else {
           strokeWeight(0);
           float xdif=mouseX-downX, ydif=mouseY-downY;
+
           rect(downX, downY, xdif, ydif);
         }
       }
@@ -160,19 +161,19 @@ void stageEditGUI() {
 
         if (upX>downX) {
           X1 = (int)downX+camPos;
-          XD = (int)xdif;
+          XD = (int)abs(xdif);
         }
         if (upX<downX) {
           X1 = (int)upX+camPos;
-          XD = (int)(downX-upX);
+          XD = (int)abs(downX-upX);
         }
         if (upY>downY) {
           Y1 = (int)downY-camPosY;
-          YD =  (int)ydif;
+          YD =  (int)abs(ydif);
         }
         if (upY<downY) {
-          Y1 = (int)upY;
-          YD = (int)(downY-upY-camPosY);
+          Y1 = (int)upY-camPosY;
+          YD = (int)abs(downY-upY);
         }
         if (downX==upX) {
           draw=false;
@@ -223,19 +224,19 @@ void stageEditGUI() {
 
         if (upX>downX) {
           X1 = (int)downX+camPos;
-          XD = (int)xdif;
+          XD = (int)abs(xdif);
         }
         if (upX<downX) {
           X1 = (int)upX+camPos;
-          XD = (int)(downX-upX);
+          XD = (int)abs(downX-upX);
         }
         if (upY>downY) {
           Y1 = (int)downY-camPosY;
-          YD =  (int)ydif;
+          YD =  (int)abs(ydif);
         }
         if (upY<downY) {
-          Y1 = (int)upY;
-          YD = (int)(downY-upY-camPosY);
+          Y1 = (int)upY-camPosY;
+          YD = (int)abs(downY-upY);
         }
         if (downX==upX) {
           draw=false;
