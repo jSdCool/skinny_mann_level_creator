@@ -147,14 +147,14 @@ class ToolBox extends PApplet {
           stroke(-16732415);
           rect(100, 60+100, 50, 10);
 
-          if (ground||holo_gram) {
-            fill(Color);
-            stroke(0);
-            strokeWeight(2);
-            rect(40, 100+100, 230, 10);
-            rect(40, 120+100, 230, 10);
-            rect(40, 140+100, 230, 10);
-          }
+          //if (ground||holo_gram) {
+          //  fill(Color);
+          //  stroke(0);
+          //  strokeWeight(2);
+          //  rect(40, 100+100, 230, 10);
+          //  rect(40, 120+100, 230, 10);
+          //  rect(40, 140+100, 230, 10);
+          //}
           strokeWeight(0);
           if (check_point) {
             fill(#F2F258);
@@ -787,6 +787,210 @@ class ToolBox extends PApplet {
           }
         }//end of if stage is 3D
       }//end of if edditing
+      else if(editingBlueprint){
+        if(workingBlueprint.type.equals("blueprint")){
+          strokeWeight(0);
+          if (ground) {
+            fill(#F2F258);
+          } else {
+            fill(203);
+          }
+          rect(95, 35+100, 60, 60);
+          fill(255);
+          rect(100, 40+100, 50, 50);
+          fill(-7254783);
+          stroke(-7254783);
+          rect(100, 70+100, 50, 20);
+          fill(-16732415);
+          stroke(-16732415);
+          rect(100, 60+100, 50, 10);
+          
+          strokeWeight(0);
+          if (check_point) {
+            fill(#F2F258);
+          } else {
+            fill(203);
+          }
+          rect(155, 35+100, 60, 60);
+          fill(255);
+          rect(160, 40+100, 50, 50);
+          fill(#B9B9B9);
+          strokeWeight(0);
+          rect(168, 45+100, 5, 40);
+          fill(#EA0202);
+          stroke(#EA0202);
+          strokeWeight(0);
+          triangle(170, 85-60+20+100, 170, 85-40+20+100, 170+30, 85-50+20+100);
+          strokeWeight(0);
+          
+            textAlign(LEFT, BOTTOM);
+
+            if (grid_mode) {
+              fill(#F2F258);
+            } else {
+              fill(203);
+            }
+            rect(395, 35+100, 60, 60);
+            fill(255);
+            strokeWeight(0);
+            rect(400, 40+100, 50, 50);
+            textSize(20);
+            fill(0);
+            stroke(0);
+            strokeWeight(1);
+            line(410, 42+100, 410, 87+100);
+            line(420, 42+100, 420, 87+100);
+            line(430, 42+100, 430, 87+100);
+            line(440, 42+100, 440, 87+100);
+            line(402, 50+100, 448, 50+100);
+            line(402, 60+100, 448, 60+100);
+            line(402, 70+100, 448, 70+100);
+            line(402, 80+100, 448, 80+100);
+            text(grid_size, 410, 80+100);
+            strokeWeight(0);
+            if (deleteing) {
+              fill(#F2F258);
+            } else {
+              fill(203);
+            }
+            rect(275, 35+100, 60, 60);
+            fill(255);
+            strokeWeight(0);
+            rect(280, 40+100, 50, 50);
+            fill(203);
+            stroke(203);
+            strokeWeight(0);
+            rect(285, 55+100, 40, 5);
+            rect(300, 50+100, 10, 5);
+            rect(290, 60+100, 5, 20);
+            rect(290, 80+100, 30, 5);
+            rect(315, 60+100, 5, 20);
+            rect(298, 60+100, 5, 20);
+            rect(307, 60+100, 5, 20);
+            
+            if (drawCoins) {
+            draw_coin.setColor(255, #F2F258);
+          } else {
+            draw_coin.setColor(255, 203);
+          }
+          draw_coin.draw();
+          drawCoin(605, 65+100, 4);
+          
+          if (sloap) {
+              draw_sloap.setColor(255, #F2F258);
+            } else {
+              draw_sloap.setColor(255, 203);
+            }//draw_holoTriangle
+            draw_sloap.draw();
+            fill(-7254783);
+            stroke(-7254783);
+            strokeWeight(0);
+            triangle(705, 85+100, 745, 85+100, 745, 45+100);
+            if (holoTriangle) {
+              draw_holoTriangle.setColor(255, #F2F258);
+            } else {
+              draw_holoTriangle.setColor(255, 203);
+            }//draw_holoTriangle
+            draw_holoTriangle.draw();
+            fill(-4623063);
+            stroke(-4623063);
+            strokeWeight(0);
+            triangle(765, 85+100, 805, 85+100, 805, 45+100);
+            if (holo_gram) {
+              fill(#F2F258);
+            } else {
+              fill(203);
+            }
+            rect(455, 35+100, 60, 60);
+            fill(255);
+            strokeWeight(0);
+            rect(460, 40+100, 50, 50);
+            saveLevel.draw();
+            
+            textAlign(LEFT,BOTTOM);
+            if (mouseX >=100 && mouseX <= 140 && mouseY >= 40+100 && mouseY <= 90+100) {
+              stroke(0);
+              fill(200);
+              strokeWeight(2);
+              rect(mouseX-4, mouseY-13, 100, 16);
+              fill(0);
+              textSize(15);
+              text("solid ground", mouseX, mouseY+5);
+            }
+            if (mouseX >=400 && mouseX <= 440 && mouseY >= 40+100 && mouseY <= 90+100) {
+              stroke(0);
+              fill(200);
+              strokeWeight(2);
+              rect(mouseX-4, mouseY-13, 85, 16);
+              fill(0);
+              textSize(15);
+              text("grid mode", mouseX, mouseY+5);
+            }
+            if (mouseX >=280 && mouseX <= 330 && mouseY >= 40+100 && mouseY <= 90+100) {
+              stroke(0);
+              fill(200);
+              strokeWeight(2);
+              rect(mouseX-4, mouseY-13, 50, 16);
+              fill(0);
+              textSize(15);
+              text("delete", mouseX, mouseY+5);
+            }
+            if (mouseX >=460 && mouseX <= 500 && mouseY >= 40+100 && mouseY <= 90+100) {
+              stroke(0);
+              fill(200);
+              strokeWeight(2);
+              rect(mouseX-4, mouseY-13, 165, 16);
+              fill(0);
+              textSize(15);
+              text("hologram (solid in 3D)", mouseX, mouseY+5);
+            }
+            if (draw_coin.isMouseOver()) {
+              stroke(0);
+              fill(200);
+              strokeWeight(2);
+              rect(mouseX-4, mouseY-13, 38, 16);
+              fill(0);
+              textSize(15);
+              text("coin", mouseX, mouseY+5);
+            }
+            if (saveLevel.isMouseOver()) {
+              stroke(0);
+              fill(200);
+              strokeWeight(2);
+              rect(mouseX-4, mouseY-13, 75, 16);
+              fill(0);
+              textSize(15);
+              text("save level", mouseX, mouseY+5);
+            }
+            if (mouseX >=160 && mouseX <= 190 && mouseY >= 40+100 && mouseY <= 90+100) {
+              stroke(0);
+              fill(200);
+              strokeWeight(2);
+              rect(mouseX-4, mouseY-13, 85, 16);
+              fill(0);
+              textSize(15);
+              text("checkpoint", mouseX, mouseY+5);
+            }
+            if (draw_sloap.isMouseOver()) {
+              stroke(0);
+              fill(200);
+              strokeWeight(2);
+              rect(mouseX-4, mouseY-13, 45, 16);
+              fill(0);
+              textSize(15);
+              text("sloap", mouseX, mouseY+5);
+            }
+            if (draw_holoTriangle.isMouseOver()) {
+              stroke(0);
+              fill(200);
+              strokeWeight(2);
+              rect(mouseX-4, mouseY-13, 138, 16);
+              fill(0);
+              textSize(15);
+              text("holographic sloap", mouseX, mouseY+5);
+            }
+        }//end of type is blueprint
+      }
       else {
         fill(0);
         textSize(20);
@@ -1121,6 +1325,52 @@ class ToolBox extends PApplet {
           println("save complete"+gmillis);
         }
       }//end of edditing stage
+      else if(editingBlueprint){
+        if(workingBlueprint.type.equals("blueprint")){
+          if (mouseX >=100 && mouseX <= 140 && mouseY >= 40+100 && mouseY <= 90+100) {
+              turnThingsOff();
+              ground=true;
+            }
+
+            if (mouseX >=280 && mouseX <= 330 && mouseY >= 40+100 && mouseY <= 90+100) {
+              turnThingsOff();
+              deleteing=true;
+            }
+
+            if (mouseX >=400 && mouseX <= 440 && mouseY >= 40+100 && mouseY <= 90+100) {
+              extra=true;
+              if (extra&&grid_mode) {
+                grid_mode=false;
+                extra=false;
+              }
+              if (extra&&!grid_mode) {
+                grid_mode=true;
+                extra=false;
+              }
+            }
+            if (mouseX >=460 && mouseX <= 500 && mouseY >= 40+100 && mouseY <= 90+100) {
+              turnThingsOff();
+              holo_gram=true;
+            }
+            if (draw_coin.isMouseOver()) {
+              turnThingsOff();
+              drawCoins=true;
+            }
+            if (mouseX >=160 && mouseX <= 190 && mouseY >= 40+100 && mouseY <= 90+100) {
+              turnThingsOff();
+              check_point=true;
+            }
+            if (draw_sloap.isMouseOver()) {
+            turnThingsOff();
+            sloap=true;
+          }
+          if (draw_holoTriangle.isMouseOver()) {
+            turnThingsOff();
+            holoTriangle=true;
+          }
+            
+        }//end of type is blueprint
+      }//end of editing blueprint
     }//end of tools
     
     if (page.equals("selection")) {
