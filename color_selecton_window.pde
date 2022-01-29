@@ -9,7 +9,7 @@ class ToolBox extends PApplet {
   public int redVal=0, greenVal=0, blueVal=0, CC=0;
   int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset;
   String page="colors";
-  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select,selectionPage,stageSettings,skyColorB1,setSkyColor,resetSkyColor,placeBlueprint;
+  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select,selectionPage,stageSettings,skyColorB1,setSkyColor,resetSkyColor,placeBlueprint,nexBlueprint,prevBlueprint;
   boolean typingSign=false,settingSkyColor=false;
 
   public void settings() {
@@ -37,6 +37,8 @@ class ToolBox extends PApplet {
     setSkyColor=new Button(300,580,100,30,"set sky color").setStrokeWeight(2);
     resetSkyColor=new Button(200,165,40,40,"reset", 255, 203).setStrokeWeight(0);
     placeBlueprint=new Button(1180, 140, 50, 50, #0F1AD3, 203).setStrokeWeight(5);
+    nexBlueprint=new Button(width/2+200, height*0.7-25, 50, 50,">", 255, 203).setStrokeWeight(5);
+    prevBlueprint=new Button(width/2-200, height*0.7-25, 50, 50,"<", 255, 203).setStrokeWeight(5);
   }
 
 
@@ -307,8 +309,6 @@ class ToolBox extends PApplet {
           
           if(selectingBlueprint){
             placeBlueprint.setColor(#0F1AD3, #F2F258);
-          }else if(blueprintSelected){
-            placeBlueprint.setColor(#0F1AD3,#07F5EF);
           }else{
             placeBlueprint.setColor(#0F1AD3,203);
           }
@@ -807,6 +807,23 @@ class ToolBox extends PApplet {
             }
           }
         }//end of if stage is 3D
+        
+        if(selectingBlueprint){
+          textAlign(CENTER,CENTER);
+         if(blueprints.length==0){
+           fill(0);
+           textSize(25);
+           text("you have no blueprints",width/2,height*0.7);
+         }else{
+           fill(0);
+           textSize(25);
+           text(blueprints[currentBluieprintIndex].name,width/2,height*0.7);
+           if(currentBluieprintIndex>0)
+           prevBlueprint.draw();
+           if(currentBluieprintIndex<blueprints.length-1)
+           nexBlueprint.draw();
+         }
+        }
       }//end of if edditing
       else if(editingBlueprint){
         if(workingBlueprint.type.equals("blueprint")){
@@ -1219,6 +1236,34 @@ class ToolBox extends PApplet {
           if (select.isMouseOver()) {
             turnThingsOff();
             selecting=true;
+          }
+          if(placeBlueprint.isMouseOver()){
+            turnThingsOff();
+            
+            String[] files=new File(System.getenv("AppData")+"/CBi-games/skinny mann level creator/blueprints").list();
+          int numofjsons=0;
+          for(int i=0;i<files.length;i++){
+            if(files[i].contains(".json")){
+              numofjsons++;
+            }
+          }
+          blueprints=new Stage[numofjsons];
+          int pointer=0;
+          for(int i=0;i<files.length;i++){
+            if(files[i].contains(".json")){
+             blueprints[pointer]=new Stage(loadJSONArray(System.getenv("AppData")+"/CBi-games/skinny mann level creator/blueprints/"+files[i]));
+             pointer++;
+            }
+          }
+            println(blueprints.length);
+            selectingBlueprint=true;
+            currentBluieprintIndex=0;
+          }
+          if(selectingBlueprint){
+           if(currentBluieprintIndex>0&&prevBlueprint.isMouseOver())
+            currentBluieprintIndex--;
+           if(currentBluieprintIndex<blueprints.length-1&&nexBlueprint.isMouseOver())
+           currentBluieprintIndex++;
           }
         }
 
