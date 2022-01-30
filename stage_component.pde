@@ -146,6 +146,9 @@ class Stage {
           if (otype.equals("WritableSign")) {
             parts.add(new WritableSign(ob, is3D));
           }
+          if (otype.equals("sound box")) {
+            parts.add(new SoundBox(ob, is3D));
+          }
         }
         catch(Throwable e) {
         }
@@ -1179,7 +1182,7 @@ class SoundBox extends StageComponent {
     y=Y;
     type = "sound box";
   }
-  SoundBox(JSONObject data) {
+  SoundBox(JSONObject data,boolean stage_3D) {
     type = "sound box";
     x=data.getFloat("x");
     y=data.getFloat("y");
@@ -1187,7 +1190,7 @@ class SoundBox extends StageComponent {
   }
 
   void draw() {
-    drawSoundBox(x, y);
+    drawSoundBox(x-camPos, y+camPosY);
     if (player1.getX()>=x-30&&player1.getX()<=x+30&&player1.y>=y-30&&player1.getY()<y+30) {
       displayText="Press E";
       displayTextUntill=millis()+100;
