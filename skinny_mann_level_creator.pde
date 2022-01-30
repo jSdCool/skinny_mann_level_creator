@@ -754,7 +754,7 @@ char getCh(int mode,char leter) {
     if (leter=='1'||leter=='2'||leter=='3'||leter=='4'||leter=='5'||leter=='6'||leter=='7'||leter=='8'||leter=='9'||leter=='0'||leter=='.')
       return leter;
   }
-  if(mode==3){//mode 3 mode 0 but also allows line returns
+  if(mode==3){//mode 3 mode 0 but also allows line returns and /
     if (Character.isLetter(leter)||leter==' ') {//mode 0 letters numbers and spcaes
       return leter;
     }
@@ -762,7 +762,7 @@ char getCh(int mode,char leter) {
       return ' ';
     }
 
-    if (leter=='1'||leter=='2'||leter=='3'||leter=='4'||leter=='5'||leter=='6'||leter=='7'||leter=='8'||leter=='9'||leter=='0'||leter=='\n')
+    if (leter=='1'||leter=='2'||leter=='3'||leter=='4'||leter=='5'||leter=='6'||leter=='7'||leter=='8'||leter=='9'||leter=='0'||leter=='\n'||leter=='/')
       return leter;
 
   }

@@ -1090,7 +1090,7 @@ class ToolBox extends PApplet {
             text("this level does not have any sounds currently",width/2,height/2);
           }else{
             int fileind=0;
-            String[] keys=new String[1];
+            String[] keys=new String[0];
             keys=level.sounds.keySet().toArray(keys);
             String current=thing.getData();
             for(int i=0;i<keys.length;i++){
@@ -1509,7 +1509,7 @@ class ToolBox extends PApplet {
           if(level.sounds.size()==0){
           }else{
             int fileind=0;
-            String[] keys=new String[1];
+            String[] keys=new String[0];
             keys=level.sounds.keySet().toArray(keys);
             String current=thing.getData();
             for(int i=0;i<keys.length;i++){
