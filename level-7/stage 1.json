@@ -1011,7 +1011,7 @@
     "type": "holoTriangle"
   },
   {
-    "sound key": "",
+    "sound key": "pirate narration 1",
     "x": 1230,
     "y": 530,
     "type": "sound box"
