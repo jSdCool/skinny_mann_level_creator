@@ -3691,5 +3691,18 @@
     "type": "interdimentional Portal",
     "linkY": 500,
     "linkX": 690
+  },
+  {
+    "dx": 810,
+    "color": -16732415,
+    "dy": 70,
+    "x": 4500,
+    "y": 650,
+    "type": "ground"
+  },
+  {
+    "x": 4900,
+    "y": 650,
+    "type": "goal"
   }
 ]
