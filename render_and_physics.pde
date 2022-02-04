@@ -17,6 +17,8 @@ void stageLevelDraw() {
   if (stage.type.equals("stage")) {
     e3DMode=false;
     camera();
+    drawCamPosX=camPos;
+    drawCamPosY=camPosY;
     for (int i=0; stageLoopCondishen(i, stage); i++) {
       strokeWeight(0);
       noStroke();
@@ -49,7 +51,8 @@ void stageLevelDraw() {
       coinRotation+=3;
       if (coinRotation>360)
         coinRotation-=360;
-
+      drawCamPosX=camPos;
+    drawCamPosY=camPosY;
       for (int i=0; stageLoopCondishen(i, stage); i++) {
         strokeWeight(0);
         noStroke();
@@ -59,7 +62,7 @@ void stageLevelDraw() {
       }
       }
 
-      draw_mann_3D(player1.x, player1.y, player1.z, player1.getPose(), Scale*player1.getScale(), player1.getColor());
+      draw_mann_3D(player1.x, player1.y, player1.z, player1.getPose(), player1.getScale(), player1.getColor());
 
       if (shadow3D) {
         float shadowAltitude=player1.y;
@@ -82,6 +85,8 @@ void stageLevelDraw() {
       }
     } else {//redner the level in 2D
       camera();
+      drawCamPosX=camPos;
+    drawCamPosY=camPosY;
       for (int i=0; stageLoopCondishen(i, stage); i++) {
         strokeWeight(0);
        noStroke(); 
@@ -146,6 +151,8 @@ void blueprintEditDraw(){
   if (workingBlueprint.type.equals("blueprint")) {
     e3DMode=false;
     camera();
+    drawCamPosX=camPos;
+    drawCamPosY=camPosY;
     for (int i=0; stageLoopCondishen(i, workingBlueprint); i++) {
       strokeWeight(0);
       noStroke();
