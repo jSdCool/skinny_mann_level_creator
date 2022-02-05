@@ -434,7 +434,7 @@ void mouseClicked() {
         println("save complete");
       }
       if (help.isMouseOver()) {
-        link("https://youtu.be/9BfTnj9Td4U");
+        link("https://youtu.be/dh07dk1xXew");
       }
       if (overviewSelection!=-1) {
         if (level.stages.get(overviewSelection).type.equals("stage")) {

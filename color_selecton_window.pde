@@ -298,7 +298,7 @@ class ToolBox extends PApplet {
             stroke(-4623063);
             strokeWeight(0);
             triangle(765, 85+100, 805, 85+100, 805, 45+100);
-          }
+          
 
           if (dethPlane) {
             draw_dethPlane.setColor(255, #F2F258);
@@ -324,11 +324,8 @@ class ToolBox extends PApplet {
           }
           playSound.draw();
           drawSpeakericon(this,playSound.x+playSound.lengthX/2,playSound.y+playSound.lengthY/2,0.5);
-        }//end of not in 3D mode
+        }//end of level is not 3D
         
-        
-        saveLevel.draw();
-
         if (drawingSign) {
           sign.setColor(255, #F2F258);
         } else {
@@ -343,6 +340,14 @@ class ToolBox extends PApplet {
           select.setColor(255, 203);
         }
         select.draw();
+        
+        
+        }//end of not in 3D mode
+        
+        
+        saveLevel.draw();
+
+        
 
         textAlign(LEFT, BOTTOM);
         if (mouseX >=40 && mouseX <= 90 && mouseY >= 40+100 && mouseY <= 90+100) {
@@ -469,7 +474,7 @@ class ToolBox extends PApplet {
               textSize(15);
               text("holographic sloap", mouseX, mouseY+5);
             }
-          }
+          
 
           if (draw_dethPlane.isMouseOver()) {
             stroke(0);
@@ -489,6 +494,7 @@ class ToolBox extends PApplet {
             fill(0);
             text("place blueprint", mouseX, mouseY+5);
           }
+        }//end of level is not 3D
           if(playSound.isMouseOver()){
             stroke(0);
             fill(200);
@@ -498,17 +504,8 @@ class ToolBox extends PApplet {
             fill(0);
             text("place sound", mouseX, mouseY+5);
           }
-        }//end of not 3d mode
-        if (saveLevel.isMouseOver()) {
-          stroke(0);
-          fill(200);
-          strokeWeight(2);
-          rect(mouseX-4, mouseY-13, 75, 16);
-          fill(0);
-          textSize(15);
-          text("save level", mouseX, mouseY+5);
-        }
-        if (sign.isMouseOver()) {
+          
+          if (sign.isMouseOver()) {
           stroke(0);
           fill(200);
           strokeWeight(2);
@@ -526,6 +523,18 @@ class ToolBox extends PApplet {
           textSize(15);
           text("select", mouseX, mouseY+5);
         }
+        }//end of not 3d mode
+        if (saveLevel.isMouseOver()) {
+          stroke(0);
+          fill(200);
+          strokeWeight(2);
+          rect(mouseX-4, mouseY-13, 75, 16);
+          fill(0);
+          textSize(15);
+          text("save level", mouseX, mouseY+5);
+        }
+        
+        
         if (level.stages.get(currentStageIndex).type.equals("3Dstage")) {
 
           if (!e3DMode) {

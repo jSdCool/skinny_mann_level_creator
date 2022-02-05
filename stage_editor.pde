@@ -954,6 +954,7 @@ void GUImouseClicked() {
         if (tmp instanceof Coin) {
           Coin g=(Coin)tmp;
           current.parts.add(new Coin(g.x+ix, g.y+iy, g.z, level.numOfCoins));
+          coins.add(false);
           level.numOfCoins++;
         }
         if (tmp instanceof Sloap) {
