@@ -232,8 +232,10 @@ void draw() {
     println(newLevelType);
     new2DStage.draw();
     new3DStage.draw();
+    addSound.draw();
     newFileCreate.draw();
     newFileBack.draw();
+    drawSpeakericon(this,addSound.x+addSound.lengthX/2,addSound.y+addSound.lengthY/2,1);
     fill(0);
     textSize(70);
     textAlign(LEFT, BOTTOM);

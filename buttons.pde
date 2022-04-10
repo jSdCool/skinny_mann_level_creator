@@ -1,4 +1,4 @@
-Button newStage, newFileCreate, newFileBack, edditStage, setMainStage, selectStage, new2DStage, new3DStage, overview_saveLevel, help,newBlueprint,loadBlueprint,createBlueprintGo;
+Button newStage, newFileCreate, newFileBack, edditStage, setMainStage, selectStage, new2DStage, new3DStage, overview_saveLevel, help,newBlueprint,loadBlueprint,createBlueprintGo,addSound;
 
 void initlizeButtons() {
   newStage=new Button(1200, 10, 60, 60, #0092FF, 0);
@@ -15,6 +15,7 @@ void initlizeButtons() {
 
   new2DStage=new Button(400, 200, 80, 80, "2D", #BB48ED, #4857ED).setTextFactor(1).setStrokeWeight(5);
   new3DStage=new Button(600, 200, 80, 80, "3D", #BB48ED, #4857ED).setTextFactor(1).setStrokeWeight(5);
+  addSound=new Button(800, 200, 80, 80, #BB48ED, #4857ED).setStrokeWeight(5);
 
   overview_saveLevel=new Button(60, 20, 50, 50, "save", #0092FF, 0).setStrokeWeight(5);
   help=new Button(130, 20, 50, 50, " ? ", #0092FF, 0);
