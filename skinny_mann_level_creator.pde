@@ -195,10 +195,10 @@ void draw() {
     for (int i=0; i < 11 && i + filesScrole < level.stages.size(); i++) {
 
       fill(0);
-      String displayName=level.stages.get(i).name, type=level.stages.get(i).type;
-      text(displayName, 80, 130+60*(i));
+      String displayName=level.stages.get(i+ filesScrole).name, type=level.stages.get(i+ filesScrole).type;
+      text(displayName, 80, 130+60*(i+ filesScrole));
       if (type.equals("stage")) {
-        drawWorldSymbol(20, 90+60*(i));
+        drawWorldSymbol(20, 90+60*(i+ filesScrole));
       }
     }
     textAlign(CENTER, CENTER);
@@ -213,6 +213,10 @@ void draw() {
 
     overview_saveLevel.draw();
     help.draw();
+    if(filesScrole>0)
+    overviewUp.draw();
+    if(filesScrole+11<level.stages.size())
+    overviewDown.draw();
   }//end of level over view
 
 
@@ -267,10 +271,10 @@ void draw() {
     for (int i=0; i < 11 && i + filesScrole < level.stages.size(); i++) {
 
       fill(0);
-      String displayName=level.stages.get(i).name, type=level.stages.get(i).type;
-      text(displayName, 80, 130+60*(i));
+      String displayName=level.stages.get(i+ filesScrole).name, type=level.stages.get(i+ filesScrole).type;
+      text(displayName, 80, 130+60*(i+ filesScrole));
       if (type.equals("stage")) {
-        drawWorldSymbol(20, 90+60*(i));
+        drawWorldSymbol(20, 90+60*(i+ filesScrole));
       }
     }
     textAlign(CENTER, CENTER);
