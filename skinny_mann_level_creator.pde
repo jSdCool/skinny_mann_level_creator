@@ -155,8 +155,8 @@ void draw() {
     stroke(#7CC7FF);
     strokeWeight(0);
     if (overviewSelection!=-1) {
-      rect(0, overviewSelection*60+80, 1280, 60);
-
+      rect(0, (overviewSelection- filesScrole)*60+80, 1280, 60);
+      if(overviewSelection<level.stages.size()){//if the selection is in rage of the stages
       if (level.stages.get(overviewSelection).type.equals("stage")) {
         edditStage.draw();
         fill(255, 255, 0);
@@ -184,21 +184,32 @@ void draw() {
         fill(#E5B178);
         triangle(1129, 54, 1114, 39, 1109, 53);
       }
-    }
+      }//end of thing slected is in stage range
+    }//end of if something is selected
     textAlign(LEFT, BOTTOM);
     stroke(0);
     strokeWeight(2);
     line(0, 80, 1280, 80);
     fill(0);
     textSize(30);
-
-    for (int i=0; i < 11 && i + filesScrole < level.stages.size(); i++) {
-
-      fill(0);
-      String displayName=level.stages.get(i+ filesScrole).name, type=level.stages.get(i+ filesScrole).type;
-      text(displayName, 80, 130+60*(i+ filesScrole));
-      if (type.equals("stage")) {
-        drawWorldSymbol(20, 90+60*(i+ filesScrole));
+    
+    String[] keys=new String[0];//create a string array that can be used to place the sound keys in
+    keys=level.sounds.keySet().toArray(keys);//place the sound keys into the array
+    for (int i=0; i < 11 && i + filesScrole < level.stages.size()+level.sounds.size(); i++) {//loop through all the stages and sounds and display 11 of them on screen 
+      if(i+ filesScrole<level.stages.size()){//if the current thing attemping to diaply is in the range of stages
+        fill(0);
+        String displayName=level.stages.get(i+ filesScrole).name, type=level.stages.get(i+ filesScrole).type;//get the name and type of the stages
+        text(displayName, 80, 130+60*(i));//display the name
+        if (type.equals("stage")) {//if it is a stage then display the stage icon
+          drawWorldSymbol(20, 90+60*(i));
+        }
+      }else{//if the thing is not a stage type
+        fill(0);
+        String displayName=level.sounds.get(keys[i+ filesScrole-level.stages.size()]).name, type=level.sounds.get(keys[i+ filesScrole-level.stages.size()]).type;//get the name and type of a sound in the level
+        text(displayName, 80, 130+60*(i));//display the name
+        if (type.equals("sound")) {//if the thing is a sound then display the sound icon
+          drawSpeakericon(this,40, 110+60*(i),0.5);
+        }
       }
     }
     textAlign(CENTER, CENTER);
@@ -215,7 +226,7 @@ void draw() {
     help.draw();
     if(filesScrole>0)
     overviewUp.draw();
-    if(filesScrole+11<level.stages.size())
+    if(filesScrole+11<level.stages.size()+level.sounds.size())
     overviewDown.draw();
   }//end of level over view
 
@@ -268,13 +279,23 @@ void draw() {
     line(0, 80, 1280, 80);
     fill(0);
     textSize(30);
-    for (int i=0; i < 11 && i + filesScrole < level.stages.size(); i++) {
-
-      fill(0);
-      String displayName=level.stages.get(i+ filesScrole).name, type=level.stages.get(i+ filesScrole).type;
-      text(displayName, 80, 130+60*(i+ filesScrole));
-      if (type.equals("stage")) {
-        drawWorldSymbol(20, 90+60*(i+ filesScrole));
+    String[] keys=new String[0];//create a string array that can be used to place the sound keys in
+    keys=level.sounds.keySet().toArray(keys);//place the sound keys into the array
+    for (int i=0; i < 11 && i + filesScrole < level.stages.size()+level.sounds.size(); i++) {//loop through all the stages and sounds and display 11 of them on screen 
+      if(i+ filesScrole<level.stages.size()){//if the current thing attemping to diaply is in the range of stages
+        fill(0);
+        String displayName=level.stages.get(i+ filesScrole).name, type=level.stages.get(i+ filesScrole).type;//get the name and type of the stages
+        text(displayName, 80, 130+60*(i));//display the name
+        if (type.equals("stage")) {//if it is a stage then display the stage icon
+          drawWorldSymbol(20, 90+60*(i));
+        }
+      }else{//if the thing is not a stage type
+        fill(0);
+        String displayName=level.sounds.get(keys[i+ filesScrole-level.stages.size()]).name, type=level.sounds.get(keys[i+ filesScrole-level.stages.size()]).type;//get the name and type of a sound in the level
+        text(displayName, 80, 130+60*(i));//display the name
+        if (type.equals("sound")) {//if the thing is a sound then display the sound icon
+          drawSpeakericon(this,40, 110+60*(i),0.5);
+        }
       }
     }
     textAlign(CENTER, CENTER);
@@ -282,6 +303,10 @@ void draw() {
     fill(0);
     textSize(90);
     text("select destenation stage", 640, 30);
+    if(filesScrole>0)
+    overviewUp.draw();
+    if(filesScrole+11<level.stages.size()+level.sounds.size())
+    overviewDown.draw();
     textAlign(LEFT, BOTTOM);
   }//end of drawing portal2
   
@@ -427,8 +452,8 @@ void mouseClicked() {
         newFileName="";
       }
       if (mouseY>80) {
-        overviewSelection=(mouseY-80)/60;
-        if (overviewSelection>=level.stages.size()) {
+        overviewSelection=(mouseY-80)/60+ filesScrole;
+        if (overviewSelection>=level.stages.size()+level.sounds.size()) {
           overviewSelection=-1;
         }
       }
@@ -443,6 +468,7 @@ void mouseClicked() {
         link("https://youtu.be/dh07dk1xXew");
       }
       if (overviewSelection!=-1) {
+        if(overviewSelection<level.stages.size()){//if the selection is in rage of the stages
         if (level.stages.get(overviewSelection).type.equals("stage")) {
           if (edditStage.isMouseOver()) {
             editingStage=true;
@@ -465,8 +491,14 @@ void mouseClicked() {
             respawnStage=currentStageIndex;
           }
         }
-      }
-    }
+        }//end if if selection is in range of the stages
+      }//end of if something is selected
+      
+      if(filesScrole>0&&overviewUp.isMouseOver())
+      filesScrole--;
+      if(filesScrole+11<level.stages.size()+level.sounds.size()&&overviewDown.isMouseOver())
+      filesScrole++;
+    }//end of level overview
 
     if (newFile) {
       if (newFileBack.isMouseOver()) {
@@ -500,13 +532,14 @@ void mouseClicked() {
     if (drawingPortal2) {
 
       if (mouseY>80) {
-        overviewSelection=(mouseY-80)/60;
-        if (overviewSelection>=level.stages.size()) {
+        overviewSelection=(mouseY-80)/60+ filesScrole;
+        if (overviewSelection>=level.stages.size()+level.sounds.size()) {
           overviewSelection=-1;
         }
       }
 
       if (overviewSelection!=-1) {
+        if(overviewSelection<level.stages.size()){//if the selection is in rage of the stages
         if (level.stages.get(overviewSelection).type.equals("stage")||level.stages.get(overviewSelection).type.equals("3Dstage")) {
           if (selectStage.isMouseOver()) {
             editingStage=true;
@@ -517,7 +550,12 @@ void mouseClicked() {
             currentStageIndex=overviewSelection;
           }
         }
+        }//end of if in stage range
       }
+      if(filesScrole>0&&overviewUp.isMouseOver())
+      filesScrole--;
+      if(filesScrole+11<level.stages.size()+level.sounds.size()&&overviewDown.isMouseOver())
+      filesScrole++;
     }//end of drawing portal 2
     if(creatingNewBlueprint){
       if(createBlueprintGo.isMouseOver()){
