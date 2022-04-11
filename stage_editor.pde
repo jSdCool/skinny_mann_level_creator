@@ -500,7 +500,7 @@ void stageEditGUI() {
         drawSign(mouseX, mouseY, Scale);
       }
     }
-    if(placingSound){
+    if (placingSound) {
       if (grid_mode) {
         drawSoundBox(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size-camPos, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size+camPosY);
       } else {
@@ -963,16 +963,16 @@ void GUImouseClicked() {
         }
         if (tmp instanceof HoloTriangle) {
           HoloTriangle g=(HoloTriangle)tmp;
-         current.parts.add(new HoloTriangle(g.x+ix, g.y+iy, g.dx+ix, g.dy+iy, g.direction, g.ccolor));
+          current.parts.add(new HoloTriangle(g.x+ix, g.y+iy, g.dx+ix, g.dy+iy, g.direction, g.ccolor));
         }
       }
     }
-    if(placingSound){
+    if (placingSound) {
       if (grid_mode) {
-          current.parts.add(new SoundBox(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size));
-        } else {
-          current.parts.add(new SoundBox((int)mouseX+camPos, (int)mouseY-camPosY));
-        }
+        current.parts.add(new SoundBox(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size));
+      } else {
+        current.parts.add(new SoundBox((int)mouseX+camPos, (int)mouseY-camPosY));
+      }
     }
   }//end of eddit stage
 }

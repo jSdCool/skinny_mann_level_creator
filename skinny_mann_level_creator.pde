@@ -16,12 +16,12 @@ void setup() {
   coin3D.scale(3);
   initlizeButtons();
 }
-boolean startup=true, editing_level=true, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, loading=false, newLevel=false, simulating=false, entering_file_path=false, coursor=false, level_complete=false, dead=false, entering_name=false, cam_left=false, cam_right=false, drawing=false, draw=false, extra=false, ground=false, check_point=false, goal=false, deleteing=false, delete=false, moving_player=false, grid_mode=false, holo_gram=false, editingStage=false, levelOverview=false, newFile=false, drawCoins=false, drawingPortal=false, drawingPortal2=false, drawingPortal3=false, E_pressed=false, saveColors=false, sloap=false, loopThread2=true, cam_up=false, cam_down=false, holoTriangle=false, dethPlane=false, setPlayerPosTo=false, e3DMode=false, WPressed=false, SPressed=false, draw3DSwitch1=false, draw3DSwitch2=false, checkpointIn3DStage=false, shadow3D=true, tutorialMode=false, drawingSign=false, selecting=false,viewingItemContents=false,loadingBlueprint=false,creatingNewBlueprint=false,editingBlueprint=false,selectingBlueprint=false,placingSound=false;
+boolean startup=true, editing_level=true, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, loading=false, newLevel=false, simulating=false, entering_file_path=false, coursor=false, level_complete=false, dead=false, entering_name=false, cam_left=false, cam_right=false, drawing=false, draw=false, extra=false, ground=false, check_point=false, goal=false, deleteing=false, delete=false, moving_player=false, grid_mode=false, holo_gram=false, editingStage=false, levelOverview=false, newFile=false, drawCoins=false, drawingPortal=false, drawingPortal2=false, drawingPortal3=false, E_pressed=false, saveColors=false, sloap=false, loopThread2=true, cam_up=false, cam_down=false, holoTriangle=false, dethPlane=false, setPlayerPosTo=false, e3DMode=false, WPressed=false, SPressed=false, draw3DSwitch1=false, draw3DSwitch2=false, checkpointIn3DStage=false, shadow3D=true, tutorialMode=false, drawingSign=false, selecting=false, viewingItemContents=false, loadingBlueprint=false, creatingNewBlueprint=false, editingBlueprint=false, selectingBlueprint=false, placingSound=false;
 String file_path, new_name="my_level", GAME_version="0.5.0_Early_Access", EDITOR_version="0.0.1.8_EAc", rootPath="", coursorr="", newFileName="", newLevelType="2D", stageType="", author="your name here", displayText="";
 //int player1 []={20,700,1,0,1,0};
 Player player1 =new Player(20, 699, 1, "red");
-int camPos=0, camPosY=0, death_cool_down, start_down, eadgeScroleDist=300, respawnX=20, respawnY=700, spdelay=0, Color=0, RedPos=0, BluePos=0, GreenPos=0, RC=0, GC=0, BC=0, grid_size=10, filesScrole=0, overviewSelection=-1, portalIndex1, stageIndex, preSI, respawnStage, setPlayerPosX, setPlayerPosY, setPlayerPosZ, startingDepth=0, totalDepth=300, respawnZ=50, coinRotation=0, coinCount=0, gmillis=0, eadgeScroleDistV=250, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0,drawCamPosX=0,drawCamPosY;
-int buttonMin=0, buttonMax=0, coinsIndex, triangleMode=0,selectedIndex=-1,viewingItemIndex=-1,currentBluieprintIndex=0;
+int camPos=0, camPosY=0, death_cool_down, start_down, eadgeScroleDist=300, respawnX=20, respawnY=700, spdelay=0, Color=0, RedPos=0, BluePos=0, GreenPos=0, RC=0, GC=0, BC=0, grid_size=10, filesScrole=0, overviewSelection=-1, portalIndex1, stageIndex, preSI, respawnStage, setPlayerPosX, setPlayerPosY, setPlayerPosZ, startingDepth=0, totalDepth=300, respawnZ=50, coinRotation=0, coinCount=0, gmillis=0, eadgeScroleDistV=250, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, drawCamPosX=0, drawCamPosY;
+int buttonMin=0, buttonMax=0, coinsIndex, triangleMode=0, selectedIndex=-1, viewingItemIndex=-1, currentBluieprintIndex=0;
 float[]tpCords=new float[3];
 JSONArray mainIndex/*,coins*/, colors;
 JSONObject portalStage1, portalStage2;
@@ -30,7 +30,7 @@ ToolBox scr2 ;
 PShape coin3D;
 Level level;
 ArrayList<Boolean> coins = new ArrayList<Boolean>();
-Stage workingBlueprint,blueprints[],displayBlueprint;
+Stage workingBlueprint, blueprints[], displayBlueprint;
 PApplet primaryWindow=this;
 void draw() {
 
@@ -143,7 +143,7 @@ void draw() {
     stageLevelDraw();
     stageEditGUI();
 
-    if(selectingBlueprint&&blueprints.length!=0){
+    if (selectingBlueprint&&blueprints.length!=0) {
       generateDisplayBlueprint();
       renderBlueprint();
     }
@@ -156,34 +156,34 @@ void draw() {
     strokeWeight(0);
     if (overviewSelection!=-1) {
       rect(0, (overviewSelection- filesScrole)*60+80, 1280, 60);
-      if(overviewSelection<level.stages.size()){//if the selection is in rage of the stages
-      if (level.stages.get(overviewSelection).type.equals("stage")) {
-        edditStage.draw();
-        fill(255, 255, 0);
-        strokeWeight(1);
-        quad(1155, 37, 1129, 54, 1114, 39, 1140, 22);
-        fill(#E5B178);
-        triangle(1129, 54, 1114, 39, 1109, 53);
-        setMainStage.draw();
-        fill(255, 0, 0);
-        quad(1030, 16, 1010, 40, 1030, 66, 1050, 40);
-        if (setMainStage.isMouseOver()) {
-          fill(200);
-          rect(mouseX-4, mouseY-18, 135, 20);
-          fill(0);
-          textSize(15);
-          textAlign(LEFT, BOTTOM);
-          text("set as main stage", mouseX, mouseY);
+      if (overviewSelection<level.stages.size()) {//if the selection is in rage of the stages
+        if (level.stages.get(overviewSelection).type.equals("stage")) {
+          edditStage.draw();
+          fill(255, 255, 0);
+          strokeWeight(1);
+          quad(1155, 37, 1129, 54, 1114, 39, 1140, 22);
+          fill(#E5B178);
+          triangle(1129, 54, 1114, 39, 1109, 53);
+          setMainStage.draw();
+          fill(255, 0, 0);
+          quad(1030, 16, 1010, 40, 1030, 66, 1050, 40);
+          if (setMainStage.isMouseOver()) {
+            fill(200);
+            rect(mouseX-4, mouseY-18, 135, 20);
+            fill(0);
+            textSize(15);
+            textAlign(LEFT, BOTTOM);
+            text("set as main stage", mouseX, mouseY);
+          }
         }
-      }
-      if (level.stages.get(overviewSelection).type.equals("3Dstage")) {
-        edditStage.draw();
-        fill(255, 255, 0);
-        strokeWeight(1);
-        quad(1155, 37, 1129, 54, 1114, 39, 1140, 22);
-        fill(#E5B178);
-        triangle(1129, 54, 1114, 39, 1109, 53);
-      }
+        if (level.stages.get(overviewSelection).type.equals("3Dstage")) {
+          edditStage.draw();
+          fill(255, 255, 0);
+          strokeWeight(1);
+          quad(1155, 37, 1129, 54, 1114, 39, 1140, 22);
+          fill(#E5B178);
+          triangle(1129, 54, 1114, 39, 1109, 53);
+        }
       }//end of thing slected is in stage range
     }//end of if something is selected
     textAlign(LEFT, BOTTOM);
@@ -192,23 +192,23 @@ void draw() {
     line(0, 80, 1280, 80);
     fill(0);
     textSize(30);
-    
+
     String[] keys=new String[0];//create a string array that can be used to place the sound keys in
     keys=level.sounds.keySet().toArray(keys);//place the sound keys into the array
-    for (int i=0; i < 11 && i + filesScrole < level.stages.size()+level.sounds.size(); i++) {//loop through all the stages and sounds and display 11 of them on screen 
-      if(i+ filesScrole<level.stages.size()){//if the current thing attemping to diaply is in the range of stages
+    for (int i=0; i < 11 && i + filesScrole < level.stages.size()+level.sounds.size(); i++) {//loop through all the stages and sounds and display 11 of them on screen
+      if (i+ filesScrole<level.stages.size()) {//if the current thing attemping to diaply is in the range of stages
         fill(0);
         String displayName=level.stages.get(i+ filesScrole).name, type=level.stages.get(i+ filesScrole).type;//get the name and type of the stages
         text(displayName, 80, 130+60*(i));//display the name
         if (type.equals("stage")) {//if it is a stage then display the stage icon
           drawWorldSymbol(20, 90+60*(i));
         }
-      }else{//if the thing is not a stage type
+      } else {//if the thing is not a stage type
         fill(0);
         String displayName=level.sounds.get(keys[i+ filesScrole-level.stages.size()]).name, type=level.sounds.get(keys[i+ filesScrole-level.stages.size()]).type;//get the name and type of a sound in the level
         text(displayName, 80, 130+60*(i));//display the name
         if (type.equals("sound")) {//if the thing is a sound then display the sound icon
-          drawSpeakericon(this,40, 110+60*(i),0.5);
+          drawSpeakericon(this, 40, 110+60*(i), 0.5);
         }
       }
     }
@@ -224,10 +224,10 @@ void draw() {
 
     overview_saveLevel.draw();
     help.draw();
-    if(filesScrole>0)
-    overviewUp.draw();
-    if(filesScrole+11<level.stages.size()+level.sounds.size())
-    overviewDown.draw();
+    if (filesScrole>0)
+      overviewUp.draw();
+    if (filesScrole+11<level.stages.size()+level.sounds.size())
+      overviewDown.draw();
   }//end of level over view
 
 
@@ -250,7 +250,7 @@ void draw() {
     addSound.draw();
     newFileCreate.draw();
     newFileBack.draw();
-    drawSpeakericon(this,addSound.x+addSound.lengthX/2,addSound.y+addSound.lengthY/2,1);
+    drawSpeakericon(this, addSound.x+addSound.lengthX/2, addSound.y+addSound.lengthY/2, 1);
     fill(0);
     textSize(70);
     textAlign(LEFT, BOTTOM);
@@ -281,20 +281,20 @@ void draw() {
     textSize(30);
     String[] keys=new String[0];//create a string array that can be used to place the sound keys in
     keys=level.sounds.keySet().toArray(keys);//place the sound keys into the array
-    for (int i=0; i < 11 && i + filesScrole < level.stages.size()+level.sounds.size(); i++) {//loop through all the stages and sounds and display 11 of them on screen 
-      if(i+ filesScrole<level.stages.size()){//if the current thing attemping to diaply is in the range of stages
+    for (int i=0; i < 11 && i + filesScrole < level.stages.size()+level.sounds.size(); i++) {//loop through all the stages and sounds and display 11 of them on screen
+      if (i+ filesScrole<level.stages.size()) {//if the current thing attemping to diaply is in the range of stages
         fill(0);
         String displayName=level.stages.get(i+ filesScrole).name, type=level.stages.get(i+ filesScrole).type;//get the name and type of the stages
         text(displayName, 80, 130+60*(i));//display the name
         if (type.equals("stage")) {//if it is a stage then display the stage icon
           drawWorldSymbol(20, 90+60*(i));
         }
-      }else{//if the thing is not a stage type
+      } else {//if the thing is not a stage type
         fill(0);
         String displayName=level.sounds.get(keys[i+ filesScrole-level.stages.size()]).name, type=level.sounds.get(keys[i+ filesScrole-level.stages.size()]).type;//get the name and type of a sound in the level
         text(displayName, 80, 130+60*(i));//display the name
         if (type.equals("sound")) {//if the thing is a sound then display the sound icon
-          drawSpeakericon(this,40, 110+60*(i),0.5);
+          drawSpeakericon(this, 40, 110+60*(i), 0.5);
         }
       }
     }
@@ -303,20 +303,20 @@ void draw() {
     fill(0);
     textSize(90);
     text("select destenation stage", 640, 30);
-    if(filesScrole>0)
-    overviewUp.draw();
-    if(filesScrole+11<level.stages.size()+level.sounds.size())
-    overviewDown.draw();
+    if (filesScrole>0)
+      overviewUp.draw();
+    if (filesScrole+11<level.stages.size()+level.sounds.size())
+      overviewDown.draw();
     textAlign(LEFT, BOTTOM);
   }//end of drawing portal2
-  
-  if(creatingNewBlueprint){
+
+  if (creatingNewBlueprint) {
     background(#48EDD8);
     fill(0);
     textSize(20);
     text("enter blueprint name", 40, 100);
     if (new_name!=null) {
-        text(new_name+coursorr, 40, 150);
+      text(new_name+coursorr, 40, 150);
     } else if (coursor) {
       text("|", 40, 150);
     }
@@ -325,13 +325,13 @@ void draw() {
     strokeWeight(1);
     line(40, 152, 800, 152);
   }//end of creating new blueprint
-  if(loadingBlueprint){
+  if (loadingBlueprint) {
     background(#48EDD8);
     fill(0);
     textSize(20);
     text("enter blueprint name", 40, 100);
     if (new_name!=null) {
-        text(new_name+coursorr, 40, 150);
+      text(new_name+coursorr, 40, 150);
     } else if (coursor) {
       text("|", 40, 150);
     }
@@ -341,16 +341,16 @@ void draw() {
     createBlueprintGo.setText("load");
     createBlueprintGo.draw();
   }//end of loading blueprint
-  if(editingBlueprint){
+  if (editingBlueprint) {
     background(7646207);
     fill(0);
     strokeWeight(0);
-    rect(width/2-0.5,0,1,height);
-    rect(0,height/2-0.5,width,1);
+    rect(width/2-0.5, 0, 1, height);
+    rect(0, height/2-0.5, width, 1);
     blueprintEditDraw();
     stageEditGUI();//overlays when placing things
   }
-  
+
 
   engageHUDPosition();
   fill(255);
@@ -385,13 +385,13 @@ void mouseClicked() {
         startup=false;
         loading=true;
       }
-      if(newBlueprint.isMouseOver()){
+      if (newBlueprint.isMouseOver()) {
         startup=false;
         creatingNewBlueprint=true;
         new_name="my blueprint";
         entering_name=true;
       }
-      if(loadBlueprint.isMouseOver()){
+      if (loadBlueprint.isMouseOver()) {
         startup=false;
         loadingBlueprint=true;
         new_name="";
@@ -468,36 +468,36 @@ void mouseClicked() {
         link("https://youtu.be/dh07dk1xXew");
       }
       if (overviewSelection!=-1) {
-        if(overviewSelection<level.stages.size()){//if the selection is in rage of the stages
-        if (level.stages.get(overviewSelection).type.equals("stage")) {
-          if (edditStage.isMouseOver()) {
-            editingStage=true;
-            levelOverview=false;
-            currentStageIndex=overviewSelection;
-            respawnStage=currentStageIndex;
-          }
+        if (overviewSelection<level.stages.size()) {//if the selection is in rage of the stages
+          if (level.stages.get(overviewSelection).type.equals("stage")) {
+            if (edditStage.isMouseOver()) {
+              editingStage=true;
+              levelOverview=false;
+              currentStageIndex=overviewSelection;
+              respawnStage=currentStageIndex;
+            }
 
-          if (setMainStage.isMouseOver()) {
-            level.mainStage=overviewSelection;
-            background(0);
-            return;
+            if (setMainStage.isMouseOver()) {
+              level.mainStage=overviewSelection;
+              background(0);
+              return;
+            }
           }
-        }
-        if (level.stages.get(overviewSelection).type.equals("3Dstage")) {
-          if (edditStage.isMouseOver()) {
-            editingStage=true;
-            levelOverview=false;
-            currentStageIndex=overviewSelection;
-            respawnStage=currentStageIndex;
+          if (level.stages.get(overviewSelection).type.equals("3Dstage")) {
+            if (edditStage.isMouseOver()) {
+              editingStage=true;
+              levelOverview=false;
+              currentStageIndex=overviewSelection;
+              respawnStage=currentStageIndex;
+            }
           }
-        }
         }//end if if selection is in range of the stages
       }//end of if something is selected
-      
-      if(filesScrole>0&&overviewUp.isMouseOver())
-      filesScrole--;
-      if(filesScrole+11<level.stages.size()+level.sounds.size()&&overviewDown.isMouseOver())
-      filesScrole++;
+
+      if (filesScrole>0&&overviewUp.isMouseOver())
+        filesScrole--;
+      if (filesScrole+11<level.stages.size()+level.sounds.size()&&overviewDown.isMouseOver())
+        filesScrole++;
     }//end of level overview
 
     if (newFile) {
@@ -539,28 +539,28 @@ void mouseClicked() {
       }
 
       if (overviewSelection!=-1) {
-        if(overviewSelection<level.stages.size()){//if the selection is in rage of the stages
-        if (level.stages.get(overviewSelection).type.equals("stage")||level.stages.get(overviewSelection).type.equals("3Dstage")) {
-          if (selectStage.isMouseOver()) {
-            editingStage=true;
-            levelOverview=false;
-            drawingPortal2=false;
-            drawingPortal3=true;
-            camPos=0;
-            currentStageIndex=overviewSelection;
+        if (overviewSelection<level.stages.size()) {//if the selection is in rage of the stages
+          if (level.stages.get(overviewSelection).type.equals("stage")||level.stages.get(overviewSelection).type.equals("3Dstage")) {
+            if (selectStage.isMouseOver()) {
+              editingStage=true;
+              levelOverview=false;
+              drawingPortal2=false;
+              drawingPortal3=true;
+              camPos=0;
+              currentStageIndex=overviewSelection;
+            }
           }
-        }
         }//end of if in stage range
       }
-      if(filesScrole>0&&overviewUp.isMouseOver())
-      filesScrole--;
-      if(filesScrole+11<level.stages.size()+level.sounds.size()&&overviewDown.isMouseOver())
-      filesScrole++;
+      if (filesScrole>0&&overviewUp.isMouseOver())
+        filesScrole--;
+      if (filesScrole+11<level.stages.size()+level.sounds.size()&&overviewDown.isMouseOver())
+        filesScrole++;
     }//end of drawing portal 2
-    if(creatingNewBlueprint){
-      if(createBlueprintGo.isMouseOver()){
-        if(new_name!=null&&!new_name.equals("")){//is something was entered
-          workingBlueprint=new Stage(new_name,"blueprint");
+    if (creatingNewBlueprint) {
+      if (createBlueprintGo.isMouseOver()) {
+        if (new_name!=null&&!new_name.equals("")) {//is something was entered
+          workingBlueprint=new Stage(new_name, "blueprint");
           entering_name=false;
           creatingNewBlueprint=false;
           editingBlueprint=true;
@@ -570,10 +570,10 @@ void mouseClicked() {
         }
       }
     }//end of creating new bluepint
-    if(loadingBlueprint){
-      if(createBlueprintGo.isMouseOver()){
-        if(new_name!=null&&!new_name.equals("")){//is something was entered
-        rootPath=System.getenv("appdata")+"/CBi-games/skinny mann level creator/blueprints";
+    if (loadingBlueprint) {
+      if (createBlueprintGo.isMouseOver()) {
+        if (new_name!=null&&!new_name.equals("")) {//is something was entered
+          rootPath=System.getenv("appdata")+"/CBi-games/skinny mann level creator/blueprints";
           workingBlueprint=new Stage(loadJSONArray(rootPath+"/"+new_name+".json"));
           entering_name=false;
           loadingBlueprint=false;
@@ -583,7 +583,6 @@ void mouseClicked() {
         }
       }
     }//end of loading blueprint
-    
   }//end of left mouse button clicked
 }//end of mouse clicked
 
@@ -778,7 +777,7 @@ void mouseWheel(MouseEvent event) {
 
 
 
-char getCh(int mode,char leter) {
+char getCh(int mode, char leter) {
   if (mode==0) {
     if (Character.isLetter(leter)||leter==' ') {//mode 0 letters numbers and spcaes
       return leter;
@@ -798,7 +797,7 @@ char getCh(int mode,char leter) {
     if (leter=='1'||leter=='2'||leter=='3'||leter=='4'||leter=='5'||leter=='6'||leter=='7'||leter=='8'||leter=='9'||leter=='0'||leter=='.')
       return leter;
   }
-  if(mode==3){//mode 3 mode 0 but also allows line returns and /
+  if (mode==3) {//mode 3 mode 0 but also allows line returns and /
     if (Character.isLetter(leter)||leter==' ') {//mode 0 letters numbers and spcaes
       return leter;
     }
@@ -808,13 +807,12 @@ char getCh(int mode,char leter) {
 
     if (leter=='1'||leter=='2'||leter=='3'||leter=='4'||leter=='5'||leter=='6'||leter=='7'||leter=='8'||leter=='9'||leter=='0'||leter=='\n'||leter=='/')
       return leter;
-
   }
 
   return 0;
 }
 
-String doBackspace(String imp,int code) {
+String doBackspace(String imp, int code) {
   if (code==8) {
     if (imp.length()>1) {
       return imp.substring(0, imp.length()-1);
@@ -825,16 +823,16 @@ String doBackspace(String imp,int code) {
   return imp;
 }
 
-String getInput(String in, int x,int code,char leter) {//code and leter exsist to allow sub windows to use this function correctly they shoud send the keyCode and key vaible in respectivlky 
-  if (getCh(x,leter)!=0) {
-    in+=getCh(x,leter);
+String getInput(String in, int x, int code, char leter) {//code and leter exsist to allow sub windows to use this function correctly they shoud send the keyCode and key vaible in respectivlky
+  if (getCh(x, leter)!=0) {
+    in+=getCh(x, leter);
   }
-  in=doBackspace(in,code);
+  in=doBackspace(in, code);
   return in;
 }
 
 String getInput(String in, int x) {//for use in the main sketch whre keyCode and key are the same as used here
-  return getInput(in,x,keyCode,key);
+  return getInput(in, x, keyCode, key);
 }
 
 void turnThingsOff() {
@@ -885,6 +883,6 @@ void thrdCalc2() {
   }
 }
 
-boolean gameVersionCompatibilityCheck(String vers){//returns ture if the inputed version id compatible
- return true; 
+boolean gameVersionCompatibilityCheck(String vers) {//returns ture if the inputed version id compatible
+  return true;
 }

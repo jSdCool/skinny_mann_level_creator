@@ -72,10 +72,10 @@ class Level {
     }
     String[] keys=new String[0];
     keys=(String[])sounds.keySet().toArray(keys);
-    if(keys.length!=0)
-    for (int i=0; i<keys.length; i++) {
-      index.setJSONObject(index.size(), sounds.get(keys[i]).save());
-    }
+    if (keys.length!=0)
+      for (int i=0; i<keys.length; i++) {
+        index.setJSONObject(index.size(), sounds.get(keys[i]).save());
+      }
     saveJSONArray(index, rootPath+"/index.json");
   }
 }
@@ -1182,7 +1182,7 @@ class SoundBox extends StageComponent {
     y=Y;
     type = "sound box";
   }
-  SoundBox(JSONObject data,boolean stage_3D) {
+  SoundBox(JSONObject data, boolean stage_3D) {
     type = "sound box";
     x=data.getFloat("x");
     y=data.getFloat("y");
@@ -1194,14 +1194,17 @@ class SoundBox extends StageComponent {
     if (player1.getX()>=x-30&&player1.getX()<=x+30&&player1.y>=y-30&&player1.getY()<y+30) {
       displayText="Press E";
       displayTextUntill=millis()+100;
-      if(E_pressed){
-      try {
-        StageSound sound = level.sounds.get(soundKey);
-        if (!sound.sound.isPlaying()) {
-          sound.sound.play();
+      if (E_pressed) {
+        try {
+          StageSound sound = level.sounds.get(soundKey);
+          if (!sound.sound.isPlaying()) {
+            sound.sound.play();
+          }
         }
-      }catch(Exception e) {}
-    }}
+        catch(Exception e) {
+        }
+      }
+    }
   }
 
   boolean colide(float x, float y, boolean c) {

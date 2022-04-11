@@ -1,4 +1,4 @@
-Button newStage, newFileCreate, newFileBack, edditStage, setMainStage, selectStage, new2DStage, new3DStage, overview_saveLevel, help,newBlueprint,loadBlueprint,createBlueprintGo,addSound,overviewUp,overviewDown;
+Button newStage, newFileCreate, newFileBack, edditStage, setMainStage, selectStage, new2DStage, new3DStage, overview_saveLevel, help, newBlueprint, loadBlueprint, createBlueprintGo, addSound, overviewUp, overviewDown;
 
 void initlizeButtons() {
   newStage=new Button(1200, 10, 60, 60, #0092FF, 0);
@@ -21,12 +21,12 @@ void initlizeButtons() {
   help=new Button(130, 20, 50, 50, " ? ", #0092FF, 0);
   overviewUp=new Button(270, 20, 50, 50, " ^ ", #0092FF, 0);
   overviewDown=new Button(200, 20, 50, 50, " v ", #0092FF, 0);
-  
-  newBlueprint=new Button(200, 500, 200, 80,"new blueprint",#BB48ED,#4857ED).setStrokeWeight(10);
-  loadBlueprint=new Button(800, 500, 200, 80,"load blueprint",#BB48ED,#4857ED).setStrokeWeight(10);
-  
-  createBlueprintGo=new Button(40, 400, 200, 40,"start",#BB48ED,#4857ED).setStrokeWeight(10);
+
+  newBlueprint=new Button(200, 500, 200, 80, "new blueprint", #BB48ED, #4857ED).setStrokeWeight(10);
+  loadBlueprint=new Button(800, 500, 200, 80, "load blueprint", #BB48ED, #4857ED).setStrokeWeight(10);
+
+  createBlueprintGo=new Button(40, 400, 200, 40, "start", #BB48ED, #4857ED).setStrokeWeight(10);
 }
 /*
 
-*/
+ */

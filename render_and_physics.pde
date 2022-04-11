@@ -1,4 +1,4 @@
-//===================================================================================
+//=================================================================================== //<>//
 int xangle=25+180, yangle=15, dist=700;//camera presets
 float DY=sin(radians(yangle))*dist, hd=cos(radians(yangle))*dist, DX=sin(radians(xangle))*hd, DZ=cos(radians(xangle))*hd;//camera rotation
 
@@ -6,14 +6,14 @@ void stageLevelDraw() {
   Stage stage=level.stages.get(currentStageIndex);
   background(stage.skyColor);
   int selectIndex=-1;
-  if(selecting){
-    selectIndex=colid_index(mouseX+camPos,mouseY-camPosY,stage);
+  if (selecting) {
+    selectIndex=colid_index(mouseX+camPos, mouseY-camPosY, stage);
   }
   if (E_pressed&&viewingItemContents) {
-        E_pressed=false;
-        viewingItemContents=false;
-        viewingItemIndex=-1;
-      }
+    E_pressed=false;
+    viewingItemContents=false;
+    viewingItemIndex=-1;
+  }
   if (stage.type.equals("stage")) {
     e3DMode=false;
     camera();
@@ -22,16 +22,16 @@ void stageLevelDraw() {
     for (int i=0; stageLoopCondishen(i, stage); i++) {
       strokeWeight(0);
       noStroke();
-      if(selectIndex==i){
-       stroke(#FFFF00);
-       strokeWeight(2);
+      if (selectIndex==i) {
+        stroke(#FFFF00);
+        strokeWeight(2);
       }
-      if(selectedIndex==i){
-       stroke(#0A03FF);
-       strokeWeight(2);
+      if (selectedIndex==i) {
+        stroke(#0A03FF);
+        strokeWeight(2);
       }
       stage.parts.get(i).draw();
-      if(viewingItemContents&&viewingItemIndex==-1){
+      if (viewingItemContents&&viewingItemIndex==-1) {
         viewingItemIndex=i;
       }
     }
@@ -52,14 +52,14 @@ void stageLevelDraw() {
       if (coinRotation>360)
         coinRotation-=360;
       drawCamPosX=camPos;
-    drawCamPosY=camPosY;
+      drawCamPosY=camPosY;
       for (int i=0; stageLoopCondishen(i, stage); i++) {
         strokeWeight(0);
         noStroke();
         stage.parts.get(i).draw3D();
-        if(viewingItemContents&&viewingItemIndex==-1){
-        viewingItemIndex=i;
-      }
+        if (viewingItemContents&&viewingItemIndex==-1) {
+          viewingItemIndex=i;
+        }
       }
 
       draw_mann_3D(player1.x, player1.y, player1.z, player1.getPose(), player1.getScale(), player1.getColor());
@@ -86,21 +86,21 @@ void stageLevelDraw() {
     } else {//redner the level in 2D
       camera();
       drawCamPosX=camPos;
-    drawCamPosY=camPosY;
+      drawCamPosY=camPosY;
       for (int i=0; stageLoopCondishen(i, stage); i++) {
         strokeWeight(0);
-       noStroke(); 
-        if(selectIndex==i){
-       stroke(#FFFF00);
-       strokeWeight(2);
-      }
-      if(selectedIndex==i){
-       stroke(#0A03FF);
-       strokeWeight(2);
-      }
+        noStroke();
+        if (selectIndex==i) {
+          stroke(#FFFF00);
+          strokeWeight(2);
+        }
+        if (selectedIndex==i) {
+          stroke(#0A03FF);
+          strokeWeight(2);
+        }
         stage.parts.get(i).draw();
-        
-        if(viewingItemContents&&viewingItemIndex==-1){
+
+        if (viewingItemContents&&viewingItemIndex==-1) {
           viewingItemIndex=i;
         }
       }
@@ -117,36 +117,36 @@ void stageLevelDraw() {
     fill(255, 126, 0);
     stroke(255, 0, 0);
     strokeWeight(Scale*10);
-    rect(Scale*550, Scale*450, Scale*200, Scale*40); //<>//
+    rect(Scale*550, Scale*450, Scale*200, Scale*40);
     fill(0);
     textSize(Scale*40);
     text("continue", Scale*565, Scale*480);
   }
-  
-  if(viewingItemContents){
-   engageHUDPosition(); 
-   StageComponent item = level.stages.get(currentStageIndex).parts.get(viewingItemIndex);
-   if(item.type.equals("WritableSign")){//if your are reeding a sign then show the contents of the sign
-     fill(#A54A00);
-     rect(width*0.05,height*0.05,width*0.9,height*0.9);
-     fill(#C4C4C4);
-     rect(width*0.1,height*0.1,width*0.8,height*0.8);
-     textAlign(CENTER,CENTER);
-     textSize(50*Scale);
-     fill(0);
-     text(item.getData(),width/2,height/2);
-     textSize(20*Scale);
-     text("press E to continue",width/2,height*0.85);
-     displayTextUntill=millis()-1;
-   }
-   disEngageHUDPosition();
+
+  if (viewingItemContents) {
+    engageHUDPosition();
+    StageComponent item = level.stages.get(currentStageIndex).parts.get(viewingItemIndex);
+    if (item.type.equals("WritableSign")) {//if your are reeding a sign then show the contents of the sign
+      fill(#A54A00);
+      rect(width*0.05, height*0.05, width*0.9, height*0.9);
+      fill(#C4C4C4);
+      rect(width*0.1, height*0.1, width*0.8, height*0.8);
+      textAlign(CENTER, CENTER);
+      textSize(50*Scale);
+      fill(0);
+      text(item.getData(), width/2, height/2);
+      textSize(20*Scale);
+      text("press E to continue", width/2, height*0.85);
+      displayTextUntill=millis()-1;
+    }
+    disEngageHUDPosition();
   }
 }
 
-void blueprintEditDraw(){
+void blueprintEditDraw() {
   int selectIndex=-1;
-  if(selecting){
-    selectIndex=colid_index(mouseX+camPos,mouseY-camPosY,workingBlueprint);
+  if (selecting) {
+    selectIndex=colid_index(mouseX+camPos, mouseY-camPosY, workingBlueprint);
   }
   if (workingBlueprint.type.equals("blueprint")) {
     e3DMode=false;
@@ -156,16 +156,16 @@ void blueprintEditDraw(){
     for (int i=0; stageLoopCondishen(i, workingBlueprint); i++) {
       strokeWeight(0);
       noStroke();
-      if(selectIndex==i){
-       stroke(#FFFF00);
-       strokeWeight(2);
+      if (selectIndex==i) {
+        stroke(#FFFF00);
+        strokeWeight(2);
       }
-      if(selectedIndex==i){
-       stroke(#0A03FF);
-       strokeWeight(2);
+      if (selectedIndex==i) {
+        stroke(#0A03FF);
+        strokeWeight(2);
       }
       workingBlueprint.parts.get(i).draw();
-      if(viewingItemContents&&viewingItemIndex==-1){
+      if (viewingItemContents&&viewingItemIndex==-1) {
         viewingItemIndex=i;
       }
     }
@@ -177,13 +177,12 @@ void blueprintEditDraw(){
 
 void playerPhysics() {
 
-  if(viewingItemContents){//stop movment while intertacting with an object
+  if (viewingItemContents) {//stop movment while intertacting with an object
     player1_moving_right=false;
     player1_moving_left=false;
     player1_jumping=false;
     WPressed=false;
     SPressed=false;
-    
   }
 
   if (!e3DMode) {
@@ -697,7 +696,7 @@ boolean player_kill(float x, float y) {
   return false;
 }
 
-int colid_index(float x, float y,Stage stage) {
+int colid_index(float x, float y, Stage stage) {
   for (int i=stage.parts.size()-1; i>=0; i--) {
     if (stage.parts.get(i).colide(x, y, true)) {
       return i;

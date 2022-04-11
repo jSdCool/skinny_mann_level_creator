@@ -9,8 +9,8 @@ class ToolBox extends PApplet {
   public int redVal=0, greenVal=0, blueVal=0, CC=0;
   int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset;
   String page="colors";
-  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select,selectionPage,stageSettings,skyColorB1,setSkyColor,resetSkyColor,placeBlueprint,nexBlueprint,prevBlueprint,playSound,nextSound,prevSound;
-  boolean typingSign=false,settingSkyColor=false;
+  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound;
+  boolean typingSign=false, settingSkyColor=false;
 
   public void settings() {
     size(1280, 720);
@@ -33,15 +33,15 @@ class ToolBox extends PApplet {
     exitStageEdit= new Button(520, 40+100, 50, 50, " < ", 255, 203).setStrokeWeight(5);
     sign=new Button(1060, 140, 50, 50, 255, 203).setStrokeWeight(5);
     select=new Button(1120, 140, 50, 50, "select", 255, 203).setStrokeWeight(5);
-    skyColorB1=new Button(150,165,40,40, 255, 203).setStrokeWeight(0);
-    setSkyColor=new Button(300,580,100,30,"set sky color").setStrokeWeight(2);
-    resetSkyColor=new Button(200,165,40,40,"reset", 255, 203).setStrokeWeight(0);
+    skyColorB1=new Button(150, 165, 40, 40, 255, 203).setStrokeWeight(0);
+    setSkyColor=new Button(300, 580, 100, 30, "set sky color").setStrokeWeight(2);
+    resetSkyColor=new Button(200, 165, 40, 40, "reset", 255, 203).setStrokeWeight(0);
     placeBlueprint=new Button(1180, 140, 50, 50, #0F1AD3, 203).setStrokeWeight(5);
-    nexBlueprint=new Button(width/2+200, height*0.7-25, 50, 50,">", 255, 203).setStrokeWeight(5);
-    prevBlueprint=new Button(width/2-200, height*0.7-25, 50, 50,"<", 255, 203).setStrokeWeight(5);
-    playSound=new Button(40,200,50,50,255, 203).setStrokeWeight(5);
-    nextSound=new Button(width/2+300, height*0.4-25, 50, 50,">", 255, 203).setStrokeWeight(5);
-    prevSound=new Button(width/2-300, height*0.4-25, 50, 50,"<", 255, 203).setStrokeWeight(5);
+    nexBlueprint=new Button(width/2+200, height*0.7-25, 50, 50, ">", 255, 203).setStrokeWeight(5);
+    prevBlueprint=new Button(width/2-200, height*0.7-25, 50, 50, "<", 255, 203).setStrokeWeight(5);
+    playSound=new Button(40, 200, 50, 50, 255, 203).setStrokeWeight(5);
+    nextSound=new Button(width/2+300, height*0.4-25, 50, 50, ">", 255, 203).setStrokeWeight(5);
+    prevSound=new Button(width/2-300, height*0.4-25, 50, 50, "<", 255, 203).setStrokeWeight(5);
   }
 
 
@@ -109,8 +109,8 @@ class ToolBox extends PApplet {
       toolsPage.draw();
       selectionPage.draw();
       stageSettings.draw();
-      if(settingSkyColor)
-      setSkyColor.draw();
+      if (settingSkyColor)
+        setSkyColor.draw();
     }//end of if page is colors
     if (page.equals("tools")) {
       background(255*0.5);
@@ -298,56 +298,54 @@ class ToolBox extends PApplet {
             stroke(-4623063);
             strokeWeight(0);
             triangle(765, 85+100, 805, 85+100, 805, 45+100);
-          
 
-          if (dethPlane) {
-            draw_dethPlane.setColor(255, #F2F258);
+
+            if (dethPlane) {
+              draw_dethPlane.setColor(255, #F2F258);
+            } else {
+              draw_dethPlane.setColor(255, 203);
+            }//draw_holoTriangle
+            draw_dethPlane.draw();
+            fill(-114431);
+            stroke(-114431);
+            rect(825, 65+100, 40, 20);
+
+            if (selectingBlueprint) {
+              placeBlueprint.setColor(#0F1AD3, #F2F258);
+            } else {
+              placeBlueprint.setColor(#0F1AD3, 203);
+            }
+            placeBlueprint.draw();
+
+            if (placingSound) {
+              playSound.setColor(255, #F2F258);
+            } else {
+              playSound.setColor(255, 203);
+            }
+            playSound.draw();
+            drawSpeakericon(this, playSound.x+playSound.lengthX/2, playSound.y+playSound.lengthY/2, 0.5);
+          }//end of level is not 3D
+
+          if (drawingSign) {
+            sign.setColor(255, #F2F258);
           } else {
-            draw_dethPlane.setColor(255, 203);
-          }//draw_holoTriangle
-          draw_dethPlane.draw();
-          fill(-114431);
-          stroke(-114431);
-          rect(825, 65+100, 40, 20);
-          
-          if(selectingBlueprint){
-            placeBlueprint.setColor(#0F1AD3, #F2F258);
-          }else{
-            placeBlueprint.setColor(#0F1AD3,203);
+            sign.setColor(255, 203);
           }
-          placeBlueprint.draw();
-          
-          if(placingSound){
-            playSound.setColor(255, #F2F258);
-          }else{
-            playSound.setColor(255, 203);
-          }
-          playSound.draw();
-          drawSpeakericon(this,playSound.x+playSound.lengthX/2,playSound.y+playSound.lengthY/2,0.5);
-        }//end of level is not 3D
-        
-        if (drawingSign) {
-          sign.setColor(255, #F2F258);
-        } else {
-          sign.setColor(255, 203);
-        }
-        sign.draw();
-        drawSign(sign.x+sign.lengthX/2, sign.y+sign.lengthY, 0.6);
+          sign.draw();
+          drawSign(sign.x+sign.lengthX/2, sign.y+sign.lengthY, 0.6);
 
-        if (selecting) {
-          select.setColor(255, #F2F258);
-        } else {
-          select.setColor(255, 203);
-        }
-        select.draw();
-        
-        
+          if (selecting) {
+            select.setColor(255, #F2F258);
+          } else {
+            select.setColor(255, 203);
+          }
+          select.draw();
         }//end of not in 3D mode
-        
-        
+
+
         saveLevel.draw();
 
-        
+
 
         textAlign(LEFT, BOTTOM);
         if (mouseX >=40 && mouseX <= 90 && mouseY >= 40+100 && mouseY <= 90+100) {
@@ -474,28 +472,28 @@ class ToolBox extends PApplet {
               textSize(15);
               text("holographic sloap", mouseX, mouseY+5);
             }
-          
 
-          if (draw_dethPlane.isMouseOver()) {
-            stroke(0);
-            fill(200);
-            strokeWeight(2);
-            rect(mouseX-4, mouseY-13, 85, 16);
-            fill(0);
-            textSize(15);
-            text("deth plane", mouseX, mouseY+5);
-          }
-          if(placeBlueprint.isMouseOver()){
-            stroke(0);
-            fill(200);
-            strokeWeight(2);
-            textSize(15);
-            rect(mouseX-4, mouseY-13, textWidth("place blueprint")+8, 16);
-            fill(0);
-            text("place blueprint", mouseX, mouseY+5);
-          }
-        }//end of level is not 3D
-          if(playSound.isMouseOver()){
+
+            if (draw_dethPlane.isMouseOver()) {
+              stroke(0);
+              fill(200);
+              strokeWeight(2);
+              rect(mouseX-4, mouseY-13, 85, 16);
+              fill(0);
+              textSize(15);
+              text("deth plane", mouseX, mouseY+5);
+            }
+            if (placeBlueprint.isMouseOver()) {
+              stroke(0);
+              fill(200);
+              strokeWeight(2);
+              textSize(15);
+              rect(mouseX-4, mouseY-13, textWidth("place blueprint")+8, 16);
+              fill(0);
+              text("place blueprint", mouseX, mouseY+5);
+            }
+          }//end of level is not 3D
+          if (playSound.isMouseOver()) {
             stroke(0);
             fill(200);
             strokeWeight(2);
@@ -504,25 +502,25 @@ class ToolBox extends PApplet {
             fill(0);
             text("place sound", mouseX, mouseY+5);
           }
-          
+
           if (sign.isMouseOver()) {
-          stroke(0);
-          fill(200);
-          strokeWeight(2);
-          rect(mouseX-4, mouseY-13, textWidth("sign"), 16);
-          fill(0);
-          textSize(15);
-          text("sign", mouseX, mouseY+5);
-        }
-        if (select.isMouseOver()) {
-          stroke(0);
-          fill(200);
-          strokeWeight(2);
-          rect(mouseX-4, mouseY-13, textWidth("select"), 16);
-          fill(0);
-          textSize(15);
-          text("select", mouseX, mouseY+5);
-        }
+            stroke(0);
+            fill(200);
+            strokeWeight(2);
+            rect(mouseX-4, mouseY-13, textWidth("sign"), 16);
+            fill(0);
+            textSize(15);
+            text("sign", mouseX, mouseY+5);
+          }
+          if (select.isMouseOver()) {
+            stroke(0);
+            fill(200);
+            strokeWeight(2);
+            rect(mouseX-4, mouseY-13, textWidth("select"), 16);
+            fill(0);
+            textSize(15);
+            text("select", mouseX, mouseY+5);
+          }
         }//end of not 3d mode
         if (saveLevel.isMouseOver()) {
           stroke(0);
@@ -533,8 +531,8 @@ class ToolBox extends PApplet {
           textSize(15);
           text("save level", mouseX, mouseY+5);
         }
-        
-        
+
+
         if (level.stages.get(currentStageIndex).type.equals("3Dstage")) {
 
           if (!e3DMode) {
@@ -836,26 +834,26 @@ class ToolBox extends PApplet {
             }
           }
         }//end of if stage is 3D
-        
-        if(selectingBlueprint){
-          textAlign(CENTER,CENTER);
-         if(blueprints.length==0){
-           fill(0);
-           textSize(25);
-           text("you have no blueprints",width/2,height*0.7);
-         }else{
-           fill(0);
-           textSize(25);
-           text(blueprints[currentBluieprintIndex].name,width/2,height*0.7);
-           if(currentBluieprintIndex>0)
-           prevBlueprint.draw();
-           if(currentBluieprintIndex<blueprints.length-1)
-           nexBlueprint.draw();
-         }
+
+        if (selectingBlueprint) {
+          textAlign(CENTER, CENTER);
+          if (blueprints.length==0) {
+            fill(0);
+            textSize(25);
+            text("you have no blueprints", width/2, height*0.7);
+          } else {
+            fill(0);
+            textSize(25);
+            text(blueprints[currentBluieprintIndex].name, width/2, height*0.7);
+            if (currentBluieprintIndex>0)
+              prevBlueprint.draw();
+            if (currentBluieprintIndex<blueprints.length-1)
+              nexBlueprint.draw();
+          }
         }
       }//end of if edditing
-      else if(editingBlueprint){
-        if(workingBlueprint.type.equals("blueprint")){
+      else if (editingBlueprint) {
+        if (workingBlueprint.type.equals("blueprint")) {
           strokeWeight(0);
           if (ground) {
             fill(#F2F258);
@@ -871,7 +869,7 @@ class ToolBox extends PApplet {
           fill(-16732415);
           stroke(-16732415);
           rect(100, 60+100, 50, 10);
-          
+
           strokeWeight(0);
           if (check_point) {
             fill(#F2F258);
@@ -889,176 +887,175 @@ class ToolBox extends PApplet {
           strokeWeight(0);
           triangle(170, 85-60+20+100, 170, 85-40+20+100, 170+30, 85-50+20+100);
           strokeWeight(0);
-          
-            textAlign(LEFT, BOTTOM);
 
-            if (grid_mode) {
-              fill(#F2F258);
-            } else {
-              fill(203);
-            }
-            rect(395, 35+100, 60, 60);
-            fill(255);
-            strokeWeight(0);
-            rect(400, 40+100, 50, 50);
-            textSize(20);
-            fill(0);
-            stroke(0);
-            strokeWeight(1);
-            line(410, 42+100, 410, 87+100);
-            line(420, 42+100, 420, 87+100);
-            line(430, 42+100, 430, 87+100);
-            line(440, 42+100, 440, 87+100);
-            line(402, 50+100, 448, 50+100);
-            line(402, 60+100, 448, 60+100);
-            line(402, 70+100, 448, 70+100);
-            line(402, 80+100, 448, 80+100);
-            text(grid_size, 410, 80+100);
-            strokeWeight(0);
-            if (deleteing) {
-              fill(#F2F258);
-            } else {
-              fill(203);
-            }
-            rect(275, 35+100, 60, 60);
-            fill(255);
-            strokeWeight(0);
-            rect(280, 40+100, 50, 50);
+          textAlign(LEFT, BOTTOM);
+
+          if (grid_mode) {
+            fill(#F2F258);
+          } else {
             fill(203);
-            stroke(203);
-            strokeWeight(0);
-            rect(285, 55+100, 40, 5);
-            rect(300, 50+100, 10, 5);
-            rect(290, 60+100, 5, 20);
-            rect(290, 80+100, 30, 5);
-            rect(315, 60+100, 5, 20);
-            rect(298, 60+100, 5, 20);
-            rect(307, 60+100, 5, 20);
-            
-            if (drawCoins) {
+          }
+          rect(395, 35+100, 60, 60);
+          fill(255);
+          strokeWeight(0);
+          rect(400, 40+100, 50, 50);
+          textSize(20);
+          fill(0);
+          stroke(0);
+          strokeWeight(1);
+          line(410, 42+100, 410, 87+100);
+          line(420, 42+100, 420, 87+100);
+          line(430, 42+100, 430, 87+100);
+          line(440, 42+100, 440, 87+100);
+          line(402, 50+100, 448, 50+100);
+          line(402, 60+100, 448, 60+100);
+          line(402, 70+100, 448, 70+100);
+          line(402, 80+100, 448, 80+100);
+          text(grid_size, 410, 80+100);
+          strokeWeight(0);
+          if (deleteing) {
+            fill(#F2F258);
+          } else {
+            fill(203);
+          }
+          rect(275, 35+100, 60, 60);
+          fill(255);
+          strokeWeight(0);
+          rect(280, 40+100, 50, 50);
+          fill(203);
+          stroke(203);
+          strokeWeight(0);
+          rect(285, 55+100, 40, 5);
+          rect(300, 50+100, 10, 5);
+          rect(290, 60+100, 5, 20);
+          rect(290, 80+100, 30, 5);
+          rect(315, 60+100, 5, 20);
+          rect(298, 60+100, 5, 20);
+          rect(307, 60+100, 5, 20);
+
+          if (drawCoins) {
             draw_coin.setColor(255, #F2F258);
           } else {
             draw_coin.setColor(255, 203);
           }
           draw_coin.draw();
           drawCoin(605, 65+100, 4);
-          
+
           if (sloap) {
-              draw_sloap.setColor(255, #F2F258);
-            } else {
-              draw_sloap.setColor(255, 203);
-            }//draw_holoTriangle
-            draw_sloap.draw();
-            fill(-7254783);
-            stroke(-7254783);
-            strokeWeight(0);
-            triangle(705, 85+100, 745, 85+100, 745, 45+100);
-            if (holoTriangle) {
-              draw_holoTriangle.setColor(255, #F2F258);
-            } else {
-              draw_holoTriangle.setColor(255, 203);
-            }//draw_holoTriangle
-            draw_holoTriangle.draw();
-            fill(-4623063);
-            stroke(-4623063);
-            strokeWeight(0);
-            triangle(765, 85+100, 805, 85+100, 805, 45+100);
-            if (holo_gram) {
-              fill(#F2F258);
-            } else {
-              fill(203);
-            }
-            rect(455, 35+100, 60, 60);
-            fill(255);
-            strokeWeight(0);
-            rect(460, 40+100, 50, 50);
-            saveLevel.draw();
-            
-            textAlign(LEFT,BOTTOM);
-            if (mouseX >=100 && mouseX <= 140 && mouseY >= 40+100 && mouseY <= 90+100) {
-              stroke(0);
-              fill(200);
-              strokeWeight(2);
-              rect(mouseX-4, mouseY-13, 100, 16);
-              fill(0);
-              textSize(15);
-              text("solid ground", mouseX, mouseY+5);
-            }
-            if (mouseX >=400 && mouseX <= 440 && mouseY >= 40+100 && mouseY <= 90+100) {
-              stroke(0);
-              fill(200);
-              strokeWeight(2);
-              rect(mouseX-4, mouseY-13, 85, 16);
-              fill(0);
-              textSize(15);
-              text("grid mode", mouseX, mouseY+5);
-            }
-            if (mouseX >=280 && mouseX <= 330 && mouseY >= 40+100 && mouseY <= 90+100) {
-              stroke(0);
-              fill(200);
-              strokeWeight(2);
-              rect(mouseX-4, mouseY-13, 50, 16);
-              fill(0);
-              textSize(15);
-              text("delete", mouseX, mouseY+5);
-            }
-            if (mouseX >=460 && mouseX <= 500 && mouseY >= 40+100 && mouseY <= 90+100) {
-              stroke(0);
-              fill(200);
-              strokeWeight(2);
-              rect(mouseX-4, mouseY-13, 165, 16);
-              fill(0);
-              textSize(15);
-              text("hologram (solid in 3D)", mouseX, mouseY+5);
-            }
-            if (draw_coin.isMouseOver()) {
-              stroke(0);
-              fill(200);
-              strokeWeight(2);
-              rect(mouseX-4, mouseY-13, 38, 16);
-              fill(0);
-              textSize(15);
-              text("coin", mouseX, mouseY+5);
-            }
-            if (saveLevel.isMouseOver()) {
-              stroke(0);
-              fill(200);
-              strokeWeight(2);
-              rect(mouseX-4, mouseY-13, 75, 16);
-              fill(0);
-              textSize(15);
-              text("save level", mouseX, mouseY+5);
-            }
-            if (mouseX >=160 && mouseX <= 190 && mouseY >= 40+100 && mouseY <= 90+100) {
-              stroke(0);
-              fill(200);
-              strokeWeight(2);
-              rect(mouseX-4, mouseY-13, 85, 16);
-              fill(0);
-              textSize(15);
-              text("checkpoint", mouseX, mouseY+5);
-            }
-            if (draw_sloap.isMouseOver()) {
-              stroke(0);
-              fill(200);
-              strokeWeight(2);
-              rect(mouseX-4, mouseY-13, 45, 16);
-              fill(0);
-              textSize(15);
-              text("sloap", mouseX, mouseY+5);
-            }
-            if (draw_holoTriangle.isMouseOver()) {
-              stroke(0);
-              fill(200);
-              strokeWeight(2);
-              rect(mouseX-4, mouseY-13, 138, 16);
-              fill(0);
-              textSize(15);
-              text("holographic sloap", mouseX, mouseY+5);
-            }
+            draw_sloap.setColor(255, #F2F258);
+          } else {
+            draw_sloap.setColor(255, 203);
+          }//draw_holoTriangle
+          draw_sloap.draw();
+          fill(-7254783);
+          stroke(-7254783);
+          strokeWeight(0);
+          triangle(705, 85+100, 745, 85+100, 745, 45+100);
+          if (holoTriangle) {
+            draw_holoTriangle.setColor(255, #F2F258);
+          } else {
+            draw_holoTriangle.setColor(255, 203);
+          }//draw_holoTriangle
+          draw_holoTriangle.draw();
+          fill(-4623063);
+          stroke(-4623063);
+          strokeWeight(0);
+          triangle(765, 85+100, 805, 85+100, 805, 45+100);
+          if (holo_gram) {
+            fill(#F2F258);
+          } else {
+            fill(203);
+          }
+          rect(455, 35+100, 60, 60);
+          fill(255);
+          strokeWeight(0);
+          rect(460, 40+100, 50, 50);
+          saveLevel.draw();
+
+          textAlign(LEFT, BOTTOM);
+          if (mouseX >=100 && mouseX <= 140 && mouseY >= 40+100 && mouseY <= 90+100) {
+            stroke(0);
+            fill(200);
+            strokeWeight(2);
+            rect(mouseX-4, mouseY-13, 100, 16);
+            fill(0);
+            textSize(15);
+            text("solid ground", mouseX, mouseY+5);
+          }
+          if (mouseX >=400 && mouseX <= 440 && mouseY >= 40+100 && mouseY <= 90+100) {
+            stroke(0);
+            fill(200);
+            strokeWeight(2);
+            rect(mouseX-4, mouseY-13, 85, 16);
+            fill(0);
+            textSize(15);
+            text("grid mode", mouseX, mouseY+5);
+          }
+          if (mouseX >=280 && mouseX <= 330 && mouseY >= 40+100 && mouseY <= 90+100) {
+            stroke(0);
+            fill(200);
+            strokeWeight(2);
+            rect(mouseX-4, mouseY-13, 50, 16);
+            fill(0);
+            textSize(15);
+            text("delete", mouseX, mouseY+5);
+          }
+          if (mouseX >=460 && mouseX <= 500 && mouseY >= 40+100 && mouseY <= 90+100) {
+            stroke(0);
+            fill(200);
+            strokeWeight(2);
+            rect(mouseX-4, mouseY-13, 165, 16);
+            fill(0);
+            textSize(15);
+            text("hologram (solid in 3D)", mouseX, mouseY+5);
+          }
+          if (draw_coin.isMouseOver()) {
+            stroke(0);
+            fill(200);
+            strokeWeight(2);
+            rect(mouseX-4, mouseY-13, 38, 16);
+            fill(0);
+            textSize(15);
+            text("coin", mouseX, mouseY+5);
+          }
+          if (saveLevel.isMouseOver()) {
+            stroke(0);
+            fill(200);
+            strokeWeight(2);
+            rect(mouseX-4, mouseY-13, 75, 16);
+            fill(0);
+            textSize(15);
+            text("save level", mouseX, mouseY+5);
+          }
+          if (mouseX >=160 && mouseX <= 190 && mouseY >= 40+100 && mouseY <= 90+100) {
+            stroke(0);
+            fill(200);
+            strokeWeight(2);
+            rect(mouseX-4, mouseY-13, 85, 16);
+            fill(0);
+            textSize(15);
+            text("checkpoint", mouseX, mouseY+5);
+          }
+          if (draw_sloap.isMouseOver()) {
+            stroke(0);
+            fill(200);
+            strokeWeight(2);
+            rect(mouseX-4, mouseY-13, 45, 16);
+            fill(0);
+            textSize(15);
+            text("sloap", mouseX, mouseY+5);
+          }
+          if (draw_holoTriangle.isMouseOver()) {
+            stroke(0);
+            fill(200);
+            strokeWeight(2);
+            rect(mouseX-4, mouseY-13, 138, 16);
+            fill(0);
+            textSize(15);
+            text("holographic sloap", mouseX, mouseY+5);
+          }
         }//end of type is blueprint
-      }
-      else {
+      } else {
         fill(0);
         textSize(20);
         text("you are not currently editing a stage", 300, 300);
@@ -1070,82 +1067,81 @@ class ToolBox extends PApplet {
       toolsPage.draw();
       selectionPage.draw();
       stageSettings.draw();
-      
-      if(selectedIndex==-1){//if nothing is selected
+
+      if (selectedIndex==-1) {//if nothing is selected
         fill(0);
         textSize(20);
-        textAlign(CENTER,CENTER);
-        text("nothing is selected",width/2,height/2);
-      }else{
+        textAlign(CENTER, CENTER);
+        text("nothing is selected", width/2, height/2);
+      } else {
         StageComponent thing = level.stages.get(currentStageIndex).parts.get(selectedIndex);
         String type=thing.type;
-        if(type.equals("WritableSign")){//if the current selected object is a sign
+        if (type.equals("WritableSign")) {//if the current selected object is a sign
           fill(0);
-        textSize(25);
-        textAlign(CENTER,CENTER);
-        text("sign contents",width/2,height*0.2);
-        textAlign(CENTER,TOP);
-        String contents=thing.getData();
-        if(typingSign){
-         contents+=coursorr; 
-        }
-        text(contents,width/2,height*0.25);
-        rect(width*0.05,height*0.29,width*0.9,2);
-        }else if(type.equals("sound box")){
-          if(level.sounds.size()==0){
+          textSize(25);
+          textAlign(CENTER, CENTER);
+          text("sign contents", width/2, height*0.2);
+          textAlign(CENTER, TOP);
+          String contents=thing.getData();
+          if (typingSign) {
+            contents+=coursorr;
+          }
+          text(contents, width/2, height*0.25);
+          rect(width*0.05, height*0.29, width*0.9, 2);
+        } else if (type.equals("sound box")) {
+          if (level.sounds.size()==0) {
             fill(0);
             textSize(20);
-            textAlign(CENTER,CENTER);
-            text("this level does not have any sounds currently",width/2,height/2);
-          }else{
+            textAlign(CENTER, CENTER);
+            text("this level does not have any sounds currently", width/2, height/2);
+          } else {
             int fileind=0;
             String[] keys=new String[0];
             keys=level.sounds.keySet().toArray(keys);
             String current=thing.getData();
-            for(int i=0;i<keys.length;i++){
-             if(keys[i].equals(current)){
-               fileind=i;
-               break;
-             }
-            } 
+            for (int i=0; i<keys.length; i++) {
+              if (keys[i].equals(current)) {
+                fileind=i;
+                break;
+              }
+            }
             fill(0);
             textSize(25);
-            text("current sound: "+keys[fileind],width/2,height*0.4);
+            text("current sound: "+keys[fileind], width/2, height*0.4);
             thing.setData(keys[fileind]);
-            if(fileind>0)
-            prevSound.draw();
-            if(fileind<keys.length-1)
-            nextSound.draw();
+            if (fileind>0)
+              prevSound.draw();
+            if (fileind<keys.length-1)
+              nextSound.draw();
           }
-        }else{
+        } else {
           fill(0);
-        textSize(20);
-        textAlign(CENTER,CENTER);
-        text("this object does not have any\nproperties that can be changed",width/2,height/2);
+          textSize(20);
+          textAlign(CENTER, CENTER);
+          text("this object does not have any\nproperties that can be changed", width/2, height/2);
         }
       }//end of thing is selected
-
     }//end of selection page
-    if(page.equals("stage settings")){
+    if (page.equals("stage settings")) {
       background(#92CED8);
       colorPage.draw();
       toolsPage.draw();
       selectionPage.draw();
       stageSettings.draw();
-      if(editingStage){
+      if (editingStage) {
         fill(0);
         textSize(25);
-        textAlign(LEFT,CENTER);
-        text("stage name: "+level.stages.get(currentStageIndex).name,50,150);
-        text("sky color: ",50,180);
-        skyColorB1.setColor(level.stages.get(currentStageIndex).skyColor,0);
+        textAlign(LEFT, CENTER);
+        text("stage name: "+level.stages.get(currentStageIndex).name, 50, 150);
+        text("sky color: ", 50, 180);
+        skyColorB1.setColor(level.stages.get(currentStageIndex).skyColor, 0);
         skyColorB1.draw();
         resetSkyColor.draw();
-      }else{//end of editing stage
+      } else {//end of editing stage
         fill(0);
         textSize(30);
-        textAlign(CENTER,CENTER);
-        text("you are not currently editing a stage",width/2,height/2);
+        textAlign(CENTER, CENTER);
+        text("you are not currently editing a stage", width/2, height/2);
       }//end of not editing stage
     }//end of stage settings page
   }//end of draw
@@ -1182,8 +1178,8 @@ class ToolBox extends PApplet {
         colors.setJSONObject(colors.size(), colo);
         saveColors=true;
       }
-      if(settingSkyColor){
-        if(setSkyColor.isMouseOver()){
+      if (settingSkyColor) {
+        if (setSkyColor.isMouseOver()) {
           settingSkyColor=false;
           page="stage settings";
           level.stages.get(currentStageIndex).skyColor=CC;
@@ -1292,37 +1288,37 @@ class ToolBox extends PApplet {
             turnThingsOff();
             selecting=true;
           }
-          if(placeBlueprint.isMouseOver()){
+          if (placeBlueprint.isMouseOver()) {
             turnThingsOff();
-            
+
             String[] files=new File(System.getenv("AppData")+"/CBi-games/skinny mann level creator/blueprints").list();
-          int numofjsons=0;
-          for(int i=0;i<files.length;i++){
-            if(files[i].contains(".json")){
-              numofjsons++;
+            int numofjsons=0;
+            for (int i=0; i<files.length; i++) {
+              if (files[i].contains(".json")) {
+                numofjsons++;
+              }
             }
-          }
-          blueprints=new Stage[numofjsons];
-          int pointer=0;
-          for(int i=0;i<files.length;i++){
-            if(files[i].contains(".json")){
-             blueprints[pointer]=new Stage(loadJSONArray(System.getenv("AppData")+"/CBi-games/skinny mann level creator/blueprints/"+files[i]));
-             pointer++;
+            blueprints=new Stage[numofjsons];
+            int pointer=0;
+            for (int i=0; i<files.length; i++) {
+              if (files[i].contains(".json")) {
+                blueprints[pointer]=new Stage(loadJSONArray(System.getenv("AppData")+"/CBi-games/skinny mann level creator/blueprints/"+files[i]));
+                pointer++;
+              }
             }
-          }
             println(blueprints.length);
             selectingBlueprint=true;
             currentBluieprintIndex=0;
           }
-          if(selectingBlueprint){
-           if(currentBluieprintIndex>0&&prevBlueprint.isMouseOver())
-            currentBluieprintIndex--;
-           if(currentBluieprintIndex<blueprints.length-1&&nexBlueprint.isMouseOver())
-           currentBluieprintIndex++;
+          if (selectingBlueprint) {
+            if (currentBluieprintIndex>0&&prevBlueprint.isMouseOver())
+              currentBluieprintIndex--;
+            if (currentBluieprintIndex<blueprints.length-1&&nexBlueprint.isMouseOver())
+              currentBluieprintIndex++;
           }
-          if(playSound.isMouseOver()){
+          if (playSound.isMouseOver()) {
             turnThingsOff();
-           placingSound=true; 
+            placingSound=true;
           }
         }
 
@@ -1450,42 +1446,42 @@ class ToolBox extends PApplet {
           println("save complete"+gmillis);
         }
       }//end of edditing stage
-      else if(editingBlueprint){
-        if(workingBlueprint.type.equals("blueprint")){
+      else if (editingBlueprint) {
+        if (workingBlueprint.type.equals("blueprint")) {
           if (mouseX >=100 && mouseX <= 140 && mouseY >= 40+100 && mouseY <= 90+100) {
-              turnThingsOff();
-              ground=true;
-            }
+            turnThingsOff();
+            ground=true;
+          }
 
-            if (mouseX >=280 && mouseX <= 330 && mouseY >= 40+100 && mouseY <= 90+100) {
-              turnThingsOff();
-              deleteing=true;
-            }
+          if (mouseX >=280 && mouseX <= 330 && mouseY >= 40+100 && mouseY <= 90+100) {
+            turnThingsOff();
+            deleteing=true;
+          }
 
-            if (mouseX >=400 && mouseX <= 440 && mouseY >= 40+100 && mouseY <= 90+100) {
-              extra=true;
-              if (extra&&grid_mode) {
-                grid_mode=false;
-                extra=false;
-              }
-              if (extra&&!grid_mode) {
-                grid_mode=true;
-                extra=false;
-              }
+          if (mouseX >=400 && mouseX <= 440 && mouseY >= 40+100 && mouseY <= 90+100) {
+            extra=true;
+            if (extra&&grid_mode) {
+              grid_mode=false;
+              extra=false;
             }
-            if (mouseX >=460 && mouseX <= 500 && mouseY >= 40+100 && mouseY <= 90+100) {
-              turnThingsOff();
-              holo_gram=true;
+            if (extra&&!grid_mode) {
+              grid_mode=true;
+              extra=false;
             }
-            if (draw_coin.isMouseOver()) {
-              turnThingsOff();
-              drawCoins=true;
-            }
-            if (mouseX >=160 && mouseX <= 190 && mouseY >= 40+100 && mouseY <= 90+100) {
-              turnThingsOff();
-              check_point=true;
-            }
-            if (draw_sloap.isMouseOver()) {
+          }
+          if (mouseX >=460 && mouseX <= 500 && mouseY >= 40+100 && mouseY <= 90+100) {
+            turnThingsOff();
+            holo_gram=true;
+          }
+          if (draw_coin.isMouseOver()) {
+            turnThingsOff();
+            drawCoins=true;
+          }
+          if (mouseX >=160 && mouseX <= 190 && mouseY >= 40+100 && mouseY <= 90+100) {
+            turnThingsOff();
+            check_point=true;
+          }
+          if (draw_sloap.isMouseOver()) {
             turnThingsOff();
             sloap=true;
           }
@@ -1494,57 +1490,56 @@ class ToolBox extends PApplet {
             holoTriangle=true;
           }
           if (saveLevel.isMouseOver()) {
-          println("saving blueprint");
-          workingBlueprint.save();
-          gmillis=millis()+400+millisOffset;
-          println("save complete"+gmillis);
-        }
-            
+            println("saving blueprint");
+            workingBlueprint.save();
+            gmillis=millis()+400+millisOffset;
+            println("save complete"+gmillis);
+          }
         }//end of type is blueprint
       }//end of editing blueprint
     }//end of tools
-    
+
     if (page.equals("selection")) {
-      if(selectedIndex!=-1){
+      if (selectedIndex!=-1) {
         StageComponent thing = level.stages.get(currentStageIndex).parts.get(selectedIndex);
         String type=thing.type;
-        if(type.equals("WritableSign")){//if the current selected object is a sign
-          if(mouseX>=width*0.05&&mouseX<=width*0.9&&mouseY>=height*0.21&&mouseY<=height*0.29){
-           typingSign=true; 
-          }else{
+        if (type.equals("WritableSign")) {//if the current selected object is a sign
+          if (mouseX>=width*0.05&&mouseX<=width*0.9&&mouseY>=height*0.21&&mouseY<=height*0.29) {
+            typingSign=true;
+          } else {
             typingSign=false;
           }
-        }else if(type.equals("sound box")){
-          if(level.sounds.size()==0){
-          }else{
+        } else if (type.equals("sound box")) {
+          if (level.sounds.size()==0) {
+          } else {
             int fileind=0;
             String[] keys=new String[0];
             keys=level.sounds.keySet().toArray(keys);
             String current=thing.getData();
-            for(int i=0;i<keys.length;i++){
-             if(keys[i].equals(current)){
-               fileind=i;
-               break;
-             }
-            } 
+            for (int i=0; i<keys.length; i++) {
+              if (keys[i].equals(current)) {
+                fileind=i;
+                break;
+              }
+            }
 
-            if(fileind>0&&prevSound.isMouseOver())
-            thing.setData(keys[fileind-1]);
-            if(fileind<keys.length-1&&nextSound.isMouseOver())
-            thing.setData(keys[fileind+1]);
+            if (fileind>0&&prevSound.isMouseOver())
+              thing.setData(keys[fileind-1]);
+            if (fileind<keys.length-1&&nextSound.isMouseOver())
+              thing.setData(keys[fileind+1]);
           }
         }
       }//if something is elected
     }//end of page is selection
-    if(page.equals("stage settings")){
-      if(editingStage){
-       if(skyColorB1.isMouseOver()){
-         settingSkyColor=true;
-         page="colors";
-       }//end of clicked on skyColorB1
-       if(resetSkyColor.isMouseOver()){
-         level.stages.get(currentStageIndex).skyColor=#74ABFF;
-       }//end of clicked on reset sky color
+    if (page.equals("stage settings")) {
+      if (editingStage) {
+        if (skyColorB1.isMouseOver()) {
+          settingSkyColor=true;
+          page="colors";
+        }//end of clicked on skyColorB1
+        if (resetSkyColor.isMouseOver()) {
+          level.stages.get(currentStageIndex).skyColor=#74ABFF;
+        }//end of clicked on reset sky color
       }//end of editing stage
     }//end of page is stage settings
   }
@@ -1585,21 +1580,21 @@ class ToolBox extends PApplet {
   }
 
 
-void keyPressed(){
-  
-  if (page.equals("selection")) {
-    if(selectedIndex!=-1){
+  void keyPressed() {
+
+    if (page.equals("selection")) {
+      if (selectedIndex!=-1) {
         StageComponent thing = level.stages.get(currentStageIndex).parts.get(selectedIndex);
         String type=thing.type;
-        if(type.equals("WritableSign")){//if the current selected object is a sign
-          if(typingSign){
-            
-            thing.setData(getInput(thing.getData(),3,keyCode,key));
+        if (type.equals("WritableSign")) {//if the current selected object is a sign
+          if (typingSign) {
+
+            thing.setData(getInput(thing.getData(), 3, keyCode, key));
           }
         }
-    }
-  }//end of page is selection
-}//end of keypressed
+      }
+    }//end of page is selection
+  }//end of keypressed
 
 
 
