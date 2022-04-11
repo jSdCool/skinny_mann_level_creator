@@ -1,10 +1,10 @@
-Button newStage, newFileCreate, newFileBack, edditStage, setMainStage, selectStage, new2DStage, new3DStage, overview_saveLevel, help, newBlueprint, loadBlueprint, createBlueprintGo, addSound, overviewUp, overviewDown,chooseFileButton;
+Button newStage, newFileCreate, newFileBack, edditStage, setMainStage, selectStage, new2DStage, new3DStage, overview_saveLevel, help, newBlueprint, loadBlueprint, createBlueprintGo, addSound, overviewUp, overviewDown, chooseFileButton;
 
 void initlizeButtons() {
   newStage=new Button(1200, 10, 60, 60, #0092FF, 0);
   newFileCreate=new Button(300, 600, 200, 40, "create", #BB48ED, #4857ED).setStrokeWeight(5);
   newFileBack=new Button(600, 600, 200, 40, "back", #BB48ED, #4857ED).setStrokeWeight(5);
-  chooseFileButton=new Button(450,540,200,40,"choose file",#BB48ED, #4857ED).setStrokeWeight(5);
+  chooseFileButton=new Button(450, 540, 200, 40, "choose file", #BB48ED, #4857ED).setStrokeWeight(5);
 
   edditStage=new Button(1100, 10, 60, 60, #0092FF, 0);
 
