@@ -1248,6 +1248,11 @@ class StageSound {
     path=input.getString("location");
     sound= new SoundFile(primaryWindow, rootPath+path);
   }
+  StageSound(String Name,String location){
+    name=Name;
+    path=location;
+    sound= new SoundFile(primaryWindow, rootPath+path);
+  }
 
   JSONObject save() {
     JSONObject out=new JSONObject();

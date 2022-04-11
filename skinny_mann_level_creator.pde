@@ -17,7 +17,7 @@ void setup() {
   initlizeButtons();
 }
 boolean startup=true, editing_level=true, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, loading=false, newLevel=false, simulating=false, entering_file_path=false, coursor=false, level_complete=false, dead=false, entering_name=false, cam_left=false, cam_right=false, drawing=false, draw=false, extra=false, ground=false, check_point=false, goal=false, deleteing=false, delete=false, moving_player=false, grid_mode=false, holo_gram=false, editingStage=false, levelOverview=false, newFile=false, drawCoins=false, drawingPortal=false, drawingPortal2=false, drawingPortal3=false, E_pressed=false, saveColors=false, sloap=false, loopThread2=true, cam_up=false, cam_down=false, holoTriangle=false, dethPlane=false, setPlayerPosTo=false, e3DMode=false, WPressed=false, SPressed=false, draw3DSwitch1=false, draw3DSwitch2=false, checkpointIn3DStage=false, shadow3D=true, tutorialMode=false, drawingSign=false, selecting=false, viewingItemContents=false, loadingBlueprint=false, creatingNewBlueprint=false, editingBlueprint=false, selectingBlueprint=false, placingSound=false;
-String file_path, new_name="my_level", GAME_version="0.5.0_Early_Access", EDITOR_version="0.0.1.8_EAc", rootPath="", coursorr="", newFileName="", newLevelType="2D", stageType="", author="your name here", displayText="";
+String file_path, new_name="my_level", GAME_version="0.5.0_Early_Access", EDITOR_version="0.0.1.8_EAc", rootPath="", coursorr="", newFileName="", newFileType="2D", stageType="", author="your name here", displayText="",fileToCoppyPath="";
 //int player1 []={20,700,1,0,1,0};
 Player player1 =new Player(20, 699, 1, "red");
 int camPos=0, camPosY=0, death_cool_down, start_down, eadgeScroleDist=300, respawnX=20, respawnY=700, spdelay=0, Color=0, RedPos=0, BluePos=0, GreenPos=0, RC=0, GC=0, BC=0, grid_size=10, filesScrole=0, overviewSelection=-1, portalIndex1, stageIndex, preSI, respawnStage, setPlayerPosX, setPlayerPosY, setPlayerPosZ, startingDepth=0, totalDepth=300, respawnZ=50, coinRotation=0, coinCount=0, gmillis=0, eadgeScroleDistV=250, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, drawCamPosX=0, drawCamPosY;
@@ -237,14 +237,20 @@ void draw() {
     stroke(0);
     strokeWeight(2);
     line(100, 450, 1200, 450);
-    if (newLevelType.equals("2D")) {
+    if (newFileType.equals("2D")) {
       new2DStage.setColor(#BB48ED, #51DFFA);
       new3DStage.setColor(#BB48ED, #4857ED);
-    } else if (newLevelType.equals("3D")) {
+      addSound.setColor(#BB48ED, #4857ED);
+    } else if (newFileType.equals("3D")) {
       new3DStage.setColor(#BB48ED, #51DFFA);
       new2DStage.setColor(#BB48ED, #4857ED);
+      addSound.setColor(#BB48ED, #4857ED);
+    }else if(newFileType.equals("sound")){
+      new3DStage.setColor(#BB48ED, #4857ED);
+      new2DStage.setColor(#BB48ED, #4857ED);
+      addSound.setColor(#BB48ED, #51DFFA);
     }
-    println(newLevelType);
+    //println(newFileType);
     new2DStage.draw();
     new3DStage.draw();
     addSound.draw();
@@ -254,7 +260,15 @@ void draw() {
     fill(0);
     textSize(70);
     textAlign(LEFT, BOTTOM);
-    text(newFileName+coursorr, 100, 445);
+    if(newFileType.equals("sound")){
+      text("name: "+newFileName+coursorr, 100, 445);
+      String pathSegments[]=fileToCoppyPath.split("/|\\\\");
+      textSize(30);
+      text(pathSegments[pathSegments.length-1],655,585);
+      chooseFileButton.draw();
+    }else{
+      text(newFileName+coursorr, 100, 445);
+    }
   }
 
   if (drawingPortal2) {
@@ -510,23 +524,55 @@ void mouseClicked() {
         if (newFileName.equals("")) {
           return;
         }
+        if(newFileType.equals("sound")){
+          if(fileToCoppyPath.equals("")){
+           return; 
+          }
+          String pathSegments[]=fileToCoppyPath.split("/|\\\\");
+          try{  
+            println("attempting to coppy file");
+            java.nio.file.Files.copy(new File(fileToCoppyPath).toPath(),new File(sketchPath()+"/"+rootPath+"/"+pathSegments[pathSegments.length-1]).toPath());
+          }catch(IOException i){
+            i.printStackTrace();
+          }
+          println("adding sound to level");
+          level.sounds.put(newFileName,new StageSound(newFileName,"/"+pathSegments[pathSegments.length-1]));
+          println("saving level");
+          level.save();
+          gmillis=millis()+400;
+          println("save complete"+gmillis);
+          newFile=false;
+          newFileName="";
+          fileToCoppyPath="";
+          levelOverview=true;
+          return;
+        }
         currentStageIndex=level.stages.size();
         respawnStage=currentStageIndex;
-        if (newLevelType.equals("2D")) {
+        if (newFileType.equals("2D")) {
           level.stages.add(new Stage(newFileName, "stage"));
         }
-        if (newLevelType.equals("3D")) {
+        if (newFileType.equals("3D")) {
           level.stages.add(new Stage(newFileName, "3Dstage"));
         }
+        
         editingStage=true;
         newFile=false;
       }
+      if(newFileType.equals("sound")){
+       if(chooseFileButton.isMouseOver()){
+         selectInput("select audio file: .WAV .AFI .MP3:", "fileSelected");
+       }
+      }
 
       if (new3DStage.isMouseOver()) {
-        newLevelType="3D";
+        newFileType="3D";
       }
       if (new2DStage.isMouseOver()) {
-        newLevelType="2D";
+        newFileType="2D";
+      }
+      if(addSound.isMouseOver()){
+        newFileType="sound";
       }
     }
     if (drawingPortal2) {
@@ -885,4 +931,21 @@ void thrdCalc2() {
 
 boolean gameVersionCompatibilityCheck(String vers) {//returns ture if the inputed version id compatible
   return true;
+}
+
+void fileSelected(File selection) {
+ if (selection == null) {
+    return;
+  } 
+  String path = selection.getAbsolutePath();
+  println(path);
+  String extenchen=path.substring(path.length()-3,path.length()).toLowerCase();
+  println(extenchen);
+  if(extenchen.equals("wav")||extenchen.equals("mp3")||extenchen.equals("afi")){
+    
+    fileToCoppyPath=path;
+  }else{
+    println("invalid extenchen");
+   return; 
+  }
 }
