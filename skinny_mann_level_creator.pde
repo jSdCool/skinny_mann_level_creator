@@ -481,24 +481,24 @@ void mouseClicked() {
       if (help.isMouseOver()) {//help button in the level overview
         link("https://youtu.be/dh07dk1xXew");
       }
-      if (overviewSelection!=-1) {
+      if (overviewSelection!=-1) {//if something is selected
         if (overviewSelection<level.stages.size()) {//if the selection is in rage of the stages
-          if (level.stages.get(overviewSelection).type.equals("stage")) {
-            if (edditStage.isMouseOver()) {
+          if (level.stages.get(overviewSelection).type.equals("stage")) {//if the selected thing is a stage
+            if (edditStage.isMouseOver()) {//eddit stage button
               editingStage=true;
               levelOverview=false;
               currentStageIndex=overviewSelection;
               respawnStage=currentStageIndex;
             }
 
-            if (setMainStage.isMouseOver()) {
+            if (setMainStage.isMouseOver()) {//set main stage button
               level.mainStage=overviewSelection;
               background(0);
               return;
             }
           }
-          if (level.stages.get(overviewSelection).type.equals("3Dstage")) {
-            if (edditStage.isMouseOver()) {
+          if (level.stages.get(overviewSelection).type.equals("3Dstage")) {//if the selected thing is a 3D stage
+            if (edditStage.isMouseOver()) {//eddit button
               editingStage=true;
               levelOverview=false;
               currentStageIndex=overviewSelection;
@@ -508,28 +508,28 @@ void mouseClicked() {
         }//end if if selection is in range of the stages
       }//end of if something is selected
 
-      if (filesScrole>0&&overviewUp.isMouseOver())
+      if (filesScrole>0&&overviewUp.isMouseOver())//scroll up button
         filesScrole--;
-      if (filesScrole+11<level.stages.size()+level.sounds.size()&&overviewDown.isMouseOver())
+      if (filesScrole+11<level.stages.size()+level.sounds.size()&&overviewDown.isMouseOver())//scroll down button
         filesScrole++;
     }//end of level overview
 
-    if (newFile) {
-      if (newFileBack.isMouseOver()) {
+    if (newFile) {//if on the new file page
+      if (newFileBack.isMouseOver()) {//back button
         levelOverview=true;
         newFile=false;
       }
 
-      if (newFileCreate.isMouseOver()) {
-        if (newFileName.equals("")) {
+      if (newFileCreate.isMouseOver()) {//create button
+        if (newFileName.equals("")) {//if no name has been entered
           return;
         }
-        if (newFileType.equals("sound")) {
-          if (fileToCoppyPath.equals("")) {
+        if (newFileType.equals("sound")) {//if the type that is selected is sound
+          if (fileToCoppyPath.equals("")) {//if no file is selected
             return;
           }
-          String pathSegments[]=fileToCoppyPath.split("/|\\\\");
-          try {
+          String pathSegments[]=fileToCoppyPath.split("/|\\\\");//split the file path at directory seperator
+          try {//attempt to coppy the file
             println("attempting to coppy file");
             java.nio.file.Files.copy(new File(fileToCoppyPath).toPath(), new File(sketchPath()+"/"+rootPath+"/"+pathSegments[pathSegments.length-1]).toPath());
           }
@@ -537,20 +537,20 @@ void mouseClicked() {
             i.printStackTrace();
           }
           println("adding sound to level");
-          level.sounds.put(newFileName, new StageSound(newFileName, "/"+pathSegments[pathSegments.length-1]));
+          level.sounds.put(newFileName, new StageSound(newFileName, "/"+pathSegments[pathSegments.length-1]));//add the sound to the level
           println("saving level");
-          level.save();
-          gmillis=millis()+400;
+          level.save();//save the level
+          gmillis=millis()+400;///glitch effect
           println("save complete"+gmillis);
-          newFile=false;
+          newFile=false;//return back to the obverview
           newFileName="";
           fileToCoppyPath="";
           levelOverview=true;
           return;
         }
-        currentStageIndex=level.stages.size();
+        currentStageIndex=level.stages.size();//set the current sateg to the new stage
         respawnStage=currentStageIndex;
-        if (newFileType.equals("2D")) {
+        if (newFileType.equals("2D")) {//create the approriate type of stage based on what is selectd
           level.stages.add(new Stage(newFileName, "stage"));
         }
         if (newFileType.equals("3D")) {
@@ -561,12 +561,12 @@ void mouseClicked() {
         newFile=false;
       }
       if (newFileType.equals("sound")) {
-        if (chooseFileButton.isMouseOver()) {
-          selectInput("select audio file: .WAV .AFI .MP3:", "fileSelected");
+        if (chooseFileButton.isMouseOver()) {//choose file button for when the type is sound
+          selectInput("select audio file: .WAV .AFI .MP3:", "fileSelected");//open file selection diaglog
         }
       }
 
-      if (new3DStage.isMouseOver()) {
+      if (new3DStage.isMouseOver()) {//buttons to set type
         newFileType="3D";
       }
       if (new2DStage.isMouseOver()) {
@@ -576,20 +576,20 @@ void mouseClicked() {
         newFileType="sound";
       }
     }
-    if (drawingPortal2) {
+    if (drawingPortal2) {//if placing portal part 2 (part that has the overview)
 
-      if (mouseY>80) {
+      if (mouseY>80) {//select the file that was clicked on in the overview
         overviewSelection=(mouseY-80)/60+ filesScrole;
         if (overviewSelection>=level.stages.size()+level.sounds.size()) {
           overviewSelection=-1;
         }
       }
 
-      if (overviewSelection!=-1) {
+      if (overviewSelection!=-1) {//if something is selected
         if (overviewSelection<level.stages.size()) {//if the selection is in rage of the stages
-          if (level.stages.get(overviewSelection).type.equals("stage")||level.stages.get(overviewSelection).type.equals("3Dstage")) {
-            if (selectStage.isMouseOver()) {
-              editingStage=true;
+          if (level.stages.get(overviewSelection).type.equals("stage")||level.stages.get(overviewSelection).type.equals("3Dstage")) {//if the selected thing is a valid destination stage
+            if (selectStage.isMouseOver()) {//if the select stagge button is clicked
+              editingStage=true;//go to that stage
               levelOverview=false;
               drawingPortal2=false;
               drawingPortal3=true;
@@ -599,36 +599,36 @@ void mouseClicked() {
           }
         }//end of if in stage range
       }
-      if (filesScrole>0&&overviewUp.isMouseOver())
+      if (filesScrole>0&&overviewUp.isMouseOver())//scroll up button
         filesScrole--;
-      if (filesScrole+11<level.stages.size()+level.sounds.size()&&overviewDown.isMouseOver())
+      if (filesScrole+11<level.stages.size()+level.sounds.size()&&overviewDown.isMouseOver())//scroll down button
         filesScrole++;
     }//end of drawing portal 2
-    if (creatingNewBlueprint) {
-      if (createBlueprintGo.isMouseOver()) {
-        if (new_name!=null&&!new_name.equals("")) {//is something was entered
-          workingBlueprint=new Stage(new_name, "blueprint");
-          entering_name=false;
+    if (creatingNewBlueprint) {//if creating a new blueprint
+      if (createBlueprintGo.isMouseOver()) {//create button
+        if (new_name!=null&&!new_name.equals("")) {//if something was entered
+          workingBlueprint=new Stage(new_name, "blueprint");//creat and load the new blueprint
+          entering_name=false;//set up enviormatn vaibles
           creatingNewBlueprint=false;
           editingBlueprint=true;
           camPos=-640;
           camPosY=360;
           rootPath=System.getenv("appdata")+"/CBi-games/skinny mann level creator/blueprints";
-        }
-      }
+        }//end of name was enterd
+      }//end of create button
     }//end of creating new bluepint
-    if (loadingBlueprint) {
-      if (createBlueprintGo.isMouseOver()) {
-        if (new_name!=null&&!new_name.equals("")) {//is something was entered
+    if (loadingBlueprint) {//if loading blueprint
+      if (createBlueprintGo.isMouseOver()) {//load button
+        if (new_name!=null&&!new_name.equals("")) {//if something was entered
           rootPath=System.getenv("appdata")+"/CBi-games/skinny mann level creator/blueprints";
-          workingBlueprint=new Stage(loadJSONArray(rootPath+"/"+new_name+".json"));
-          entering_name=false;
+          workingBlueprint=new Stage(loadJSONArray(rootPath+"/"+new_name+".json"));//load the blueprint
+          entering_name=false;//set enviormaent varibles
           loadingBlueprint=false;
           editingBlueprint=true;
           camPos=-640;
           camPosY=360;
-        }
-      }
+        }//end of thing were entered
+      }//end of load button
     }//end of loading blueprint
   }//end of left mouse button clicked
 }//end of mouse clicked
@@ -638,183 +638,169 @@ void keyPressed() {
     key = 0;  //clear the key so it doesnt close the program
   }
   if (simulating) {
-    if (keyCode==65) {
+    if (keyCode==65) {//if 'A' is pressed
       player1_moving_left=true;
     }
-    if (keyCode==68) {
+    if (keyCode==68) {//if 'D' is pressed
       player1_moving_right=true;
     }
-    if (keyCode==32) {
+    if (keyCode==32) {//if SPACE is pressed
       player1_jumping=true;
     }
-    if (key=='e'||key=='E') {
+    if (key=='e'||key=='E') {//if 'E' is pressed
       E_pressed=true;
     }
-    if (e3DMode) {
-      if (keyCode==87) {//w
+    if (e3DMode) {//if 3D mode is on
+      if (keyCode==87) {//if 'W' is pressed
         WPressed=true;
+        key = 0;//clear key so CTRL + W doesent close the program
       }
-      if (keyCode==83) {//s
+      if (keyCode==83) {//if 'S' is pressed
         SPressed=true;
       }
     }//end of 3d mode
   }
-  if (!simulating) {
-    if (keyCode==37) {
+  if (!simulating) {//if the simulation is paused
+    if (keyCode==37) {//if LEFT ARROW is pressed
       cam_left=true;
     }
-    if (keyCode==39) {
+    if (keyCode==39) {//if RIGHT ARROW is pressed
       cam_right=true;
     }
-    if (keyCode==38) {
+    if (keyCode==38) {//if UP ARROW is pressed
       cam_up=true;
     }
-    if (keyCode==40) {
+    if (keyCode==40) {//if DOWN ARROW is pressed
       cam_down=true;
     }
   }//end of if sumilating
 
 
 
-  if (key=='q') {
-    println(player1.x+" "+player1.y+" "+player1.z/*+" "+player1.getY()*/);
+  if (key=='q') {//if 'q' is pressed then print debg info to the console
+    println(player1.x+" "+player1.y+" "+player1.z);
   }
 
 
 
-  if (editingStage||editingBlueprint) {
-    if (key=='r'||key=='R') {
-      triangleMode++;
-      if (triangleMode==4)
+  if (editingStage||editingBlueprint) {//if edditng a stage
+    if (key=='r'||key=='R') {//if 'R' is pressed
+      triangleMode++;//increase the current rotation
+      if (triangleMode==4)//reset if rotation os over max
         triangleMode=0;
     }
   }
 
-  if (entering_file_path) {
-    if (keyCode>=48&&keyCode<=57||keyCode==46||keyCode==32||(keyCode>=65&&keyCode<=90)||keyCode==59||keyCode==92||keyCode==45) {
+  if (entering_file_path) {//if ennering "file path"
+    if (keyCode>=48&&keyCode<=57/*numbers*/||keyCode==46/*decimal*/||keyCode==32/*space*/||(keyCode>=65&&keyCode<=90)/*a-z*/||keyCode==59/*;:*/||keyCode==92/*\*/||keyCode==45/*-_*/) {
 
-      if (rootPath==null) {
-        rootPath=key+"";
+      if (rootPath==null) {//if the path is blank
+        rootPath=key+"";//add current key pressed to path
       } else {
-        rootPath+=key;
+        rootPath+=key;//add current key pressed to path
       }
     }
-    if (keyCode==8) {
-      if (rootPath==null) {
+    if (keyCode==8) {//if the key is BACKSPACE
+      if (rootPath==null) {//if there3 is nothing then do nothing
       } else {
-        if (rootPath.length()==1) {
+        if (rootPath.length()==1) {//delet if only 1 charcter
           rootPath=null;
         } else {
-          rootPath=rootPath.substring(0, rootPath.length()-1);
+          rootPath=rootPath.substring(0, rootPath.length()-1);//remove last charicter
         }
       }
     }
-  }
+  }//end of entering file path
 
-  if (entering_name) {
-    if (keyCode>=48&&keyCode<=57||keyCode==46||keyCode==32||(keyCode>=65&&keyCode<=90)||keyCode==59||keyCode==92||keyCode==45) {
+  if (entering_name) {//if entering anme
+    if (keyCode>=48&&keyCode<=57/*numbers*/||keyCode==46/*decimal*/||keyCode==32/*space*/||(keyCode>=65&&keyCode<=90)/*a-z*/||keyCode==59/*;:*/||keyCode==92/*\*/||keyCode==45/*-_*/) {
 
-      if (new_name==null) {
-        new_name=key+"";
+      if (new_name==null) {//if the path is blank
+        new_name=key+"";//add current key pressed to path
       } else {
-        new_name+=key;
+        new_name+=key;//add current key pressed to path
       }
     }
-    if (keyCode==8) {
+    if (keyCode==8) {//if the key is BACKSPACE
       if (new_name==null) {
       } else {
         if (new_name.length()==1) {
           new_name=null;
         } else {
-          new_name=new_name.substring(0, new_name.length()-1);
+          new_name=new_name.substring(0, new_name.length()-1);//remove the last charicter
         }
       }
     }
-  }
-  if (newFile) {
-    newFileName=getInput(newFileName, 0);
+  }//end of entering name
+  if (newFile) {//if new file
+    newFileName=getInput(newFileName, 0);//use the cencable typing functions
   }
 
-  if (startup) {
-    author = getInput(author, 0);
+  if (startup) {//if on the main menue
+    author = getInput(author, 0);//typing for the author name
   }
-  //System.out.println(keyCode);
+  //System.out.println(keyCode);//usefull to figureout what key is what
 }
 
 void keyReleased() {
-  if (simulating) {
-    if (keyCode==65) {
+  if (simulating) {//if the simulatiuon is running
+    if (keyCode==65) {//if 'A" released
       player1_moving_left=false;
     }
-    if (keyCode==68) {
+    if (keyCode==68) {//if 'D' released
       player1_moving_right=false;
     }
-    if (keyCode==32) {
+    if (keyCode==32) {//if SPACE relased
       player1_jumping=false;
     }
-    if (e3DMode) {
-      if (keyCode==87) {//w
+    if (e3DMode) {//if 3D mode on
+      if (keyCode==87) {//if 'W' relased
         WPressed=false;
       }
-      if (keyCode==83) {//s
+      if (keyCode==83) {//if 'S' released
         SPressed=false;
       }
     }//end of 3d mode
-  }
-  if (key=='e'||key=='E') {
+  }//end of simulation is running
+  if (key=='e'||key=='E') {//if 'E' released
     E_pressed=false;
   }
-  if (!simulating) {
-    if (keyCode==37) {
+  if (!simulating) {//if the simulation is paused
+    if (keyCode==37) {//if LEFT ARROW released
       cam_left=false;
     }
-    if (keyCode==39) {
+    if (keyCode==39) {//if RIGHT ARROW released
       cam_right=false;
     }
-    if (keyCode==38) {
+    if (keyCode==38) {//if UP ARROW released
       cam_up=false;
     }
-    if (keyCode==40) {
+    if (keyCode==40) {//if DOWN ARROW released
       cam_down=false;
     }
-  }
-}
+  }//end of simulation pasued
+}//end of key relaesed
 
 void mousePressed() {
-  if (editingStage||editingBlueprint) {
+  if (editingStage||editingBlueprint) {//if edditing a stage or blueprint
     GUImousePressed();
   }
 }
 
 void mouseReleased() {
-  if (editingStage||editingBlueprint) {
+  if (editingStage||editingBlueprint) {//if edditing a stage or blueprint
     GUImouseReleased();
   }
 }
 
-//void mouseDragged(){
-//  if(mouseButton==LEFT){
-//  if(editingStage&&(ground||holo_gram)){
-//     if(mouseX>=RedPos+35&&mouseX<=RedPos+55&& mouseY>=98&&mouseY<=112&&RedPos>=0&&RedPos<=229){
-//        RedPos=mouseX-40;
-//     }
-//     if(mouseX>=GreenPos+35&&mouseX<=GreenPos+55&& mouseY>=116&&mouseY<=132&&GreenPos>=0&&GreenPos<=229){
-//       GreenPos=mouseX-40;
-//     }
-//     if(mouseX>=BluePos+35&&mouseX<=BluePos+55&& mouseY>=136&&mouseY<=152&&BluePos>=0&&BluePos<=229){
-//        BluePos=mouseX-40;
-//     }
-//  }
-//  }
-//}
 
-void mouseWheel(MouseEvent event) {
+void mouseWheel(MouseEvent event) {//when the scroll wheel is moved
   float wheel_direction = event.getCount()*-1;
-  if (grid_mode) {
+  if (grid_mode) {//if grid mode is active 
     if (grid_size==10&&wheel_direction<0) {
     } else {
 
-      grid_size+=wheel_direction*10;
+      grid_size+=wheel_direction*10;//change the grid size
     }
     if (grid_size<10) {
       grid_size=10;
@@ -823,7 +809,11 @@ void mouseWheel(MouseEvent event) {
 }
 
 
-
+/**used to easaly process keyboard inputs
+ @param mode what charicter mode to use
+ @param letter the char from the keyboard to be processed
+ @returns a char that is compatbale with the selected mode
+*/
 char getCh(int mode, char leter) {
   if (mode==0) {
     if (Character.isLetter(leter)||leter==' ') {//mode 0 letters numbers and spcaes
@@ -859,9 +849,14 @@ char getCh(int mode, char leter) {
   return 0;
 }
 
+/** processes backspace operations
+  @param imp the string that needs a backspace opperation
+  @param code the key ID of the key that was pressed
+  @returns a string with 1 less char
+*/
 String doBackspace(String imp, int code) {
-  if (code==8) {
-    if (imp.length()>1) {
+  if (code==8) {//if the key was backspace
+    if (imp.length()>1) {//remove the last char
       return imp.substring(0, imp.length()-1);
     } else if (imp.length()==1) {
       return "";
@@ -870,6 +865,13 @@ String doBackspace(String imp, int code) {
   return imp;
 }
 
+/**used to process keyboard inputs by modifying strings
+  @param in the string to be modified
+  @param x the allowed charicter mode
+  @param code keyCode value
+  @param letter key value
+  @returns in modified according to the mode selected by x
+*/
 String getInput(String in, int x, int code, char leter) {//code and leter exsist to allow sub windows to use this function correctly they shoud send the keyCode and key vaible in respectivlky
   if (getCh(x, leter)!=0) {
     in+=getCh(x, leter);
@@ -878,10 +880,18 @@ String getInput(String in, int x, int code, char leter) {//code and leter exsist
   return in;
 }
 
+/**used to process keyboard inputs by modifying strings||only use if in top level sketch||auto fill the outher values for getinput
+  @param in the string to be modified
+  @param x the allowed charicter mode
+  @returns in modified according to the mode selected by x
+*/
 String getInput(String in, int x) {//for use in the main sketch whre keyCode and key are the same as used here
   return getInput(in, x, keyCode, key);
 }
 
+/**resets tool stages to default
+
+*/
 void turnThingsOff() {
   ground=false;
   check_point=false;
@@ -907,12 +917,15 @@ void turnThingsOff() {
 
 int curMills=0, lasMills=0, mspc=0;
 
+/**seperate therad for calculation physics
+
+*/
 void thrdCalc2() {
   println("ere");
   while (loopThread2) {
     curMills=millis();
-    mspc=curMills-lasMills;
-    if (editingStage) {
+    mspc=curMills-lasMills;//calculate how long its been sence the last physics calculation
+    if (editingStage) {//if edditing a stage
       try {
         playerPhysics();
         if (death_cool_down==0) {
@@ -923,17 +936,23 @@ void thrdCalc2() {
       catch(Throwable e) {
       }
     } else {
-      random(10);//some how make it so it doesent stop the thread
+      random(10);//make preocessing think that this thread is still active while it waits
     }
     lasMills=curMills;
     //println(mspc);
   }
 }
 
-boolean gameVersionCompatibilityCheck(String vers) {//returns ture if the inputed version id compatible
+/**used in the game to check if a level is of a compatable verson 
+no implmentation in level editor
+*/
+boolean gameVersionCompatibilityCheck(String vers) {//returns ture if the inputed version is compatible
   return true;
 }
 
+/**function that handles the output of the file selection dialog
+
+*/
 void fileSelected(File selection) {
   if (selection == null) {
     return;
@@ -942,7 +961,7 @@ void fileSelected(File selection) {
   println(path);
   String extenchen=path.substring(path.length()-3, path.length()).toLowerCase();
   println(extenchen);
-  if (extenchen.equals("wav")||extenchen.equals("mp3")||extenchen.equals("afi")) {
+  if (extenchen.equals("wav")||extenchen.equals("mp3")||extenchen.equals("afi")) {//check if the file type is valid
 
     fileToCoppyPath=path;
   } else {
