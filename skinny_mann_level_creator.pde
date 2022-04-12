@@ -6,24 +6,23 @@ void settings() {
 
 void setup() {
   textSize(80);//make text not fuzzy
-  loadJSONArray("data/colors.json");
-  frameRate(60);
-  surface.setTitle("skinny mann level creator");
-  scr2 =new ToolBox(millis());
-  colors=loadJSONArray("data/colors.json");
-  thread("thrdCalc2");
-  coin3D=loadShape("data/modles/coin/tinker.obj");
+  frameRate(60);//limmit the frame rate
+  surface.setTitle("skinny mann level creator");//set the window title
+  scr2 =new ToolBox(millis());//initilize the tool box window
+  colors=loadJSONArray("data/colors.json");//load saved colors
+  thread("thrdCalc2");//start the physics thread
+  coin3D=loadShape("data/modles/coin/tinker.obj");//load the 3d coin modle
   coin3D.scale(3);
   initlizeButtons();
 }
 boolean startup=true, editing_level=true, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, loading=false, newLevel=false, simulating=false, entering_file_path=false, coursor=false, level_complete=false, dead=false, entering_name=false, cam_left=false, cam_right=false, drawing=false, draw=false, extra=false, ground=false, check_point=false, goal=false, deleteing=false, delete=false, moving_player=false, grid_mode=false, holo_gram=false, editingStage=false, levelOverview=false, newFile=false, drawCoins=false, drawingPortal=false, drawingPortal2=false, drawingPortal3=false, E_pressed=false, saveColors=false, sloap=false, loopThread2=true, cam_up=false, cam_down=false, holoTriangle=false, dethPlane=false, setPlayerPosTo=false, e3DMode=false, WPressed=false, SPressed=false, draw3DSwitch1=false, draw3DSwitch2=false, checkpointIn3DStage=false, shadow3D=true, tutorialMode=false, drawingSign=false, selecting=false, viewingItemContents=false, loadingBlueprint=false, creatingNewBlueprint=false, editingBlueprint=false, selectingBlueprint=false, placingSound=false;
 String file_path, new_name="my_level", GAME_version="0.5.0_Early_Access", EDITOR_version="0.0.1.8_EAc", rootPath="", coursorr="", newFileName="", newFileType="2D", stageType="", author="your name here", displayText="", fileToCoppyPath="";
-//int player1 []={20,700,1,0,1,0};
+//int player1 []={20,700,1,0,1,0}; // old player data
 Player player1 =new Player(20, 699, 1, "red");
 int camPos=0, camPosY=0, death_cool_down, start_down, eadgeScroleDist=300, respawnX=20, respawnY=700, spdelay=0, Color=0, RedPos=0, BluePos=0, GreenPos=0, RC=0, GC=0, BC=0, grid_size=10, filesScrole=0, overviewSelection=-1, portalIndex1, stageIndex, preSI, respawnStage, setPlayerPosX, setPlayerPosY, setPlayerPosZ, startingDepth=0, totalDepth=300, respawnZ=50, coinRotation=0, coinCount=0, gmillis=0, eadgeScroleDistV=250, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, drawCamPosX=0, drawCamPosY;
 int buttonMin=0, buttonMax=0, coinsIndex, triangleMode=0, selectedIndex=-1, viewingItemIndex=-1, currentBluieprintIndex=0;
 float[]tpCords=new float[3];
-JSONArray mainIndex/*,coins*/, colors;
+JSONArray mainIndex, colors;
 JSONObject portalStage1, portalStage2;
 float downX, downY, upX, upY, Scale=1, gravity=0.001;
 ToolBox scr2 ;
@@ -34,7 +33,7 @@ Stage workingBlueprint, blueprints[], displayBlueprint;
 PApplet primaryWindow=this;
 void draw() {
 
-  if (frameCount%20==0) {
+  if (frameCount%20==0) {//curcor blinking code
     coursor=false;
     coursorr="";
   }
@@ -43,18 +42,18 @@ void draw() {
     coursorr="|";
   }
 
-  if (saveColors) {
+  if (saveColors) {//save the saved colors if you want to save colors
     saveJSONArray(colors, "/data/colors.json");
     saveColors=false;
   }
 
-  if (startup) {
+  if (startup) {//if on the startup screen
     background(#48EDD8);
     stroke(#4857ED);
     fill(#BB48ED);
     strokeWeight(10);
-    rect(200, 300, 200, 80);
-    rect(800, 300, 200, 80);
+    rect(200, 300, 200, 80);//new button
+    rect(800, 300, 200, 80);//load button
     fill(0);
     textSize(80);
     textAlign(LEFT, BOTTOM);
@@ -62,21 +61,21 @@ void draw() {
     text("load", 810, 370+15);
     fill(0);
     textSize(15);
-    text("game ver: "+GAME_version+ "  editor ver: "+EDITOR_version, 0, 718);
+    text("game ver: "+GAME_version+ "  editor ver: "+EDITOR_version, 0, 718);//game version text
     fill(0);
     textSize(15);
-    text("author: "+author+coursorr, 10, 30);
+    text("author: "+author+coursorr, 10, 30);//author text
     strokeWeight(0);
-    rect(60, 31, textWidth(author), 1);
+    rect(60, 31, textWidth(author), 1);//draw the line under the author name
     newBlueprint.draw();
     loadBlueprint.draw();
-  }
-  if (loading) {
+  }//end of startup screen
+  if (loading) {//if loading a lavel
     background(#48EDD8);
     fill(0);
     textSize(20);
     text("enter level name", 40, 100);
-    if (rootPath!=null) {
+    if (rootPath!=null) {//manual cursor blinking becasue apperently I hadent made the global system yet
       if (entering_file_path&&coursor) {
         text(rootPath+"|", 40, 150);
       } else {
@@ -87,21 +86,21 @@ void draw() {
     }
     stroke(0);
     strokeWeight(1);
-    line(40, 152, 1200, 152);
+    line(40, 152, 1200, 152);//draw the line the the text sits on
     stroke(#4857ED);
     fill(#BB48ED);
     strokeWeight(10);
-    rect(40, 400, 200, 40);
+    rect(40, 400, 200, 40);//draw load button
     fill(0);
     textSize(40);
     text("load", 50, 435+10);
-  }
-  if (newLevel) {
+  }//end of loading level
+  if (newLevel) {//if creating a new level
     background(#48EDD8);
     fill(0);
     textSize(20);
     text("enter level name", 40, 100);
-    if (new_name!=null) {
+    if (new_name!=null) {//manual cursor blinking becasue apperently I hadent made the global system yet
       if (entering_name&&coursor) {
         text(new_name+"|", 40, 150);
       } else {
@@ -113,19 +112,19 @@ void draw() {
     stroke(#4857ED);
     fill(#BB48ED);
     strokeWeight(10);
-    rect(40, 400, 200, 40);
+    rect(40, 400, 200, 40);//start button
     fill(0);
     textSize(40);
     text("start", 50, 435+10);
     stroke(0);
     strokeWeight(1);
-    line(40, 152, 800, 152);
-  }
+    line(40, 152, 800, 152);//line for name text
+  }//end of make new level
 
 
-  if (editingStage) {
+  if (editingStage) {//if edditing the stage
     //background(7646207);
-    if (!simulating) {
+    if (!simulating) {//if not simulating allow the camera to be moved by the arrow keys
       if (cam_left&&camPos>0) {
         camPos-=4;
       }
@@ -140,34 +139,34 @@ void draw() {
       }
     }
 
-    stageLevelDraw();
-    stageEditGUI();
+    stageLevelDraw();//level draw code
+    stageEditGUI();//level gui code
 
-    if (selectingBlueprint&&blueprints.length!=0) {
-      generateDisplayBlueprint();
-      renderBlueprint();
+    if (selectingBlueprint&&blueprints.length!=0) {//if selecting blueprint
+      generateDisplayBlueprint();//visualize the blueprint that is selected 
+      renderBlueprint();//render blueprint 
     }
   }
 
-  if (levelOverview) {
+  if (levelOverview) {//if on the level overview
     background(#0092FF);
     fill(#7CC7FF);
     stroke(#7CC7FF);
     strokeWeight(0);
-    if (overviewSelection!=-1) {
-      rect(0, (overviewSelection- filesScrole)*60+80, 1280, 60);
+    if (overviewSelection!=-1) {//if something is selected
+      rect(0, (overviewSelection- filesScrole)*60+80, 1280, 60);//draw the highlight
       if (overviewSelection<level.stages.size()) {//if the selection is in rage of the stages
-        if (level.stages.get(overviewSelection).type.equals("stage")) {
-          edditStage.draw();
+        if (level.stages.get(overviewSelection).type.equals("stage")) {//if the selected thing is a stage
+          edditStage.draw();//draw edit button
           fill(255, 255, 0);
           strokeWeight(1);
-          quad(1155, 37, 1129, 54, 1114, 39, 1140, 22);
+          quad(1155, 37, 1129, 54, 1114, 39, 1140, 22);//draw the pencil
           fill(#E5B178);
-          triangle(1129, 54, 1114, 39, 1109, 53);
-          setMainStage.draw();
+          triangle(1129, 54, 1114, 39, 1109, 53);//more pencil thing
+          setMainStage.draw();//draw set main stage button
           fill(255, 0, 0);
-          quad(1030, 16, 1010, 40, 1030, 66, 1050, 40);
-          if (setMainStage.isMouseOver()) {
+          quad(1030, 16, 1010, 40, 1030, 66, 1050, 40);//draw the main stage diamond
+          if (setMainStage.isMouseOver()) {//hover text for set main stage
             fill(200);
             rect(mouseX-4, mouseY-18, 135, 20);
             fill(0);
@@ -176,11 +175,11 @@ void draw() {
             text("set as main stage", mouseX, mouseY);
           }
         }
-        if (level.stages.get(overviewSelection).type.equals("3Dstage")) {
-          edditStage.draw();
+        if (level.stages.get(overviewSelection).type.equals("3Dstage")) {//if the selected thing is a 3D stage
+          edditStage.draw();//draw edit stage button
           fill(255, 255, 0);
           strokeWeight(1);
-          quad(1155, 37, 1129, 54, 1114, 39, 1140, 22);
+          quad(1155, 37, 1129, 54, 1114, 39, 1140, 22);//draw the pencil
           fill(#E5B178);
           triangle(1129, 54, 1114, 39, 1109, 53);
         }
@@ -213,18 +212,18 @@ void draw() {
       }
     }
     textAlign(CENTER, CENTER);
-    newStage.draw();
+    newStage.draw();//draw the new file button
     fill(0);
     textSize(90);
     text("+", 1230, 25);
     textAlign(LEFT, BOTTOM);
-    respawnX=(int)level.SpawnX;
+    respawnX=(int)level.SpawnX;//set the respawn info to that of the current level
     respawnY=(int)level.SpawnY;
     respawnStage=level.mainStage;
 
-    overview_saveLevel.draw();
-    help.draw();
-    if (filesScrole>0)
+    overview_saveLevel.draw();//draw save button
+    help.draw();//draw help button
+    if (filesScrole>0)//draw scroll buttons
       overviewUp.draw();
     if (filesScrole+11<level.stages.size()+level.sounds.size())
       overviewDown.draw();
@@ -232,11 +231,12 @@ void draw() {
 
 
 
-  if (newFile) {
+  if (newFile) {//if on the new file screen
     background(#0092FF);
     stroke(0);
     strokeWeight(2);
     line(100, 450, 1200, 450);
+    //highlight the option that is currently set
     if (newFileType.equals("2D")) {
       new2DStage.setColor(#BB48ED, #51DFFA);
       new3DStage.setColor(#BB48ED, #4857ED);
@@ -250,8 +250,8 @@ void draw() {
       new2DStage.setColor(#BB48ED, #4857ED);
       addSound.setColor(#BB48ED, #51DFFA);
     }
-    //println(newFileType);
-    new2DStage.draw();
+
+    new2DStage.draw();//draw the selection buttons
     new3DStage.draw();
     addSound.draw();
     newFileCreate.draw();
@@ -260,30 +260,30 @@ void draw() {
     fill(0);
     textSize(70);
     textAlign(LEFT, BOTTOM);
-    if (newFileType.equals("sound")) {
-      text("name: "+newFileName+coursorr, 100, 445);
+    if (newFileType.equals("sound")) {//if the selected type is sound
+      text("name: "+newFileName+coursorr, 100, 445);//dfisplay the entyered name
       String pathSegments[]=fileToCoppyPath.split("/|\\\\");
       textSize(30);
-      text(pathSegments[pathSegments.length-1], 655, 585);
+      text(pathSegments[pathSegments.length-1], 655, 585);//display the name of the selected file
       chooseFileButton.draw();
     } else {
-      text(newFileName+coursorr, 100, 445);
+      text(newFileName+coursorr, 100, 445);//display the entered name
     }
   }
 
-  if (drawingPortal2) {
+  if (drawingPortal2) {//if drawing portal part 2 aka outher overview selection screen
     background(#0092FF);
     fill(#7CC7FF);
     stroke(#7CC7FF);
     strokeWeight(0);
-    if (overviewSelection!=-1) {
-      rect(0, overviewSelection*60+80, 1280, 60);
-      if (level.stages.get(overviewSelection).type.equals("stage")||level.stages.get(overviewSelection).type.equals("3Dstage")) {
-        selectStage.draw();
+    if (overviewSelection!=-1) {//if sonethign is selected
+      rect(0, (overviewSelection- filesScrole)*60+80, 1280, 60);//highlight
+      if (level.stages.get(overviewSelection).type.equals("stage")||level.stages.get(overviewSelection).type.equals("3Dstage")) {//if the selected thing is a posible destination stage
+        selectStage.draw();//draw the select stage button
         textAlign(LEFT, BOTTOM);
         stroke(0, 255, 0);
         strokeWeight(7);
-        line(1212, 44, 1224, 55);
+        line(1212, 44, 1224, 55);//checkmark
         line(1224, 55, 1253, 29);
       }
     }
@@ -317,34 +317,34 @@ void draw() {
     fill(0);
     textSize(90);
     text("select destenation stage", 640, 30);
-    if (filesScrole>0)
+    if (filesScrole>0)//scroll buttons
       overviewUp.draw();
     if (filesScrole+11<level.stages.size()+level.sounds.size())
       overviewDown.draw();
     textAlign(LEFT, BOTTOM);
   }//end of drawing portal2
 
-  if (creatingNewBlueprint) {
+  if (creatingNewBlueprint) {//if creating a new bueprint screen
     background(#48EDD8);
     fill(0);
     textSize(20);
     text("enter blueprint name", 40, 100);
-    if (new_name!=null) {
+    if (new_name!=null) {//display the name entered
       text(new_name+coursorr, 40, 150);
     } else if (coursor) {
       text("|", 40, 150);
     }
-    createBlueprintGo.draw();
+    createBlueprintGo.draw();//create button
     stroke(0);
     strokeWeight(1);
-    line(40, 152, 800, 152);
+    line(40, 152, 800, 152);//text line
   }//end of creating new blueprint
-  if (loadingBlueprint) {
+  if (loadingBlueprint) {//if loading blueprint
     background(#48EDD8);
     fill(0);
     textSize(20);
     text("enter blueprint name", 40, 100);
-    if (new_name!=null) {
+    if (new_name!=null) {//coursor and entrd name
       text(new_name+coursorr, 40, 150);
     } else if (coursor) {
       text("|", 40, 150);
@@ -352,31 +352,31 @@ void draw() {
     stroke(0);
     strokeWeight(1);
     line(40, 152, 1200, 152);
-    createBlueprintGo.setText("load");
+    createBlueprintGo.setText("load");//load button
     createBlueprintGo.draw();
   }//end of loading blueprint
-  if (editingBlueprint) {
+  if (editingBlueprint) {//if edditing blueprint
     background(7646207);
     fill(0);
     strokeWeight(0);
-    rect(width/2-0.5, 0, 1, height);
+    rect(width/2-0.5, 0, 1, height);//draw lines in the center of the screen that indicate wherer (0,0) is
     rect(0, height/2-0.5, width, 1);
-    blueprintEditDraw();
+    blueprintEditDraw();//draw the accual blueprint
     stageEditGUI();//overlays when placing things
   }
 
 
-  engageHUDPosition();
+  engageHUDPosition();//setup for HUD incase of being in 3D mode
   fill(255);
   textSize(200*Scale);
   textAlign(CENTER, CENTER);
-  if (displayTextUntill>=millis()) {
+  if (displayTextUntill>=millis()) {//info display text logic
     text(displayText, width/2, height*0.2);
   }
 
   textAlign(LEFT, BOTTOM);
   textSize(10);
-  text("fps: "+ frameRate, 1200, 10);
+  text("fps: "+ frameRate, 1200, 10);//framrate and de3bug thigns
   text("mspc: "+mspc, 1200, 25);
   if (millis()<gmillis) {
     glitchEffect();
@@ -388,56 +388,56 @@ void draw() {
 
 void mouseClicked() {
 
-  if (mouseButton==LEFT) {
-    println(mouseX+" "+mouseY);
-    if (startup) {
-      if (mouseX >=200 && mouseX <= 400 && mouseY >= 300 && mouseY <= 380) {
+  if (mouseButton==LEFT) {//if the button pressed was the left button
+    println(mouseX+" "+mouseY);//print the location the mouse clicked to the console
+    if (startup) {//if on the startup screen
+      if (mouseX >=200 && mouseX <= 400 && mouseY >= 300 && mouseY <= 380) {//new level button
         startup=false;
         newLevel=true;
       }
-      if (mouseX >=800 && mouseX <= 1000 && mouseY >= 300 && mouseY <= 380) {
+      if (mouseX >=800 && mouseX <= 1000 && mouseY >= 300 && mouseY <= 380) {//load level button
         startup=false;
         loading=true;
       }
-      if (newBlueprint.isMouseOver()) {
+      if (newBlueprint.isMouseOver()) {//new blurprint button
         startup=false;
         creatingNewBlueprint=true;
         new_name="my blueprint";
         entering_name=true;
       }
-      if (loadBlueprint.isMouseOver()) {
+      if (loadBlueprint.isMouseOver()) {//loaf blueprint button
         startup=false;
         loadingBlueprint=true;
         new_name="";
         entering_name=true;
       }
     }
-    if (loading) {
-      if (mouseX >=40 && mouseX <= 1200 && mouseY >= 100 && mouseY <= 150) {
+    if (loading) {//if loading level
+      if (mouseX >=40 && mouseX <= 1200 && mouseY >= 100 && mouseY <= 150) {//click box for the line to type the name
         entering_file_path=true;
       }
-      if (mouseX >=40 && mouseX <= 240 && mouseY >= 400 && mouseY <= 440) {
-        try {
+      if (mouseX >=40 && mouseX <= 240 && mouseY >= 400 && mouseY <= 440) {//load button
+        try {//attempt to load the level
           mainIndex=loadJSONArray(rootPath+"/index.json");
           entering_file_path=false;
           loading=false;
           levelOverview=true;
         }
-        catch(Throwable e) {
+        catch(Throwable e) {//do nothign if loading fails
         }
         level=new Level(mainIndex);
         return;
       }
     }
-    if (newLevel) {
-      if (mouseX >=40 && mouseX <= 1200 && mouseY >= 100 && mouseY <= 150) {
+    if (newLevel) {//if creating a new level
+      if (mouseX >=40 && mouseX <= 1200 && mouseY >= 100 && mouseY <= 150) {//text line click box
         entering_name=true;
       }//rect(40,400,200,40);
-      if (mouseX >=40 && mouseX <= 240 && mouseY >= 400 && mouseY <= 440) {
+      if (mouseX >=40 && mouseX <= 240 && mouseY >= 400 && mouseY <= 440) {//create button
         entering_name=false;
         newLevel=false;
         rootPath=new_name;
-        JSONArray mainIndex=new JSONArray();
+        JSONArray mainIndex=new JSONArray();//set up a new level
         JSONObject terain = new JSONObject();
         terain.setInt("level_id", (int)(Math.random()*1000000000%999999999));
         terain.setString("name", new_name);
@@ -456,29 +456,29 @@ void mouseClicked() {
       }
     }
 
-    GUImouseClicked();
+    GUImouseClicked();//gui clicking code
 
 
-    if (levelOverview) {
-      if (newStage.isMouseOver()) {
+    if (levelOverview) {//if on level overview
+      if (newStage.isMouseOver()) {//if the new file button is clicked
         levelOverview=false;
         newFile=true;
         newFileName="";
       }
-      if (mouseY>80) {
-        overviewSelection=(mouseY-80)/60+ filesScrole;
-        if (overviewSelection>=level.stages.size()+level.sounds.size()) {
+      if (mouseY>80) {//if the mouse is in the files section of the screen
+        overviewSelection=(mouseY-80)/60+ filesScrole;//figure out witch thing to select
+        if (overviewSelection>=level.stages.size()+level.sounds.size()) {//de seclect if there was nothing under where the click happend
           overviewSelection=-1;
         }
       }
 
-      if (overview_saveLevel.isMouseOver()) {
+      if (overview_saveLevel.isMouseOver()) {//save button in the level overview
         println("saving level");
         level.save();
-        gmillis=millis()+400;
+        gmillis=millis()+400;//glitch effect
         println("save complete");
       }
-      if (help.isMouseOver()) {
+      if (help.isMouseOver()) {//help button in the level overview
         link("https://youtu.be/dh07dk1xXew");
       }
       if (overviewSelection!=-1) {
