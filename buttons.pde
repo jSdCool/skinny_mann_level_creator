@@ -28,6 +28,3 @@ void initlizeButtons() {
 
   createBlueprintGo=new Button(40, 400, 200, 40, "start", #BB48ED, #4857ED).setStrokeWeight(10);
 }
-/*
-
- */
