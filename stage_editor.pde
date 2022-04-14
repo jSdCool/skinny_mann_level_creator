@@ -3,16 +3,16 @@ void stageEditGUI() {
   textAlign(LEFT, BOTTOM);
 
 
-  int adj;
+  int adj;//color adjustment stuff that may be useless
   if (RC == 0 && GC == 0 && BC > 0) {
     adj=256;
   } else {
     adj=0;
   }
-
   Color=(int)(RC*Math.pow(16, 4)+GC*Math.pow(16, 2)+BC+adj)-16777215;
   Color=scr2.CC;
-  Stage current=null;
+  
+  Stage current=null;//setup a varable that can be used for the current stage or blueprint
   if (editingStage) {
     current=level.stages.get(currentStageIndex);
   }
@@ -20,19 +20,19 @@ void stageEditGUI() {
     current=workingBlueprint;
   }
 
-  if (current.type.equals("stage")||current.type.equals("blueprint")) {
+  if (current.type.equals("stage")||current.type.equals("blueprint")) {//if current is a steg or blueprint
 
-    if (drawing) {
+    if (drawing) {//if drawing a dragable shape
       fill(Color);
       stroke(Color);
-      if (dethPlane) {
+      if (dethPlane) {//overide coustome color if the current tool is deathplane
         fill(-114431);
         stroke(-114431);
       }
 
-      if (grid_mode) {
-        if (sloap||holoTriangle) {
-          int X2=0, Y2=0, X1=0, Y1=0;
+      if (grid_mode) {//if gridmode is on
+        if (sloap||holoTriangle) {//if your currenly drawing a triangle type
+          int X2=0, Y2=0, X1=0, Y1=0;//calcaute the location of the mouese press and unpress location
           if (mouseX>downX) {
             X1=(int)((downX+camPos)/grid_size)*grid_size-camPos;
             X2=(int)(Math.ceil((mouseX*1.0+camPos)/grid_size)*grid_size)-camPos;
@@ -45,12 +45,11 @@ void stageEditGUI() {
             Y1=(int)((downY-camPosY)/grid_size)*grid_size+camPosY;
             Y2=(int)(Math.ceil((mouseY-camPosY)*1.0/grid_size)*grid_size)+camPosY;
           }
-          //YD=(int)(Math.ceil(upY/grid_size)*grid_size)-Y1;
           if (mouseY<downY) {
             Y1=(int)((mouseY-camPosY)/grid_size)*grid_size+camPosY;
             Y2=(int)(Math.ceil((downY-camPosY)/grid_size)*grid_size)+camPosY;
           }
-          if (triangleMode==0) {
+          if (triangleMode==0) {//display the triangle that will be created
             triangle(X1, Y1, X2, Y2, X2, Y1);
           }
           if (triangleMode==1) {
@@ -62,8 +61,8 @@ void stageEditGUI() {
           if (triangleMode==3) {
             triangle(X1, Y2, X2, Y2, X2, Y1);
           }
-        } else {
-          int XD=0, YD=0, X1=0, Y1=0;
+        } else {//if the type is not a triangle
+          int XD=0, YD=0, X1=0, Y1=0;//calcaute the location of the mouese press and unpress location
           if (mouseX>downX) {
             X1=(int)((downX+camPos)/grid_size)*grid_size-camPos;
             XD=(int)(Math.ceil((mouseX*1.0+camPos)/grid_size)*grid_size)-X1-camPos;
@@ -83,11 +82,11 @@ void stageEditGUI() {
           }
           strokeWeight(0);
 
-          rect(X1, Y1, XD, YD);
+          rect(X1, Y1, XD, YD);//display the rectangle that is being drawn
         }
-      } else {
+      } else {//if grid mode is off
         if (sloap||holoTriangle) {
-          int X2=0, Y2=0, X1=0, Y1=0;
+          int X2=0, Y2=0, X1=0, Y1=0;//calcaute the location of the mouese press and unpress location
           if (mouseX>downX) {
             X1=(int)((downX));
             X2=(int)(Math.ceil((mouseX)));
@@ -104,7 +103,7 @@ void stageEditGUI() {
             Y1=(int)(mouseY);
             Y2=(int)(Math.ceil(downY));
           }
-          if (triangleMode==0) {
+          if (triangleMode==0) {//display the triangle that will be created
             triangle(X1, Y1, X2, Y2, X2, Y1);
           }
           if (triangleMode==1) {
@@ -118,21 +117,21 @@ void stageEditGUI() {
           }
         } else {
           strokeWeight(0);
-          float xdif=mouseX-downX, ydif=mouseY-downY;
+          float xdif=mouseX-downX, ydif=mouseY-downY;//calcaute the location of the mouese press and unpress location
 
-          rect(downX, downY, xdif, ydif);
+          rect(downX, downY, xdif, ydif);//display the rectangle that is being drawn
         }
       }
     }
 
-    if (draw&&ground) {
+    if (draw&&ground) {//add new ground element to the level
 
       float xdif=upX-downX, ydif=upY-downY;
       int X1=0, XD=0, Y1=0, YD=0;
-      if (grid_mode) {
+      if (grid_mode) {//if grid mode is on
 
 
-        if (upX>downX) {
+        if (upX>downX) {//calcualte corner position
           X1=(int)((downX+camPos)/grid_size)*grid_size;
           XD=(int)(Math.ceil((upX+camPos)/grid_size)*grid_size)-X1;
         }
@@ -148,7 +147,7 @@ void stageEditGUI() {
           Y1=(int)((upY-camPosY)/grid_size)*grid_size;
           YD=(int)(Math.ceil((downY-camPosY)/grid_size)*grid_size)-Y1;
         }
-        if (downX==upX) {
+        if (downX==upX) {//if there was no change is mouse position then don't create a new segment
           draw=false;
           return ;
         }
@@ -156,10 +155,10 @@ void stageEditGUI() {
           draw=false;
           return;
         }
-      } else {
+      } else {//if grid mode is off
 
 
-        if (upX>downX) {
+        if (upX>downX) {//calculate corder position
           X1 = (int)downX+camPos;
           XD = (int)abs(xdif);
         }
@@ -175,7 +174,7 @@ void stageEditGUI() {
           Y1 = (int)upY-camPosY;
           YD = (int)abs(downY-upY);
         }
-        if (downX==upX) {
+        if (downX==upX) {//if there was no change is mouse position then don't create a new segment
           draw=false;
           return ;
         }
@@ -185,17 +184,17 @@ void stageEditGUI() {
         }
       }
 
-      current.parts.add(new Ground(X1, Y1, XD, YD, Color));
+      current.parts.add(new Ground(X1, Y1, XD, YD, Color));//add the new element to the stage
       draw=false;
-    }
+    }//end of add ground
 
-    if (draw&&holo_gram) {
+    if (draw&&holo_gram) {//add new holo element to the level
       float xdif=upX-downX, ydif=upY-downY;
       int X1=0, XD=0, Y1=0, YD=0;
       if (grid_mode) {
 
 
-        if (upX>downX) {
+        if (upX>downX) {//calculate corder position
           X1=(int)((downX+camPos)/grid_size)*grid_size;
           XD=(int)(Math.ceil((upX+camPos)/grid_size)*grid_size)-X1;
         }
@@ -211,7 +210,7 @@ void stageEditGUI() {
           Y1=(int)((upY-camPosY)/grid_size)*grid_size;
           YD=(int)(Math.ceil((downY-camPosY)/grid_size)*grid_size)-Y1;
         }
-        if (downX==upX) {
+        if (downX==upX) {//if there was no change is mouse position then don't create a new segment
           draw=false;
           return ;
         }
@@ -222,7 +221,7 @@ void stageEditGUI() {
       } else {
 
 
-        if (upX>downX) {
+        if (upX>downX) {//calculate corder position
           X1 = (int)downX+camPos;
           XD = (int)abs(xdif);
         }
@@ -238,7 +237,7 @@ void stageEditGUI() {
           Y1 = (int)upY-camPosY;
           YD = (int)abs(downY-upY);
         }
-        if (downX==upX) {
+        if (downX==upX) {//if there was no change is mouse position then don't create a new segment
           draw=false;
           return ;
         }
@@ -247,17 +246,17 @@ void stageEditGUI() {
           return;
         }
       }
-      current.parts.add(new Holo(X1, Y1, XD, YD, Color));
+      current.parts.add(new Holo(X1, Y1, XD, YD, Color));//add the new element to the stage
       draw=false;
-    }
+    }//end of add holo
 
-    if (draw&&dethPlane) {
+    if (draw&&dethPlane) {//add new deathplane element to the level
       float xdif=upX-downX, ydif=upY-downY;
       int X1=0, XD=0, Y1=0, YD=0;
       if (grid_mode) {
 
 
-        if (upX>downX) {
+        if (upX>downX) {//calculate corder position
           X1=(int)((downX+camPos)/grid_size)*grid_size;
           XD=(int)(Math.ceil((upX+camPos)/grid_size)*grid_size)-X1;
         }
@@ -273,7 +272,7 @@ void stageEditGUI() {
           Y1=(int)((upY-camPosY)/grid_size)*grid_size;
           YD=(int)(Math.ceil((downY-camPosY)/grid_size)*grid_size)-Y1;
         }
-        if (downX==upX) {
+        if (downX==upX) {//if there was no change is mouse position then don't create a new segment
           draw=false;
           return ;
         }
@@ -284,7 +283,7 @@ void stageEditGUI() {
       } else {
 
 
-        if (upX>downX) {
+        if (upX>downX) {//calculate corder position
           X1 = (int)downX+camPos;
           XD = (int)xdif;
         }
@@ -300,7 +299,7 @@ void stageEditGUI() {
           Y1 = (int)upY;
           YD = (int)(downY-upY-camPosY);
         }
-        if (downX==upX) {
+        if (downX==upX) {//if there was no change is mouse position then don't create a new segment
           draw=false;
           return ;
         }
@@ -309,68 +308,128 @@ void stageEditGUI() {
           return;
         }
       }
-      current.parts.add(new DethPlane(X1, Y1, XD, YD));
+      current.parts.add(new DethPlane(X1, Y1, XD, YD));//add new death plane elemtn to the stage
       draw=false;
-    }
+    }//end of new deathplane
 
 
-    if (check_point&&draw) {
-      if (grid_mode) {
-        current.parts.add(new CheckPoint(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size));
+    if (check_point&&draw) {//creating new checkpoint
+      if (grid_mode) {//if grid mode is on
+        current.parts.add(new CheckPoint(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size));//add new checkpoint to the stage
       } else {
-        current.parts.add(new CheckPoint((int)mouseX+camPos, (int)mouseY-camPosY));
+        current.parts.add(new CheckPoint((int)mouseX+camPos, (int)mouseY-camPosY));//add new checkpoint to the stage
       }
       draw=false;
-    }
-    if (goal&&draw) {
-      if (grid_mode) {
-        current.parts.add(new Goal(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size));
+    }//end of create new checkpoint
+    if (goal&&draw) {//create new finishline
+      if (grid_mode) {//if grid mode is on
+        current.parts.add(new Goal(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size));//add new finishline to the stage
       } else {
-        current.parts.add(new Goal((int)mouseX+camPos, (int)mouseY-camPosY));
+        current.parts.add(new Goal((int)mouseX+camPos, (int)mouseY-camPosY));//add new finishline to the stage
       }
       draw=false;
-    }
+    }//end of new finishline
 
-    if (deleteing&&delete) {
-      int index=colid_index(mouseX+camPos, mouseY-camPosY, current);
-      if (index==-1) {
+    if (deleteing&&delete) {//if attempting to delete something
+      int index=colid_index(mouseX+camPos, mouseY-camPosY, current);//get the index of the elemtn the mouse is currently over
+      if (index==-1) {//if the mouse was over nothing then do nothing 
       } else {
-        current.parts.remove(index);
+        current.parts.remove(index);//remove the object the mosue was over
       }
       delete=false;
-    }
+    }//end of delete
 
-    if (drawCoins) {
-      if (grid_mode) {
-        drawCoin(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size-camPos, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size+camPosY, 3);
+    if (drawCoins) {//if adding coins
+      if (grid_mode) {//if grid mode is on
+        drawCoin(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size-camPos, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size+camPosY, 3);//draw gid aligmed coin
       } else {
-        drawCoin(mouseX, mouseY, 3);
+        drawCoin(mouseX, mouseY, 3);//draw coin
       }
     }
 
-    if (drawingPortal) {
-      if (grid_mode) {
-        drawPortal(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size-camPos, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size+camPosY, 1);
+    if (drawingPortal) {//if adding portal part 1
+      if (grid_mode) {//if gridmode is on
+        drawPortal(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size-camPos, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size+camPosY, 1);//draw a grid aligned portal
       } else {
-        drawPortal(mouseX, mouseY, 1);
+        drawPortal(mouseX, mouseY, 1);//draw a portal
       }
     }
 
-    if (drawingPortal3) {
-      if (grid_mode) {
-        drawPortal(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size-camPos, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size+camPosY, 1);
+    if (drawingPortal3) {//if drawing portal part 3
+      if (grid_mode) {//if gridmode is on 
+        drawPortal(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size-camPos, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size+camPosY, 1);//draw a grid aligned portal
       } else {
-        drawPortal(mouseX, mouseY, 1);
+        drawPortal(mouseX, mouseY, 1);//draw a portal
       }
     }
 
-    if (sloap&&draw) {
-      //float xdif=upX-downX,ydif=upY-downY;
+    if (sloap&&draw) {//if drawing a triangle
       int X1=0, X2=0, Y1=0, Y2=0;
-      if (grid_mode) {
+      if (grid_mode) {//if gridmode is on 
 
+
+        if (upX>downX) {//calcualte corner positions
+          X1=(int)((downX+camPos)/grid_size)*grid_size;
+          X2=(int)(Math.ceil((upX+camPos)/grid_size)*grid_size);
+        }
+        if (upX<downX) {
+          X1=(int)((upX+camPos)/grid_size)*grid_size;
+          X2=(int)(Math.ceil((downX+camPos)/grid_size)*grid_size);
+        }
+        if (upY>downY) {
+          Y1=(int)((downY-camPosY)/grid_size)*grid_size;
+          Y2=(int)(Math.ceil((upY-camPosY)/grid_size)*grid_size);
+        }
+        if (upY<downY) {
+          Y1=(int)((upY-camPosY)/grid_size)*grid_size;
+          Y2=(int)(Math.ceil((downY-camPosY)/grid_size)*grid_size);
+        }
+        if (downX==upX) {//if there was no change is mouse position then don't create a new segment
+          draw=false;
+          return ;
+        }
+        if (downY==upY) {
+          draw=false;
+          return;
+        }
+      } else {//if gridmode is off
 
         if (upX>downX) {
+          X1 = (int)downX+camPos;//calculate corder position
+          X2 = (int)upX+camPos;
+        }
+        if (upX<downX) {
+          X1 = (int)upX+camPos;
+          X2 = (int)(downX+camPos);
+        }
+        if (upY>downY) {
+          Y1 = (int)downY-camPosY;
+          Y2 = (int)upY-camPosY;
+        }
+        if (upY<downY) {
+          Y1 = (int)upY-camPosY;
+          Y2 = (int)(downY)-camPosY;
+        }
+        if (downX==upX) {//if there was no change is mouse position then don't create a new segment
+          draw=false;
+          return ;
+        }
+        if (downY==upY) {
+          draw=false;
+          return;
+        }
+      }
+
+      current.parts.add(new Sloap(X1, Y1, X2, Y2, triangleMode, Color));//add new sloap to the stage
+      draw=false;
+    }
+
+    if (holoTriangle&&draw) {//if drawing a holo triangle
+      int X1=0, X2=0, Y1=0, Y2=0;
+      if (grid_mode) {//if gridmode is on
+
+
+        if (upX>downX) {//calculate corder position
           X1=(int)((downX+camPos)/grid_size)*grid_size;
           X2=(int)(Math.ceil((upX+camPos)/grid_size)*grid_size);
         }
@@ -394,9 +453,10 @@ void stageEditGUI() {
           draw=false;
           return;
         }
-      } else {
+      } else {//if grid mode is off
 
-        if (upX>downX) {
+
+        if (upX>downX) {//calculate corder position
           X1 = (int)downX+camPos;
           X2 = (int)upX+camPos;
         }
@@ -412,7 +472,7 @@ void stageEditGUI() {
           Y1 = (int)upY-camPosY;
           Y2 = (int)(downY)-camPosY;
         }
-        if (downX==upX) {
+        if (downX==upX) {//if there was no change is mouse position then don't create a new segment
           draw=false;
           return ;
         }
@@ -421,87 +481,25 @@ void stageEditGUI() {
           return;
         }
       }
-
-      current.parts.add(new Sloap(X1, Y1, X2, Y2, triangleMode, Color));
+      current.parts.add(new HoloTriangle(X1, Y1, X2, Y2, triangleMode, Color));//add new holor triangle to the stage
       draw=false;
     }
-
-    if (holoTriangle&&draw) {
-      int X1=0, X2=0, Y1=0, Y2=0;
-      if (grid_mode) {
-
-
-        if (upX>downX) {
-          X1=(int)((downX+camPos)/grid_size)*grid_size;
-          X2=(int)(Math.ceil((upX+camPos)/grid_size)*grid_size);
-        }
-        if (upX<downX) {
-          X1=(int)((upX+camPos)/grid_size)*grid_size;
-          X2=(int)(Math.ceil((downX+camPos)/grid_size)*grid_size);
-        }
-        if (upY>downY) {
-          Y1=(int)((downY-camPosY)/grid_size)*grid_size;
-          Y2=(int)(Math.ceil((upY-camPosY)/grid_size)*grid_size);
-        }
-        if (upY<downY) {
-          Y1=(int)((upY-camPosY)/grid_size)*grid_size;
-          Y2=(int)(Math.ceil((downY-camPosY)/grid_size)*grid_size);
-        }
-        if (downX==upX) {
-          draw=false;
-          return ;
-        }
-        if (downY==upY) {
-          draw=false;
-          return;
-        }
-      } else {
-
-
-        if (upX>downX) {
-          X1 = (int)downX+camPos;
-          X2 = (int)upX+camPos;
-        }
-        if (upX<downX) {
-          X1 = (int)upX+camPos;
-          X2 = (int)(downX+camPos);
-        }
-        if (upY>downY) {
-          Y1 = (int)downY-camPosY;
-          Y2 = (int)upY-camPosY;
-        }
-        if (upY<downY) {
-          Y1 = (int)upY-camPosY;
-          Y2 = (int)(downY)-camPosY;
-        }
-        if (downX==upX) {
-          draw=false;
-          return ;
-        }
-        if (downY==upY) {
-          draw=false;
-          return;
-        }
-      }
-      current.parts.add(new HoloTriangle(X1, Y1, X2, Y2, triangleMode, Color));
-      draw=false;
-    }
-    if (check_point) {
-      if (grid_mode) {
+    if (check_point) {//if  checkpoint
+      if (grid_mode) {//draw checkoint
         drawCheckPoint(Math.round((mouseX+camPos)*1.0/grid_size)*grid_size-camPos, Math.round((mouseY-camPosY)*1.0/grid_size)*grid_size+camPosY);
       } else {
         drawCheckPoint(mouseX, mouseY);
       }
     }
-    if (drawingSign) {
-      if (grid_mode) {
+    if (drawingSign) {//if sign
+      if (grid_mode) {//draw a sign
         drawSign(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size-camPos, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size+camPosY, Scale);
       } else {
         drawSign(mouseX, mouseY, Scale);
       }
     }
-    if (placingSound) {
-      if (grid_mode) {
+    if (placingSound) {//if placing soundboxes
+      if (grid_mode) {//draw a sound box
         drawSoundBox(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size-camPos, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size+camPosY);
       } else {
         drawSoundBox(mouseX, mouseY);
@@ -512,11 +510,11 @@ void stageEditGUI() {
     //the accual gut part
   }
 
-  if (current.type.equals("3Dstage")) {
+  if (current.type.equals("3Dstage")) {//if in a 3D stage
 
-    if (!e3DMode) {
+    if (!e3DMode) {//if 3D mode is off
 
-      if (drawing) {
+      if (drawing) {//if drawing something
         fill(Color);
         stroke(Color);
         if (dethPlane) {
@@ -524,8 +522,8 @@ void stageEditGUI() {
           stroke(-114431);
         }
 
-        if (grid_mode||holo_gram) {
-          int XD=0, YD=0, X1=0, Y1=0;
+        if (grid_mode||holo_gram) {//if drawing something that is a rectangle
+          int XD=0, YD=0, X1=0, Y1=0;//calc the corner positions
           if (mouseX>downX) {
             X1=(int)((downX+camPos)/grid_size)*grid_size-camPos;
             XD=(int)(Math.ceil((mouseX*1.0+camPos)/grid_size)*grid_size)-X1-camPos;
@@ -545,21 +543,21 @@ void stageEditGUI() {
           }
           strokeWeight(0);
 
-          rect(X1, Y1, XD, YD);
+          rect(X1, Y1, XD, YD);//draw the rectangle preview
         } else {//end of grid mode
           strokeWeight(0);
           float xdif=mouseX-downX, ydif=mouseY-downY;
-          rect(downX, downY, xdif, ydif);
+          rect(downX, downY, xdif, ydif);//draw the preview
         }
       }//end of drawing
 
-      if (draw&&ground) {
+      if (draw&&ground) {//if drawing ground
         float xdif=upX-downX, ydif=upY-downY;
         int X1=0, XD=0, Y1=0, YD=0;
-        if (grid_mode) {
+        if (grid_mode) {//if gridmode is on
 
 
-          if (upX>downX) {
+          if (upX>downX) {//cacl corner posirions
             X1=(int)((downX+camPos)/grid_size)*grid_size;
             XD=(int)(Math.ceil((upX+camPos)/grid_size)*grid_size)-X1;
           }
@@ -575,7 +573,7 @@ void stageEditGUI() {
             Y1=(int)((upY-camPosY)/grid_size)*grid_size;
             YD=(int)(Math.ceil((downY-camPosY)/grid_size)*grid_size)-Y1;
           }
-          if (downX==upX) {
+          if (downX==upX) {//if there was no change is mouse position then don't create a new segment
             draw=false;
             return ;
           }
@@ -586,7 +584,7 @@ void stageEditGUI() {
         } else {
 
 
-          if (upX>downX) {
+          if (upX>downX) {//calc corner positions
             X1 = (int)downX+camPos;
             XD = (int)xdif;
           }
@@ -602,7 +600,7 @@ void stageEditGUI() {
             Y1 = (int)upY;
             YD = (int)(downY-upY-camPosY);
           }
-          if (downX==upX) {
+          if (downX==upX) {//if there was no change is mouse position then don't create a new segment
             draw=false;
             return ;
           }
@@ -611,16 +609,16 @@ void stageEditGUI() {
             return;
           }
         }
-        current.parts.add(new Ground(X1, Y1, startingDepth, XD, YD, totalDepth, Color));
+        current.parts.add(new Ground(X1, Y1, startingDepth, XD, YD, totalDepth, Color));//add new ground to the stage
         draw=false;
       }
-      if (draw&&holo_gram) {
+      if (draw&&holo_gram) {//if drawing holo
         float xdif=upX-downX, ydif=upY-downY;
         int X1=0, XD=0, Y1=0, YD=0;
-        if (grid_mode) {
+        if (grid_mode) {//if grid mode is on
 
 
-          if (upX>downX) {
+          if (upX>downX) {//calc corner position
             X1=(int)((downX+camPos)/grid_size)*grid_size;
             XD=(int)(Math.ceil((upX+camPos)/grid_size)*grid_size)-X1;
           }
@@ -636,7 +634,7 @@ void stageEditGUI() {
             Y1=(int)((upY-camPosY)/grid_size)*grid_size;
             YD=(int)(Math.ceil((downY-camPosY)/grid_size)*grid_size)-Y1;
           }
-          if (downX==upX) {
+          if (downX==upX) {//if there was no change is mouse position then don't create a new segment
             draw=false;
             return ;
           }
@@ -647,7 +645,7 @@ void stageEditGUI() {
         } else {
 
 
-          if (upX>downX) {
+          if (upX>downX) {//calc corner position
             X1 = (int)downX+camPos;
             XD = (int)xdif;
           }
@@ -663,7 +661,7 @@ void stageEditGUI() {
             Y1 = (int)upY;
             YD = (int)(downY-upY-camPosY);
           }
-          if (downX==upX) {
+          if (downX==upX) {//if there was no change is mouse position then don't create a new segment
             draw=false;
             return ;
           }
@@ -672,34 +670,34 @@ void stageEditGUI() {
             return;
           }
         }
-        current.parts.add(new Holo(X1, Y1, startingDepth, XD, YD, totalDepth, Color));
+        current.parts.add(new Holo(X1, Y1, startingDepth, XD, YD, totalDepth, Color));//add new holo to the stage
         draw=false;
       }
 
-      if (deleteing&&delete) {
-        int index=colid_index(mouseX+camPos, mouseY-camPosY, level.stages.get(currentStageIndex));
-        if (index==-1) {
+      if (deleteing&&delete) {//if deleting things 
+        int index=colid_index(mouseX+camPos, mouseY-camPosY, level.stages.get(currentStageIndex));//figure out what thing the mouse is over
+        if (index==-1) {//if the mouse is over nothing then do nothing
         } else {
-          current.parts.remove(index);
+          current.parts.remove(index);//remove the thing
         }
         delete=false;
       }
-      if (draw3DSwitch1) {
-        if (grid_mode) {
+      if (draw3DSwitch1) {//if drawing a 3d switch
+        if (grid_mode) {//draw the switch
           draw3DSwitch1(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size-camPos, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size+camPosY, 1);
         } else {
           draw3DSwitch1(mouseX, mouseY, 1);
         }
       }
-      if (draw3DSwitch2) {
-        if (grid_mode) {
+      if (draw3DSwitch2) {//if drawing a 3d switch
+        if (grid_mode) {//draw the switch
           draw3DSwitch2(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size-camPos, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size+camPosY, 1);
         } else {
           draw3DSwitch2(mouseX, mouseY, 1);
         }
       }
-      if (draw3DSwitch1&&draw) {
-        if (grid_mode) {
+      if (draw3DSwitch1&&draw) {//if attempting to add a 3D switch
+        if (grid_mode) {//add the switch to the stage
           current.parts.add(new SWon3D(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size, startingDepth));
         } else {
           current.parts.add(new SWon3D((int)mouseX+camPos, (int)mouseY-camPosY, startingDepth));
@@ -707,8 +705,8 @@ void stageEditGUI() {
         draw=false;
       }
 
-      if (draw3DSwitch2&&draw) {
-        if (grid_mode) {
+      if (draw3DSwitch2&&draw) {//if attempting to add a 3D switch 
+        if (grid_mode) {//add the 3D switch to the stage
           current.parts.add(new SWoff3D(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size, startingDepth));
         } else {
           current.parts.add(new SWoff3D((int)mouseX+camPos, (int)mouseY-camPosY, startingDepth));
@@ -716,8 +714,8 @@ void stageEditGUI() {
         draw=false;
       }
 
-      if (check_point&&draw) {
-        if (grid_mode) {
+      if (check_point&&draw) {//if adding a checkpoint
+        if (grid_mode) {//add a checkoint to the stage
           current.parts.add(new CheckPoint(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size, startingDepth));
         } else {
           current.parts.add(new CheckPoint((int)mouseX+camPos, (int)mouseY-camPosY, startingDepth));
@@ -725,37 +723,37 @@ void stageEditGUI() {
         draw=false;
       }
 
-      if (drawingPortal) {
-        if (grid_mode) {
+      if (drawingPortal) {//if placing a portal
+        if (grid_mode) {//diaply the portal
           drawPortal(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size-camPos, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size+camPosY, 1);
         } else {
           drawPortal(mouseX, mouseY, 1);
         }
       }
 
-      if (drawingPortal3) {
-        if (grid_mode) {
+      if (drawingPortal3) {//if placing a portal part 3 
+        if (grid_mode) {//display the portal
           drawPortal(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size-camPos, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size+camPosY, 1);
         } else {
           drawPortal(mouseX, mouseY, 1);
         }
       }
-      if (check_point) {
-        if (grid_mode) {
+      if (check_point) {//if adding checkoint
+        if (grid_mode) {//display a checkoint
           drawCheckPoint(Math.round((mouseX+camPos)*1.0/grid_size)*grid_size-camPos, Math.round((mouseY-camPosY)*1.0/grid_size)*grid_size+camPosY);
         } else {
           drawCheckPoint(mouseX, mouseY);
         }
       }
-      if (drawCoins) {
-        if (grid_mode) {
+      if (drawCoins) {//if adding coins
+        if (grid_mode) {//display a coin
           drawCoin(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size-camPos, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size+camPosY, 3);
         } else {
           drawCoin(mouseX, mouseY, 3);
         }
       }
-      if (drawingSign) {
-        if (grid_mode) {
+      if (drawingSign) {//if adding coins
+        if (grid_mode) {//display a coin
           drawSign(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size-camPos, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size+camPosY, Scale);
         } else {
           drawSign(mouseX, mouseY, Scale);
@@ -772,11 +770,11 @@ void stageEditGUI() {
 }
 
 void GUImouseClicked() {
-  if (editingStage||editingBlueprint) {
+  if (editingStage||editingBlueprint) {//if edditing a stage or blueprint
 
 
 
-    Stage current=null;
+    Stage current=null;//figure out what your edditing
     if (editingStage) {
       current=level.stages.get(currentStageIndex);
     }
@@ -785,27 +783,27 @@ void GUImouseClicked() {
     }
 
 
-    if (check_point) {
+    if (check_point) {//if checkoint
       if (mouseX >=buttonMin && mouseX <= buttonMax && mouseY >= 40 && mouseY <= 90) {
       } else {
         draw=true;
       }
     }
-    if (goal) {
+    if (goal) {//if placing finishline
       if (mouseX >=buttonMin && mouseX <= buttonMax && mouseY >= 40 && mouseY <= 90) {
       } else {
         draw=true;
       }
     }
-    if (deleteing) {
+    if (deleteing) {//if deleteing
       if (mouseX >=buttonMin && mouseX <= buttonMax && mouseY >= 40 && mouseY <= 90) {
       } else {
         delete=true;
       }
     }
-    if (moving_player) {
+    if (moving_player) {//if moving the player
       if (mouseX >=buttonMin && mouseX <= buttonMax && mouseY >= 40 && mouseY <= 90) {
-      } else {
+      } else {//set the players new position
         player1.setX(mouseX+camPos);
         player1.setY(mouseY-camPosY);
         if (level.stages.get(currentStageIndex).type.equals("3Dstage")) {
@@ -817,11 +815,10 @@ void GUImouseClicked() {
       }
       setPlayerPosTo=true;
     }
-    if (drawCoins) {
+    if (drawCoins) {//if drawing coin
       println("peepee poopoo");
       String tpe = current.type;
-      //Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size , Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size
-      if (grid_mode) {
+      if (grid_mode) {//add coins with data accorinding to how it needs to be integrated
         if (tpe.equals("stage")) {
           current.parts.add(new Coin(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size, level.numOfCoins));
         }
@@ -842,14 +839,14 @@ void GUImouseClicked() {
           current.parts.add(new Coin((int)mouseX+camPos, (int)mouseY-camPosY, startingDepth, 0));
         }
       }
-      if (editingStage) {
+      if (editingStage) {//if edditng stage the increwase the coin counter
         level.numOfCoins++;
         level.reloadCoins();
       }
     }
-    if (drawingPortal) {
+    if (drawingPortal) {//if drawing portal part 1
 
-      portalStage1=new JSONObject();
+      portalStage1=new JSONObject();//create and store data needed for the proper function of the portals
       portalStage2=new JSONObject();
       portalStage1.setString("type", "interdimentional Portal");
       portalStage2.setString("type", "interdimentional Portal");
@@ -874,9 +871,9 @@ void GUImouseClicked() {
       editingStage=false;
       preSI=currentStageIndex;
     }
-    if (drawingPortal3) {
+    if (drawingPortal3) {//if drawing portal part 3
 
-      if (grid_mode) {
+      if (grid_mode) {//gathe the remaining data required and then add the portal to the correct stages
         portalStage2.setInt("x", Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size);
         portalStage2.setInt("y", Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size);
         portalStage1.setInt("linkX", Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size);
@@ -898,15 +895,14 @@ void GUImouseClicked() {
       portalStage1=null;
       drawingPortal3=false;
     }
+    //add switches 
     if (draw3DSwitch1) {
-
       draw=true;
     }
     if (draw3DSwitch2) {
-
       draw=true;
     }
-    if (drawingSign&&!e3DMode) {
+    if (drawingSign&&!e3DMode) {//if drawing sign then add the sign to the stage
       String tpe = level.stages.get(currentStageIndex).type;
       if (tpe.equals("stage")) {
         if (grid_mode) {
@@ -924,10 +920,10 @@ void GUImouseClicked() {
       }
     }
 
-    if (selecting) {
+    if (selecting) {//if selecting figureout what is being selected
       selectedIndex=colid_index(mouseX+camPos, mouseY-camPosY, current);
     }
-    if (selectingBlueprint&&blueprints.length!=0) {
+    if (selectingBlueprint&&blueprints.length!=0) {//place selectedb bluepring and paste it into the stage
       StageComponent tmp;
       int ix, iy;
       if (grid_mode) {
@@ -937,7 +933,7 @@ void GUImouseClicked() {
         ix=mouseX+camPos;
         iy=mouseY-camPosY;
       }
-      for (int i=0; i<blueprints[currentBluieprintIndex].parts.size(); i++) {
+      for (int i=0; i<blueprints[currentBluieprintIndex].parts.size(); i++) {//translate the objects from blueprint form into stage readdy form
         tmp=blueprints[currentBluieprintIndex].parts.get(i);
         if (tmp instanceof Ground) {
           Ground g=(Ground)tmp;
@@ -1151,23 +1147,18 @@ void glitchEffect() {
 
 
 void engageHUDPosition() {
-  //translate(player1.x+DX,player1.y-DY,player1.z-DZ);
-  //rotateY(radians(-(xangle-180)));
-  //rotateX(radians(yangle));
-  //translate(-640,-360,-623);
   camera();
   hint(DISABLE_DEPTH_TEST);
   noLights();
 }
 
 void disEngageHUDPosition() {
-  //translate(640,360,623);
-  //rotateX(radians(-yangle));
-  //rotateY(radians((xangle-180)));
-  //translate(-1*(player1.x+DX),-1*(player1.y-DY),-1*(player1.z-DZ));
   hint(ENABLE_DEPTH_TEST);
 }
 
+/**coppy the blueprint so it can be correctly positoned on top of the stage for viewing
+
+*/
 void generateDisplayBlueprint() {
   displayBlueprint=new Stage("tmp", "blueprint");
   int ix, iy;
@@ -1192,7 +1183,7 @@ void generateDisplayBlueprint() {
   }
 }
 
-void renderBlueprint() {
+void renderBlueprint() {//render the blueprint on top of the stage
   for (int i=0; i<displayBlueprint.parts.size(); i++) {
     displayBlueprint.parts.get(i).draw();
   }
