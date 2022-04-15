@@ -13,14 +13,16 @@ class ToolBox extends PApplet {
   boolean typingSign=false, settingSkyColor=false;
 
   public void settings() {
-    size(1280, 720);
+    size(1280, 720,P2D);//mac os requires a render to be specified
+    smooth();
   }
   void setup() {
+    textSize(50);
     colorPage=new Button(50, 50, 100, 50, "colors/depth");
     toolsPage=new Button(155, 50, 100, 50, "tools");
     selectionPage=new Button(260, 50, 100, 50, "selection");
     stageSettings=new Button(365, 50, 100, 50, "stage settings");
-
+    
     toggle3DMode=new Button(820, 40+100, 50, 50, "  3D  ", 255, 203).setStrokeWeight(5);
     switch3D1=new Button(880, 40+100, 50, 50, 255, 203).setStrokeWeight(5);
     switch3D2=new Button(940, 40+100, 50, 50, 255, 203).setStrokeWeight(5);
