@@ -526,6 +526,7 @@ class ToolBox extends PApplet {
           else {
             toggle3DMode.setColor(255, #F2F258);
             toggle3DMode.draw();
+            textAlign(LEFT, BOTTOM);
             toggle3DMode.drawHoverText();
           }
         }//end of if stage is 3D
@@ -1114,7 +1115,7 @@ class ToolBox extends PApplet {
         StageComponent thing = level.stages.get(currentStageIndex).parts.get(selectedIndex);
         String type=thing.type;
         if (type.equals("WritableSign")) {//if the current selected object is a sign
-          if (mouseX>=width*0.05&&mouseX<=width*0.9&&mouseY>=height*0.21&&mouseY<=height*0.29) {
+          if (mouseX>=width*0.05&&mouseX<=width*0.9&&mouseY>=height*0.21&&mouseY<=height*0.29) {//place to click to start typing
             typingSign=true;
           } else {
             typingSign=false;
