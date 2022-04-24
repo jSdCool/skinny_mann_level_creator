@@ -80,7 +80,7 @@ class Button {
       window.strokeWeight(0);
       window.fill(htStroke);
       window.textSize(15);
-      window.rect(window.mouseX-7, window.mouseY-16, window.textWidth(hoverText)+14, 22);
+      window.rect(window.mouseX-6, window.mouseY-15, window.textWidth(hoverText)+12, 20);
       window.fill(htFill);
       window.rect(window.mouseX-4, window.mouseY-13, window.textWidth(hoverText)+8, 16);
       window.fill(htColor);

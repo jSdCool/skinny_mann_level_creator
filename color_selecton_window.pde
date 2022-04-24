@@ -23,25 +23,25 @@ class ToolBox extends PApplet {
     selectionPage=new Button(this,260, 50, 100, 50, "selection");
     stageSettings=new Button(this,365, 50, 100, 50, "stage settings");
     
-    toggle3DMode=new Button(this,820, 40+100, 50, 50, "  3D  ", 255, 203).setStrokeWeight(5);
-    switch3D1=new Button(this,880, 40+100, 50, 50, 255, 203).setStrokeWeight(5);
-    switch3D2=new Button(this,940, 40+100, 50, 50, 255, 203).setStrokeWeight(5);
-    saveLevel=new Button(this,1000, 40+100, 50, 50, "save", 255, 203).setStrokeWeight(5);
-    draw_sloap=new Button(this,700, 40+100, 50, 50, 255, 203).setStrokeWeight(5);
-    draw_holoTriangle=new Button(this,760, 40+100, 50, 50, 255, 203).setStrokeWeight(5);
-    draw_dethPlane=new Button(this,820, 40+100, 50, 50, 255, 203).setStrokeWeight(5);
-    draw_coin=new Button(this,580, 40+100, 50, 50, 255, 203).setStrokeWeight(5);
-    draw_portal=new Button(this,640, 40+100, 50, 50, 255, 203).setStrokeWeight(5);
-    exitStageEdit= new Button(this,520, 40+100, 50, 50, " < ", 255, 203).setStrokeWeight(5);
-    sign=new Button(this,1060, 140, 50, 50, 255, 203).setStrokeWeight(5);
-    select=new Button(this,1120, 140, 50, 50, "select", 255, 203).setStrokeWeight(5);
+    toggle3DMode=new Button(this,820, 40+100, 50, 50, "  3D  ", 255, 203).setStrokeWeight(5).setHoverText("toggle 3D mode");
+    switch3D1=new Button(this,880, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("turn 3D on switch");
+    switch3D2=new Button(this,940, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("turn 3D off switch");
+    saveLevel=new Button(this,1000, 40+100, 50, 50, "save", 255, 203).setStrokeWeight(5).setHoverText("save level");
+    draw_sloap=new Button(this,700, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("sloap");
+    draw_holoTriangle=new Button(this,760, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("holographic sloap(no colision)");
+    draw_dethPlane=new Button(this,820, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("death plane");
+    draw_coin=new Button(this,580, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("coin");
+    draw_portal=new Button(this,640, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("interdimentional portal");
+    exitStageEdit= new Button(this,520, 40+100, 50, 50, " < ", 255, 203).setStrokeWeight(5).setHoverText("exit to overview");
+    sign=new Button(this,1060, 140, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("sign");
+    select=new Button(this,1120, 140, 50, 50, "select", 255, 203).setStrokeWeight(5).setHoverText("select");
     skyColorB1=new Button(this,150, 165, 40, 40, 255, 203).setStrokeWeight(0);
     setSkyColor=new Button(this,300, 580, 100, 30, "set sky color").setStrokeWeight(2);
     resetSkyColor=new Button(this,200, 165, 40, 40, "reset", 255, 203).setStrokeWeight(0);
-    placeBlueprint=new Button(this,1180, 140, 50, 50, #0F1AD3, 203).setStrokeWeight(5);
+    placeBlueprint=new Button(this,1180, 140, 50, 50, #0F1AD3, 203).setStrokeWeight(5).setHoverText("place blurprint");
     nexBlueprint=new Button(this,width/2+200, height*0.7-25, 50, 50, ">", 255, 203).setStrokeWeight(5);
     prevBlueprint=new Button(this,width/2-200, height*0.7-25, 50, 50, "<", 255, 203).setStrokeWeight(5);
-    playSound=new Button(this,40, 200, 50, 50, 255, 203).setStrokeWeight(5);
+    playSound=new Button(this,40, 200, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("place sound");
     nextSound=new Button(this,width/2+300, height*0.4-25, 50, 50, ">", 255, 203).setStrokeWeight(5);
     prevSound=new Button(this,width/2-300, height*0.4-25, 50, 50, "<", 255, 203).setStrokeWeight(5);
   }
@@ -427,112 +427,21 @@ class ToolBox extends PApplet {
             textSize(15);
             text("hologram", mouseX, mouseY+5);
           }
-          if (exitStageEdit.isMouseOver()) {
-            stroke(0);
-            fill(200);
-            strokeWeight(2);
-            rect(mouseX-4, mouseY-13, 125, 16);
-            fill(0);
-            textSize(15);
-            text("exit to overview", mouseX, mouseY+5);
-          }
-          textAlign(LEFT, BOTTOM);
-          if (draw_coin.isMouseOver()) {
-            stroke(0);
-            fill(200);
-            strokeWeight(2);
-            rect(mouseX-4, mouseY-13, 38, 16);
-            fill(0);
-            textSize(15);
-            text("coin", mouseX, mouseY+5);
-          }
-          if (draw_portal.isMouseOver()) {
-            stroke(0);
-            fill(200);
-            strokeWeight(2);
-            rect(mouseX-4, mouseY-13, 180, 16);
-            fill(0);
-            textSize(15);
-            text("inter dimentional portal", mouseX, mouseY+5);
-          }
+          exitStageEdit.drawHoverText();
+          draw_coin.drawHoverText();
+          draw_portal.drawHoverText();
           if (!level.stages.get(currentStageIndex).type.equals("3Dstage")) {
-            if (draw_sloap.isMouseOver()) {
-              stroke(0);
-              fill(200);
-              strokeWeight(2);
-              rect(mouseX-4, mouseY-13, 45, 16);
-              fill(0);
-              textSize(15);
-              text("sloap", mouseX, mouseY+5);
-            }
-            if (draw_holoTriangle.isMouseOver()) {
-              stroke(0);
-              fill(200);
-              strokeWeight(2);
-              rect(mouseX-4, mouseY-13, 138, 16);
-              fill(0);
-              textSize(15);
-              text("holographic sloap", mouseX, mouseY+5);
-            }
-
-
-            if (draw_dethPlane.isMouseOver()) {
-              stroke(0);
-              fill(200);
-              strokeWeight(2);
-              rect(mouseX-4, mouseY-13, 85, 16);
-              fill(0);
-              textSize(15);
-              text("deth plane", mouseX, mouseY+5);
-            }
-            if (placeBlueprint.isMouseOver()) {
-              stroke(0);
-              fill(200);
-              strokeWeight(2);
-              textSize(15);
-              rect(mouseX-4, mouseY-13, textWidth("place blueprint")+8, 16);
-              fill(0);
-              text("place blueprint", mouseX, mouseY+5);
-            }
+            draw_sloap.drawHoverText();
+            draw_holoTriangle.drawHoverText();
+            draw_dethPlane.drawHoverText();
+            placeBlueprint.drawHoverText();
           }//end of level is not 3D
-          if (playSound.isMouseOver()) {
-            stroke(0);
-            fill(200);
-            strokeWeight(2);
-            textSize(15);
-            rect(mouseX-4, mouseY-13, textWidth("place sound")+8, 16);
-            fill(0);
-            text("place sound", mouseX, mouseY+5);
-          }
+          playSound.drawHoverText();
 
-          if (sign.isMouseOver()) {
-            stroke(0);
-            fill(200);
-            strokeWeight(2);
-            rect(mouseX-4, mouseY-13, textWidth("sign"), 16);
-            fill(0);
-            textSize(15);
-            text("sign", mouseX, mouseY+5);
-          }
-          if (select.isMouseOver()) {
-            stroke(0);
-            fill(200);
-            strokeWeight(2);
-            rect(mouseX-4, mouseY-13, textWidth("select"), 16);
-            fill(0);
-            textSize(15);
-            text("select", mouseX, mouseY+5);
-          }
+          sign.drawHoverText();
+          select.drawHoverText();
         }//end of not 3d mode
-        if (saveLevel.isMouseOver()) {
-          stroke(0);
-          fill(200);
-          strokeWeight(2);
-          rect(mouseX-4, mouseY-13, 75, 16);
-          fill(0);
-          textSize(15);
-          text("save level", mouseX, mouseY+5);
-        }
+        saveLevel.drawHoverText();
 
 
         if (level.stages.get(currentStageIndex).type.equals("3Dstage")) {
@@ -695,38 +604,9 @@ class ToolBox extends PApplet {
 
             saveLevel.draw();
             textAlign(LEFT, BOTTOM);
-            if (toggle3DMode.isMouseOver()) {
-              stroke(0);
-              fill(200);
-              strokeWeight(2);
-              rect(mouseX-4, mouseY-13, 125, 16);
-              fill(0);
-              textSize(15);
-              textAlign(LEFT, BOTTOM);
-              text("toggle 3D mode", mouseX, mouseY+5);
-            }
-
-            if (switch3D1.isMouseOver()) {
-              stroke(0);
-              fill(200);
-              strokeWeight(2);
-              rect(mouseX-4, mouseY-13, 140, 16);
-              fill(0);
-              textSize(15);
-              textAlign(LEFT, BOTTOM);
-              text("turn 3D on switch", mouseX, mouseY+5);
-            }
-
-            if (switch3D2.isMouseOver()) {
-              stroke(0);
-              fill(200);
-              strokeWeight(2);
-              rect(mouseX-4, mouseY-13, 140, 16);
-              fill(0);
-              textSize(15);
-              textAlign(LEFT, BOTTOM);
-              text("turn 3D off switch", mouseX, mouseY+5);
-            }
+            toggle3DMode.drawHoverText();
+            switch3D1.drawHoverText();
+            switch3D2.drawHoverText();
             if (mouseX >=160 && mouseX <= 190 && mouseY >= 40+100 && mouseY <= 90+100) {
               stroke(0);
               fill(200);
@@ -736,15 +616,7 @@ class ToolBox extends PApplet {
               textSize(15);
               text("checkpoint", mouseX, mouseY+5);
             }
-            if (draw_portal.isMouseOver()) {
-              stroke(0);
-              fill(200);
-              strokeWeight(2);
-              rect(mouseX-4, mouseY-13, 180, 16);
-              fill(0);
-              textSize(15);
-              text("inter dimentional portal", mouseX, mouseY+5);
-            }
+            draw_portal.drawHoverText();
             if (mouseX >=460 && mouseX <= 500 && mouseY >= 40+100 && mouseY <= 90+100) {
               stroke(0);
               fill(200);
@@ -754,25 +626,8 @@ class ToolBox extends PApplet {
               textSize(15);
               text("hologram (solid in 3D)", mouseX, mouseY+5);
             }
-            if (draw_coin.isMouseOver()) {
-              stroke(0);
-              fill(200);
-              strokeWeight(2);
-              rect(mouseX-4, mouseY-13, 38, 16);
-              fill(0);
-              textSize(15);
-              text("coin", mouseX, mouseY+5);
-            }
-
-            if (saveLevel.isMouseOver()) {
-              stroke(0);
-              fill(200);
-              strokeWeight(2);
-              rect(mouseX-4, mouseY-13, 75, 16);
-              fill(0);
-              textSize(15);
-              text("save level", mouseX, mouseY+5);
-            }
+            draw_coin.drawHoverText();
+            saveLevel.drawHoverText();
             textAlign(LEFT, BOTTOM);
             if (mouseX >=40 && mouseX <= 90 && mouseY >= 40+100 && mouseY <= 90+100) {
               stroke(0);
@@ -792,15 +647,7 @@ class ToolBox extends PApplet {
               textSize(15);
               text("solid ground", mouseX, mouseY+5);
             }
-            if (exitStageEdit.isMouseOver()) {
-              stroke(0);
-              fill(200);
-              strokeWeight(2);
-              rect(mouseX-4, mouseY-13, 125, 16);
-              fill(0);
-              textSize(15);
-              text("exit to overview", mouseX, mouseY+5);
-            }
+            exitStageEdit.drawHoverText();
             if (mouseX >=400 && mouseX <= 440 && mouseY >= 40+100 && mouseY <= 90+100) {
               stroke(0);
               fill(200);
@@ -823,17 +670,7 @@ class ToolBox extends PApplet {
           else {
             toggle3DMode.setColor(255, #F2F258);
             toggle3DMode.draw();
-            if (toggle3DMode.isMouseOver()) {
-              textAlign(LEFT, BOTTOM);
-              stroke(0);
-              fill(200);
-              strokeWeight(2);
-              rect(mouseX-4, mouseY-13, 125, 16);
-              fill(0);
-              textSize(15);
-              textAlign(LEFT, BOTTOM);
-              text("toggle 3D mode", mouseX, mouseY+5);
-            }
+            toggle3DMode.drawHoverText();
           }
         }//end of if stage is 3D
 
@@ -1011,24 +848,8 @@ class ToolBox extends PApplet {
             textSize(15);
             text("hologram (solid in 3D)", mouseX, mouseY+5);
           }
-          if (draw_coin.isMouseOver()) {
-            stroke(0);
-            fill(200);
-            strokeWeight(2);
-            rect(mouseX-4, mouseY-13, 38, 16);
-            fill(0);
-            textSize(15);
-            text("coin", mouseX, mouseY+5);
-          }
-          if (saveLevel.isMouseOver()) {
-            stroke(0);
-            fill(200);
-            strokeWeight(2);
-            rect(mouseX-4, mouseY-13, 75, 16);
-            fill(0);
-            textSize(15);
-            text("save level", mouseX, mouseY+5);
-          }
+          draw_coin.drawHoverText();
+          saveLevel.drawHoverText();
           if (mouseX >=160 && mouseX <= 190 && mouseY >= 40+100 && mouseY <= 90+100) {
             stroke(0);
             fill(200);
@@ -1038,24 +859,8 @@ class ToolBox extends PApplet {
             textSize(15);
             text("checkpoint", mouseX, mouseY+5);
           }
-          if (draw_sloap.isMouseOver()) {
-            stroke(0);
-            fill(200);
-            strokeWeight(2);
-            rect(mouseX-4, mouseY-13, 45, 16);
-            fill(0);
-            textSize(15);
-            text("sloap", mouseX, mouseY+5);
-          }
-          if (draw_holoTriangle.isMouseOver()) {
-            stroke(0);
-            fill(200);
-            strokeWeight(2);
-            rect(mouseX-4, mouseY-13, 138, 16);
-            fill(0);
-            textSize(15);
-            text("holographic sloap", mouseX, mouseY+5);
-          }
+          draw_sloap.drawHoverText();
+          draw_holoTriangle.drawHoverText();
         }//end of type is blueprint
       } else {
         fill(0);
