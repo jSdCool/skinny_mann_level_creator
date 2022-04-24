@@ -9,7 +9,7 @@ class ToolBox extends PApplet {
   public int redVal=0, greenVal=0, blueVal=0, CC=0;
   int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset;
   String page="colors";
-  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound;
+  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound,checkpointButton,playPauseButton,groundButton,goalButton,deleteButton,movePlayerButton,gridModeButton,holoButton;
   boolean typingSign=false, settingSkyColor=false;
 
   public void settings() {
@@ -44,6 +44,14 @@ class ToolBox extends PApplet {
     playSound=new Button(this,40, 200, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("place sound");
     nextSound=new Button(this,width/2+300, height*0.4-25, 50, 50, ">", 255, 203).setStrokeWeight(5);
     prevSound=new Button(this,width/2-300, height*0.4-25, 50, 50, "<", 255, 203).setStrokeWeight(5);
+    checkpointButton=new Button(this,160, 40+100, 50, 50,255,203).setStrokeWeight(5).setHoverText("check point");
+    playPauseButton=new Button(this,40, 40+100, 50, 50,255,203).setStrokeWeight(5).setHoverText("play/pause the simulation");
+    groundButton=new Button(this,100, 40+100, 50, 50,255,203).setStrokeWeight(5).setHoverText("solid ground");
+    goalButton=new Button(this,220, 40+100, 50, 50,255,203).setStrokeWeight(5).setHoverText("finish line");
+    deleteButton=new Button(this,280, 40+100, 50, 50,255,203).setStrokeWeight(5).setHoverText("delete");
+    movePlayerButton=new Button(this,340, 40+100, 50, 50,255,203).setStrokeWeight(5).setHoverText("move player");
+    gridModeButton=new Button(this,400, 40+100, 50, 50,255,203).setStrokeWeight(5).setHoverText("grid mode");
+    holoButton=new Button(this,460, 40+100, 50, 50,255,203).setStrokeWeight(5).setHoverText("hologram (no collision)");
   }
 
 
@@ -124,10 +132,7 @@ class ToolBox extends PApplet {
       if (editingStage) {
 
 
-        fill(203);
-        rect(35, 35+100, 60, 60);
-        fill(255);
-        rect(40, 40+100, 50, 50);
+        playPauseButton.draw();
         fill(0);
         stroke(0);
         strokeWeight(0);
@@ -141,37 +146,25 @@ class ToolBox extends PApplet {
         if (!e3DMode) {
           strokeWeight(0);
           if (ground) {
-            fill(#F2F258);
+            groundButton.setColor(255,#F2F258);
           } else {
-            fill(203);
+            groundButton.setColor(255,203);
           }
-          rect(95, 35+100, 60, 60);
-          fill(255);
-          rect(100, 40+100, 50, 50);
+          groundButton.draw();
           fill(-7254783);
           stroke(-7254783);
           rect(100, 70+100, 50, 20);
           fill(-16732415);
           stroke(-16732415);
           rect(100, 60+100, 50, 10);
-
-          //if (ground||holo_gram) {
-          //  fill(Color);
-          //  stroke(0);
-          //  strokeWeight(2);
-          //  rect(40, 100+100, 230, 10);
-          //  rect(40, 120+100, 230, 10);
-          //  rect(40, 140+100, 230, 10);
-          //}
+          
           strokeWeight(0);
           if (check_point) {
-            fill(#F2F258);
+            checkpointButton.setColor(255,#F2F258);
           } else {
-            fill(203);
+            checkpointButton.setColor(255,203);
           }
-          rect(155, 35+100, 60, 60);
-          fill(255);
-          rect(160, 40+100, 50, 50);
+          checkpointButton.draw();
           fill(#B9B9B9);
           strokeWeight(0);
           rect(168, 45+100, 5, 40);
@@ -180,15 +173,14 @@ class ToolBox extends PApplet {
           strokeWeight(0);
           triangle(170, 85-60+20+100, 170, 85-40+20+100, 170+30, 85-50+20+100);
           strokeWeight(0);
+          
           if (!level.stages.get(currentStageIndex).type.equals("3Dstage")) {
             if (goal) {
-              fill(#F2F258);
+              goalButton.setColor(255,#F2F258);
             } else {
-              fill(203);
+              goalButton.setColor(255,203);
             }
-            rect(215, 35+100, 60, 60);
-            fill(255);
-            rect(220, 40+100, 50, 50);
+            goalButton.draw();
             fill(0);
             stroke(0);
             strokeWeight(0);
@@ -199,14 +191,11 @@ class ToolBox extends PApplet {
             rect(253, 73+100, 15, 15);
           }
           if (deleteing) {
-            fill(#F2F258);
+            deleteButton.setColor(255,#F2F258);
           } else {
-            fill(203);
+            deleteButton.setColor(255,203);
           }
-          rect(275, 35+100, 60, 60);
-          fill(255);
-          strokeWeight(0);
-          rect(280, 40+100, 50, 50);
+          deleteButton.draw();
           fill(203);
           stroke(203);
           strokeWeight(0);
@@ -219,26 +208,20 @@ class ToolBox extends PApplet {
           rect(307, 60+100, 5, 20);
 
           if (moving_player) {
-            fill(#F2F258);
+            movePlayerButton.setColor(255,#F2F258);
           } else {
-            fill(203);
+            movePlayerButton.setColor(255,203);
           }
-          rect(335, 35+100, 60, 60);
-          fill(255);
-          strokeWeight(0);
-          rect(340, 40+100, 50, 50);
+          movePlayerButton.draw();
           strokeWeight(0);
           draw_mann(365, 88+100, 1, 0.6, "red");
 
           if (grid_mode) {
-            fill(#F2F258);
+            gridModeButton.setColor(255,#F2F258);
           } else {
-            fill(203);
+            gridModeButton.setColor(255,203);
           }
-          rect(395, 35+100, 60, 60);
-          fill(255);
-          strokeWeight(0);
-          rect(400, 40+100, 50, 50);
+          gridModeButton.draw();
           textSize(20);
           fill(0);
           stroke(0);
@@ -254,14 +237,11 @@ class ToolBox extends PApplet {
           text(grid_size, 410, 80+100);
           strokeWeight(0);
           if (holo_gram) {
-            fill(#F2F258);
+            holoButton.setColor(255,#F2F258);
           } else {
-            fill(203);
+            holoButton.setColor(255,203);
           }
-          rect(455, 35+100, 60, 60);
-          fill(255);
-          strokeWeight(0);
-          rect(460, 40+100, 50, 50);
+          holoButton.draw();
           exitStageEdit.draw();
 
           if (drawCoins) {
@@ -348,85 +328,20 @@ class ToolBox extends PApplet {
         saveLevel.draw();
 
 
-
+        //button hover text
         textAlign(LEFT, BOTTOM);
-        if (mouseX >=40 && mouseX <= 90 && mouseY >= 40+100 && mouseY <= 90+100) {
-          stroke(0);
-          fill(200);
-          strokeWeight(2);
-          rect(mouseX-4, mouseY-13, 200, 16);
-          fill(0);
-          textSize(15);
-          text("play/pause the simulation", mouseX, mouseY+5);
-        }
+        playPauseButton.drawHoverText();
         if (!e3DMode) {
-          if (mouseX >=100 && mouseX <= 140 && mouseY >= 40+100 && mouseY <= 90+100) {
-            stroke(0);
-            fill(200);
-            strokeWeight(2);
-            rect(mouseX-4, mouseY-13, 100, 16);
-            fill(0);
-            textSize(15);
-            text("solid ground", mouseX, mouseY+5);
-          }
-          if (mouseX >=160 && mouseX <= 190 && mouseY >= 40+100 && mouseY <= 90+100) {
-            stroke(0);
-            fill(200);
-            strokeWeight(2);
-            rect(mouseX-4, mouseY-13, 85, 16);
-            fill(0);
-            textSize(15);
-            text("checkpoint", mouseX, mouseY+5);
-          }
+          groundButton.drawHoverText();
+          checkpointButton.drawHoverText();
           if (!level.stages.get(currentStageIndex).type.equals("3Dstage")) {
-            if (mouseX >=220 && mouseX <= 270 && mouseY >= 40+100 && mouseY <= 90+100) {
-              stroke(0);
-              fill(200);
-              strokeWeight(2);
-              rect(mouseX-4, mouseY-13, 80, 16);
-              fill(0);
-              textSize(15);
-              text("finish line", mouseX, mouseY+5);
-            }
+            goalButton.drawHoverText();
           }
 
-          if (mouseX >=280 && mouseX <= 330 && mouseY >= 40+100 && mouseY <= 90+100) {
-            stroke(0);
-            fill(200);
-            strokeWeight(2);
-            rect(mouseX-4, mouseY-13, 50, 16);
-            fill(0);
-            textSize(15);
-            text("delete", mouseX, mouseY+5);
-          }
-          if (mouseX >=340 && mouseX <= 390 && mouseY >= 40+100 && mouseY <= 90+100) {
-            stroke(0);
-            fill(200);
-            strokeWeight(2);
-            rect(mouseX-4, mouseY-13, 97, 16);
-            fill(0);
-            textSize(15);
-            text("move player", mouseX, mouseY+5);
-          }
-          if (mouseX >=400 && mouseX <= 440 && mouseY >= 40+100 && mouseY <= 90+100) {
-            stroke(0);
-            fill(200);
-            strokeWeight(2);
-            rect(mouseX-4, mouseY-13, 85, 16);
-            fill(0);
-            textSize(15);
-            text("grid mode", mouseX, mouseY+5);
-          }
-
-          if (mouseX >=460 && mouseX <= 500 && mouseY >= 40+100 && mouseY <= 90+100) {
-            stroke(0);
-            fill(200);
-            strokeWeight(2);
-            rect(mouseX-4, mouseY-13, 85, 16);
-            fill(0);
-            textSize(15);
-            text("hologram", mouseX, mouseY+5);
-          }
+          deleteButton.drawHoverText();
+          movePlayerButton.drawHoverText();
+          gridModeButton.drawHoverText();
+          holoButton.drawHoverText();
           exitStageEdit.drawHoverText();
           draw_coin.drawHoverText();
           draw_portal.drawHoverText();
@@ -450,10 +365,7 @@ class ToolBox extends PApplet {
             toggle3DMode.setColor(255, 203);
             toggle3DMode.draw();
 
-            fill(203);
-            rect(35, 35+100, 60, 60);
-            fill(255);
-            rect(40, 40+100, 50, 50);
+            playPauseButton.draw();
             fill(0);
             stroke(0);
             strokeWeight(0);
@@ -466,13 +378,11 @@ class ToolBox extends PApplet {
 
             strokeWeight(0);
             if (ground) {
-              fill(#F2F258);
+              groundButton.setColor(255,#F2F258);
             } else {
-              fill(203);
+              groundButton.setColor(255,203);
             }
-            rect(95, 35+100, 60, 60);
-            fill(255);
-            rect(100, 40+100, 50, 50);
+            groundButton.draw();
             fill(-7254783);
             stroke(-7254783);
             rect(100, 70+100, 50, 20);
@@ -483,14 +393,11 @@ class ToolBox extends PApplet {
             textAlign(LEFT, BOTTOM);
 
             if (grid_mode) {
-              fill(#F2F258);
+              gridModeButton.setColor(255,#F2F258);
             } else {
-              fill(203);
+              gridModeButton.setColor(255,203);
             }
-            rect(395, 35+100, 60, 60);
-            fill(255);
-            strokeWeight(0);
-            rect(400, 40+100, 50, 50);
+            gridModeButton.draw();
             textSize(20);
             fill(0);
             stroke(0);
@@ -506,14 +413,11 @@ class ToolBox extends PApplet {
             text(grid_size, 410, 80+100);
             strokeWeight(0);
             if (deleteing) {
-              fill(#F2F258);
+              deleteButton.setColor(255,#F2F258);
             } else {
-              fill(203);
+              deleteButton.setColor(255,203);
             }
-            rect(275, 35+100, 60, 60);
-            fill(255);
-            strokeWeight(0);
-            rect(280, 40+100, 50, 50);
+            deleteButton.draw();
             fill(203);
             stroke(203);
             strokeWeight(0);
@@ -526,14 +430,11 @@ class ToolBox extends PApplet {
             rect(307, 60+100, 5, 20);
 
             if (moving_player) {
-              fill(#F2F258);
+              movePlayerButton.setColor(255,#F2F258);
             } else {
-              fill(203);
+              movePlayerButton.setColor(255,203);
             }
-            rect(335, 35+100, 60, 60);
-            fill(255);
-            strokeWeight(0);
-            rect(340, 40+100, 50, 50);
+            movePlayerButton.draw();
             strokeWeight(0);
             draw_mann(365, 88+100, 1, 0.6, "red");
 
@@ -543,13 +444,11 @@ class ToolBox extends PApplet {
 
 
             if (check_point) {
-              fill(#F2F258);
+              checkpointButton.setColor(255,#F2F258);
             } else {
-              fill(203);
+              checkpointButton.setColor(255,203);
             }
-            rect(155, 35+100, 60, 60);
-            fill(255);
-            rect(160, 40+100, 50, 50);
+            checkpointButton.draw();
             fill(#B9B9B9);
             strokeWeight(0);
             rect(168, 45+100, 5, 40);
@@ -561,14 +460,11 @@ class ToolBox extends PApplet {
 
 
             if (holo_gram) {
-              fill(#F2F258);
+              holoButton.setColor(255,#F2F258);
             } else {
-              fill(203);
+              holoButton.setColor(255,203);
             }
-            rect(455, 35+100, 60, 60);
-            fill(255);
-            strokeWeight(0);
-            rect(460, 40+100, 50, 50);
+            holoButton.draw();
 
             if (draw3DSwitch1) {
               switch3D1.setColor(255, #F2F258);
@@ -607,17 +503,9 @@ class ToolBox extends PApplet {
             toggle3DMode.drawHoverText();
             switch3D1.drawHoverText();
             switch3D2.drawHoverText();
-            if (mouseX >=160 && mouseX <= 190 && mouseY >= 40+100 && mouseY <= 90+100) {
-              stroke(0);
-              fill(200);
-              strokeWeight(2);
-              rect(mouseX-4, mouseY-13, 85, 16);
-              fill(0);
-              textSize(15);
-              text("checkpoint", mouseX, mouseY+5);
-            }
+            checkpointButton.drawHoverText();
             draw_portal.drawHoverText();
-            if (mouseX >=460 && mouseX <= 500 && mouseY >= 40+100 && mouseY <= 90+100) {
+            if (holoButton.isMouseOver()) {//this one has to stay
               stroke(0);
               fill(200);
               strokeWeight(2);
@@ -629,43 +517,11 @@ class ToolBox extends PApplet {
             draw_coin.drawHoverText();
             saveLevel.drawHoverText();
             textAlign(LEFT, BOTTOM);
-            if (mouseX >=40 && mouseX <= 90 && mouseY >= 40+100 && mouseY <= 90+100) {
-              stroke(0);
-              fill(200);
-              strokeWeight(2);
-              rect(mouseX-4, mouseY-13, 200, 16);
-              fill(0);
-              textSize(15);
-              text("play/pause the simulation", mouseX, mouseY+5);
-            }
-            if (mouseX >=100 && mouseX <= 140 && mouseY >= 40+100 && mouseY <= 90+100) {
-              stroke(0);
-              fill(200);
-              strokeWeight(2);
-              rect(mouseX-4, mouseY-13, 100, 16);
-              fill(0);
-              textSize(15);
-              text("solid ground", mouseX, mouseY+5);
-            }
+            playPauseButton.drawHoverText();
+            groundButton.drawHoverText();
             exitStageEdit.drawHoverText();
-            if (mouseX >=400 && mouseX <= 440 && mouseY >= 40+100 && mouseY <= 90+100) {
-              stroke(0);
-              fill(200);
-              strokeWeight(2);
-              rect(mouseX-4, mouseY-13, 85, 16);
-              fill(0);
-              textSize(15);
-              text("grid mode", mouseX, mouseY+5);
-            }
-            if (mouseX >=280 && mouseX <= 330 && mouseY >= 40+100 && mouseY <= 90+100) {
-              stroke(0);
-              fill(200);
-              strokeWeight(2);
-              rect(mouseX-4, mouseY-13, 50, 16);
-              fill(0);
-              textSize(15);
-              text("delete", mouseX, mouseY+5);
-            }
+            gridModeButton.drawHoverText();
+            deleteButton.drawHoverText();
           }//end of if not in 3D mode
           else {
             toggle3DMode.setColor(255, #F2F258);
@@ -695,13 +551,11 @@ class ToolBox extends PApplet {
         if (workingBlueprint.type.equals("blueprint")) {
           strokeWeight(0);
           if (ground) {
-            fill(#F2F258);
+            groundButton.setColor(255,#F2F258);
           } else {
-            fill(203);
+            groundButton.setColor(255,203);
           }
-          rect(95, 35+100, 60, 60);
-          fill(255);
-          rect(100, 40+100, 50, 50);
+          groundButton.draw();
           fill(-7254783);
           stroke(-7254783);
           rect(100, 70+100, 50, 20);
@@ -711,13 +565,11 @@ class ToolBox extends PApplet {
 
           strokeWeight(0);
           if (check_point) {
-            fill(#F2F258);
+            checkpointButton.setColor(255,#F2F258);
           } else {
-            fill(203);
+            checkpointButton.setColor(255,203);
           }
-          rect(155, 35+100, 60, 60);
-          fill(255);
-          rect(160, 40+100, 50, 50);
+          checkpointButton.draw();
           fill(#B9B9B9);
           strokeWeight(0);
           rect(168, 45+100, 5, 40);
@@ -730,14 +582,11 @@ class ToolBox extends PApplet {
           textAlign(LEFT, BOTTOM);
 
           if (grid_mode) {
-            fill(#F2F258);
+            gridModeButton.setColor(255,#F2F258);
           } else {
-            fill(203);
+            gridModeButton.setColor(255,203);
           }
-          rect(395, 35+100, 60, 60);
-          fill(255);
-          strokeWeight(0);
-          rect(400, 40+100, 50, 50);
+          gridModeButton.draw();
           textSize(20);
           fill(0);
           stroke(0);
@@ -753,14 +602,11 @@ class ToolBox extends PApplet {
           text(grid_size, 410, 80+100);
           strokeWeight(0);
           if (deleteing) {
-            fill(#F2F258);
+            deleteButton.setColor(255,#F2F258);
           } else {
-            fill(203);
+            deleteButton.setColor(255,203);
           }
-          rect(275, 35+100, 60, 60);
-          fill(255);
-          strokeWeight(0);
-          rect(280, 40+100, 50, 50);
+          deleteButton.draw();
           fill(203);
           stroke(203);
           strokeWeight(0);
@@ -801,64 +647,21 @@ class ToolBox extends PApplet {
           strokeWeight(0);
           triangle(765, 85+100, 805, 85+100, 805, 45+100);
           if (holo_gram) {
-            fill(#F2F258);
+            holoButton.setColor(255,#F2F258);
           } else {
-            fill(203);
+            holoButton.setColor(255,203);
           }
-          rect(455, 35+100, 60, 60);
-          fill(255);
-          strokeWeight(0);
-          rect(460, 40+100, 50, 50);
+          holoButton.draw();
           saveLevel.draw();
 
           textAlign(LEFT, BOTTOM);
-          if (mouseX >=100 && mouseX <= 140 && mouseY >= 40+100 && mouseY <= 90+100) {
-            stroke(0);
-            fill(200);
-            strokeWeight(2);
-            rect(mouseX-4, mouseY-13, 100, 16);
-            fill(0);
-            textSize(15);
-            text("solid ground", mouseX, mouseY+5);
-          }
-          if (mouseX >=400 && mouseX <= 440 && mouseY >= 40+100 && mouseY <= 90+100) {
-            stroke(0);
-            fill(200);
-            strokeWeight(2);
-            rect(mouseX-4, mouseY-13, 85, 16);
-            fill(0);
-            textSize(15);
-            text("grid mode", mouseX, mouseY+5);
-          }
-          if (mouseX >=280 && mouseX <= 330 && mouseY >= 40+100 && mouseY <= 90+100) {
-            stroke(0);
-            fill(200);
-            strokeWeight(2);
-            rect(mouseX-4, mouseY-13, 50, 16);
-            fill(0);
-            textSize(15);
-            text("delete", mouseX, mouseY+5);
-          }
-          if (mouseX >=460 && mouseX <= 500 && mouseY >= 40+100 && mouseY <= 90+100) {
-            stroke(0);
-            fill(200);
-            strokeWeight(2);
-            rect(mouseX-4, mouseY-13, 165, 16);
-            fill(0);
-            textSize(15);
-            text("hologram (solid in 3D)", mouseX, mouseY+5);
-          }
+          groundButton.drawHoverText();
+          gridModeButton.drawHoverText();
+          deleteButton.drawHoverText();
+          holoButton.drawHoverText();
           draw_coin.drawHoverText();
           saveLevel.drawHoverText();
-          if (mouseX >=160 && mouseX <= 190 && mouseY >= 40+100 && mouseY <= 90+100) {
-            stroke(0);
-            fill(200);
-            strokeWeight(2);
-            rect(mouseX-4, mouseY-13, 85, 16);
-            fill(0);
-            textSize(15);
-            text("checkpoint", mouseX, mouseY+5);
-          }
+          checkpointButton.drawHoverText();
           draw_sloap.drawHoverText();
           draw_holoTriangle.drawHoverText();
         }//end of type is blueprint
@@ -1030,8 +833,8 @@ class ToolBox extends PApplet {
             turnThingsOff();
             dethPlane=true;
           }
-          if (mouseX >=40 && mouseX <= 270 && mouseY >= 40+100 && mouseY <= 90+100) {
-            if (mouseX >=40 && mouseX <= 90 && mouseY >= 40+100 && mouseY <= 90+100) {
+
+            if (playPauseButton.isMouseOver()) {
               extra=true;
               if (extra&&simulating) {
                 simulating=false;
@@ -1042,29 +845,29 @@ class ToolBox extends PApplet {
                 extra=false;
               }
             }
-          }
+          
 
-          if (mouseX >=100 && mouseX <= 140 && mouseY >= 40+100 && mouseY <= 90+100) {
+          if (groundButton.isMouseOver()) {
             turnThingsOff();
             ground=true;
           }
-          if (mouseX >=160 && mouseX <= 190 && mouseY >= 40+100 && mouseY <= 90+100) {
+          if (checkpointButton.isMouseOver()) {
             turnThingsOff();
             check_point=true;
           }
-          if (mouseX >=220 && mouseX <= 270 && mouseY >= 40+100 && mouseY <= 90+100) {
+          if (goalButton.isMouseOver()) {
             turnThingsOff();
             goal=true;
           }
-          if (mouseX >=280 && mouseX <= 330 && mouseY >= 40+100 && mouseY <= 90+100) {
+          if (deleteButton.isMouseOver()) {
             turnThingsOff();
             deleteing=true;
           }
-          if (mouseX >=340 && mouseX <= 390 && mouseY >= 40+100 && mouseY <= 90+100) {
+          if (movePlayerButton.isMouseOver()) {
             turnThingsOff();
             moving_player=true;
           }
-          if (mouseX >=400 && mouseX <= 440 && mouseY >= 40+100 && mouseY <= 90+100) {
+          if (gridModeButton.isMouseOver()) {
             extra=true;
             if (extra&&grid_mode) {
               grid_mode=false;
@@ -1076,7 +879,7 @@ class ToolBox extends PApplet {
             }
           }
 
-          if (mouseX >=460 && mouseX <= 500 && mouseY >= 40+100 && mouseY <= 90+100) {
+          if (holoButton.isMouseOver()) {
             turnThingsOff();
             holo_gram=true;
           }
@@ -1132,8 +935,8 @@ class ToolBox extends PApplet {
         if (level.stages.get(currentStageIndex).type.equals("3Dstage")) {
 
           if (!e3DMode) {
-            if (mouseX >=40 && mouseX <= 270 && mouseY >= 40+100 && mouseY <= 90+100) {//pause / play button
-              if (mouseX >=40 && mouseX <= 90 && mouseY >= 40+100 && mouseY <= 90+100) {
+
+              if (playPauseButton.isMouseOver()) {
                 extra=true;
                 if (extra&&simulating) {
                   simulating=false;
@@ -1144,19 +947,19 @@ class ToolBox extends PApplet {
                   extra=false;
                 }
               }
-            }
+            
 
-            if (mouseX >=100 && mouseX <= 140 && mouseY >= 40+100 && mouseY <= 90+100) {
+            if (groundButton.isMouseOver()) {
               turnThingsOff();
               ground=true;
             }
 
-            if (mouseX >=280 && mouseX <= 330 && mouseY >= 40+100 && mouseY <= 90+100) {
+            if (deleteButton.isMouseOver()) {
               turnThingsOff();
               deleteing=true;
             }
 
-            if (mouseX >=400 && mouseX <= 440 && mouseY >= 40+100 && mouseY <= 90+100) {
+            if (gridModeButton.isMouseOver()) {
               extra=true;
               if (extra&&grid_mode) {
                 grid_mode=false;
@@ -1168,7 +971,7 @@ class ToolBox extends PApplet {
               }
             }
 
-            if (mouseX >=340 && mouseX <= 390 && mouseY >= 40+100 && mouseY <= 90+100) {
+            if (movePlayerButton.isMouseOver()) {
               turnThingsOff();
               moving_player=true;
             }
@@ -1181,7 +984,7 @@ class ToolBox extends PApplet {
 
 
 
-            if (mouseX >=160 && mouseX <= 190 && mouseY >= 40+100 && mouseY <= 90+100) {
+            if (checkpointButton.isMouseOver()) {
               turnThingsOff();
               check_point=true;
             }
@@ -1202,7 +1005,7 @@ class ToolBox extends PApplet {
               turnThingsOff();
               drawingPortal=true;
             }
-            if (mouseX >=460 && mouseX <= 500 && mouseY >= 40+100 && mouseY <= 90+100) {
+            if (holoButton.isMouseOver()) {
               turnThingsOff();
               holo_gram=true;
             }
@@ -1222,8 +1025,8 @@ class ToolBox extends PApplet {
             if (toggle3DMode.isMouseOver()) {
               e3DMode=false;
             }
-            if (mouseX >=40 && mouseX <= 270 && mouseY >= 40+100 && mouseY <= 90+100) {
-              if (mouseX >=40 && mouseX <= 90 && mouseY >= 40+100 && mouseY <= 90+100) {
+
+              if (playPauseButton.isMouseOver()) {
                 extra=true;
                 if (extra&&simulating) {
                   simulating=false;
@@ -1234,7 +1037,7 @@ class ToolBox extends PApplet {
                   extra=false;
                 }
               }
-            }
+            
             if (sign.isMouseOver()) {
               turnThingsOff();
               drawingSign=true;
@@ -1255,17 +1058,17 @@ class ToolBox extends PApplet {
       }//end of edditing stage
       else if (editingBlueprint) {
         if (workingBlueprint.type.equals("blueprint")) {
-          if (mouseX >=100 && mouseX <= 140 && mouseY >= 40+100 && mouseY <= 90+100) {
+          if (groundButton.isMouseOver()) {
             turnThingsOff();
             ground=true;
           }
 
-          if (mouseX >=280 && mouseX <= 330 && mouseY >= 40+100 && mouseY <= 90+100) {
+          if (deleteButton.isMouseOver()) {
             turnThingsOff();
             deleteing=true;
           }
 
-          if (mouseX >=400 && mouseX <= 440 && mouseY >= 40+100 && mouseY <= 90+100) {
+          if (gridModeButton.isMouseOver()) {
             extra=true;
             if (extra&&grid_mode) {
               grid_mode=false;
@@ -1276,7 +1079,7 @@ class ToolBox extends PApplet {
               extra=false;
             }
           }
-          if (mouseX >=460 && mouseX <= 500 && mouseY >= 40+100 && mouseY <= 90+100) {
+          if (holoButton.isMouseOver()) {
             turnThingsOff();
             holo_gram=true;
           }
@@ -1284,7 +1087,7 @@ class ToolBox extends PApplet {
             turnThingsOff();
             drawCoins=true;
           }
-          if (mouseX >=160 && mouseX <= 190 && mouseY >= 40+100 && mouseY <= 90+100) {
+          if (checkpointButton.isMouseOver()) {
             turnThingsOff();
             check_point=true;
           }

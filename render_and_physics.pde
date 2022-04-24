@@ -1,4 +1,4 @@
- //<>// //<>// //<>//
+ //<>// //<>// //<>// //<>// //<>// //<>//
 int xangle=25+180, yangle=15, dist=700;//camera presets
 float DY=sin(radians(yangle))*dist, hd=cos(radians(yangle))*dist, DX=sin(radians(xangle))*hd, DZ=cos(radians(xangle))*hd;//camera rotation
 
