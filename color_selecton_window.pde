@@ -18,32 +18,32 @@ class ToolBox extends PApplet {
   }
   void setup() {
     textSize(50);
-    colorPage=new Button(50, 50, 100, 50, "colors/depth");
-    toolsPage=new Button(155, 50, 100, 50, "tools");
-    selectionPage=new Button(260, 50, 100, 50, "selection");
-    stageSettings=new Button(365, 50, 100, 50, "stage settings");
+    colorPage=new Button(this,50, 50, 100, 50, "colors/depth");
+    toolsPage=new Button(this,155, 50, 100, 50, "tools");
+    selectionPage=new Button(this,260, 50, 100, 50, "selection");
+    stageSettings=new Button(this,365, 50, 100, 50, "stage settings");
     
-    toggle3DMode=new Button(820, 40+100, 50, 50, "  3D  ", 255, 203).setStrokeWeight(5);
-    switch3D1=new Button(880, 40+100, 50, 50, 255, 203).setStrokeWeight(5);
-    switch3D2=new Button(940, 40+100, 50, 50, 255, 203).setStrokeWeight(5);
-    saveLevel=new Button(1000, 40+100, 50, 50, "save", 255, 203).setStrokeWeight(5);
-    draw_sloap=new Button(700, 40+100, 50, 50, 255, 203).setStrokeWeight(5);
-    draw_holoTriangle=new Button(760, 40+100, 50, 50, 255, 203).setStrokeWeight(5);
-    draw_dethPlane=new Button(820, 40+100, 50, 50, 255, 203).setStrokeWeight(5);
-    draw_coin=new Button(580, 40+100, 50, 50, 255, 203).setStrokeWeight(5);
-    draw_portal=new Button(640, 40+100, 50, 50, 255, 203).setStrokeWeight(5);
-    exitStageEdit= new Button(520, 40+100, 50, 50, " < ", 255, 203).setStrokeWeight(5);
-    sign=new Button(1060, 140, 50, 50, 255, 203).setStrokeWeight(5);
-    select=new Button(1120, 140, 50, 50, "select", 255, 203).setStrokeWeight(5);
-    skyColorB1=new Button(150, 165, 40, 40, 255, 203).setStrokeWeight(0);
-    setSkyColor=new Button(300, 580, 100, 30, "set sky color").setStrokeWeight(2);
-    resetSkyColor=new Button(200, 165, 40, 40, "reset", 255, 203).setStrokeWeight(0);
-    placeBlueprint=new Button(1180, 140, 50, 50, #0F1AD3, 203).setStrokeWeight(5);
-    nexBlueprint=new Button(width/2+200, height*0.7-25, 50, 50, ">", 255, 203).setStrokeWeight(5);
-    prevBlueprint=new Button(width/2-200, height*0.7-25, 50, 50, "<", 255, 203).setStrokeWeight(5);
-    playSound=new Button(40, 200, 50, 50, 255, 203).setStrokeWeight(5);
-    nextSound=new Button(width/2+300, height*0.4-25, 50, 50, ">", 255, 203).setStrokeWeight(5);
-    prevSound=new Button(width/2-300, height*0.4-25, 50, 50, "<", 255, 203).setStrokeWeight(5);
+    toggle3DMode=new Button(this,820, 40+100, 50, 50, "  3D  ", 255, 203).setStrokeWeight(5);
+    switch3D1=new Button(this,880, 40+100, 50, 50, 255, 203).setStrokeWeight(5);
+    switch3D2=new Button(this,940, 40+100, 50, 50, 255, 203).setStrokeWeight(5);
+    saveLevel=new Button(this,1000, 40+100, 50, 50, "save", 255, 203).setStrokeWeight(5);
+    draw_sloap=new Button(this,700, 40+100, 50, 50, 255, 203).setStrokeWeight(5);
+    draw_holoTriangle=new Button(this,760, 40+100, 50, 50, 255, 203).setStrokeWeight(5);
+    draw_dethPlane=new Button(this,820, 40+100, 50, 50, 255, 203).setStrokeWeight(5);
+    draw_coin=new Button(this,580, 40+100, 50, 50, 255, 203).setStrokeWeight(5);
+    draw_portal=new Button(this,640, 40+100, 50, 50, 255, 203).setStrokeWeight(5);
+    exitStageEdit= new Button(this,520, 40+100, 50, 50, " < ", 255, 203).setStrokeWeight(5);
+    sign=new Button(this,1060, 140, 50, 50, 255, 203).setStrokeWeight(5);
+    select=new Button(this,1120, 140, 50, 50, "select", 255, 203).setStrokeWeight(5);
+    skyColorB1=new Button(this,150, 165, 40, 40, 255, 203).setStrokeWeight(0);
+    setSkyColor=new Button(this,300, 580, 100, 30, "set sky color").setStrokeWeight(2);
+    resetSkyColor=new Button(this,200, 165, 40, 40, "reset", 255, 203).setStrokeWeight(0);
+    placeBlueprint=new Button(this,1180, 140, 50, 50, #0F1AD3, 203).setStrokeWeight(5);
+    nexBlueprint=new Button(this,width/2+200, height*0.7-25, 50, 50, ">", 255, 203).setStrokeWeight(5);
+    prevBlueprint=new Button(this,width/2-200, height*0.7-25, 50, 50, "<", 255, 203).setStrokeWeight(5);
+    playSound=new Button(this,40, 200, 50, 50, 255, 203).setStrokeWeight(5);
+    nextSound=new Button(this,width/2+300, height*0.4-25, 50, 50, ">", 255, 203).setStrokeWeight(5);
+    prevSound=new Button(this,width/2-300, height*0.4-25, 50, 50, "<", 255, 203).setStrokeWeight(5);
   }
 
 
@@ -1598,120 +1598,6 @@ class ToolBox extends PApplet {
     }//end of page is selection
   }//end of keypressed
 
-
-
-  //button class V1.1.2
-  class Button {
-    protected float x, y, lengthX, lengthY;
-    private int fColor=#FFFFFF, sColor=#AAAAAA, textcolor=0;
-    private String text="";
-    private float textScaleFactor=2.903, strokeWeight=3;
-    Button(float X, float Y, float DX, float DY) {
-      x=X;
-      y=Y;
-      lengthX=DX;
-      lengthY=DY;
-      findTextScale();
-      strokeWeight=3;
-    }
-    Button(float X, float Y, float DX, float DY, String Text) {
-      x=X;
-      y=Y;
-      lengthX=DX;
-      lengthY=DY;
-      text=Text;
-      findTextScale();
-      strokeWeight=3;
-    }
-    Button(float X, float Y, float DX, float DY, int c1, int c2) {
-      x=X;
-      y=Y;
-      lengthX=DX;
-      lengthY=DY;
-      fColor=c1;
-      sColor=c2;
-      findTextScale();
-      strokeWeight=3;
-    }
-    Button(float X, float Y, float DX, float DY, String Text, int c1, int c2) {
-      x=X;
-      y=Y;
-      lengthX=DX;
-      lengthY=DY;
-      text=Text;
-      fColor=c1;
-      sColor=c2;
-      findTextScale();
-      strokeWeight=3;
-    }
-
-    void findTextScale() {
-      for (int i=1; i<300; i++) {
-        textSize(i);
-        if (textWidth(text)>lengthX||textAscent()+textDescent()>lengthY) {
-          textScaleFactor=i-1;
-          break;
-        }
-      }
-    }
-
-    public Button draw() {
-      strokeWeight(0);
-      fill(sColor);
-      rect(x-strokeWeight, y-strokeWeight, lengthX+strokeWeight*2, lengthY+strokeWeight*2);
-      fill(fColor);
-      rect(x, y, lengthX, lengthY);
-      fill(textcolor);
-      textAlign(CENTER, CENTER);
-      if (!text.equals("")) {
-        textSize(textScaleFactor);
-        text(text, lengthX/2+x, lengthY/2+y);
-      }
-      return this;
-    }
-
-    public Button setText(String t) {
-      text=t;
-      findTextScale();
-      return this;
-    }
-    public String getText() {
-      return text;
-    }
-    public boolean isMouseOver() {
-      return mouseX>=x&&mouseX<=x+lengthX&&mouseY>=y&&mouseY<=y+lengthY;
-    }
-    public Button setColor(int c1, int c2) {
-      fColor=c1;
-      sColor=c2;
-      return this;
-    }
-    public int getColor() {
-      return fColor;
-    }
-    public String toString() {
-      return "button at:"+x+" "+y+" length: "+lengthX+" height: "+lengthY+" with text: "+text+" and a color of: "+fColor;
-    }
-
-
-    @Deprecated
-      public Button setTextFactor(float factor) {
-      //textScaleFactor=factor;
-      return this;
-    }
-    public Button setTextColor(int c) {
-      textcolor=c;
-      return this;
-    }
-    public Button setX(float X) {
-      x=X;
-      return this;
-    }
-    public Button setStrokeWeight(float s) {
-      strokeWeight=s;
-      return this;
-    }
-  }//end of button class
 
   void drawCoin(float x, float y, float Scale) {
     strokeWeight(0);
