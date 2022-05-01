@@ -9,7 +9,7 @@ class ToolBox extends PApplet {
   public int redVal=0, greenVal=0, blueVal=0, CC=0;
   int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset;
   String page="colors";
-  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound,checkpointButton,playPauseButton,groundButton,goalButton,deleteButton,movePlayerButton,gridModeButton,holoButton,connectLogicButton;
+  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound,checkpointButton,playPauseButton,groundButton,goalButton,deleteButton,movePlayerButton,gridModeButton,holoButton,connectLogicButton,moveComponentsButton;
   boolean typingSign=false, settingSkyColor=false;
 
   public void settings() {
@@ -54,6 +54,7 @@ class ToolBox extends PApplet {
     holoButton=new Button(this,460, 40+100, 50, 50,255,203).setStrokeWeight(5).setHoverText("hologram (no collision)");
     
     connectLogicButton=new Button(this,40, 40+100, 50, 50,"connect",255,203).setStrokeWeight(5).setHoverText("connect logic nodes");
+    moveComponentsButton=new Button(this,100, 40+100, 50, 50,"move",255,203).setStrokeWeight(5).setHoverText("move components arround");
   }
 
 
@@ -676,10 +677,17 @@ class ToolBox extends PApplet {
             connectLogicButton.setColor(255,203);
           }
         connectLogicButton.draw();
+        if(moveLogicComponents){
+            moveComponentsButton.setColor(255,#F2F258);
+          } else {
+            moveComponentsButton.setColor(255,203);
+          }
+        moveComponentsButton.draw();
         
         
         //draw hover text
         connectLogicButton.drawHoverText();
+        moveComponentsButton.drawHoverText();
       }else {
         fill(0);
         textSize(20);
@@ -1126,6 +1134,10 @@ class ToolBox extends PApplet {
         if(connectLogicButton.isMouseOver()){
           turnThingsOff();
           connectingLogic=true;
+        }
+        if(moveComponentsButton.isMouseOver()){
+          turnThingsOff();
+          moveLogicComponents=true;
         }
       }//end of edditing logic board
     }//end of tools

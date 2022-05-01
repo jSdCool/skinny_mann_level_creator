@@ -121,6 +121,10 @@ class Button {
     x=X;
     return this;
   }
+  public Button setY(float Y) {
+    y=Y;
+    return this;
+  }
   public Button setStrokeWeight(float s) {
     strokeWeight=s;
     return this;

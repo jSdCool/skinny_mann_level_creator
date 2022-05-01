@@ -1327,6 +1327,12 @@ abstract class LogicComponent{//the base of all logic gam=ts and things
     }
   }
   
+  void setPos(float x,float y){
+    this.x=x-button.lengthX/2;
+    this.y=y-button.lengthY/2;
+    button.setX(this.x).setY(this.y);
+  }
+  
 }
 
 class GenericLogicComponent extends LogicComponent{

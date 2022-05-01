@@ -15,12 +15,12 @@ void setup() {
   coin3D.scale(3);
   initlizeButtons();
 }
-boolean startup=true, editing_level=true, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, loading=false, newLevel=false, simulating=false, entering_file_path=false, coursor=false, level_complete=false, dead=false, entering_name=false, cam_left=false, cam_right=false, drawing=false, draw=false, extra=false, ground=false, check_point=false, goal=false, deleteing=false, delete=false, moving_player=false, grid_mode=false, holo_gram=false, editingStage=false, levelOverview=false, newFile=false, drawCoins=false, drawingPortal=false, drawingPortal2=false, drawingPortal3=false, E_pressed=false, saveColors=false, sloap=false, loopThread2=true, cam_up=false, cam_down=false, holoTriangle=false, dethPlane=false, setPlayerPosTo=false, e3DMode=false, WPressed=false, SPressed=false, draw3DSwitch1=false, draw3DSwitch2=false, checkpointIn3DStage=false, shadow3D=true, tutorialMode=false, drawingSign=false, selecting=false, viewingItemContents=false, loadingBlueprint=false, creatingNewBlueprint=false, editingBlueprint=false, selectingBlueprint=false, placingSound=false,editinglogicBoard=false,connectingLogic=false,connecting=false;
+boolean startup=true, editing_level=true, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, loading=false, newLevel=false, simulating=false, entering_file_path=false, coursor=false, level_complete=false, dead=false, entering_name=false, cam_left=false, cam_right=false, drawing=false, draw=false, extra=false, ground=false, check_point=false, goal=false, deleteing=false, delete=false, moving_player=false, grid_mode=false, holo_gram=false, editingStage=false, levelOverview=false, newFile=false, drawCoins=false, drawingPortal=false, drawingPortal2=false, drawingPortal3=false, E_pressed=false, saveColors=false, sloap=false, loopThread2=true, cam_up=false, cam_down=false, holoTriangle=false, dethPlane=false, setPlayerPosTo=false, e3DMode=false, WPressed=false, SPressed=false, draw3DSwitch1=false, draw3DSwitch2=false, checkpointIn3DStage=false, shadow3D=true, tutorialMode=false, drawingSign=false, selecting=false, viewingItemContents=false, loadingBlueprint=false, creatingNewBlueprint=false, editingBlueprint=false, selectingBlueprint=false, placingSound=false,editinglogicBoard=false,connectingLogic=false,connecting=false,moveLogicComponents=false,movingLogicComponent;
 String file_path, new_name="my_level", GAME_version="0.5.0_Early_Access", EDITOR_version="0.0.1.9_EAc", rootPath="", coursorr="", newFileName="", newFileType="2D", stageType="", author="your name here", displayText="", fileToCoppyPath="";
 //int player1 []={20,700,1,0,1,0}; // old player data
 Player player1 =new Player(20, 699, 1, "red");
 int camPos=0, camPosY=0, death_cool_down, start_down, eadgeScroleDist=300, respawnX=20, respawnY=700, spdelay=0, Color=0, RedPos=0, BluePos=0, GreenPos=0, RC=0, GC=0, BC=0, grid_size=10, filesScrole=0, overviewSelection=-1, portalIndex1, stageIndex, preSI, respawnStage, setPlayerPosX, setPlayerPosY, setPlayerPosZ, startingDepth=0, totalDepth=300, respawnZ=50, coinRotation=0, coinCount=0, gmillis=0, eadgeScroleDistV=250, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, drawCamPosX=0, drawCamPosY;
-int buttonMin=0, buttonMax=0, coinsIndex, triangleMode=0, selectedIndex=-1, viewingItemIndex=-1, currentBluieprintIndex=0,logicBoardIndex,connectingFromIndex;
+int buttonMin=0, buttonMax=0, coinsIndex, triangleMode=0, selectedIndex=-1, viewingItemIndex=-1, currentBluieprintIndex=0,logicBoardIndex,connectingFromIndex,movingLogicIndex;
 float[]tpCords=new float[3];
 JSONArray mainIndex, colors;
 JSONObject portalStage1, portalStage2;
@@ -392,6 +392,10 @@ void draw() {
       strokeWeight(5);
       line(nodePos[0],nodePos[1],mouseX,mouseY);
     }
+    
+    if(movingLogicComponent&&moveLogicComponents){
+        level.logicBoards.get(logicBoardIndex).components.get(movingLogicIndex).setPos(mouseX,mouseY);
+      }
   }
 
 
@@ -835,10 +839,21 @@ void mousePressed() {
           if(Math.sqrt(Math.pow(nodePos[0]-mouseX,2)+Math.pow(nodePos[1]-mouseY,2))<=10){
             connecting=true;
             connectingFromIndex=i;
+            return;
           }
         }
       }
-  }
+      if(moveLogicComponents){
+        LogicBoard board=level.logicBoards.get(logicBoardIndex);
+        for(int i=0;i<board.components.size();i++){
+          if(board.components.get(i).button.isMouseOver()){
+           movingLogicIndex=i;
+           movingLogicComponent=true;
+           return;
+          }
+        }
+      }
+  }//end of editng logic board
 }
 
 void mouseReleased() {
@@ -853,13 +868,22 @@ void mouseReleased() {
          float[] nodePos1=board.components.get(i).getTerminalPos(0),nodePos2=board.components.get(i).getTerminalPos(1);
           if(Math.sqrt(Math.pow(nodePos1[0]-mouseX,2)+Math.pow(nodePos1[1]-mouseY,2))<=10){
             board.components.get(connectingFromIndex).connect(i,0);
+            return;
           }
           if(Math.sqrt(Math.pow(nodePos2[0]-mouseX,2)+Math.pow(nodePos2[1]-mouseY,2))<=10){
             board.components.get(connectingFromIndex).connect(i,1);
+            return;
           }
       }
     }    
-  }
+    if(moveLogicComponents){
+      if(movingLogicComponent){
+        movingLogicComponent=false;
+        level.logicBoards.get(logicBoardIndex).components.get(movingLogicIndex).setPos(mouseX,mouseY);
+        
+      }
+    }
+  }//end of editing logic board
 }
 
 
@@ -983,6 +1007,7 @@ void turnThingsOff() {
   selectingBlueprint=false;
   placingSound=false;
   connectingLogic=false;
+  moveLogicComponents=false;
 }
 
 int curMills=0, lasMills=0, mspc=0;
