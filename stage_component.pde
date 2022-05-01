@@ -1,5 +1,6 @@
 class Level {
   ArrayList<Stage> stages=new ArrayList<>();
+  ArrayList<LogicBoard> logicBoards=new ArrayList<>();
   public int mainStage, numOfCoins, levelID;
   public String name, createdVersion;
   public float SpawnX, SpawnY, RewspawnX, RespawnY;
@@ -40,6 +41,8 @@ class Level {
     for (int i=0; i<numOfCoins; i++) {
       coins.add(false);
     }
+    
+    logicBoards.add(new LogicBoard());//temporary
   }
 
   void reloadCoins() {
@@ -1261,4 +1264,8 @@ class StageSound {
     out.setString("type", type);
     return out;
   }
+}
+
+class LogicBoard{
+  public String name="eee";
 }

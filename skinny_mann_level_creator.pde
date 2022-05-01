@@ -15,12 +15,12 @@ void setup() {
   coin3D.scale(3);
   initlizeButtons();
 }
-boolean startup=true, editing_level=true, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, loading=false, newLevel=false, simulating=false, entering_file_path=false, coursor=false, level_complete=false, dead=false, entering_name=false, cam_left=false, cam_right=false, drawing=false, draw=false, extra=false, ground=false, check_point=false, goal=false, deleteing=false, delete=false, moving_player=false, grid_mode=false, holo_gram=false, editingStage=false, levelOverview=false, newFile=false, drawCoins=false, drawingPortal=false, drawingPortal2=false, drawingPortal3=false, E_pressed=false, saveColors=false, sloap=false, loopThread2=true, cam_up=false, cam_down=false, holoTriangle=false, dethPlane=false, setPlayerPosTo=false, e3DMode=false, WPressed=false, SPressed=false, draw3DSwitch1=false, draw3DSwitch2=false, checkpointIn3DStage=false, shadow3D=true, tutorialMode=false, drawingSign=false, selecting=false, viewingItemContents=false, loadingBlueprint=false, creatingNewBlueprint=false, editingBlueprint=false, selectingBlueprint=false, placingSound=false;
+boolean startup=true, editing_level=true, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, loading=false, newLevel=false, simulating=false, entering_file_path=false, coursor=false, level_complete=false, dead=false, entering_name=false, cam_left=false, cam_right=false, drawing=false, draw=false, extra=false, ground=false, check_point=false, goal=false, deleteing=false, delete=false, moving_player=false, grid_mode=false, holo_gram=false, editingStage=false, levelOverview=false, newFile=false, drawCoins=false, drawingPortal=false, drawingPortal2=false, drawingPortal3=false, E_pressed=false, saveColors=false, sloap=false, loopThread2=true, cam_up=false, cam_down=false, holoTriangle=false, dethPlane=false, setPlayerPosTo=false, e3DMode=false, WPressed=false, SPressed=false, draw3DSwitch1=false, draw3DSwitch2=false, checkpointIn3DStage=false, shadow3D=true, tutorialMode=false, drawingSign=false, selecting=false, viewingItemContents=false, loadingBlueprint=false, creatingNewBlueprint=false, editingBlueprint=false, selectingBlueprint=false, placingSound=false,editinglogicBoard=false;
 String file_path, new_name="my_level", GAME_version="0.5.0_Early_Access", EDITOR_version="0.0.1.9_EAc", rootPath="", coursorr="", newFileName="", newFileType="2D", stageType="", author="your name here", displayText="", fileToCoppyPath="";
 //int player1 []={20,700,1,0,1,0}; // old player data
 Player player1 =new Player(20, 699, 1, "red");
 int camPos=0, camPosY=0, death_cool_down, start_down, eadgeScroleDist=300, respawnX=20, respawnY=700, spdelay=0, Color=0, RedPos=0, BluePos=0, GreenPos=0, RC=0, GC=0, BC=0, grid_size=10, filesScrole=0, overviewSelection=-1, portalIndex1, stageIndex, preSI, respawnStage, setPlayerPosX, setPlayerPosY, setPlayerPosZ, startingDepth=0, totalDepth=300, respawnZ=50, coinRotation=0, coinCount=0, gmillis=0, eadgeScroleDistV=250, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, drawCamPosX=0, drawCamPosY;
-int buttonMin=0, buttonMax=0, coinsIndex, triangleMode=0, selectedIndex=-1, viewingItemIndex=-1, currentBluieprintIndex=0;
+int buttonMin=0, buttonMax=0, coinsIndex, triangleMode=0, selectedIndex=-1, viewingItemIndex=-1, currentBluieprintIndex=0,logicBoardIndex;
 float[]tpCords=new float[3];
 JSONArray mainIndex, colors;
 JSONObject portalStage1, portalStage2;
@@ -184,6 +184,15 @@ void draw() {
           triangle(1129, 54, 1114, 39, 1109, 53);
         }
       }//end of thing slected is in stage range
+      if(overviewSelection>=level.stages.size()+level.sounds.size()){//if the selection is in the logic board range
+          edditStage.draw();//draw edit button
+          fill(255, 255, 0);
+          strokeWeight(1);
+          quad(1155, 37, 1129, 54, 1114, 39, 1140, 22);//draw the pencil
+          fill(#E5B178);
+          triangle(1129, 54, 1114, 39, 1109, 53);//more pencil thing
+        
+      }
     }//end of if something is selected
     textAlign(LEFT, BOTTOM);
     stroke(0);
@@ -194,7 +203,7 @@ void draw() {
 
     String[] keys=new String[0];//create a string array that can be used to place the sound keys in
     keys=level.sounds.keySet().toArray(keys);//place the sound keys into the array
-    for (int i=0; i < 11 && i + filesScrole < level.stages.size()+level.sounds.size(); i++) {//loop through all the stages and sounds and display 11 of them on screen
+    for (int i=0; i < 11 && i + filesScrole < level.stages.size()+level.sounds.size()+level.logicBoards.size(); i++) {//loop through all the stages and sounds and display 11 of them on screen
       if (i+ filesScrole<level.stages.size()) {//if the current thing attemping to diaply is in the range of stages
         fill(0);
         String displayName=level.stages.get(i+ filesScrole).name, type=level.stages.get(i+ filesScrole).type;//get the name and type of the stages
@@ -202,13 +211,17 @@ void draw() {
         if (type.equals("stage")) {//if it is a stage then display the stage icon
           drawWorldSymbol(20, 90+60*(i));
         }
-      } else {//if the thing is not a stage type
+      } else if(i+ filesScrole<level.stages.size()+level.sounds.size()){//if the thing is in the range of sounds
         fill(0);
         String displayName=level.sounds.get(keys[i+ filesScrole-level.stages.size()]).name, type=level.sounds.get(keys[i+ filesScrole-level.stages.size()]).type;//get the name and type of a sound in the level
         text(displayName, 80, 130+60*(i));//display the name
         if (type.equals("sound")) {//if the thing is a sound then display the sound icon
           drawSpeakericon(this, 40, 110+60*(i), 0.5);
         }
+      }else{
+        fill(0);
+        String displayName=level.logicBoards.get(i+ filesScrole-(level.stages.size()+level.sounds.size())).name;//get the name of the logic board
+        text(displayName, 80, 130+60*(i));//display the name
       }
     }
     textAlign(CENTER, CENTER);
@@ -225,7 +238,7 @@ void draw() {
     help.draw();//draw help button
     if (filesScrole>0)//draw scroll buttons
       overviewUp.draw();
-    if (filesScrole+11<level.stages.size()+level.sounds.size())
+    if (filesScrole+11<level.stages.size()+level.sounds.size()+level.logicBoards.size())
       overviewDown.draw();
   }//end of level over view
 
@@ -364,6 +377,9 @@ void draw() {
     blueprintEditDraw();//draw the accual blueprint
     stageEditGUI();//overlays when placing things
   }
+  if(editinglogicBoard){//if editing a logic board
+    background(#FFECA0);
+  }
 
 
   engageHUDPosition();//setup for HUD incase of being in 3D mode
@@ -467,7 +483,7 @@ void mouseClicked() {
       }
       if (mouseY>80) {//if the mouse is in the files section of the screen
         overviewSelection=(mouseY-80)/60+ filesScrole;//figure out witch thing to select
-        if (overviewSelection>=level.stages.size()+level.sounds.size()) {//de seclect if there was nothing under where the click happend
+        if (overviewSelection>=level.stages.size()+level.sounds.size()+level.logicBoards.size()) {//de seclect if there was nothing under where the click happend
           overviewSelection=-1;
         }
       }
@@ -506,11 +522,18 @@ void mouseClicked() {
             }
           }
         }//end if if selection is in range of the stages
+        if(overviewSelection>=level.stages.size()+level.sounds.size()){//if the selecion is in the logic board range
+          if (edditStage.isMouseOver()) {//eddit button
+          levelOverview=false;
+          editinglogicBoard=true;
+          logicBoardIndex=overviewSelection-(level.stages.size()+level.sounds.size());
+          }
+        }
       }//end of if something is selected
 
       if (filesScrole>0&&overviewUp.isMouseOver())//scroll up button
         filesScrole--;
-      if (filesScrole+11<level.stages.size()+level.sounds.size()&&overviewDown.isMouseOver())//scroll down button
+      if (filesScrole+11<level.stages.size()+level.sounds.size()+level.logicBoards.size()&&overviewDown.isMouseOver())//scroll down button
         filesScrole++;
     }//end of level overview
 
