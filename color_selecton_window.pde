@@ -9,7 +9,7 @@ class ToolBox extends PApplet {
   public int redVal=0, greenVal=0, blueVal=0, CC=0;
   int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset;
   String page="colors";
-  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound,checkpointButton,playPauseButton,groundButton,goalButton,deleteButton,movePlayerButton,gridModeButton,holoButton,connectLogicButton,moveComponentsButton,andGateButton,orGateButton,xorGateButton;
+  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound,checkpointButton,playPauseButton,groundButton,goalButton,deleteButton,movePlayerButton,gridModeButton,holoButton,connectLogicButton,moveComponentsButton,andGateButton,orGateButton,xorGateButton,nandGateButton,norGateButton,xnorGateButton;
   boolean typingSign=false, settingSkyColor=false;
 
   public void settings() {
@@ -58,6 +58,9 @@ class ToolBox extends PApplet {
     andGateButton=new Button(this,160, 40+100, 50, 50,"AND",255,203).setStrokeWeight(5).setHoverText("and gate");
     orGateButton=new Button(this,220, 40+100, 50, 50,"OR",255,203).setStrokeWeight(5).setHoverText("or gate");
     xorGateButton=new Button(this,340, 40+100, 50, 50,"XOR",255,203).setStrokeWeight(5).setHoverText("exclucuve or gate");
+    nandGateButton=new Button(this,400, 40+100, 50, 50,"NAND",255,203).setStrokeWeight(5).setHoverText("inverted and gate");
+    norGateButton=new Button(this,460, 40+100, 50, 50,"NOR",255,203).setStrokeWeight(5).setHoverText("inverted or gate");
+    xnorGateButton=new Button(this,580, 40+100, 50, 50,"XNOR", 255, 203).setStrokeWeight(5).setHoverText("inverted exclucive or gate");
   }
 
 
@@ -722,6 +725,24 @@ class ToolBox extends PApplet {
         xorGateButton.draw();
         saveLevel.draw();
         exitStageEdit.draw();
+        if(placingNandGate){
+          nandGateButton.setColor(255,#F2F258);
+        }else{
+          nandGateButton.setColor(255,203);
+        }
+        nandGateButton.draw();
+        if(placingNorGate){
+          norGateButton.setColor(255,#F2F258);
+        }else{
+          norGateButton.setColor(255,203);
+        }
+        norGateButton.draw();
+        if(placingXnorGate){
+          xnorGateButton.setColor(255,#F2F258);
+        }else{
+          xnorGateButton.setColor(255,203);
+        }
+        xnorGateButton.draw();
         
         //draw hover text
         connectLogicButton.drawHoverText();
@@ -732,6 +753,9 @@ class ToolBox extends PApplet {
         xorGateButton.drawHoverText();
         exitStageEdit.drawHoverText();
         saveLevel.drawHoverText();
+        nandGateButton.drawHoverText();
+        norGateButton.drawHoverText();
+        xnorGateButton.drawHoverText();
       }else {
         fill(0);
         textSize(20);
@@ -1210,6 +1234,18 @@ class ToolBox extends PApplet {
             levelOverview=true;
             editinglogicBoard=false;
           }
+        if(nandGateButton.isMouseOver()){
+           turnThingsOff();
+           placingNandGate=true;
+        }
+        if(norGateButton.isMouseOver()){
+           turnThingsOff();
+           placingNorGate=true;
+        }
+        if(xnorGateButton.isMouseOver()){
+           turnThingsOff();
+           placingXnorGate=true;
+        }
       }//end of edditing logic board
     }//end of tools
 

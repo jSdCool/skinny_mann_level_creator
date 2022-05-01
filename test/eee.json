@@ -61,5 +61,53 @@
     "y": 564,
     "type": "AND",
     "connections": []
+  },
+  {
+    "x": 660,
+    "y": 37,
+    "type": "NOR",
+    "connections": [
+      {
+        "index": 7,
+        "terminal": 0
+      },
+      {
+        "index": 9,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 661,
+    "y": 122,
+    "type": "NOR",
+    "connections": [
+      {
+        "index": 6,
+        "terminal": 1
+      },
+      {
+        "index": 9,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 505,
+    "y": 39,
+    "type": "OR",
+    "connections": [{
+      "index": 6,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 811,
+    "y": 78,
+    "type": "AND",
+    "connections": [{
+      "index": 8,
+      "terminal": 1
+    }]
   }
 ]

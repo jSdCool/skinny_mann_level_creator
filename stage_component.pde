@@ -1300,6 +1300,15 @@ class LogicBoard{//stores all the logic components
        if(type.equals("XOR")){
          components.add(new XorGate(component,this));
        }
+       if(type.equals("NAND")){
+         components.add(new NAndGate(component,this));
+       }
+       if(type.equals("NOR")){
+         components.add(new NOrGate(component,this));
+       }
+       if(type.equals("XNOR")){
+         components.add(new XNorGate(component,this));
+       }
     }
   }
   LogicBoard(String name){
@@ -1476,5 +1485,46 @@ class XorGate extends LogicComponent{
   
   void tick(){
     outputTerminal=inputTerminal1!=inputTerminal2;
+  }
+}
+
+class NAndGate extends LogicComponent{
+  NAndGate(float x,float y,LogicBoard lb){
+    super(x,y,"NAND",lb);
+  }
+  
+  NAndGate(JSONObject data,LogicBoard lb){
+    super(data.getFloat("x"),data.getFloat("y"),"NAND",lb,data.getJSONArray("connections"));
+  }
+  
+  void tick(){
+    outputTerminal=!(inputTerminal1&&inputTerminal2);
+  }
+}
+
+class NOrGate extends LogicComponent{
+  NOrGate(float x,float y,LogicBoard lb){
+    super(x,y,"NOR",lb);
+  }
+  NOrGate(JSONObject data,LogicBoard lb){
+    super(data.getFloat("x"),data.getFloat("y"),"NOR",lb,data.getJSONArray("connections"));
+  }
+  
+  void tick(){
+    outputTerminal=!(inputTerminal1||inputTerminal2);
+  }
+}
+
+class XNorGate extends LogicComponent{
+  XNorGate(float x,float y,LogicBoard lb){
+    super(x,y,"XNOR",lb);
+  }
+  
+  XNorGate(JSONObject data,LogicBoard lb){
+    super(data.getFloat("x"),data.getFloat("y"),"XNOR",lb,data.getJSONArray("connections"));
+  }
+  
+  void tick(){
+    outputTerminal=!(inputTerminal1!=inputTerminal2);
   }
 }
