@@ -1280,6 +1280,7 @@ abstract class LogicComponent{//the base of all logic gam=ts and things
   Button button;
   ArrayList<Integer[]> connections=new ArrayList<>();
   LogicBoard lb;
+  boolean outputTerminal=false,inputTerminal1Buffer=false,inputTerminal2Buffer=false,inputTerminal1=false,inputTerminal2=false;
   LogicComponent(float x,float y,String type,LogicBoard board){
     this.x=x;
     this.y=y;
@@ -1333,6 +1334,26 @@ abstract class LogicComponent{//the base of all logic gam=ts and things
     button.setX(this.x).setY(this.y);
   }
   
+  void setTerminal(int terminal,boolean state){
+    if(terminal==0)
+      inputTerminal1Buffer=state;
+    if(terminal==1)
+      inputTerminal2Buffer=state;
+  }
+  
+  void flushBuffer(){
+    inputTerminal1=inputTerminal1Buffer;
+    inputTerminal2=inputTerminal2Buffer;
+  }
+  
+  abstract void tick();
+  
+  void sendOut(){
+    for(int i=0;i<connections.size();i++){
+     lb.components.get(connections.get(i)[0]).setTerminal( connections.get(i)[1],outputTerminal);
+    }
+  }
+  
 }
 
 class GenericLogicComponent extends LogicComponent{
@@ -1343,4 +1364,6 @@ class GenericLogicComponent extends LogicComponent{
   void draw(){
    super.draw(); 
   }
+  
+  void tick(){}
 }
