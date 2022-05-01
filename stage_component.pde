@@ -35,6 +35,9 @@ class Level {
       if (job.getString("type").equals("sound")) {
         sounds.put(job.getString("name"), new StageSound(job));
       }
+      if(job.getString("type").equals("logicBoard")){
+        logicBoards.add(new LogicBoard(loadJSONArray(rootPath+job.getString("location"))));
+      }
     }
 
     coins=new ArrayList<Boolean>();
@@ -42,10 +45,10 @@ class Level {
       coins.add(false);
     }
     
-    logicBoards.add(new LogicBoard());//temporary
-    logicBoards.get(0).components.add(new GenericLogicComponent(80,80,logicBoards.get(0)));
-    logicBoards.get(0).components.add(new GenericLogicComponent(580,360,logicBoards.get(0)));
-    logicBoards.get(0).components.get(0).connect(1,1);
+    //logicBoards.add(new LogicBoard());//temporary
+    //logicBoards.get(0).components.add(new GenericLogicComponent(80,80,logicBoards.get(0)));
+    //logicBoards.get(0).components.add(new GenericLogicComponent(580,360,logicBoards.get(0)));
+    //logicBoards.get(0).components.get(0).connect(1,1);
   }
 
   void reloadCoins() {
@@ -1279,6 +1282,29 @@ class StageSound {
 class LogicBoard{//stores all the logic components
   public String name="eee";//temp name
   public ArrayList<LogicComponent> components=new ArrayList<>();
+  LogicBoard(JSONArray file){
+    JSONObject head=file.getJSONObject(0);
+    name=head.getString("name");
+    for(int i=1;i<file.size();i++){
+       JSONObject component=file.getJSONObject(i);
+       String type=component.getString("type");
+       if(type.equals("generic")){
+         components.add(new GenericLogicComponent(component,this));
+       }
+       if(type.equals("AND")){
+         components.add(new AndGate(component,this));
+       }
+       if(type.equals("OR")){
+         components.add(new OrGate(component,this));
+       }
+       if(type.equals("XOR")){
+         components.add(new XorGate(component,this));
+       }
+    }
+  }
+  LogicBoard(String name){
+   this.name=name; 
+  }
   String save(){
     JSONArray logicComponents=new JSONArray();
     JSONObject head=new JSONObject();
@@ -1305,6 +1331,17 @@ abstract class LogicComponent{//the base of all logic gam=ts and things
     this.type=type;
     button=new Button(primaryWindow,x,y,100,80,"  "+type+"  ");
     lb=board;
+  }
+  LogicComponent(float x,float y,String type,LogicBoard board,JSONArray cnects){
+    this.x=x;
+    this.y=y;
+    this.type=type;
+    button=new Button(primaryWindow,x,y,100,80,"  "+type+"  ");
+    lb=board;
+    for(int i=0;i<cnects.size();i++){
+     JSONObject data= cnects.getJSONObject(i);
+     connections.add(new Integer[]{data.getInt("index"),data.getInt("terminal")});
+    }
   }
   
   void draw(){
@@ -1394,6 +1431,9 @@ class GenericLogicComponent extends LogicComponent{
   GenericLogicComponent(float x,float y,LogicBoard lb){
    super(x,y,"generic",lb); 
   }
+  GenericLogicComponent(JSONObject data,LogicBoard lb){
+   super(data.getFloat("x"),data.getFloat("y"),"generic",lb,data.getJSONArray("connections"));
+  }
   
   void tick(){}
 }
@@ -1401,6 +1441,10 @@ class GenericLogicComponent extends LogicComponent{
 class AndGate extends LogicComponent{
   AndGate(float x,float y,LogicBoard lb){
     super(x,y,"AND",lb);
+  }
+  
+  AndGate(JSONObject data,LogicBoard lb){
+    super(data.getFloat("x"),data.getFloat("y"),"AND",lb,data.getJSONArray("connections"));
   }
   
   void tick(){
@@ -1412,6 +1456,9 @@ class OrGate extends LogicComponent{
   OrGate(float x,float y,LogicBoard lb){
     super(x,y,"OR",lb);
   }
+  OrGate(JSONObject data,LogicBoard lb){
+    super(data.getFloat("x"),data.getFloat("y"),"OR",lb,data.getJSONArray("connections"));
+  }
   
   void tick(){
     outputTerminal=inputTerminal1||inputTerminal2;
@@ -1421,6 +1468,10 @@ class OrGate extends LogicComponent{
 class XorGate extends LogicComponent{
   XorGate(float x,float y,LogicBoard lb){
     super(x,y,"XOR",lb);
+  }
+  
+  XorGate(JSONObject data,LogicBoard lb){
+    super(data.getFloat("x"),data.getFloat("y"),"XOR",lb,data.getJSONArray("connections"));
   }
   
   void tick(){
