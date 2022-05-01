@@ -82,6 +82,13 @@ class Level {
       for (int i=0; i<keys.length; i++) {
         index.setJSONObject(index.size(), sounds.get(keys[i]).save());
       }
+    for(int i=0;i<logicBoards.size();i++){
+      JSONObject board=new JSONObject();
+      board.setString("name", logicBoards.get(i).name);
+      board.setString("type", "logicBoard");
+      board.setString("location", logicBoards.get(i).save());
+      index.setJSONObject(index.size(),board);
+    }
     saveJSONArray(index, rootPath+"/index.json");
   }
 }
@@ -1272,6 +1279,17 @@ class StageSound {
 class LogicBoard{//stores all the logic components
   public String name="eee";//temp name
   public ArrayList<LogicComponent> components=new ArrayList<>();
+  String save(){
+    JSONArray logicComponents=new JSONArray();
+    JSONObject head=new JSONObject();
+    head.setString("name", name);
+    logicComponents.setJSONObject(0, head);
+    for(int i=0;i<components.size();i++){
+      logicComponents.setJSONObject(i+1,components.get(i).save());
+    }
+    saveJSONArray(logicComponents,rootPath+"/"+name+".json");
+    return "/"+name+".json";
+  }
 }
 
 abstract class LogicComponent{//the base of all logic gam=ts and things
@@ -1352,6 +1370,22 @@ abstract class LogicComponent{//the base of all logic gam=ts and things
     for(int i=0;i<connections.size();i++){
      lb.components.get(connections.get(i)[0]).setTerminal( connections.get(i)[1],outputTerminal);
     }
+  }
+  
+  JSONObject save(){
+   JSONObject component=new JSONObject();
+    component.setString("type",type);
+    component.setFloat("x",x);
+    component.setFloat("y",y);
+    JSONArray connections=new JSONArray();
+    for(int i=0;i<this.connections.size();i++){
+     JSONObject connect=new JSONObject();
+     connect.setInt("index",this.connections.get(i)[0]);
+     connect.setInt("terminal",this.connections.get(i)[1]);
+     connections.setJSONObject(i,connect);
+    }
+    component.setJSONArray("connections",connections);
+    return component;
   }
   
 }

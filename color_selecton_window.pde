@@ -720,6 +720,7 @@ class ToolBox extends PApplet {
           xorGateButton.setColor(255,203);
         }
         xorGateButton.draw();
+        saveLevel.draw();
         
         
         //draw hover text
@@ -1195,6 +1196,12 @@ class ToolBox extends PApplet {
         if(xorGateButton.isMouseOver()){
            turnThingsOff();
            placingXorGate=true;
+        }
+        if (saveLevel.isMouseOver()) {
+          println("saving level");
+          level.save();
+          gmillis=millis()+400+millisOffset;
+          println("save complete"+gmillis);
         }
       }//end of edditing logic board
     }//end of tools

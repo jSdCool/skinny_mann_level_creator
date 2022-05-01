@@ -1,0 +1,65 @@
+[
+  {"name": "eee"},
+  {
+    "x": 80,
+    "y": 80,
+    "type": "generic",
+    "connections": [{
+      "index": 1,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 580,
+    "y": 360,
+    "type": "generic",
+    "connections": []
+  },
+  {
+    "x": 35,
+    "y": 542,
+    "type": "AND",
+    "connections": [
+      {
+        "index": 4,
+        "terminal": 0
+      },
+      {
+        "index": 5,
+        "terminal": 0
+      },
+      {
+        "index": 3,
+        "terminal": 1
+      },
+      {
+        "index": 3,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 181,
+    "y": 562,
+    "type": "OR",
+    "connections": [{
+      "index": 4,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 307,
+    "y": 563,
+    "type": "XOR",
+    "connections": [{
+      "index": 5,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 421,
+    "y": 564,
+    "type": "AND",
+    "connections": []
+  }
+]
