@@ -1266,6 +1266,37 @@ class StageSound {
   }
 }
 
-class LogicBoard{
-  public String name="eee";
+class LogicBoard{//stores all the logic components
+  public String name="eee";//temp name
+  public ArrayList<LogicComponent> components=new ArrayList<>();
+}
+
+abstract class LogicComponent{//the base of all logic gam=ts and things
+  float x,y;//for visuals only
+  String type;
+  Button button;
+  LogicComponent(float x,float y,String type){
+    this.x=x;
+    this.y=y;
+    this.type=type;
+    button=new Button(primaryWindow,x,y,100,80,"  "+type+"  ");
+  }
+  
+  void draw(){
+   button.draw(); 
+   fill(#FF98CF);
+   ellipse(x-2,y+20,20,20);
+   ellipse(x-2,y+60,20,20);
+   ellipse(x+102,y+40,20,20);
+  }
+}
+
+class GenericLogicComponent extends LogicComponent{
+  GenericLogicComponent(float x,float y){
+   super(x,y,"generic"); 
+  }
+  
+  void draw(){
+   super.draw(); 
+  }
 }

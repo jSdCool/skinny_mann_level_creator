@@ -379,6 +379,9 @@ void draw() {
   }
   if(editinglogicBoard){//if editing a logic board
     background(#FFECA0);
+    for(int i=0;i<level.logicBoards.get(logicBoardIndex).components.size();i++){
+      level.logicBoards.get(logicBoardIndex).components.get(i).draw();
+    }
   }
 
 
@@ -653,6 +656,9 @@ void mouseClicked() {
         }//end of thing were entered
       }//end of load button
     }//end of loading blueprint
+    if(editinglogicBoard){
+      level.logicBoards.get(logicBoardIndex).components.add(new GenericLogicComponent(mouseX,mouseY));
+    }//end of edditing logic board
   }//end of left mouse button clicked
 }//end of mouse clicked
 
