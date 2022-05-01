@@ -721,7 +721,7 @@ class ToolBox extends PApplet {
         }
         xorGateButton.draw();
         saveLevel.draw();
-        
+        exitStageEdit.draw();
         
         //draw hover text
         connectLogicButton.drawHoverText();
@@ -730,6 +730,8 @@ class ToolBox extends PApplet {
         andGateButton.drawHoverText();
         orGateButton.drawHoverText();
         xorGateButton.drawHoverText();
+        exitStageEdit.drawHoverText();
+        saveLevel.drawHoverText();
       }else {
         fill(0);
         textSize(20);
@@ -1203,6 +1205,11 @@ class ToolBox extends PApplet {
           gmillis=millis()+400+millisOffset;
           println("save complete"+gmillis);
         }
+        if (exitStageEdit.isMouseOver()) {
+            turnThingsOff();
+            levelOverview=true;
+            editinglogicBoard=false;
+          }
       }//end of edditing logic board
     }//end of tools
 
