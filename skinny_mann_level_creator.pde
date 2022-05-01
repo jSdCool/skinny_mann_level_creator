@@ -394,8 +394,8 @@ void draw() {
     }
     
     if(movingLogicComponent&&moveLogicComponents){
-        level.logicBoards.get(logicBoardIndex).components.get(movingLogicIndex).setPos(mouseX,mouseY);
-      }
+      level.logicBoards.get(logicBoardIndex).components.get(movingLogicIndex).setPos(mouseX,mouseY);
+    }
   }
 
 
@@ -867,10 +867,22 @@ void mouseReleased() {
       for(int i=0;i<board.components.size();i++){
          float[] nodePos1=board.components.get(i).getTerminalPos(0),nodePos2=board.components.get(i).getTerminalPos(1);
           if(Math.sqrt(Math.pow(nodePos1[0]-mouseX,2)+Math.pow(nodePos1[1]-mouseY,2))<=10){
+            for(int j=0;j<board.components.get(connectingFromIndex).connections.size();j++){
+              if(board.components.get(connectingFromIndex).connections.get(j)[0]==i&&board.components.get(connectingFromIndex).connections.get(j)[1]==0){
+                board.components.get(connectingFromIndex).connections.remove(j);
+                return;
+              }
+            }
             board.components.get(connectingFromIndex).connect(i,0);
             return;
           }
           if(Math.sqrt(Math.pow(nodePos2[0]-mouseX,2)+Math.pow(nodePos2[1]-mouseY,2))<=10){
+            for(int j=0;j<board.components.get(connectingFromIndex).connections.size();j++){
+              if(board.components.get(connectingFromIndex).connections.get(j)[0]==i&&board.components.get(connectingFromIndex).connections.get(j)[1]==1){
+                  board.components.get(connectingFromIndex).connections.remove(j);
+                  return;
+                }
+              }
             board.components.get(connectingFromIndex).connect(i,1);
             return;
           }
