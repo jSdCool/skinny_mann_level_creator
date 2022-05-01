@@ -689,7 +689,14 @@ void mouseClicked() {
       if(placingXnorGate){
         level.logicBoards.get(logicBoardIndex).components.add(new XNorGate(mouseX-50,mouseY-40,level.logicBoards.get(logicBoardIndex)));
       }
-      //level.logicBoards.get(logicBoardIndex).components.add(new GenericLogicComponent(mouseX,mouseY,level.logicBoards.get(logicBoardIndex)));
+      if(deleteing){
+       for(int i=0;i< level.logicBoards.get(logicBoardIndex).components.size();i++){
+        if(level.logicBoards.get(logicBoardIndex).components.get(i).button.isMouseOver()){
+          level.logicBoards.get(logicBoardIndex).remove(i);
+          return;
+        }
+       }
+      }
     }//end of edditing logic board
   }//end of left mouse button clicked
 }//end of mouse clicked

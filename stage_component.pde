@@ -1325,6 +1325,24 @@ class LogicBoard{//stores all the logic components
     saveJSONArray(logicComponents,rootPath+"/"+name+".json");
     return "/"+name+".json";
   }
+  
+  void remove(int index){
+    if(components.size()<=index||index<0)//check if the porvided index is valid
+      return;
+    components.remove(index);//remove the object
+    for(int i=0;i<components.size();i++){//make shure all connects still point to the correct components and remove connects that went to the deleted one
+      LogicComponent component=components.get(i);
+      for(int j=0;j<component.connections.size();j++){
+       if(component.connections.get(j)[0]==index){
+         component.connections.remove(j);
+         j--;
+         continue;
+       } 
+       if(component.connections.get(j)[0]>index)
+         component.connections.get(j)[0]--; 
+      }
+    }
+  }
 }
 
 abstract class LogicComponent{//the base of all logic gam=ts and things
@@ -1341,6 +1359,7 @@ abstract class LogicComponent{//the base of all logic gam=ts and things
     button=new Button(primaryWindow,x,y,100,80,"  "+type+"  ");
     lb=board;
   }
+  
   LogicComponent(float x,float y,String type,LogicBoard board,JSONArray cnects){
     this.x=x;
     this.y=y;
@@ -1433,6 +1452,8 @@ abstract class LogicComponent{//the base of all logic gam=ts and things
     component.setJSONArray("connections",connections);
     return component;
   }
+  
+  
   
 }
 
