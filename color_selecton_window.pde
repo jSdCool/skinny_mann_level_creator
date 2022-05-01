@@ -9,7 +9,7 @@ class ToolBox extends PApplet {
   public int redVal=0, greenVal=0, blueVal=0, CC=0;
   int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset;
   String page="colors";
-  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound,checkpointButton,playPauseButton,groundButton,goalButton,deleteButton,movePlayerButton,gridModeButton,holoButton,connectLogicButton,moveComponentsButton;
+  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound,checkpointButton,playPauseButton,groundButton,goalButton,deleteButton,movePlayerButton,gridModeButton,holoButton,connectLogicButton,moveComponentsButton,andGateButton,orGateButton,xorGateButton;
   boolean typingSign=false, settingSkyColor=false;
 
   public void settings() {
@@ -55,6 +55,9 @@ class ToolBox extends PApplet {
     
     connectLogicButton=new Button(this,40, 40+100, 50, 50,"connect",255,203).setStrokeWeight(5).setHoverText("connect logic nodes");
     moveComponentsButton=new Button(this,100, 40+100, 50, 50,"move",255,203).setStrokeWeight(5).setHoverText("move components arround");
+    andGateButton=new Button(this,160, 40+100, 50, 50,"AND",255,203).setStrokeWeight(5).setHoverText("and gate");
+    orGateButton=new Button(this,220, 40+100, 50, 50,"OR",255,203).setStrokeWeight(5).setHoverText("or gate");
+    xorGateButton=new Button(this,340, 40+100, 50, 50,"XOR",255,203).setStrokeWeight(5).setHoverText("exclucuve or gate");
   }
 
 
@@ -683,11 +686,49 @@ class ToolBox extends PApplet {
             moveComponentsButton.setColor(255,203);
           }
         moveComponentsButton.draw();
+        if (deleteing) {
+            deleteButton.setColor(255,#F2F258);
+          } else {
+            deleteButton.setColor(255,203);
+          }
+        deleteButton.draw();
+        fill(203);
+        stroke(203);
+        strokeWeight(0);
+        rect(285, 55+100, 40, 5);
+        rect(300, 50+100, 10, 5);
+        rect(290, 60+100, 5, 20);
+        rect(290, 80+100, 30, 5);
+        rect(315, 60+100, 5, 20);
+        rect(298, 60+100, 5, 20);
+        rect(307, 60+100, 5, 20);
+        if(placingAndGate){
+          andGateButton.setColor(255,#F2F258);
+        }else{
+          andGateButton.setColor(255,203);
+        }
+        andGateButton.draw();
+        if(placingOrGate){
+          orGateButton.setColor(255,#F2F258);
+        }else{
+          orGateButton.setColor(255,203);
+        }
+        orGateButton.draw();
+        if(placingXorGate){
+          xorGateButton.setColor(255,#F2F258);
+        }else{
+          xorGateButton.setColor(255,203);
+        }
+        xorGateButton.draw();
         
         
         //draw hover text
         connectLogicButton.drawHoverText();
         moveComponentsButton.drawHoverText();
+        deleteButton.drawHoverText();
+        andGateButton.drawHoverText();
+        orGateButton.drawHoverText();
+        xorGateButton.drawHoverText();
       }else {
         fill(0);
         textSize(20);
@@ -1138,6 +1179,22 @@ class ToolBox extends PApplet {
         if(moveComponentsButton.isMouseOver()){
           turnThingsOff();
           moveLogicComponents=true;
+        }
+        if(andGateButton.isMouseOver()){
+           turnThingsOff();
+           placingAndGate=true;
+        }
+        if(orGateButton.isMouseOver()){
+           turnThingsOff();
+           placingOrGate=true;
+        }
+        if (deleteButton.isMouseOver()) {
+            turnThingsOff();
+            deleteing=true;
+          }
+        if(xorGateButton.isMouseOver()){
+           turnThingsOff();
+           placingXorGate=true;
         }
       }//end of edditing logic board
     }//end of tools

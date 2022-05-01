@@ -1361,9 +1361,35 @@ class GenericLogicComponent extends LogicComponent{
    super(x,y,"generic",lb); 
   }
   
-  void draw(){
-   super.draw(); 
+  void tick(){}
+}
+
+class AndGate extends LogicComponent{
+  AndGate(float x,float y,LogicBoard lb){
+    super(x,y,"AND",lb);
   }
   
-  void tick(){}
+  void tick(){
+    outputTerminal=inputTerminal1&&inputTerminal2;
+  }
+}
+
+class OrGate extends LogicComponent{
+  OrGate(float x,float y,LogicBoard lb){
+    super(x,y,"OR",lb);
+  }
+  
+  void tick(){
+    outputTerminal=inputTerminal1||inputTerminal2;
+  }
+}
+
+class XorGate extends LogicComponent{
+  XorGate(float x,float y,LogicBoard lb){
+    super(x,y,"XOR",lb);
+  }
+  
+  void tick(){
+    outputTerminal=inputTerminal1!=inputTerminal2;
+  }
 }

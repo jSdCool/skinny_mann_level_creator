@@ -15,7 +15,7 @@ void setup() {
   coin3D.scale(3);
   initlizeButtons();
 }
-boolean startup=true, editing_level=true, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, loading=false, newLevel=false, simulating=false, entering_file_path=false, coursor=false, level_complete=false, dead=false, entering_name=false, cam_left=false, cam_right=false, drawing=false, draw=false, extra=false, ground=false, check_point=false, goal=false, deleteing=false, delete=false, moving_player=false, grid_mode=false, holo_gram=false, editingStage=false, levelOverview=false, newFile=false, drawCoins=false, drawingPortal=false, drawingPortal2=false, drawingPortal3=false, E_pressed=false, saveColors=false, sloap=false, loopThread2=true, cam_up=false, cam_down=false, holoTriangle=false, dethPlane=false, setPlayerPosTo=false, e3DMode=false, WPressed=false, SPressed=false, draw3DSwitch1=false, draw3DSwitch2=false, checkpointIn3DStage=false, shadow3D=true, tutorialMode=false, drawingSign=false, selecting=false, viewingItemContents=false, loadingBlueprint=false, creatingNewBlueprint=false, editingBlueprint=false, selectingBlueprint=false, placingSound=false,editinglogicBoard=false,connectingLogic=false,connecting=false,moveLogicComponents=false,movingLogicComponent;
+boolean startup=true, editing_level=true, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, loading=false, newLevel=false, simulating=false, entering_file_path=false, coursor=false, level_complete=false, dead=false, entering_name=false, cam_left=false, cam_right=false, drawing=false, draw=false, extra=false, ground=false, check_point=false, goal=false, deleteing=false, delete=false, moving_player=false, grid_mode=false, holo_gram=false, editingStage=false, levelOverview=false, newFile=false, drawCoins=false, drawingPortal=false, drawingPortal2=false, drawingPortal3=false, E_pressed=false, saveColors=false, sloap=false, loopThread2=true, cam_up=false, cam_down=false, holoTriangle=false, dethPlane=false, setPlayerPosTo=false, e3DMode=false, WPressed=false, SPressed=false, draw3DSwitch1=false, draw3DSwitch2=false, checkpointIn3DStage=false, shadow3D=true, tutorialMode=false, drawingSign=false, selecting=false, viewingItemContents=false, loadingBlueprint=false, creatingNewBlueprint=false, editingBlueprint=false, selectingBlueprint=false, placingSound=false,editinglogicBoard=false,connectingLogic=false,connecting=false,moveLogicComponents=false,movingLogicComponent,placingAndGate=false,placingOrGate=false,placingXorGate;
 String file_path, new_name="my_level", GAME_version="0.5.0_Early_Access", EDITOR_version="0.0.1.9_EAc", rootPath="", coursorr="", newFileName="", newFileType="2D", stageType="", author="your name here", displayText="", fileToCoppyPath="";
 //int player1 []={20,700,1,0,1,0}; // old player data
 Player player1 =new Player(20, 699, 1, "red");
@@ -671,8 +671,14 @@ void mouseClicked() {
       }//end of load button
     }//end of loading blueprint
     if(editinglogicBoard){
-      if(connectingLogic){
-        
+      if(placingAndGate){
+        level.logicBoards.get(logicBoardIndex).components.add(new AndGate(mouseX-50,mouseY-40,level.logicBoards.get(logicBoardIndex)));
+      }
+      if(placingOrGate){
+        level.logicBoards.get(logicBoardIndex).components.add(new OrGate(mouseX-50,mouseY-40,level.logicBoards.get(logicBoardIndex)));
+      }
+      if(placingXorGate){
+        level.logicBoards.get(logicBoardIndex).components.add(new XorGate(mouseX-50,mouseY-40,level.logicBoards.get(logicBoardIndex)));
       }
       //level.logicBoards.get(logicBoardIndex).components.add(new GenericLogicComponent(mouseX,mouseY,level.logicBoards.get(logicBoardIndex)));
     }//end of edditing logic board
@@ -994,7 +1000,7 @@ String getInput(String in, int x) {//for use in the main sketch whre keyCode and
   return getInput(in, x, keyCode, key);
 }
 
-/**resets tool stages to default
+/**resets tool states to default
 
 */
 void turnThingsOff() {
@@ -1020,6 +1026,9 @@ void turnThingsOff() {
   placingSound=false;
   connectingLogic=false;
   moveLogicComponents=false;
+  placingAndGate=false;
+  placingOrGate=false;
+  placingXorGate=false;
 }
 
 int curMills=0, lasMills=0, mspc=0;
