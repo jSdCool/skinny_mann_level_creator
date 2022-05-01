@@ -43,6 +43,9 @@ class Level {
     }
     
     logicBoards.add(new LogicBoard());//temporary
+    logicBoards.get(0).components.add(new GenericLogicComponent(80,80,logicBoards.get(0)));
+    logicBoards.get(0).components.add(new GenericLogicComponent(580,360,logicBoards.get(0)));
+    logicBoards.get(0).components.get(0).connect(1,1);
   }
 
   void reloadCoins() {
@@ -1275,11 +1278,14 @@ abstract class LogicComponent{//the base of all logic gam=ts and things
   float x,y;//for visuals only
   String type;
   Button button;
-  LogicComponent(float x,float y,String type){
+  ArrayList<Integer[]> connections=new ArrayList<>();
+  LogicBoard lb;
+  LogicComponent(float x,float y,String type,LogicBoard board){
     this.x=x;
     this.y=y;
     this.type=type;
     button=new Button(primaryWindow,x,y,100,80,"  "+type+"  ");
+    lb=board;
   }
   
   void draw(){
@@ -1289,11 +1295,43 @@ abstract class LogicComponent{//the base of all logic gam=ts and things
    ellipse(x-2,y+60,20,20);
    ellipse(x+102,y+40,20,20);
   }
+  
+  float[] getTerminalPos(int t){
+     if(t==0){
+       return new float[]{x-2,y+20};
+     }
+     if(t==1){
+       return new float[]{x-2,y+60};
+     }
+     if(t==2){
+       return new float[]{x+102,y+40};
+     }
+    return new float[]{0,0};
+  }
+  
+  void connect(int index,int terminal){
+    if(index>=lb.components.size()||index<0)//check if the index is valid
+      return; 
+    if(terminal<0||terminal>1)//check id the terminal attemping to connect to is valid
+      return;
+    connections.add(new Integer[]{index,terminal});//create the connection
+  }
+  
+  void drawConnections(){
+    for(int i=0;i<connections.size();i++){
+      stroke(0);
+      strokeWeight(5);
+      Integer[] connectionInfo =connections.get(i);
+      float[] thisTerminal = getTerminalPos(2),toTerminal=lb.components.get(connectionInfo[0]).getTerminalPos(connectionInfo[1]);
+      line(thisTerminal[0],thisTerminal[1],toTerminal[0],toTerminal[1]);
+    }
+  }
+  
 }
 
 class GenericLogicComponent extends LogicComponent{
-  GenericLogicComponent(float x,float y){
-   super(x,y,"generic"); 
+  GenericLogicComponent(float x,float y,LogicBoard lb){
+   super(x,y,"generic",lb); 
   }
   
   void draw(){

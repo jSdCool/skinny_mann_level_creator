@@ -382,6 +382,9 @@ void draw() {
     for(int i=0;i<level.logicBoards.get(logicBoardIndex).components.size();i++){
       level.logicBoards.get(logicBoardIndex).components.get(i).draw();
     }
+    for(int i=0;i<level.logicBoards.get(logicBoardIndex).components.size();i++){
+      level.logicBoards.get(logicBoardIndex).components.get(i).drawConnections();
+    }
   }
 
 
@@ -657,7 +660,7 @@ void mouseClicked() {
       }//end of load button
     }//end of loading blueprint
     if(editinglogicBoard){
-      level.logicBoards.get(logicBoardIndex).components.add(new GenericLogicComponent(mouseX,mouseY));
+      level.logicBoards.get(logicBoardIndex).components.add(new GenericLogicComponent(mouseX,mouseY,level.logicBoards.get(logicBoardIndex)));
     }//end of edditing logic board
   }//end of left mouse button clicked
 }//end of mouse clicked
