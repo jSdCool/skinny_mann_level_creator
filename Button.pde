@@ -76,7 +76,7 @@ class Button {
   
   public Button drawHoverText(){
     if(isMouseOver()){
-      textAlign(LEFT, BOTTOM);
+      window.textAlign(LEFT, BOTTOM);
       window.strokeWeight(0);
       window.fill(htStroke);
       window.textSize(15);

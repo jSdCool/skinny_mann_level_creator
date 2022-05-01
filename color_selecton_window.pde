@@ -9,7 +9,7 @@ class ToolBox extends PApplet {
   public int redVal=0, greenVal=0, blueVal=0, CC=0;
   int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset;
   String page="colors";
-  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound,checkpointButton,playPauseButton,groundButton,goalButton,deleteButton,movePlayerButton,gridModeButton,holoButton;
+  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound,checkpointButton,playPauseButton,groundButton,goalButton,deleteButton,movePlayerButton,gridModeButton,holoButton,connectLogicButton;
   boolean typingSign=false, settingSkyColor=false;
 
   public void settings() {
@@ -52,6 +52,8 @@ class ToolBox extends PApplet {
     movePlayerButton=new Button(this,340, 40+100, 50, 50,255,203).setStrokeWeight(5).setHoverText("move player");
     gridModeButton=new Button(this,400, 40+100, 50, 50,255,203).setStrokeWeight(5).setHoverText("grid mode");
     holoButton=new Button(this,460, 40+100, 50, 50,255,203).setStrokeWeight(5).setHoverText("hologram (no collision)");
+    
+    connectLogicButton=new Button(this,40, 40+100, 50, 50,"connect",255,203).setStrokeWeight(5).setHoverText("connect logic nodes");
   }
 
 
@@ -666,7 +668,19 @@ class ToolBox extends PApplet {
           draw_sloap.drawHoverText();
           draw_holoTriangle.drawHoverText();
         }//end of type is blueprint
-      } else {
+      } else if(editinglogicBoard){ 
+        //draw buttons
+        if(connectingLogic){
+          connectLogicButton.setColor(255,#F2F258);
+          } else {
+            connectLogicButton.setColor(255,203);
+          }
+        connectLogicButton.draw();
+        
+        
+        //draw hover text
+        connectLogicButton.drawHoverText();
+      }else {
         fill(0);
         textSize(20);
         text("you are not currently editing a stage", 300, 300);
@@ -1108,6 +1122,12 @@ class ToolBox extends PApplet {
           }
         }//end of type is blueprint
       }//end of editing blueprint
+      else if(editinglogicBoard){ 
+        if(connectLogicButton.isMouseOver()){
+          turnThingsOff();
+          connectingLogic=true;
+        }
+      }//end of edditing logic board
     }//end of tools
 
     if (page.equals("selection")) {
