@@ -1309,6 +1309,9 @@ class LogicBoard {//stores all the logic components
       if (type.equals("XNOR")) {
         components.add(new XNorGate(component, this));
       }
+      if (type.equals("ON")) {
+        components.add(new ConstantOnSignal(component, this));
+      }
     }
   }
   LogicBoard(String name) {
@@ -1377,6 +1380,7 @@ abstract class LogicComponent {//the base of all logic gam=ts and things
     fill(#FF98CF);
     ellipse(x-2, y+20, 20, 20);
     ellipse(x-2, y+60, 20, 20);
+    fill(#FA5BD5);
     ellipse(x+102, y+40, 20, 20);
   }
 
@@ -1390,7 +1394,7 @@ abstract class LogicComponent {//the base of all logic gam=ts and things
     if (t==2) {
       return new float[]{x+102, y+40};
     }
-    return new float[]{0, 0};
+    return new float[]{-100, -100};
   }
 
   void connect(int index, int terminal) {
@@ -1545,5 +1549,64 @@ class XNorGate extends LogicComponent {
 
   void tick() {
     outputTerminal=!(inputTerminal1!=inputTerminal2);
+  }
+}
+
+abstract class LogicInputComponent extends LogicComponent{
+  LogicInputComponent(float x, float y, String type, LogicBoard board) {
+    super(x, y, type, board);
+    button=new Button(primaryWindow, x, y, 100, 40, "  "+type+"  ");
+  }
+  LogicInputComponent(float x, float y, String type, LogicBoard board, JSONArray cnects){
+    super(x,y,type,board,cnects);
+    button=new Button(primaryWindow, x, y, 100, 40, "  "+type+"  ");
+  }
+  void draw() {
+    button.draw();
+    fill(#FA5BD5);
+    ellipse(x+102, y+20, 20, 20);
+  }
+  float[] getTerminalPos(int t) {
+    if (t==2) {
+      return new float[]{x+102, y+20};
+    }
+    return new float[]{-100, -100};
+  }
+}
+
+abstract class LogicOutputComponent extends LogicComponent{
+  LogicOutputComponent(float x, float y, String type, LogicBoard board) {
+    super(x, y, type, board);
+    button=new Button(primaryWindow, x, y, 100, 40, "  "+type+"  ");
+  }
+  LogicOutputComponent(float x, float y, String type, LogicBoard board, JSONArray cnects){
+    super(x,y,type,board,cnects);
+    button=new Button(primaryWindow, x, y, 100, 40, "  "+type+"  ");
+  }
+  void draw() {
+    button.draw();
+    fill(#FF98CF);
+    ellipse(x-2, y+20, 20, 20);
+  }
+  float[] getTerminalPos(int t) {
+    if (t==0) {
+      return new float[]{x-2, y+20};
+    }
+    return new float[]{-100, -100};
+  }
+}
+
+class ConstantOnSignal extends LogicInputComponent{
+  ConstantOnSignal(float x, float y, LogicBoard lb) {
+    super(x, y, "ON", lb);
+    outputTerminal=true;
+  }
+
+  ConstantOnSignal(JSONObject data, LogicBoard lb) {
+    super(data.getFloat("x"), data.getFloat("y"), "ON", lb, data.getJSONArray("connections"));
+    outputTerminal=true;
+  }
+  void tick(){
+    outputTerminal=true;
   }
 }
