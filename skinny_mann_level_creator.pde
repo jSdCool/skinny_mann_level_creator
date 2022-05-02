@@ -883,28 +883,43 @@ void mouseReleased() {
     GUImouseReleased();
   }
   if(editinglogicBoard){
-    if(connectingLogic&&connecting){
-      connecting=false;
+    if(connectingLogic&&connecting){//if attempting to connect terminals
+      connecting=false;//stop more connecting
       LogicBoard board=level.logicBoards.get(logicBoardIndex);
-      for(int i=0;i<board.components.size();i++){
-         float[] nodePos1=board.components.get(i).getTerminalPos(0),nodePos2=board.components.get(i).getTerminalPos(1);
-          if(Math.sqrt(Math.pow(nodePos1[0]-mouseX,2)+Math.pow(nodePos1[1]-mouseY,2))<=10){
-            for(int j=0;j<board.components.get(connectingFromIndex).connections.size();j++){
-              if(board.components.get(connectingFromIndex).connections.get(j)[0]==i&&board.components.get(connectingFromIndex).connections.get(j)[1]==0){
+      for(int i=0;i<board.components.size();i++){//srech through all components in the current board
+         float[] nodePos1=board.components.get(i).getTerminalPos(0),nodePos2=board.components.get(i).getTerminalPos(1);//gets the positions of the terminals of the component
+          if(Math.sqrt(Math.pow(nodePos1[0]-mouseX,2)+Math.pow(nodePos1[1]-mouseY,2))<=10){//if the mmouse is over terminal 0
+            for(int j=0;j<board.components.get(connectingFromIndex).connections.size();j++){//checkif the connection allready exsists
+              if(board.components.get(connectingFromIndex).connections.get(j)[0]==i&&board.components.get(connectingFromIndex).connections.get(j)[1]==0){//if so then remove the connection
                 board.components.get(connectingFromIndex).connections.remove(j);
                 return;
               }
             }
-            board.components.get(connectingFromIndex).connect(i,0);
+            for(int j=0;j<board.components.size();j++){//check if any outher components are connecting to this terminal allready
+              for(int k=0;k<board.components.get(j).connections.size();k++){
+               if( board.components.get(j).connections.get(k)[0]==i&&board.components.get(j).connections.get(k)[1]==0){//if so then do nothing
+                return; 
+               }
+              }
+            }
+            board.components.get(connectingFromIndex).connect(i,0);//make the connection
             return;
           }
-          if(Math.sqrt(Math.pow(nodePos2[0]-mouseX,2)+Math.pow(nodePos2[1]-mouseY,2))<=10){
-            for(int j=0;j<board.components.get(connectingFromIndex).connections.size();j++){
-              if(board.components.get(connectingFromIndex).connections.get(j)[0]==i&&board.components.get(connectingFromIndex).connections.get(j)[1]==1){
+          if(Math.sqrt(Math.pow(nodePos2[0]-mouseX,2)+Math.pow(nodePos2[1]-mouseY,2))<=10){//if the mmouse is over terminal 1
+            for(int j=0;j<board.components.get(connectingFromIndex).connections.size();j++){//checkif the connection allready exsists
+              if(board.components.get(connectingFromIndex).connections.get(j)[0]==i&&board.components.get(connectingFromIndex).connections.get(j)[1]==1){//if so then remove the connection
                   board.components.get(connectingFromIndex).connections.remove(j);
                   return;
                 }
               }
+              
+              for(int j=0;j<board.components.size();j++){//check if any outher components are connecting to this terminal allready
+                for(int k=0;k<board.components.get(j).connections.size();k++){
+                 if( board.components.get(j).connections.get(k)[0]==i&&board.components.get(j).connections.get(k)[1]==1){//if so then do nothing
+                  return; 
+               }
+              }
+            }
             board.components.get(connectingFromIndex).connect(i,1);
             return;
           }
