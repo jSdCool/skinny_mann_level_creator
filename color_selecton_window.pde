@@ -9,58 +9,58 @@ class ToolBox extends PApplet {
   public int redVal=0, greenVal=0, blueVal=0, CC=0;
   int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset;
   String page="colors";
-  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound,checkpointButton,playPauseButton,groundButton,goalButton,deleteButton,movePlayerButton,gridModeButton,holoButton,connectLogicButton,moveComponentsButton,andGateButton,orGateButton,xorGateButton,nandGateButton,norGateButton,xnorGateButton;
+  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton;
   boolean typingSign=false, settingSkyColor=false;
 
   public void settings() {
-    size(1280, 720,P2D);//mac os requires a render to be specified
+    size(1280, 720, P2D);//mac os requires a render to be specified
     smooth();
   }
   void setup() {
     textSize(50);
-    colorPage=new Button(this,50, 50, 100, 50, "colors/depth");
-    toolsPage=new Button(this,155, 50, 100, 50, "tools");
-    selectionPage=new Button(this,260, 50, 100, 50, "selection");
-    stageSettings=new Button(this,365, 50, 100, 50, "stage settings");
-    
-    toggle3DMode=new Button(this,820, 40+100, 50, 50, "  3D  ", 255, 203).setStrokeWeight(5).setHoverText("toggle 3D mode");
-    switch3D1=new Button(this,880, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("turn 3D on switch");
-    switch3D2=new Button(this,940, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("turn 3D off switch");
-    saveLevel=new Button(this,1000, 40+100, 50, 50, "save", 255, 203).setStrokeWeight(5).setHoverText("save level");
-    draw_sloap=new Button(this,700, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("sloap");
-    draw_holoTriangle=new Button(this,760, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("holographic sloap(no colision)");
-    draw_dethPlane=new Button(this,820, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("death plane");
-    draw_coin=new Button(this,580, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("coin");
-    draw_portal=new Button(this,640, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("interdimentional portal");
-    exitStageEdit= new Button(this,520, 40+100, 50, 50, " < ", 255, 203).setStrokeWeight(5).setHoverText("exit to overview");
-    sign=new Button(this,1060, 140, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("sign");
-    select=new Button(this,1120, 140, 50, 50, "select", 255, 203).setStrokeWeight(5).setHoverText("select");
-    skyColorB1=new Button(this,150, 165, 40, 40, 255, 203).setStrokeWeight(0);
-    setSkyColor=new Button(this,300, 580, 100, 30, "set sky color").setStrokeWeight(2);
-    resetSkyColor=new Button(this,200, 165, 40, 40, "reset", 255, 203).setStrokeWeight(0);
-    placeBlueprint=new Button(this,1180, 140, 50, 50, #0F1AD3, 203).setStrokeWeight(5).setHoverText("place blurprint");
-    nexBlueprint=new Button(this,width/2+200, height*0.7-25, 50, 50, ">", 255, 203).setStrokeWeight(5);
-    prevBlueprint=new Button(this,width/2-200, height*0.7-25, 50, 50, "<", 255, 203).setStrokeWeight(5);
-    playSound=new Button(this,40, 200, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("place sound");
-    nextSound=new Button(this,width/2+300, height*0.4-25, 50, 50, ">", 255, 203).setStrokeWeight(5);
-    prevSound=new Button(this,width/2-300, height*0.4-25, 50, 50, "<", 255, 203).setStrokeWeight(5);
-    checkpointButton=new Button(this,160, 40+100, 50, 50,255,203).setStrokeWeight(5).setHoverText("check point");
-    playPauseButton=new Button(this,40, 40+100, 50, 50,255,203).setStrokeWeight(5).setHoverText("play/pause the simulation");
-    groundButton=new Button(this,100, 40+100, 50, 50,255,203).setStrokeWeight(5).setHoverText("solid ground");
-    goalButton=new Button(this,220, 40+100, 50, 50,255,203).setStrokeWeight(5).setHoverText("finish line");
-    deleteButton=new Button(this,280, 40+100, 50, 50,255,203).setStrokeWeight(5).setHoverText("delete");
-    movePlayerButton=new Button(this,340, 40+100, 50, 50,255,203).setStrokeWeight(5).setHoverText("move player");
-    gridModeButton=new Button(this,400, 40+100, 50, 50,255,203).setStrokeWeight(5).setHoverText("grid mode");
-    holoButton=new Button(this,460, 40+100, 50, 50,255,203).setStrokeWeight(5).setHoverText("hologram (no collision)");
-    
-    connectLogicButton=new Button(this,40, 40+100, 50, 50,"connect",255,203).setStrokeWeight(5).setHoverText("connect logic nodes");
-    moveComponentsButton=new Button(this,100, 40+100, 50, 50,"move",255,203).setStrokeWeight(5).setHoverText("move components arround");
-    andGateButton=new Button(this,160, 40+100, 50, 50,"AND",255,203).setStrokeWeight(5).setHoverText("and gate");
-    orGateButton=new Button(this,220, 40+100, 50, 50,"OR",255,203).setStrokeWeight(5).setHoverText("or gate");
-    xorGateButton=new Button(this,340, 40+100, 50, 50,"XOR",255,203).setStrokeWeight(5).setHoverText("exclucuve or gate");
-    nandGateButton=new Button(this,400, 40+100, 50, 50,"NAND",255,203).setStrokeWeight(5).setHoverText("inverted and gate");
-    norGateButton=new Button(this,460, 40+100, 50, 50,"NOR",255,203).setStrokeWeight(5).setHoverText("inverted or gate");
-    xnorGateButton=new Button(this,580, 40+100, 50, 50,"XNOR", 255, 203).setStrokeWeight(5).setHoverText("inverted exclucive or gate");
+    colorPage=new Button(this, 50, 50, 100, 50, "colors/depth");
+    toolsPage=new Button(this, 155, 50, 100, 50, "tools");
+    selectionPage=new Button(this, 260, 50, 100, 50, "selection");
+    stageSettings=new Button(this, 365, 50, 100, 50, "stage settings");
+
+    toggle3DMode=new Button(this, 820, 40+100, 50, 50, "  3D  ", 255, 203).setStrokeWeight(5).setHoverText("toggle 3D mode");
+    switch3D1=new Button(this, 880, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("turn 3D on switch");
+    switch3D2=new Button(this, 940, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("turn 3D off switch");
+    saveLevel=new Button(this, 1000, 40+100, 50, 50, "save", 255, 203).setStrokeWeight(5).setHoverText("save level");
+    draw_sloap=new Button(this, 700, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("sloap");
+    draw_holoTriangle=new Button(this, 760, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("holographic sloap(no colision)");
+    draw_dethPlane=new Button(this, 820, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("death plane");
+    draw_coin=new Button(this, 580, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("coin");
+    draw_portal=new Button(this, 640, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("interdimentional portal");
+    exitStageEdit= new Button(this, 520, 40+100, 50, 50, " < ", 255, 203).setStrokeWeight(5).setHoverText("exit to overview");
+    sign=new Button(this, 1060, 140, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("sign");
+    select=new Button(this, 1120, 140, 50, 50, "select", 255, 203).setStrokeWeight(5).setHoverText("select");
+    skyColorB1=new Button(this, 150, 165, 40, 40, 255, 203).setStrokeWeight(0);
+    setSkyColor=new Button(this, 300, 580, 100, 30, "set sky color").setStrokeWeight(2);
+    resetSkyColor=new Button(this, 200, 165, 40, 40, "reset", 255, 203).setStrokeWeight(0);
+    placeBlueprint=new Button(this, 1180, 140, 50, 50, #0F1AD3, 203).setStrokeWeight(5).setHoverText("place blurprint");
+    nexBlueprint=new Button(this, width/2+200, height*0.7-25, 50, 50, ">", 255, 203).setStrokeWeight(5);
+    prevBlueprint=new Button(this, width/2-200, height*0.7-25, 50, 50, "<", 255, 203).setStrokeWeight(5);
+    playSound=new Button(this, 40, 200, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("place sound");
+    nextSound=new Button(this, width/2+300, height*0.4-25, 50, 50, ">", 255, 203).setStrokeWeight(5);
+    prevSound=new Button(this, width/2-300, height*0.4-25, 50, 50, "<", 255, 203).setStrokeWeight(5);
+    checkpointButton=new Button(this, 160, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("check point");
+    playPauseButton=new Button(this, 40, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("play/pause the simulation");
+    groundButton=new Button(this, 100, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("solid ground");
+    goalButton=new Button(this, 220, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("finish line");
+    deleteButton=new Button(this, 280, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("delete");
+    movePlayerButton=new Button(this, 340, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("move player");
+    gridModeButton=new Button(this, 400, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("grid mode");
+    holoButton=new Button(this, 460, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("hologram (no collision)");
+
+    connectLogicButton=new Button(this, 40, 40+100, 50, 50, "connect", 255, 203).setStrokeWeight(5).setHoverText("connect logic nodes");
+    moveComponentsButton=new Button(this, 100, 40+100, 50, 50, "move", 255, 203).setStrokeWeight(5).setHoverText("move components arround");
+    andGateButton=new Button(this, 160, 40+100, 50, 50, "AND", 255, 203).setStrokeWeight(5).setHoverText("and gate");
+    orGateButton=new Button(this, 220, 40+100, 50, 50, "OR", 255, 203).setStrokeWeight(5).setHoverText("or gate");
+    xorGateButton=new Button(this, 340, 40+100, 50, 50, "XOR", 255, 203).setStrokeWeight(5).setHoverText("exclucuve or gate");
+    nandGateButton=new Button(this, 400, 40+100, 50, 50, "NAND", 255, 203).setStrokeWeight(5).setHoverText("inverted and gate");
+    norGateButton=new Button(this, 460, 40+100, 50, 50, "NOR", 255, 203).setStrokeWeight(5).setHoverText("inverted or gate");
+    xnorGateButton=new Button(this, 580, 40+100, 50, 50, "XNOR", 255, 203).setStrokeWeight(5).setHoverText("inverted exclucive or gate");
   }
 
 
@@ -155,9 +155,9 @@ class ToolBox extends PApplet {
         if (!e3DMode) {
           strokeWeight(0);
           if (ground) {
-            groundButton.setColor(255,#F2F258);
+            groundButton.setColor(255, #F2F258);
           } else {
-            groundButton.setColor(255,203);
+            groundButton.setColor(255, 203);
           }
           groundButton.draw();
           fill(-7254783);
@@ -166,12 +166,12 @@ class ToolBox extends PApplet {
           fill(-16732415);
           stroke(-16732415);
           rect(100, 60+100, 50, 10);
-          
+
           strokeWeight(0);
           if (check_point) {
-            checkpointButton.setColor(255,#F2F258);
+            checkpointButton.setColor(255, #F2F258);
           } else {
-            checkpointButton.setColor(255,203);
+            checkpointButton.setColor(255, 203);
           }
           checkpointButton.draw();
           fill(#B9B9B9);
@@ -182,12 +182,12 @@ class ToolBox extends PApplet {
           strokeWeight(0);
           triangle(170, 85-60+20+100, 170, 85-40+20+100, 170+30, 85-50+20+100);
           strokeWeight(0);
-          
+
           if (!level.stages.get(currentStageIndex).type.equals("3Dstage")) {
             if (goal) {
-              goalButton.setColor(255,#F2F258);
+              goalButton.setColor(255, #F2F258);
             } else {
-              goalButton.setColor(255,203);
+              goalButton.setColor(255, 203);
             }
             goalButton.draw();
             fill(0);
@@ -200,9 +200,9 @@ class ToolBox extends PApplet {
             rect(253, 73+100, 15, 15);
           }
           if (deleteing) {
-            deleteButton.setColor(255,#F2F258);
+            deleteButton.setColor(255, #F2F258);
           } else {
-            deleteButton.setColor(255,203);
+            deleteButton.setColor(255, 203);
           }
           deleteButton.draw();
           fill(203);
@@ -217,18 +217,18 @@ class ToolBox extends PApplet {
           rect(307, 60+100, 5, 20);
 
           if (moving_player) {
-            movePlayerButton.setColor(255,#F2F258);
+            movePlayerButton.setColor(255, #F2F258);
           } else {
-            movePlayerButton.setColor(255,203);
+            movePlayerButton.setColor(255, 203);
           }
           movePlayerButton.draw();
           strokeWeight(0);
           draw_mann(365, 88+100, 1, 0.6, "red");
 
           if (grid_mode) {
-            gridModeButton.setColor(255,#F2F258);
+            gridModeButton.setColor(255, #F2F258);
           } else {
-            gridModeButton.setColor(255,203);
+            gridModeButton.setColor(255, 203);
           }
           gridModeButton.draw();
           textSize(20);
@@ -246,9 +246,9 @@ class ToolBox extends PApplet {
           text(grid_size, 410, 80+100);
           strokeWeight(0);
           if (holo_gram) {
-            holoButton.setColor(255,#F2F258);
+            holoButton.setColor(255, #F2F258);
           } else {
-            holoButton.setColor(255,203);
+            holoButton.setColor(255, 203);
           }
           holoButton.draw();
           exitStageEdit.draw();
@@ -387,9 +387,9 @@ class ToolBox extends PApplet {
 
             strokeWeight(0);
             if (ground) {
-              groundButton.setColor(255,#F2F258);
+              groundButton.setColor(255, #F2F258);
             } else {
-              groundButton.setColor(255,203);
+              groundButton.setColor(255, 203);
             }
             groundButton.draw();
             fill(-7254783);
@@ -402,9 +402,9 @@ class ToolBox extends PApplet {
             textAlign(LEFT, BOTTOM);
 
             if (grid_mode) {
-              gridModeButton.setColor(255,#F2F258);
+              gridModeButton.setColor(255, #F2F258);
             } else {
-              gridModeButton.setColor(255,203);
+              gridModeButton.setColor(255, 203);
             }
             gridModeButton.draw();
             textSize(20);
@@ -422,9 +422,9 @@ class ToolBox extends PApplet {
             text(grid_size, 410, 80+100);
             strokeWeight(0);
             if (deleteing) {
-              deleteButton.setColor(255,#F2F258);
+              deleteButton.setColor(255, #F2F258);
             } else {
-              deleteButton.setColor(255,203);
+              deleteButton.setColor(255, 203);
             }
             deleteButton.draw();
             fill(203);
@@ -439,9 +439,9 @@ class ToolBox extends PApplet {
             rect(307, 60+100, 5, 20);
 
             if (moving_player) {
-              movePlayerButton.setColor(255,#F2F258);
+              movePlayerButton.setColor(255, #F2F258);
             } else {
-              movePlayerButton.setColor(255,203);
+              movePlayerButton.setColor(255, 203);
             }
             movePlayerButton.draw();
             strokeWeight(0);
@@ -453,9 +453,9 @@ class ToolBox extends PApplet {
 
 
             if (check_point) {
-              checkpointButton.setColor(255,#F2F258);
+              checkpointButton.setColor(255, #F2F258);
             } else {
-              checkpointButton.setColor(255,203);
+              checkpointButton.setColor(255, 203);
             }
             checkpointButton.draw();
             fill(#B9B9B9);
@@ -469,9 +469,9 @@ class ToolBox extends PApplet {
 
 
             if (holo_gram) {
-              holoButton.setColor(255,#F2F258);
+              holoButton.setColor(255, #F2F258);
             } else {
-              holoButton.setColor(255,203);
+              holoButton.setColor(255, 203);
             }
             holoButton.draw();
 
@@ -561,9 +561,9 @@ class ToolBox extends PApplet {
         if (workingBlueprint.type.equals("blueprint")) {
           strokeWeight(0);
           if (ground) {
-            groundButton.setColor(255,#F2F258);
+            groundButton.setColor(255, #F2F258);
           } else {
-            groundButton.setColor(255,203);
+            groundButton.setColor(255, 203);
           }
           groundButton.draw();
           fill(-7254783);
@@ -575,9 +575,9 @@ class ToolBox extends PApplet {
 
           strokeWeight(0);
           if (check_point) {
-            checkpointButton.setColor(255,#F2F258);
+            checkpointButton.setColor(255, #F2F258);
           } else {
-            checkpointButton.setColor(255,203);
+            checkpointButton.setColor(255, 203);
           }
           checkpointButton.draw();
           fill(#B9B9B9);
@@ -592,9 +592,9 @@ class ToolBox extends PApplet {
           textAlign(LEFT, BOTTOM);
 
           if (grid_mode) {
-            gridModeButton.setColor(255,#F2F258);
+            gridModeButton.setColor(255, #F2F258);
           } else {
-            gridModeButton.setColor(255,203);
+            gridModeButton.setColor(255, 203);
           }
           gridModeButton.draw();
           textSize(20);
@@ -612,9 +612,9 @@ class ToolBox extends PApplet {
           text(grid_size, 410, 80+100);
           strokeWeight(0);
           if (deleteing) {
-            deleteButton.setColor(255,#F2F258);
+            deleteButton.setColor(255, #F2F258);
           } else {
-            deleteButton.setColor(255,203);
+            deleteButton.setColor(255, 203);
           }
           deleteButton.draw();
           fill(203);
@@ -657,9 +657,9 @@ class ToolBox extends PApplet {
           strokeWeight(0);
           triangle(765, 85+100, 805, 85+100, 805, 45+100);
           if (holo_gram) {
-            holoButton.setColor(255,#F2F258);
+            holoButton.setColor(255, #F2F258);
           } else {
-            holoButton.setColor(255,203);
+            holoButton.setColor(255, 203);
           }
           holoButton.draw();
           saveLevel.draw();
@@ -675,25 +675,25 @@ class ToolBox extends PApplet {
           draw_sloap.drawHoverText();
           draw_holoTriangle.drawHoverText();
         }//end of type is blueprint
-      } else if(editinglogicBoard){ 
+      } else if (editinglogicBoard) {
         //draw buttons
-        if(connectingLogic){
-          connectLogicButton.setColor(255,#F2F258);
-          } else {
-            connectLogicButton.setColor(255,203);
-          }
+        if (connectingLogic) {
+          connectLogicButton.setColor(255, #F2F258);
+        } else {
+          connectLogicButton.setColor(255, 203);
+        }
         connectLogicButton.draw();
-        if(moveLogicComponents){
-            moveComponentsButton.setColor(255,#F2F258);
-          } else {
-            moveComponentsButton.setColor(255,203);
-          }
+        if (moveLogicComponents) {
+          moveComponentsButton.setColor(255, #F2F258);
+        } else {
+          moveComponentsButton.setColor(255, 203);
+        }
         moveComponentsButton.draw();
         if (deleteing) {
-            deleteButton.setColor(255,#F2F258);
-          } else {
-            deleteButton.setColor(255,203);
-          }
+          deleteButton.setColor(255, #F2F258);
+        } else {
+          deleteButton.setColor(255, 203);
+        }
         deleteButton.draw();
         fill(203);
         stroke(203);
@@ -705,45 +705,45 @@ class ToolBox extends PApplet {
         rect(315, 60+100, 5, 20);
         rect(298, 60+100, 5, 20);
         rect(307, 60+100, 5, 20);
-        if(placingAndGate){
-          andGateButton.setColor(255,#F2F258);
-        }else{
-          andGateButton.setColor(255,203);
+        if (placingAndGate) {
+          andGateButton.setColor(255, #F2F258);
+        } else {
+          andGateButton.setColor(255, 203);
         }
         andGateButton.draw();
-        if(placingOrGate){
-          orGateButton.setColor(255,#F2F258);
-        }else{
-          orGateButton.setColor(255,203);
+        if (placingOrGate) {
+          orGateButton.setColor(255, #F2F258);
+        } else {
+          orGateButton.setColor(255, 203);
         }
         orGateButton.draw();
-        if(placingXorGate){
-          xorGateButton.setColor(255,#F2F258);
-        }else{
-          xorGateButton.setColor(255,203);
+        if (placingXorGate) {
+          xorGateButton.setColor(255, #F2F258);
+        } else {
+          xorGateButton.setColor(255, 203);
         }
         xorGateButton.draw();
         saveLevel.draw();
         exitStageEdit.draw();
-        if(placingNandGate){
-          nandGateButton.setColor(255,#F2F258);
-        }else{
-          nandGateButton.setColor(255,203);
+        if (placingNandGate) {
+          nandGateButton.setColor(255, #F2F258);
+        } else {
+          nandGateButton.setColor(255, 203);
         }
         nandGateButton.draw();
-        if(placingNorGate){
-          norGateButton.setColor(255,#F2F258);
-        }else{
-          norGateButton.setColor(255,203);
+        if (placingNorGate) {
+          norGateButton.setColor(255, #F2F258);
+        } else {
+          norGateButton.setColor(255, 203);
         }
         norGateButton.draw();
-        if(placingXnorGate){
-          xnorGateButton.setColor(255,#F2F258);
-        }else{
-          xnorGateButton.setColor(255,203);
+        if (placingXnorGate) {
+          xnorGateButton.setColor(255, #F2F258);
+        } else {
+          xnorGateButton.setColor(255, 203);
         }
         xnorGateButton.draw();
-        
+
         //draw hover text
         connectLogicButton.drawHoverText();
         moveComponentsButton.drawHoverText();
@@ -756,7 +756,7 @@ class ToolBox extends PApplet {
         nandGateButton.drawHoverText();
         norGateButton.drawHoverText();
         xnorGateButton.drawHoverText();
-      }else {
+      } else {
         fill(0);
         textSize(20);
         text("you are not currently editing a stage", 300, 300);
@@ -925,18 +925,18 @@ class ToolBox extends PApplet {
             dethPlane=true;
           }
 
-            if (playPauseButton.isMouseOver()) {
-              extra=true;
-              if (extra&&simulating) {
-                simulating=false;
-                extra=false;
-              }
-              if (extra&&!simulating) {
-                simulating=true;
-                extra=false;
-              }
+          if (playPauseButton.isMouseOver()) {
+            extra=true;
+            if (extra&&simulating) {
+              simulating=false;
+              extra=false;
             }
-          
+            if (extra&&!simulating) {
+              simulating=true;
+              extra=false;
+            }
+          }
+
 
           if (groundButton.isMouseOver()) {
             turnThingsOff();
@@ -1027,18 +1027,18 @@ class ToolBox extends PApplet {
 
           if (!e3DMode) {
 
-              if (playPauseButton.isMouseOver()) {
-                extra=true;
-                if (extra&&simulating) {
-                  simulating=false;
-                  extra=false;
-                }
-                if (extra&&!simulating) {
-                  simulating=true;
-                  extra=false;
-                }
+            if (playPauseButton.isMouseOver()) {
+              extra=true;
+              if (extra&&simulating) {
+                simulating=false;
+                extra=false;
               }
-            
+              if (extra&&!simulating) {
+                simulating=true;
+                extra=false;
+              }
+            }
+
 
             if (groundButton.isMouseOver()) {
               turnThingsOff();
@@ -1117,18 +1117,18 @@ class ToolBox extends PApplet {
               e3DMode=false;
             }
 
-              if (playPauseButton.isMouseOver()) {
-                extra=true;
-                if (extra&&simulating) {
-                  simulating=false;
-                  extra=false;
-                }
-                if (extra&&!simulating) {
-                  simulating=true;
-                  extra=false;
-                }
+            if (playPauseButton.isMouseOver()) {
+              extra=true;
+              if (extra&&simulating) {
+                simulating=false;
+                extra=false;
               }
-            
+              if (extra&&!simulating) {
+                simulating=true;
+                extra=false;
+              }
+            }
+
             if (sign.isMouseOver()) {
               turnThingsOff();
               drawingSign=true;
@@ -1198,30 +1198,30 @@ class ToolBox extends PApplet {
           }
         }//end of type is blueprint
       }//end of editing blueprint
-      else if(editinglogicBoard){ 
-        if(connectLogicButton.isMouseOver()){
+      else if (editinglogicBoard) {
+        if (connectLogicButton.isMouseOver()) {
           turnThingsOff();
           connectingLogic=true;
         }
-        if(moveComponentsButton.isMouseOver()){
+        if (moveComponentsButton.isMouseOver()) {
           turnThingsOff();
           moveLogicComponents=true;
         }
-        if(andGateButton.isMouseOver()){
-           turnThingsOff();
-           placingAndGate=true;
+        if (andGateButton.isMouseOver()) {
+          turnThingsOff();
+          placingAndGate=true;
         }
-        if(orGateButton.isMouseOver()){
-           turnThingsOff();
-           placingOrGate=true;
+        if (orGateButton.isMouseOver()) {
+          turnThingsOff();
+          placingOrGate=true;
         }
         if (deleteButton.isMouseOver()) {
-            turnThingsOff();
-            deleteing=true;
-          }
-        if(xorGateButton.isMouseOver()){
-           turnThingsOff();
-           placingXorGate=true;
+          turnThingsOff();
+          deleteing=true;
+        }
+        if (xorGateButton.isMouseOver()) {
+          turnThingsOff();
+          placingXorGate=true;
         }
         if (saveLevel.isMouseOver()) {
           println("saving level");
@@ -1230,21 +1230,21 @@ class ToolBox extends PApplet {
           println("save complete"+gmillis);
         }
         if (exitStageEdit.isMouseOver()) {
-            turnThingsOff();
-            levelOverview=true;
-            editinglogicBoard=false;
-          }
-        if(nandGateButton.isMouseOver()){
-           turnThingsOff();
-           placingNandGate=true;
+          turnThingsOff();
+          levelOverview=true;
+          editinglogicBoard=false;
         }
-        if(norGateButton.isMouseOver()){
-           turnThingsOff();
-           placingNorGate=true;
+        if (nandGateButton.isMouseOver()) {
+          turnThingsOff();
+          placingNandGate=true;
         }
-        if(xnorGateButton.isMouseOver()){
-           turnThingsOff();
-           placingXnorGate=true;
+        if (norGateButton.isMouseOver()) {
+          turnThingsOff();
+          placingNorGate=true;
+        }
+        if (xnorGateButton.isMouseOver()) {
+          turnThingsOff();
+          placingXnorGate=true;
         }
       }//end of edditing logic board
     }//end of tools

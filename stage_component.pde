@@ -35,7 +35,7 @@ class Level {
       if (job.getString("type").equals("sound")) {
         sounds.put(job.getString("name"), new StageSound(job));
       }
-      if(job.getString("type").equals("logicBoard")){
+      if (job.getString("type").equals("logicBoard")) {
         logicBoards.add(new LogicBoard(loadJSONArray(rootPath+job.getString("location"))));
       }
     }
@@ -44,7 +44,7 @@ class Level {
     for (int i=0; i<numOfCoins; i++) {
       coins.add(false);
     }
-    
+
     //logicBoards.add(new LogicBoard());//temporary
     //logicBoards.get(0).components.add(new GenericLogicComponent(80,80,logicBoards.get(0)));
     //logicBoards.get(0).components.add(new GenericLogicComponent(580,360,logicBoards.get(0)));
@@ -85,12 +85,12 @@ class Level {
       for (int i=0; i<keys.length; i++) {
         index.setJSONObject(index.size(), sounds.get(keys[i]).save());
       }
-    for(int i=0;i<logicBoards.size();i++){
+    for (int i=0; i<logicBoards.size(); i++) {
       JSONObject board=new JSONObject();
       board.setString("name", logicBoards.get(i).name);
       board.setString("type", "logicBoard");
       board.setString("location", logicBoards.get(i).save());
-      index.setJSONObject(index.size(),board);
+      index.setJSONObject(index.size(), board);
     }
     saveJSONArray(index, rootPath+"/index.json");
   }
@@ -1264,7 +1264,7 @@ class StageSound {
     path=input.getString("location");
     sound= new SoundFile(primaryWindow, rootPath+path);
   }
-  StageSound(String Name,String location){
+  StageSound(String Name, String location) {
     name=Name;
     path=location;
     sound= new SoundFile(primaryWindow, rootPath+path);
@@ -1279,273 +1279,271 @@ class StageSound {
   }
 }
 
-class LogicBoard{//stores all the logic components
+class LogicBoard {//stores all the logic components
   public String name="eee";//temp name
   public ArrayList<LogicComponent> components=new ArrayList<>();
-  LogicBoard(JSONArray file){
+  LogicBoard(JSONArray file) {
     JSONObject head=file.getJSONObject(0);
     name=head.getString("name");
-    for(int i=1;i<file.size();i++){
-       JSONObject component=file.getJSONObject(i);
-       String type=component.getString("type");
-       if(type.equals("generic")){
-         components.add(new GenericLogicComponent(component,this));
-       }
-       if(type.equals("AND")){
-         components.add(new AndGate(component,this));
-       }
-       if(type.equals("OR")){
-         components.add(new OrGate(component,this));
-       }
-       if(type.equals("XOR")){
-         components.add(new XorGate(component,this));
-       }
-       if(type.equals("NAND")){
-         components.add(new NAndGate(component,this));
-       }
-       if(type.equals("NOR")){
-         components.add(new NOrGate(component,this));
-       }
-       if(type.equals("XNOR")){
-         components.add(new XNorGate(component,this));
-       }
+    for (int i=1; i<file.size(); i++) {
+      JSONObject component=file.getJSONObject(i);
+      String type=component.getString("type");
+      if (type.equals("generic")) {
+        components.add(new GenericLogicComponent(component, this));
+      }
+      if (type.equals("AND")) {
+        components.add(new AndGate(component, this));
+      }
+      if (type.equals("OR")) {
+        components.add(new OrGate(component, this));
+      }
+      if (type.equals("XOR")) {
+        components.add(new XorGate(component, this));
+      }
+      if (type.equals("NAND")) {
+        components.add(new NAndGate(component, this));
+      }
+      if (type.equals("NOR")) {
+        components.add(new NOrGate(component, this));
+      }
+      if (type.equals("XNOR")) {
+        components.add(new XNorGate(component, this));
+      }
     }
   }
-  LogicBoard(String name){
-   this.name=name; 
+  LogicBoard(String name) {
+    this.name=name;
   }
-  String save(){
+  String save() {
     JSONArray logicComponents=new JSONArray();
     JSONObject head=new JSONObject();
     head.setString("name", name);
     logicComponents.setJSONObject(0, head);
-    for(int i=0;i<components.size();i++){
-      logicComponents.setJSONObject(i+1,components.get(i).save());
+    for (int i=0; i<components.size(); i++) {
+      logicComponents.setJSONObject(i+1, components.get(i).save());
     }
-    saveJSONArray(logicComponents,rootPath+"/"+name+".json");
+    saveJSONArray(logicComponents, rootPath+"/"+name+".json");
     return "/"+name+".json";
   }
-  
-  void remove(int index){
-    if(components.size()<=index||index<0)//check if the porvided index is valid
+
+  void remove(int index) {
+    if (components.size()<=index||index<0)//check if the porvided index is valid
       return;
     components.remove(index);//remove the object
-    for(int i=0;i<components.size();i++){//make shure all connects still point to the correct components and remove connects that went to the deleted one
+    for (int i=0; i<components.size(); i++) {//make shure all connects still point to the correct components and remove connects that went to the deleted one
       LogicComponent component=components.get(i);
-      for(int j=0;j<component.connections.size();j++){
-       if(component.connections.get(j)[0]==index){
-         component.connections.remove(j);
-         j--;
-         continue;
-       } 
-       if(component.connections.get(j)[0]>index)
-         component.connections.get(j)[0]--; 
+      for (int j=0; j<component.connections.size(); j++) {
+        if (component.connections.get(j)[0]==index) {
+          component.connections.remove(j);
+          j--;
+          continue;
+        }
+        if (component.connections.get(j)[0]>index)
+          component.connections.get(j)[0]--;
       }
     }
   }
 }
 
-abstract class LogicComponent{//the base of all logic gam=ts and things
-  float x,y;//for visuals only
+abstract class LogicComponent {//the base of all logic gam=ts and things
+  float x, y;//for visuals only
   String type;
   Button button;
   ArrayList<Integer[]> connections=new ArrayList<>();
   LogicBoard lb;
-  boolean outputTerminal=false,inputTerminal1Buffer=false,inputTerminal2Buffer=false,inputTerminal1=false,inputTerminal2=false;
-  LogicComponent(float x,float y,String type,LogicBoard board){
+  boolean outputTerminal=false, inputTerminal1Buffer=false, inputTerminal2Buffer=false, inputTerminal1=false, inputTerminal2=false;
+  LogicComponent(float x, float y, String type, LogicBoard board) {
     this.x=x;
     this.y=y;
     this.type=type;
-    button=new Button(primaryWindow,x,y,100,80,"  "+type+"  ");
+    button=new Button(primaryWindow, x, y, 100, 80, "  "+type+"  ");
     lb=board;
   }
-  
-  LogicComponent(float x,float y,String type,LogicBoard board,JSONArray cnects){
+
+  LogicComponent(float x, float y, String type, LogicBoard board, JSONArray cnects) {
     this.x=x;
     this.y=y;
     this.type=type;
-    button=new Button(primaryWindow,x,y,100,80,"  "+type+"  ");
+    button=new Button(primaryWindow, x, y, 100, 80, "  "+type+"  ");
     lb=board;
-    for(int i=0;i<cnects.size();i++){
-     JSONObject data= cnects.getJSONObject(i);
-     connections.add(new Integer[]{data.getInt("index"),data.getInt("terminal")});
+    for (int i=0; i<cnects.size(); i++) {
+      JSONObject data= cnects.getJSONObject(i);
+      connections.add(new Integer[]{data.getInt("index"), data.getInt("terminal")});
     }
   }
-  
-  void draw(){
-   button.draw(); 
-   fill(#FF98CF);
-   ellipse(x-2,y+20,20,20);
-   ellipse(x-2,y+60,20,20);
-   ellipse(x+102,y+40,20,20);
+
+  void draw() {
+    button.draw();
+    fill(#FF98CF);
+    ellipse(x-2, y+20, 20, 20);
+    ellipse(x-2, y+60, 20, 20);
+    ellipse(x+102, y+40, 20, 20);
   }
-  
-  float[] getTerminalPos(int t){
-     if(t==0){
-       return new float[]{x-2,y+20};
-     }
-     if(t==1){
-       return new float[]{x-2,y+60};
-     }
-     if(t==2){
-       return new float[]{x+102,y+40};
-     }
-    return new float[]{0,0};
+
+  float[] getTerminalPos(int t) {
+    if (t==0) {
+      return new float[]{x-2, y+20};
+    }
+    if (t==1) {
+      return new float[]{x-2, y+60};
+    }
+    if (t==2) {
+      return new float[]{x+102, y+40};
+    }
+    return new float[]{0, 0};
   }
-  
-  void connect(int index,int terminal){
-    if(index>=lb.components.size()||index<0)//check if the index is valid
-      return; 
-    if(terminal<0||terminal>1)//check id the terminal attemping to connect to is valid
+
+  void connect(int index, int terminal) {
+    if (index>=lb.components.size()||index<0)//check if the index is valid
       return;
-    connections.add(new Integer[]{index,terminal});//create the connection
+    if (terminal<0||terminal>1)//check id the terminal attemping to connect to is valid
+      return;
+    connections.add(new Integer[]{index, terminal});//create the connection
   }
-  
-  void drawConnections(){
-    for(int i=0;i<connections.size();i++){
+
+  void drawConnections() {
+    for (int i=0; i<connections.size(); i++) {
       stroke(0);
       strokeWeight(5);
       Integer[] connectionInfo =connections.get(i);
-      float[] thisTerminal = getTerminalPos(2),toTerminal=lb.components.get(connectionInfo[0]).getTerminalPos(connectionInfo[1]);
-      line(thisTerminal[0],thisTerminal[1],toTerminal[0],toTerminal[1]);
+      float[] thisTerminal = getTerminalPos(2), toTerminal=lb.components.get(connectionInfo[0]).getTerminalPos(connectionInfo[1]);
+      line(thisTerminal[0], thisTerminal[1], toTerminal[0], toTerminal[1]);
     }
   }
-  
-  void setPos(float x,float y){
+
+  void setPos(float x, float y) {
     this.x=x-button.lengthX/2;
     this.y=y-button.lengthY/2;
     button.setX(this.x).setY(this.y);
   }
-  
-  void setTerminal(int terminal,boolean state){
-    if(terminal==0)
+
+  void setTerminal(int terminal, boolean state) {
+    if (terminal==0)
       inputTerminal1Buffer=state;
-    if(terminal==1)
+    if (terminal==1)
       inputTerminal2Buffer=state;
   }
-  
-  void flushBuffer(){
+
+  void flushBuffer() {
     inputTerminal1=inputTerminal1Buffer;
     inputTerminal2=inputTerminal2Buffer;
   }
-  
+
   abstract void tick();
-  
-  void sendOut(){
-    for(int i=0;i<connections.size();i++){
-     lb.components.get(connections.get(i)[0]).setTerminal( connections.get(i)[1],outputTerminal);
+
+  void sendOut() {
+    for (int i=0; i<connections.size(); i++) {
+      lb.components.get(connections.get(i)[0]).setTerminal( connections.get(i)[1], outputTerminal);
     }
   }
-  
-  JSONObject save(){
-   JSONObject component=new JSONObject();
-    component.setString("type",type);
-    component.setFloat("x",x);
-    component.setFloat("y",y);
+
+  JSONObject save() {
+    JSONObject component=new JSONObject();
+    component.setString("type", type);
+    component.setFloat("x", x);
+    component.setFloat("y", y);
     JSONArray connections=new JSONArray();
-    for(int i=0;i<this.connections.size();i++){
-     JSONObject connect=new JSONObject();
-     connect.setInt("index",this.connections.get(i)[0]);
-     connect.setInt("terminal",this.connections.get(i)[1]);
-     connections.setJSONObject(i,connect);
+    for (int i=0; i<this.connections.size(); i++) {
+      JSONObject connect=new JSONObject();
+      connect.setInt("index", this.connections.get(i)[0]);
+      connect.setInt("terminal", this.connections.get(i)[1]);
+      connections.setJSONObject(i, connect);
     }
-    component.setJSONArray("connections",connections);
+    component.setJSONArray("connections", connections);
     return component;
   }
-  
-  
-  
 }
 
-class GenericLogicComponent extends LogicComponent{
-  GenericLogicComponent(float x,float y,LogicBoard lb){
-   super(x,y,"generic",lb); 
+class GenericLogicComponent extends LogicComponent {
+  GenericLogicComponent(float x, float y, LogicBoard lb) {
+    super(x, y, "generic", lb);
   }
-  GenericLogicComponent(JSONObject data,LogicBoard lb){
-   super(data.getFloat("x"),data.getFloat("y"),"generic",lb,data.getJSONArray("connections"));
+  GenericLogicComponent(JSONObject data, LogicBoard lb) {
+    super(data.getFloat("x"), data.getFloat("y"), "generic", lb, data.getJSONArray("connections"));
   }
-  
-  void tick(){}
+
+  void tick() {
+  }
 }
 
-class AndGate extends LogicComponent{
-  AndGate(float x,float y,LogicBoard lb){
-    super(x,y,"AND",lb);
+class AndGate extends LogicComponent {
+  AndGate(float x, float y, LogicBoard lb) {
+    super(x, y, "AND", lb);
   }
-  
-  AndGate(JSONObject data,LogicBoard lb){
-    super(data.getFloat("x"),data.getFloat("y"),"AND",lb,data.getJSONArray("connections"));
+
+  AndGate(JSONObject data, LogicBoard lb) {
+    super(data.getFloat("x"), data.getFloat("y"), "AND", lb, data.getJSONArray("connections"));
   }
-  
-  void tick(){
+
+  void tick() {
     outputTerminal=inputTerminal1&&inputTerminal2;
   }
 }
 
-class OrGate extends LogicComponent{
-  OrGate(float x,float y,LogicBoard lb){
-    super(x,y,"OR",lb);
+class OrGate extends LogicComponent {
+  OrGate(float x, float y, LogicBoard lb) {
+    super(x, y, "OR", lb);
   }
-  OrGate(JSONObject data,LogicBoard lb){
-    super(data.getFloat("x"),data.getFloat("y"),"OR",lb,data.getJSONArray("connections"));
+  OrGate(JSONObject data, LogicBoard lb) {
+    super(data.getFloat("x"), data.getFloat("y"), "OR", lb, data.getJSONArray("connections"));
   }
-  
-  void tick(){
+
+  void tick() {
     outputTerminal=inputTerminal1||inputTerminal2;
   }
 }
 
-class XorGate extends LogicComponent{
-  XorGate(float x,float y,LogicBoard lb){
-    super(x,y,"XOR",lb);
+class XorGate extends LogicComponent {
+  XorGate(float x, float y, LogicBoard lb) {
+    super(x, y, "XOR", lb);
   }
-  
-  XorGate(JSONObject data,LogicBoard lb){
-    super(data.getFloat("x"),data.getFloat("y"),"XOR",lb,data.getJSONArray("connections"));
+
+  XorGate(JSONObject data, LogicBoard lb) {
+    super(data.getFloat("x"), data.getFloat("y"), "XOR", lb, data.getJSONArray("connections"));
   }
-  
-  void tick(){
+
+  void tick() {
     outputTerminal=inputTerminal1!=inputTerminal2;
   }
 }
 
-class NAndGate extends LogicComponent{
-  NAndGate(float x,float y,LogicBoard lb){
-    super(x,y,"NAND",lb);
+class NAndGate extends LogicComponent {
+  NAndGate(float x, float y, LogicBoard lb) {
+    super(x, y, "NAND", lb);
   }
-  
-  NAndGate(JSONObject data,LogicBoard lb){
-    super(data.getFloat("x"),data.getFloat("y"),"NAND",lb,data.getJSONArray("connections"));
+
+  NAndGate(JSONObject data, LogicBoard lb) {
+    super(data.getFloat("x"), data.getFloat("y"), "NAND", lb, data.getJSONArray("connections"));
   }
-  
-  void tick(){
+
+  void tick() {
     outputTerminal=!(inputTerminal1&&inputTerminal2);
   }
 }
 
-class NOrGate extends LogicComponent{
-  NOrGate(float x,float y,LogicBoard lb){
-    super(x,y,"NOR",lb);
+class NOrGate extends LogicComponent {
+  NOrGate(float x, float y, LogicBoard lb) {
+    super(x, y, "NOR", lb);
   }
-  NOrGate(JSONObject data,LogicBoard lb){
-    super(data.getFloat("x"),data.getFloat("y"),"NOR",lb,data.getJSONArray("connections"));
+  NOrGate(JSONObject data, LogicBoard lb) {
+    super(data.getFloat("x"), data.getFloat("y"), "NOR", lb, data.getJSONArray("connections"));
   }
-  
-  void tick(){
+
+  void tick() {
     outputTerminal=!(inputTerminal1||inputTerminal2);
   }
 }
 
-class XNorGate extends LogicComponent{
-  XNorGate(float x,float y,LogicBoard lb){
-    super(x,y,"XNOR",lb);
+class XNorGate extends LogicComponent {
+  XNorGate(float x, float y, LogicBoard lb) {
+    super(x, y, "XNOR", lb);
   }
-  
-  XNorGate(JSONObject data,LogicBoard lb){
-    super(data.getFloat("x"),data.getFloat("y"),"XNOR",lb,data.getJSONArray("connections"));
+
+  XNorGate(JSONObject data, LogicBoard lb) {
+    super(data.getFloat("x"), data.getFloat("y"), "XNOR", lb, data.getJSONArray("connections"));
   }
-  
-  void tick(){
+
+  void tick() {
     outputTerminal=!(inputTerminal1!=inputTerminal2);
   }
 }

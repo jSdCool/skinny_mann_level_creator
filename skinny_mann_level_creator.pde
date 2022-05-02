@@ -15,12 +15,12 @@ void setup() {
   coin3D.scale(3);
   initlizeButtons();
 }
-boolean startup=true, editing_level=true, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, loading=false, newLevel=false, simulating=false, entering_file_path=false, coursor=false, level_complete=false, dead=false, entering_name=false, cam_left=false, cam_right=false, drawing=false, draw=false, extra=false, ground=false, check_point=false, goal=false, deleteing=false, delete=false, moving_player=false, grid_mode=false, holo_gram=false, editingStage=false, levelOverview=false, newFile=false, drawCoins=false, drawingPortal=false, drawingPortal2=false, drawingPortal3=false, E_pressed=false, saveColors=false, sloap=false, loopThread2=true, cam_up=false, cam_down=false, holoTriangle=false, dethPlane=false, setPlayerPosTo=false, e3DMode=false, WPressed=false, SPressed=false, draw3DSwitch1=false, draw3DSwitch2=false, checkpointIn3DStage=false, shadow3D=true, tutorialMode=false, drawingSign=false, selecting=false, viewingItemContents=false, loadingBlueprint=false, creatingNewBlueprint=false, editingBlueprint=false, selectingBlueprint=false, placingSound=false,editinglogicBoard=false,connectingLogic=false,connecting=false,moveLogicComponents=false,movingLogicComponent,placingAndGate=false,placingOrGate=false,placingXorGate=false,placingNandGate=false,placingNorGate=false,placingXnorGate=false;
+boolean startup=true, editing_level=true, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, loading=false, newLevel=false, simulating=false, entering_file_path=false, coursor=false, level_complete=false, dead=false, entering_name=false, cam_left=false, cam_right=false, drawing=false, draw=false, extra=false, ground=false, check_point=false, goal=false, deleteing=false, delete=false, moving_player=false, grid_mode=false, holo_gram=false, editingStage=false, levelOverview=false, newFile=false, drawCoins=false, drawingPortal=false, drawingPortal2=false, drawingPortal3=false, E_pressed=false, saveColors=false, sloap=false, loopThread2=true, cam_up=false, cam_down=false, holoTriangle=false, dethPlane=false, setPlayerPosTo=false, e3DMode=false, WPressed=false, SPressed=false, draw3DSwitch1=false, draw3DSwitch2=false, checkpointIn3DStage=false, shadow3D=true, tutorialMode=false, drawingSign=false, selecting=false, viewingItemContents=false, loadingBlueprint=false, creatingNewBlueprint=false, editingBlueprint=false, selectingBlueprint=false, placingSound=false, editinglogicBoard=false, connectingLogic=false, connecting=false, moveLogicComponents=false, movingLogicComponent, placingAndGate=false, placingOrGate=false, placingXorGate=false, placingNandGate=false, placingNorGate=false, placingXnorGate=false;
 String file_path, new_name="my_level", GAME_version="0.6.0_Early_Access", EDITOR_version="0.0.2_EAc", rootPath="", coursorr="", newFileName="", newFileType="2D", stageType="", author="your name here", displayText="", fileToCoppyPath="";
 //int player1 []={20,700,1,0,1,0}; // old player data
 Player player1 =new Player(20, 699, 1, "red");
 int camPos=0, camPosY=0, death_cool_down, start_down, eadgeScroleDist=300, respawnX=20, respawnY=700, spdelay=0, Color=0, RedPos=0, BluePos=0, GreenPos=0, RC=0, GC=0, BC=0, grid_size=10, filesScrole=0, overviewSelection=-1, portalIndex1, stageIndex, preSI, respawnStage, setPlayerPosX, setPlayerPosY, setPlayerPosZ, startingDepth=0, totalDepth=300, respawnZ=50, coinRotation=0, coinCount=0, gmillis=0, eadgeScroleDistV=250, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, drawCamPosX=0, drawCamPosY;
-int buttonMin=0, buttonMax=0, coinsIndex, triangleMode=0, selectedIndex=-1, viewingItemIndex=-1, currentBluieprintIndex=0,logicBoardIndex,connectingFromIndex,movingLogicIndex;
+int buttonMin=0, buttonMax=0, coinsIndex, triangleMode=0, selectedIndex=-1, viewingItemIndex=-1, currentBluieprintIndex=0, logicBoardIndex, connectingFromIndex, movingLogicIndex;
 float[]tpCords=new float[3];
 JSONArray mainIndex, colors;
 JSONObject portalStage1, portalStage2;
@@ -143,8 +143,8 @@ void draw() {
     stageEditGUI();//level gui code
 
     if (selectingBlueprint&&blueprints.length!=0) {//if selecting blueprint
-      generateDisplayBlueprint();//visualize the blueprint that is selected 
-      renderBlueprint();//render blueprint 
+      generateDisplayBlueprint();//visualize the blueprint that is selected
+      renderBlueprint();//render blueprint
     }
   }
 
@@ -184,14 +184,13 @@ void draw() {
           triangle(1129, 54, 1114, 39, 1109, 53);
         }
       }//end of thing slected is in stage range
-      if(overviewSelection>=level.stages.size()+level.sounds.size()){//if the selection is in the logic board range
-          edditStage.draw();//draw edit button
-          fill(255, 255, 0);
-          strokeWeight(1);
-          quad(1155, 37, 1129, 54, 1114, 39, 1140, 22);//draw the pencil
-          fill(#E5B178);
-          triangle(1129, 54, 1114, 39, 1109, 53);//more pencil thing
-        
+      if (overviewSelection>=level.stages.size()+level.sounds.size()) {//if the selection is in the logic board range
+        edditStage.draw();//draw edit button
+        fill(255, 255, 0);
+        strokeWeight(1);
+        quad(1155, 37, 1129, 54, 1114, 39, 1140, 22);//draw the pencil
+        fill(#E5B178);
+        triangle(1129, 54, 1114, 39, 1109, 53);//more pencil thing
       }
     }//end of if something is selected
     textAlign(LEFT, BOTTOM);
@@ -211,14 +210,14 @@ void draw() {
         if (type.equals("stage")) {//if it is a stage then display the stage icon
           drawWorldSymbol(20, 90+60*(i));
         }
-      } else if(i+ filesScrole<level.stages.size()+level.sounds.size()){//if the thing is in the range of sounds
+      } else if (i+ filesScrole<level.stages.size()+level.sounds.size()) {//if the thing is in the range of sounds
         fill(0);
         String displayName=level.sounds.get(keys[i+ filesScrole-level.stages.size()]).name, type=level.sounds.get(keys[i+ filesScrole-level.stages.size()]).type;//get the name and type of a sound in the level
         text(displayName, 80, 130+60*(i));//display the name
         if (type.equals("sound")) {//if the thing is a sound then display the sound icon
           drawSpeakericon(this, 40, 110+60*(i), 0.5);
         }
-      }else{
+      } else {
         fill(0);
         String displayName=level.logicBoards.get(i+ filesScrole-(level.stages.size()+level.sounds.size())).name;//get the name of the logic board
         text(displayName, 80, 130+60*(i));//display the name
@@ -377,24 +376,24 @@ void draw() {
     blueprintEditDraw();//draw the accual blueprint
     stageEditGUI();//overlays when placing things
   }
-  if(editinglogicBoard){//if editing a logic board
+  if (editinglogicBoard) {//if editing a logic board
     background(#FFECA0);
-    for(int i=0;i<level.logicBoards.get(logicBoardIndex).components.size();i++){//draw the components
+    for (int i=0; i<level.logicBoards.get(logicBoardIndex).components.size(); i++) {//draw the components
       level.logicBoards.get(logicBoardIndex).components.get(i).draw();
     }
-    for(int i=0;i<level.logicBoards.get(logicBoardIndex).components.size();i++){//draw the connections
+    for (int i=0; i<level.logicBoards.get(logicBoardIndex).components.size(); i++) {//draw the connections
       level.logicBoards.get(logicBoardIndex).components.get(i).drawConnections();
     }
-    
-    if(connectingLogic&&connecting){//draw the connnecting line
+
+    if (connectingLogic&&connecting) {//draw the connnecting line
       float[] nodePos = level.logicBoards.get(logicBoardIndex).components.get(connectingFromIndex).getTerminalPos(2);
       stroke(0);
       strokeWeight(5);
-      line(nodePos[0],nodePos[1],mouseX,mouseY);
+      line(nodePos[0], nodePos[1], mouseX, mouseY);
     }
-    
-    if(movingLogicComponent&&moveLogicComponents){
-      level.logicBoards.get(logicBoardIndex).components.get(movingLogicIndex).setPos(mouseX,mouseY);
+
+    if (movingLogicComponent&&moveLogicComponents) {
+      level.logicBoards.get(logicBoardIndex).components.get(movingLogicIndex).setPos(mouseX, mouseY);
     }
   }
 
@@ -539,11 +538,11 @@ void mouseClicked() {
             }
           }
         }//end if if selection is in range of the stages
-        if(overviewSelection>=level.stages.size()+level.sounds.size()){//if the selecion is in the logic board range
+        if (overviewSelection>=level.stages.size()+level.sounds.size()) {//if the selecion is in the logic board range
           if (edditStage.isMouseOver()) {//eddit button
-          levelOverview=false;
-          editinglogicBoard=true;
-          logicBoardIndex=overviewSelection-(level.stages.size()+level.sounds.size());
+            levelOverview=false;
+            editinglogicBoard=true;
+            logicBoardIndex=overviewSelection-(level.stages.size()+level.sounds.size());
           }
         }
       }//end of if something is selected
@@ -670,32 +669,32 @@ void mouseClicked() {
         }//end of thing were entered
       }//end of load button
     }//end of loading blueprint
-    if(editinglogicBoard){
-      if(placingAndGate){
-        level.logicBoards.get(logicBoardIndex).components.add(new AndGate(mouseX-50,mouseY-40,level.logicBoards.get(logicBoardIndex)));
+    if (editinglogicBoard) {
+      if (placingAndGate) {
+        level.logicBoards.get(logicBoardIndex).components.add(new AndGate(mouseX-50, mouseY-40, level.logicBoards.get(logicBoardIndex)));
       }
-      if(placingOrGate){
-        level.logicBoards.get(logicBoardIndex).components.add(new OrGate(mouseX-50,mouseY-40,level.logicBoards.get(logicBoardIndex)));
+      if (placingOrGate) {
+        level.logicBoards.get(logicBoardIndex).components.add(new OrGate(mouseX-50, mouseY-40, level.logicBoards.get(logicBoardIndex)));
       }
-      if(placingXorGate){
-        level.logicBoards.get(logicBoardIndex).components.add(new XorGate(mouseX-50,mouseY-40,level.logicBoards.get(logicBoardIndex)));
+      if (placingXorGate) {
+        level.logicBoards.get(logicBoardIndex).components.add(new XorGate(mouseX-50, mouseY-40, level.logicBoards.get(logicBoardIndex)));
       }
-      if(placingNandGate){
-        level.logicBoards.get(logicBoardIndex).components.add(new NAndGate(mouseX-50,mouseY-40,level.logicBoards.get(logicBoardIndex)));
+      if (placingNandGate) {
+        level.logicBoards.get(logicBoardIndex).components.add(new NAndGate(mouseX-50, mouseY-40, level.logicBoards.get(logicBoardIndex)));
       }
-      if(placingNorGate){
-        level.logicBoards.get(logicBoardIndex).components.add(new NOrGate(mouseX-50,mouseY-40,level.logicBoards.get(logicBoardIndex)));
+      if (placingNorGate) {
+        level.logicBoards.get(logicBoardIndex).components.add(new NOrGate(mouseX-50, mouseY-40, level.logicBoards.get(logicBoardIndex)));
       }
-      if(placingXnorGate){
-        level.logicBoards.get(logicBoardIndex).components.add(new XNorGate(mouseX-50,mouseY-40,level.logicBoards.get(logicBoardIndex)));
+      if (placingXnorGate) {
+        level.logicBoards.get(logicBoardIndex).components.add(new XNorGate(mouseX-50, mouseY-40, level.logicBoards.get(logicBoardIndex)));
       }
-      if(deleteing){
-       for(int i=0;i< level.logicBoards.get(logicBoardIndex).components.size();i++){
-        if(level.logicBoards.get(logicBoardIndex).components.get(i).button.isMouseOver()){
-          level.logicBoards.get(logicBoardIndex).remove(i);
-          return;
+      if (deleteing) {
+        for (int i=0; i< level.logicBoards.get(logicBoardIndex).components.size(); i++) {
+          if (level.logicBoards.get(logicBoardIndex).components.get(i).button.isMouseOver()) {
+            level.logicBoards.get(logicBoardIndex).remove(i);
+            return;
+          }
         }
-       }
       }
     }//end of edditing logic board
   }//end of left mouse button clicked
@@ -853,28 +852,28 @@ void mousePressed() {
   if (editingStage||editingBlueprint) {//if edditing a stage or blueprint
     GUImousePressed();
   }
-  if(editinglogicBoard){
-      if(connectingLogic){
-        LogicBoard board=level.logicBoards.get(logicBoardIndex);
-        for(int i=0;i<board.components.size();i++){
-          float[] nodePos=board.components.get(i).getTerminalPos(2);
-          if(Math.sqrt(Math.pow(nodePos[0]-mouseX,2)+Math.pow(nodePos[1]-mouseY,2))<=10){
-            connecting=true;
-            connectingFromIndex=i;
-            return;
-          }
+  if (editinglogicBoard) {
+    if (connectingLogic) {
+      LogicBoard board=level.logicBoards.get(logicBoardIndex);
+      for (int i=0; i<board.components.size(); i++) {
+        float[] nodePos=board.components.get(i).getTerminalPos(2);
+        if (Math.sqrt(Math.pow(nodePos[0]-mouseX, 2)+Math.pow(nodePos[1]-mouseY, 2))<=10) {
+          connecting=true;
+          connectingFromIndex=i;
+          return;
         }
       }
-      if(moveLogicComponents){
-        LogicBoard board=level.logicBoards.get(logicBoardIndex);
-        for(int i=0;i<board.components.size();i++){
-          if(board.components.get(i).button.isMouseOver()){
-           movingLogicIndex=i;
-           movingLogicComponent=true;
-           return;
-          }
+    }
+    if (moveLogicComponents) {
+      LogicBoard board=level.logicBoards.get(logicBoardIndex);
+      for (int i=0; i<board.components.size(); i++) {
+        if (board.components.get(i).button.isMouseOver()) {
+          movingLogicIndex=i;
+          movingLogicComponent=true;
+          return;
         }
       }
+    }
   }//end of editng logic board
 }
 
@@ -882,54 +881,53 @@ void mouseReleased() {
   if (editingStage||editingBlueprint) {//if edditing a stage or blueprint
     GUImouseReleased();
   }
-  if(editinglogicBoard){
-    if(connectingLogic&&connecting){//if attempting to connect terminals
+  if (editinglogicBoard) {
+    if (connectingLogic&&connecting) {//if attempting to connect terminals
       connecting=false;//stop more connecting
       LogicBoard board=level.logicBoards.get(logicBoardIndex);
-      for(int i=0;i<board.components.size();i++){//srech through all components in the current board
-         float[] nodePos1=board.components.get(i).getTerminalPos(0),nodePos2=board.components.get(i).getTerminalPos(1);//gets the positions of the terminals of the component
-          if(Math.sqrt(Math.pow(nodePos1[0]-mouseX,2)+Math.pow(nodePos1[1]-mouseY,2))<=10){//if the mmouse is over terminal 0
-            for(int j=0;j<board.components.get(connectingFromIndex).connections.size();j++){//checkif the connection allready exsists
-              if(board.components.get(connectingFromIndex).connections.get(j)[0]==i&&board.components.get(connectingFromIndex).connections.get(j)[1]==0){//if so then remove the connection
-                board.components.get(connectingFromIndex).connections.remove(j);
+      for (int i=0; i<board.components.size(); i++) {//srech through all components in the current board
+        float[] nodePos1=board.components.get(i).getTerminalPos(0), nodePos2=board.components.get(i).getTerminalPos(1);//gets the positions of the terminals of the component
+        if (Math.sqrt(Math.pow(nodePos1[0]-mouseX, 2)+Math.pow(nodePos1[1]-mouseY, 2))<=10) {//if the mmouse is over terminal 0
+          for (int j=0; j<board.components.get(connectingFromIndex).connections.size(); j++) {//checkif the connection allready exsists
+            if (board.components.get(connectingFromIndex).connections.get(j)[0]==i&&board.components.get(connectingFromIndex).connections.get(j)[1]==0) {//if so then remove the connection
+              board.components.get(connectingFromIndex).connections.remove(j);
+              return;
+            }
+          }
+          for (int j=0; j<board.components.size(); j++) {//check if any outher components are connecting to this terminal allready
+            for (int k=0; k<board.components.get(j).connections.size(); k++) {
+              if ( board.components.get(j).connections.get(k)[0]==i&&board.components.get(j).connections.get(k)[1]==0) {//if so then do nothing
                 return;
               }
             }
-            for(int j=0;j<board.components.size();j++){//check if any outher components are connecting to this terminal allready
-              for(int k=0;k<board.components.get(j).connections.size();k++){
-               if( board.components.get(j).connections.get(k)[0]==i&&board.components.get(j).connections.get(k)[1]==0){//if so then do nothing
-                return; 
-               }
+          }
+          board.components.get(connectingFromIndex).connect(i, 0);//make the connection
+          return;
+        }
+        if (Math.sqrt(Math.pow(nodePos2[0]-mouseX, 2)+Math.pow(nodePos2[1]-mouseY, 2))<=10) {//if the mmouse is over terminal 1
+          for (int j=0; j<board.components.get(connectingFromIndex).connections.size(); j++) {//checkif the connection allready exsists
+            if (board.components.get(connectingFromIndex).connections.get(j)[0]==i&&board.components.get(connectingFromIndex).connections.get(j)[1]==1) {//if so then remove the connection
+              board.components.get(connectingFromIndex).connections.remove(j);
+              return;
+            }
+          }
+
+          for (int j=0; j<board.components.size(); j++) {//check if any outher components are connecting to this terminal allready
+            for (int k=0; k<board.components.get(j).connections.size(); k++) {
+              if ( board.components.get(j).connections.get(k)[0]==i&&board.components.get(j).connections.get(k)[1]==1) {//if so then do nothing
+                return;
               }
             }
-            board.components.get(connectingFromIndex).connect(i,0);//make the connection
-            return;
           }
-          if(Math.sqrt(Math.pow(nodePos2[0]-mouseX,2)+Math.pow(nodePos2[1]-mouseY,2))<=10){//if the mmouse is over terminal 1
-            for(int j=0;j<board.components.get(connectingFromIndex).connections.size();j++){//checkif the connection allready exsists
-              if(board.components.get(connectingFromIndex).connections.get(j)[0]==i&&board.components.get(connectingFromIndex).connections.get(j)[1]==1){//if so then remove the connection
-                  board.components.get(connectingFromIndex).connections.remove(j);
-                  return;
-                }
-              }
-              
-              for(int j=0;j<board.components.size();j++){//check if any outher components are connecting to this terminal allready
-                for(int k=0;k<board.components.get(j).connections.size();k++){
-                 if( board.components.get(j).connections.get(k)[0]==i&&board.components.get(j).connections.get(k)[1]==1){//if so then do nothing
-                  return; 
-               }
-              }
-            }
-            board.components.get(connectingFromIndex).connect(i,1);
-            return;
-          }
+          board.components.get(connectingFromIndex).connect(i, 1);
+          return;
+        }
       }
-    }    
-    if(moveLogicComponents){
-      if(movingLogicComponent){
+    }
+    if (moveLogicComponents) {
+      if (movingLogicComponent) {
         movingLogicComponent=false;
-        level.logicBoards.get(logicBoardIndex).components.get(movingLogicIndex).setPos(mouseX,mouseY);
-        
+        level.logicBoards.get(logicBoardIndex).components.get(movingLogicIndex).setPos(mouseX, mouseY);
       }
     }
   }//end of editing logic board
@@ -938,7 +936,7 @@ void mouseReleased() {
 
 void mouseWheel(MouseEvent event) {//when the scroll wheel is moved
   float wheel_direction = event.getCount()*-1;
-  if (grid_mode) {//if grid mode is active 
+  if (grid_mode) {//if grid mode is active
     if (grid_size==10&&wheel_direction<0) {
     } else {
 
@@ -955,7 +953,7 @@ void mouseWheel(MouseEvent event) {//when the scroll wheel is moved
  @param mode what charicter mode to use
  @param letter the char from the keyboard to be processed
  @returns a char that is compatbale with the selected mode
-*/
+ */
 char getCh(int mode, char leter) {
   if (mode==0) {
     if (Character.isLetter(leter)||leter==' ') {//mode 0 letters numbers and spcaes
@@ -992,10 +990,10 @@ char getCh(int mode, char leter) {
 }
 
 /** processes backspace operations
-  @param imp the string that needs a backspace opperation
-  @param code the key ID of the key that was pressed
-  @returns a string with 1 less char
-*/
+ @param imp the string that needs a backspace opperation
+ @param code the key ID of the key that was pressed
+ @returns a string with 1 less char
+ */
 String doBackspace(String imp, int code) {
   if (code==8) {//if the key was backspace
     if (imp.length()>1) {//remove the last char
@@ -1008,12 +1006,12 @@ String doBackspace(String imp, int code) {
 }
 
 /**used to process keyboard inputs by modifying strings
-  @param in the string to be modified
-  @param x the allowed charicter mode
-  @param code keyCode value
-  @param letter key value
-  @returns in modified according to the mode selected by x
-*/
+ @param in the string to be modified
+ @param x the allowed charicter mode
+ @param code keyCode value
+ @param letter key value
+ @returns in modified according to the mode selected by x
+ */
 String getInput(String in, int x, int code, char leter) {//code and leter exsist to allow sub windows to use this function correctly they shoud send the keyCode and key vaible in respectivlky
   if (getCh(x, leter)!=0) {
     in+=getCh(x, leter);
@@ -1023,17 +1021,17 @@ String getInput(String in, int x, int code, char leter) {//code and leter exsist
 }
 
 /**used to process keyboard inputs by modifying strings||only use if in top level sketch||auto fill the outher values for getinput
-  @param in the string to be modified
-  @param x the allowed charicter mode
-  @returns in modified according to the mode selected by x
-*/
+ @param in the string to be modified
+ @param x the allowed charicter mode
+ @returns in modified according to the mode selected by x
+ */
 String getInput(String in, int x) {//for use in the main sketch whre keyCode and key are the same as used here
   return getInput(in, x, keyCode, key);
 }
 
 /**resets tool states to default
-
-*/
+ 
+ */
 void turnThingsOff() {
   ground=false;
   check_point=false;
@@ -1068,8 +1066,8 @@ void turnThingsOff() {
 int curMills=0, lasMills=0, mspc=0;
 
 /**seperate therad for calculation physics
-
-*/
+ 
+ */
 void thrdCalc2() {
   println("ere");
   while (loopThread2) {
@@ -1093,16 +1091,16 @@ void thrdCalc2() {
   }
 }
 
-/**used in the game to check if a level is of a compatable verson 
-no implmentation in level editor
-*/
+/**used in the game to check if a level is of a compatable verson
+ no implmentation in level editor
+ */
 boolean gameVersionCompatibilityCheck(String vers) {//returns ture if the inputed version is compatible
   return true;
 }
 
 /**function that handles the output of the file selection dialog
-
-*/
+ 
+ */
 void fileSelected(File selection) {
   if (selection == null) {
     return;
