@@ -9,7 +9,7 @@ class ToolBox extends PApplet {
   public int redVal=0, greenVal=0, blueVal=0, CC=0;
   int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset;
   String page="colors";
-  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton,testLogicPlaceButton,constantOnButton;
+  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton,testLogicPlaceButton,constantOnButton,setVariableButton,readVariableButton;
   boolean typingSign=false, settingSkyColor=false;
 
   public void settings() {
@@ -63,6 +63,8 @@ class ToolBox extends PApplet {
     xnorGateButton=new Button(this, 580, 40+100, 50, 50, "XNOR", 255, 203).setStrokeWeight(5).setHoverText("inverted exclucive or gate");
     testLogicPlaceButton=new Button(this, 40, 100+100, 50, 50, "test", 255, 203).setStrokeWeight(5).setHoverText("this should not exsist");
     constantOnButton=new Button(this, 640, 40+100, 50, 50,"ON", 255, 203).setStrokeWeight(5).setHoverText("constant on signal");
+    readVariableButton=new Button(this, 700, 40+100, 50, 50,"read", 255, 203).setStrokeWeight(5).setHoverText("read the state of a variable");
+    setVariableButton=new Button(this, 760, 40+100, 50, 50,"set", 255, 203).setStrokeWeight(5).setHoverText("set the state of a varable");
   }
 
 
@@ -757,6 +759,24 @@ class ToolBox extends PApplet {
           constantOnButton.setColor(255, 203);
         }
         constantOnButton.draw();
+        if(placingReadVariable){
+          readVariableButton.setColor(255, #F2F258);
+        }else{
+          readVariableButton.setColor(255, 203);
+        }
+        readVariableButton.draw();
+        if(placingSetVaravle){
+          setVariableButton.setColor(255, #F2F258);
+        }else{
+          setVariableButton.setColor(255, 203);
+        }
+        setVariableButton.draw();
+        if (selecting) {
+          select.setColor(255, #F2F258);
+        } else {
+          select.setColor(255, 203);
+        }
+        select.draw();
 
         //draw hover text
         connectLogicButton.drawHoverText();
@@ -772,6 +792,8 @@ class ToolBox extends PApplet {
         xnorGateButton.drawHoverText();
         testLogicPlaceButton.drawHoverText();
         constantOnButton.drawHoverText();
+        readVariableButton.drawHoverText();
+        setVariableButton.drawHoverText();
       } else {
         fill(0);
         textSize(20);
@@ -791,8 +813,17 @@ class ToolBox extends PApplet {
         textAlign(CENTER, CENTER);
         text("nothing is selected", width/2, height/2);
       } else {
-        StageComponent thing = level.stages.get(currentStageIndex).parts.get(selectedIndex);
-        String type=thing.type;
+        String type="";
+        StageComponent thing= new GenericStageComponent();
+        LogicComponent logicThing=new GenericLogicComponent(-10,-10,null);
+        if(editingStage){
+         thing= level.stages.get(currentStageIndex).parts.get(selectedIndex);
+        type=thing.type;
+        }
+        if(editinglogicBoard){
+          logicThing=level.logicBoards.get(logicBoardIndex).components.get(selectedIndex);
+          type=logicThing.type;
+        }
         if (type.equals("WritableSign")) {//if the current selected object is a sign
           fill(0);
           textSize(25);
@@ -831,7 +862,17 @@ class ToolBox extends PApplet {
             if (fileind<keys.length-1)
               nextSound.draw();
           }
-        } else {
+        } else if(type.equals("read var")||type.equals("set var")){
+          int curvar=logicThing.getData();
+          if(curvar>0)
+            prevSound.draw();
+          if(curvar<level.variables.size()-1)
+            nextSound.draw();
+          fill(0);
+          textSize(25);
+          text("b"+curvar, width/2, height*0.4);
+          text("current variable",width/2,height*0.36);
+        }else {
           fill(0);
           textSize(20);
           textAlign(CENTER, CENTER);
@@ -1270,13 +1311,34 @@ class ToolBox extends PApplet {
           turnThingsOff();
           placingOnSingal=true;
         }
+        if(readVariableButton.isMouseOver()){
+          turnThingsOff();
+          placingReadVariable=true;
+        }
+        if(setVariableButton.isMouseOver()){
+          turnThingsOff();
+          placingSetVaravle=true;
+        }
+        if (select.isMouseOver()) {
+            turnThingsOff();
+            selecting=true;
+        }
       }//end of edditing logic board
     }//end of tools
 
     if (page.equals("selection")) {
       if (selectedIndex!=-1) {
-        StageComponent thing = level.stages.get(currentStageIndex).parts.get(selectedIndex);
-        String type=thing.type;
+        String type="";
+        StageComponent thing= new GenericStageComponent();
+        LogicComponent logicThing=new GenericLogicComponent(-10,-10,null);
+        if(editingStage){
+         thing= level.stages.get(currentStageIndex).parts.get(selectedIndex);
+        type=thing.type;
+        }
+        if(editinglogicBoard){
+          logicThing=level.logicBoards.get(logicBoardIndex).components.get(selectedIndex);
+          type=logicThing.type;
+        }
         if (type.equals("WritableSign")) {//if the current selected object is a sign
           if (mouseX>=width*0.05&&mouseX<=width*0.9&&mouseY>=height*0.21&&mouseY<=height*0.29) {//place to click to start typing
             typingSign=true;
@@ -1302,6 +1364,12 @@ class ToolBox extends PApplet {
             if (fileind<keys.length-1&&nextSound.isMouseOver())
               thing.setData(keys[fileind+1]);
           }
+        } else if(type.equals("read var")||type.equals("set var")){
+          int curvar=logicThing.getData();
+          if (curvar>0&&prevSound.isMouseOver())
+              logicThing.setData(curvar-1);
+            if (curvar<level.variables.size()-1&&nextSound.isMouseOver())
+              logicThing.setData(curvar+1);
         }
       }//if something is elected
     }//end of page is selection

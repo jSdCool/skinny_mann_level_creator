@@ -1,6 +1,7 @@
 class Level {
   ArrayList<Stage> stages=new ArrayList<>();
   ArrayList<LogicBoard> logicBoards=new ArrayList<>();
+  ArrayList<Boolean> variables=new ArrayList<>();
   public int mainStage, numOfCoins, levelID;
   public String name, createdVersion;
   public float SpawnX, SpawnY, RewspawnX, RespawnY;
@@ -19,6 +20,17 @@ class Level {
     createdVersion=job.getString("game version");
     author=job.getString("author");
     currentStageIndex=mainStage;
+    if(job.isNull("number of variable")){
+      variables.add(false);
+      variables.add(false);
+      variables.add(false);
+      variables.add(false);
+      variables.add(false);
+    }else{
+      for(int i=0;i<job.getInt("number of variable");i++){
+        variables.add(false);
+      }
+    }
     player1.x=SpawnX;
     player1.y=SpawnY;
     respawnX=(int)RewspawnX;
@@ -71,6 +83,7 @@ class Level {
     head.setString("name", name);
     head.setString("game version", GAME_version);
     head.setString("author", author);
+    head.setInt("number of variable",variables.size());
     index.setJSONObject(0, head);
     for (int i=1; i<stages.size()+1; i++) {
       JSONObject stg=new JSONObject();
@@ -1256,6 +1269,15 @@ class SoundBox extends StageComponent {
   }
 }
 
+class GenericStageComponent extends StageComponent{
+  StageComponent copy(){
+   return this; 
+  }
+  JSONObject save(boolean e){
+   return null; 
+  }
+}
+
 class StageSound {
   String path, name, type="sound";
   protected SoundFile sound;
@@ -1311,6 +1333,12 @@ class LogicBoard {//stores all the logic components
       }
       if (type.equals("ON")) {
         components.add(new ConstantOnSignal(component, this));
+      }
+      if(type.equals("read var")){
+        components.add(new ReadVariable(component, this));
+      }
+      if(type.equals("set var")){
+        components.add(new SetVariable(component, this));
       }
     }
   }
@@ -1455,6 +1483,14 @@ abstract class LogicComponent {//the base of all logic gam=ts and things
     }
     component.setJSONArray("connections", connections);
     return component;
+  }
+  
+  void setData(int data){
+    
+  }
+  
+  int getData(){
+    return 0;
   }
 }
 
@@ -1608,5 +1644,63 @@ class ConstantOnSignal extends LogicInputComponent{
   }
   void tick(){
     outputTerminal=true;
+  }
+}
+
+class ReadVariable extends LogicInputComponent{
+  int variableNumber=0;
+  ReadVariable(float x, float y, LogicBoard lb) {
+    super(x, y, "read var", lb);
+    button.setText("read var b"+variableNumber+"  ");
+  }
+
+  ReadVariable(JSONObject data, LogicBoard lb) {
+    super(data.getFloat("x"), data.getFloat("y"), "read var", lb, data.getJSONArray("connections"));
+    variableNumber=data.getInt("variable number");
+    button.setText("read var b"+variableNumber+"  ");
+  }
+  void tick(){
+    outputTerminal=level.variables.get(variableNumber);
+  }
+  JSONObject save() {
+   JSONObject component=super.save();
+   component.setInt("variable number",variableNumber);
+   return component;
+  }
+  void setData(int data){
+    variableNumber=data;
+    button.setText("read var b"+variableNumber+"  ");
+  }
+  int getData(){
+   return variableNumber;
+  }
+}
+
+class SetVariable extends LogicOutputComponent{
+  int variableNumber=0;
+  SetVariable(float x, float y, LogicBoard lb) {
+    super(x, y, "set var", lb);
+    button.setText("  set var b"+variableNumber);
+  }
+
+  SetVariable(JSONObject data, LogicBoard lb) {
+    super(data.getFloat("x"), data.getFloat("y"), "set var", lb, data.getJSONArray("connections"));
+    variableNumber=data.getInt("variable number");
+    button.setText("  set var b"+variableNumber);
+  }
+  void tick(){
+    level.variables.set(variableNumber,inputTerminal1);
+  }
+  JSONObject save() {
+   JSONObject component=super.save();
+   component.setInt("variable number",variableNumber);
+   return component;
+  }
+  void setData(int data){
+    variableNumber=data;
+    button.setText("  set var b"+variableNumber);
+  }
+  int getData(){
+   return variableNumber;
   }
 }

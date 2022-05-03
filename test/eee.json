@@ -109,5 +109,22 @@
       "index": 8,
       "terminal": 1
     }]
+  },
+  {
+    "variable number": 3,
+    "x": 872,
+    "y": 285,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "variable number": 2,
+    "x": 697,
+    "y": 278,
+    "type": "read var",
+    "connections": [{
+      "index": 10,
+      "terminal": 0
+    }]
   }
 ]
