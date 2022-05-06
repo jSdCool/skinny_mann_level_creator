@@ -1374,6 +1374,23 @@ class LogicBoard {//stores all the logic components
       }
     }
   }
+  
+  void tick(){//tick each component once
+   for(int i=0;i<components.size();i++){
+     components.get(i).tick();
+   }
+   for(int i=0;i<components.size();i++){
+     components.get(i).sendOut();
+   }
+   for(int i=0;i<components.size();i++){
+     components.get(i).flushBuffer();
+   }
+  }
+  void superTick(){//ticked the logic board 256 times with no delay inbetween ticks
+    for(int i=0;i<256;i++){
+     tick(); 
+    }
+  }
 }
 
 abstract class LogicComponent {//the base of all logic gam=ts and things
