@@ -2,6 +2,8 @@ class Level {
   ArrayList<Stage> stages=new ArrayList<>();
   ArrayList<LogicBoard> logicBoards=new ArrayList<>();
   ArrayList<Boolean> variables=new ArrayList<>();
+  ArrayList<Group> groups=new ArrayList<>();
+  ArrayList<String> groupNames=new ArrayList<>();
   public int mainStage, numOfCoins, levelID;
   public String name, createdVersion;
   public float SpawnX, SpawnY, RewspawnX, RespawnY;
@@ -30,6 +32,13 @@ class Level {
       for(int i=0;i<job.getInt("number of variable");i++){
         variables.add(false);
       }
+    }
+    if(!job.isNull("groups")){
+     JSONArray gps= job.getJSONArray("groups");
+     for(int i=0;i<gps.size();i++){
+       groupNames.add(gps.getString(i));
+       groups.add(new Group());
+     }
     }
     player1.x=SpawnX;
     player1.y=SpawnY;
@@ -84,6 +93,11 @@ class Level {
     head.setString("game version", GAME_version);
     head.setString("author", author);
     head.setInt("number of variable",variables.size());
+    JSONArray grps=new JSONArray();
+    for(int i=0;i<groupNames.size();i++){
+       grps.setString(i, groupNames.get(i));
+    }
+    head.setJSONArray("groups",grps);
     index.setJSONObject(0, head);
     for (int i=1; i<stages.size()+1; i++) {
       JSONObject stg=new JSONObject();
@@ -107,6 +121,11 @@ class Level {
     }
     saveJSONArray(index, rootPath+"/index.json");
   }
+}
+
+class Group{
+ boolean visable=true;
+ float xOffset=0,yOffest=0;
 }
 
 class Stage {
