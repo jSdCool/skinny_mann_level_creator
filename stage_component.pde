@@ -1630,20 +1630,24 @@ abstract class LogicInputComponent extends LogicComponent{
 abstract class LogicOutputComponent extends LogicComponent{
   LogicOutputComponent(float x, float y, String type, LogicBoard board) {
     super(x, y, type, board);
-    button=new Button(primaryWindow, x, y, 100, 40, "  "+type+"  ");
+    button=new Button(primaryWindow, x, y, 100, 80, "  "+type+"  ");
   }
   LogicOutputComponent(float x, float y, String type, LogicBoard board, JSONArray cnects){
     super(x,y,type,board,cnects);
-    button=new Button(primaryWindow, x, y, 100, 40, "  "+type+"  ");
+    button=new Button(primaryWindow, x, y, 100, 80, "  "+type+"  ");
   }
   void draw() {
     button.draw();
     fill(#FF98CF);
     ellipse(x-2, y+20, 20, 20);
+    ellipse(x-2, y+60, 20, 20);
   }
   float[] getTerminalPos(int t) {
     if (t==0) {
       return new float[]{x-2, y+20};
+    }
+    if (t==1) {
+      return new float[]{x-2, y+60};
     }
     return new float[]{-100, -100};
   }
@@ -1706,7 +1710,16 @@ class SetVariable extends LogicOutputComponent{
     button.setText("  set var b"+variableNumber);
   }
   void tick(){
+    if(inputTerminal2)
     level.variables.set(variableNumber,inputTerminal1);
+  }
+  void draw(){
+   super.draw();
+   fill(0);
+   textSize(15);
+   textAlign(LEFT,CENTER);
+   text("data",x+5,y+16);
+   text("set",x+5,y+56);
   }
   JSONObject save() {
    JSONObject component=super.save();
