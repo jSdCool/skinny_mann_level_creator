@@ -9,7 +9,7 @@ class ToolBox extends PApplet {
   public int redVal=0, greenVal=0, blueVal=0, CC=0;
   int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset;
   String page="colors";
-  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton,testLogicPlaceButton,constantOnButton,setVariableButton,readVariableButton;
+  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton,testLogicPlaceButton,constantOnButton,setVariableButton,readVariableButton,setVisabilityButton,xOffsetButton,yOffsetButton,increase,increaseMore,increaseAlot,decrease,decreaseMore,decreaseAlot;
   boolean typingSign=false, settingSkyColor=false;
 
   public void settings() {
@@ -65,6 +65,16 @@ class ToolBox extends PApplet {
     constantOnButton=new Button(this, 640, 40+100, 50, 50,"ON", 255, 203).setStrokeWeight(5).setHoverText("constant on signal");
     readVariableButton=new Button(this, 700, 40+100, 50, 50,"read", 255, 203).setStrokeWeight(5).setHoverText("read the state of a variable");
     setVariableButton=new Button(this, 760, 40+100, 50, 50,"set", 255, 203).setStrokeWeight(5).setHoverText("set the state of a varable");
+    setVisabilityButton=new Button(this, 820, 40+100, 50, 50, "vis",255, 203).setStrokeWeight(5).setHoverText("set visability of a group");
+    xOffsetButton=new Button(this, 880, 40+100, 50, 50,"offset X", 255, 203).setStrokeWeight(5).setHoverText("offset a group in the x-axis");
+    yOffsetButton=new Button(this, 940, 40+100, 50, 50,"offset y", 255, 203).setStrokeWeight(5).setHoverText("offset a group in the y-axis");
+    
+    increase=new Button(this, width/2+180, height*0.5, 50, 50, "+", 255, 203).setStrokeWeight(5);
+    increaseMore=new Button(this, width/2+240, height*0.5, 50, 50, "++", 255, 203).setStrokeWeight(5);
+    increaseAlot=new Button(this, width/2+300, height*0.5, 50, 50, "+++", 255, 203).setStrokeWeight(5);
+    decrease=new Button(this, width/2-180, height*0.5, 50, 50, "-", 255, 203).setStrokeWeight(5);
+    decreaseMore=new Button(this, width/2-240, height*0.5, 50, 50, "--", 255, 203).setStrokeWeight(5);
+    decreaseAlot=new Button(this, width/2-300, height*0.5, 50, 50, "---", 255, 203).setStrokeWeight(5);
   }
 
 
@@ -777,6 +787,24 @@ class ToolBox extends PApplet {
           select.setColor(255, 203);
         }
         select.draw();
+        if(placingSetVisibility){
+          setVisabilityButton.setColor(255, #F2F258);
+        }else{
+          setVisabilityButton.setColor(255, 203);
+        }
+        setVisabilityButton.draw();
+        if(placingXOffset){
+          xOffsetButton.setColor(255, #F2F258);
+        }else{
+          xOffsetButton.setColor(255, 203);
+        }
+        xOffsetButton.draw();
+        if(placingYOffset){
+          yOffsetButton.setColor(255, #F2F258);
+        }else{
+          yOffsetButton.setColor(255, 203);
+        }
+        yOffsetButton.draw();
 
         //draw hover text
         connectLogicButton.drawHoverText();
@@ -794,6 +822,9 @@ class ToolBox extends PApplet {
         constantOnButton.drawHoverText();
         readVariableButton.drawHoverText();
         setVariableButton.drawHoverText();
+        setVisabilityButton.drawHoverText();
+        xOffsetButton.drawHoverText();
+        yOffsetButton.drawHoverText();
       } else {
         fill(0);
         textSize(20);
@@ -872,6 +903,52 @@ class ToolBox extends PApplet {
           textSize(25);
           text("b"+curvar, width/2, height*0.4);
           text("current variable",width/2,height*0.36);
+        }else if(type.equals("set visable")){
+          int curgroop=logicThing.getData();
+          if(curgroop>0)
+            prevSound.draw();
+          if(curgroop<level.groups.size()-1)
+            nextSound.draw();
+          fill(0);
+          textSize(25);
+          text(level.groupNames.get(curgroop), width/2, height*0.4);
+          text("current group",width/2,height*0.36);
+        }else if(type.equals("x-offset")){
+          int curgroop=logicThing.getData();
+          if(curgroop>0)
+            prevSound.draw();
+          if(curgroop<level.groups.size()-1)
+            nextSound.draw();
+          fill(0);
+          textSize(25);
+          text(level.groupNames.get(curgroop), width/2, height*0.4);
+          text("current group",width/2,height*0.36);
+          text("offset",width/2,height*0.46);
+          text(((SetXOffset)logicThing).getOffset(),width/2,height*0.53);
+          increase.draw();
+          increaseMore.draw();
+          increaseAlot.draw();
+          decrease.draw();
+          decreaseMore.draw();
+          decreaseAlot.draw();
+        }else if(type.equals("y-offset")){
+          int curgroop=logicThing.getData();
+          if(curgroop>0)
+            prevSound.draw();
+          if(curgroop<level.groups.size()-1)
+            nextSound.draw();
+          fill(0);
+          textSize(25);
+          text(level.groupNames.get(curgroop), width/2, height*0.4);
+          text("current group",width/2,height*0.36);
+          text("offset",width/2,height*0.46);
+          text(((SetYOffset)logicThing).getOffset(),width/2,height*0.53);
+          increase.draw();
+          increaseMore.draw();
+          increaseAlot.draw();
+          decrease.draw();
+          decreaseMore.draw();
+          decreaseAlot.draw();
         }else {
           fill(0);
           textSize(20);
@@ -1323,6 +1400,18 @@ class ToolBox extends PApplet {
             turnThingsOff();
             selecting=true;
         }
+        if(setVisabilityButton.isMouseOver()){
+          turnThingsOff();
+          placingSetVisibility=true;
+        }
+        if(xOffsetButton.isMouseOver()){
+          turnThingsOff();
+          placingXOffset=true;
+        }
+        if(yOffsetButton.isMouseOver()){
+          turnThingsOff();
+          placingYOffset=true;
+        }
       }//end of edditing logic board
     }//end of tools
 
@@ -1370,6 +1459,52 @@ class ToolBox extends PApplet {
               logicThing.setData(curvar-1);
             if (curvar<level.variables.size()-1&&nextSound.isMouseOver())
               logicThing.setData(curvar+1);
+        }else if(type.equals("set visable")){
+          int curvar=logicThing.getData();
+          if (curvar>0&&prevSound.isMouseOver())
+              logicThing.setData(curvar-1);
+            if (curvar<level.groups.size()-1&&nextSound.isMouseOver())
+              logicThing.setData(curvar+1);
+        }else if(type.equals("x-offset")){
+          SetXOffset r=(SetXOffset)logicThing;
+           if(increase.isMouseOver()){
+             r.setOffset(r.getOffset()+1);
+           }
+           if(increaseMore.isMouseOver()){
+             r.setOffset(r.getOffset()+10);
+           }
+           if(increaseAlot.isMouseOver()){
+             r.setOffset(r.getOffset()+100);
+           }
+           if(decrease.isMouseOver()){
+             r.setOffset(r.getOffset()-1);
+           }
+           if(decreaseMore.isMouseOver()){
+             r.setOffset(r.getOffset()-10);
+           }
+           if(decreaseAlot.isMouseOver()){
+             r.setOffset(r.getOffset()-100);
+           }
+        }else if(type.equals("y-offset")){
+          SetYOffset r=(SetYOffset)logicThing;
+           if(increase.isMouseOver()){
+             r.setOffset(r.getOffset()+1);
+           }
+           if(increaseMore.isMouseOver()){
+             r.setOffset(r.getOffset()+10);
+           }
+           if(increaseAlot.isMouseOver()){
+             r.setOffset(r.getOffset()+100);
+           }
+           if(decrease.isMouseOver()){
+             r.setOffset(r.getOffset()-1);
+           }
+           if(decreaseMore.isMouseOver()){
+             r.setOffset(r.getOffset()-10);
+           }
+           if(decreaseAlot.isMouseOver()){
+             r.setOffset(r.getOffset()-100);
+           }
         }
       }//if something is elected
     }//end of page is selection

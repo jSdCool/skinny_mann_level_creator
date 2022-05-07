@@ -39,6 +39,9 @@ class Level {
        groupNames.add(gps.getString(i));
        groups.add(new Group());
      }
+    }else{
+       groupNames.add("group 0");
+       groups.add(new Group());
     }
     player1.x=SpawnX;
     player1.y=SpawnY;
@@ -57,7 +60,7 @@ class Level {
         sounds.put(job.getString("name"), new StageSound(job));
       }
       if (job.getString("type").equals("logicBoard")) {
-        logicBoards.add(new LogicBoard(loadJSONArray(rootPath+job.getString("location"))));
+        logicBoards.add(new LogicBoard(loadJSONArray(rootPath+job.getString("location")),this));
       }
     }
 
@@ -125,7 +128,7 @@ class Level {
 
 class Group{
  boolean visable=true;
- float xOffset=0,yOffest=0;
+ float xOffset=0,yOffset=0;
 }
 
 class Stage {
@@ -1323,7 +1326,7 @@ class StageSound {
 class LogicBoard {//stores all the logic components
   public String name="eee";//temp name
   public ArrayList<LogicComponent> components=new ArrayList<>();
-  LogicBoard(JSONArray file) {
+  LogicBoard(JSONArray file,Level level) {
     JSONObject head=file.getJSONObject(0);
     name=head.getString("name");
     for (int i=1; i<file.size(); i++) {
@@ -1358,6 +1361,15 @@ class LogicBoard {//stores all the logic components
       }
       if(type.equals("set var")){
         components.add(new SetVariable(component, this));
+      }
+      if(type.equals("set visable")){
+        components.add(new SetVisibility(component, this,level));
+      }
+      if(type.equals("y-offset")){
+        components.add(new SetYOffset(component, this,level));
+      }
+      if(type.equals("x-offset")){
+        components.add(new SetXOffset(component, this,level));
       }
     }
   }
@@ -1751,5 +1763,154 @@ class SetVariable extends LogicOutputComponent{
   }
   int getData(){
    return variableNumber;
+  }
+}
+
+class SetVisibility extends LogicOutputComponent{
+  int groupNumber=0;
+  SetVisibility(float x, float y, LogicBoard lb) {
+    super(x, y, "set visable", lb);
+    button.setText("  visibility of "+level.groupNames.get(groupNumber));
+  }
+
+  SetVisibility(JSONObject data, LogicBoard lb,Level level) {
+    super(data.getFloat("x"), data.getFloat("y"), "set visable", lb, data.getJSONArray("connections"));
+    groupNumber=data.getInt("group number"); //<>//
+    button.setText("  visibility of "+level.groupNames.get(groupNumber));
+  }
+  void tick(){
+    if(inputTerminal1){
+      level.groups.get(groupNumber).visable=true;
+    }
+    if(inputTerminal2){
+    level.groups.get(groupNumber).visable=false;
+    }
+  }
+  JSONObject save() {
+   JSONObject component=super.save();
+   component.setInt("group number",groupNumber);
+   return component;
+  }
+  void setData(int data){
+    groupNumber=data;
+    button.setText("  visibility of "+level.groupNames.get(groupNumber));
+  }
+  int getData(){
+   return groupNumber;
+  }
+  
+  void draw(){
+   super.draw();
+   fill(0);
+   textSize(15);
+   textAlign(LEFT,CENTER);
+   text("true",x+5,y+16);
+   text("false",x+5,y+56);
+  }
+}
+
+class SetXOffset extends LogicOutputComponent{
+  int groupNumber=0;
+  float offset=0;
+  SetXOffset(float x, float y, LogicBoard lb) {
+    super(x, y, "x-offset", lb);
+    button.setText("x-offset "+level.groupNames.get(groupNumber)+" by "+offset);
+  }
+
+  SetXOffset(JSONObject data, LogicBoard lb,Level level) {
+    super(data.getFloat("x"), data.getFloat("y"), "x-offset", lb, data.getJSONArray("connections"));
+    groupNumber=data.getInt("group number");
+    offset=data.getFloat("offset");
+    button.setText("x-offset "+level.groupNames.get(groupNumber)+" by "+offset);
+  }
+  void tick(){
+    if(inputTerminal1){
+      level.groups.get(groupNumber).xOffset=offset;
+    }
+    if(inputTerminal2){
+    level.groups.get(groupNumber).xOffset=0;
+    }
+  }
+  JSONObject save() {
+   JSONObject component=super.save();
+   component.setInt("group number",groupNumber);
+   component.setFloat("offset",offset);
+   return component;
+  }
+  void setData(int data){
+    groupNumber=data;
+    button.setText("x-offset "+level.groupNames.get(groupNumber)+" by "+offset);
+  }
+  int getData(){
+   return groupNumber;
+  }
+  
+  void draw(){
+   super.draw();
+   fill(0);
+   textSize(15);
+   textAlign(LEFT,CENTER);
+   text("set",x+5,y+16);
+   text("reset",x+5,y+56);
+  }
+  void setOffset(float of){
+   offset=of; 
+   button.setText("x-offset "+level.groupNames.get(groupNumber)+" by "+offset);
+  }
+  float getOffset(){
+   return offset; 
+  }
+}
+
+class SetYOffset extends LogicOutputComponent{
+  int groupNumber=0;
+  float offset=0;
+  SetYOffset(float x, float y, LogicBoard lb) {
+    super(x, y, "y-offset", lb);
+    button.setText("y-offset "+level.groupNames.get(groupNumber)+" by "+offset);
+  }
+
+  SetYOffset(JSONObject data, LogicBoard lb,Level level) {
+    super(data.getFloat("x"), data.getFloat("y"), "y-offset", lb, data.getJSONArray("connections"));
+    groupNumber=data.getInt("group number");
+    offset=data.getFloat("offset"); //<>//
+    button.setText("y-offset "+level.groupNames.get(groupNumber)+" by "+offset);
+  }
+  void tick(){
+    if(inputTerminal1){
+      level.groups.get(groupNumber).yOffset=offset;
+    }
+    if(inputTerminal2){
+    level.groups.get(groupNumber).yOffset=0;
+    }
+  }
+  JSONObject save() {
+   JSONObject component=super.save();
+   component.setInt("group number",groupNumber);
+   component.setFloat("offset",offset);
+   return component;
+  }
+  void setData(int data){
+    groupNumber=data;
+    button.setText("y-offset "+level.groupNames.get(groupNumber)+" by "+offset);
+  }
+  int getData(){
+   return groupNumber;
+  }
+  
+  void draw(){
+   super.draw();
+   fill(0);
+   textSize(15);
+   textAlign(LEFT,CENTER);
+   text("set",x+5,y+16);
+   text("reset",x+5,y+56);
+  }
+  void setOffset(float of){
+   offset=of; 
+   button.setText("y-offset "+level.groupNames.get(groupNumber)+" by "+offset);
+  }
+  float getOffset(){
+   return offset; 
   }
 }
