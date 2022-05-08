@@ -225,7 +225,7 @@ class Stage {
 
 abstract class StageComponent {//the base class for all components that exsist inside a stage
   public float x, y, z, dx, dy, dz;
-  public int ccolor;
+  public int ccolor,group=-1;
   public String type;
   void draw() {
   };
@@ -249,6 +249,11 @@ abstract class StageComponent {//the base class for all components that exsist i
     return null;
   }
   abstract StageComponent copy();
+  Group getGroup(){
+    if(group==-1)
+    return new Group();
+    return level.groups.get(group);
+  }
 }
 
 class Ground extends StageComponent {//ground component
@@ -262,6 +267,9 @@ class Ground extends StageComponent {//ground component
     if (stage_3D) {
       z=data.getFloat("z");
       dz=data.getFloat("dz");
+    }
+    if(!data.isNull("group")){
+      group=data.getInt("group");
     }
   }
   Ground(float X, float Y, float DX, float DY, int fcolor) {
@@ -298,33 +306,46 @@ class Ground extends StageComponent {//ground component
     }
     part.setInt("color", ccolor);
     part.setString("type", type);
+    part.setInt("group",group);
     return part;
   }
 
   void draw() {
+    Group group=getGroup();
+    if(!group.visable)
+      return;
     fill(ccolor);
-    rect(Scale*(x-drawCamPosX)-1, Scale*(y+drawCamPosY)-1, Scale*dx+2, Scale*dy+2);
+    rect(Scale*((x+group.xOffset)-drawCamPosX)-1, Scale*((y+group.yOffset)+drawCamPosY)-1, Scale*dx+2, Scale*dy+2);
   }
 
   void draw3D() {
+    Group group=getGroup();
+    if(!group.visable)
+      return;
     fill(ccolor);
     strokeWeight(0);
-    translate(x+dx/2, y+dy/2, z+dz/2);
+    translate((x+group.xOffset)+dx/2, (y+group.yOffset)+dy/2, z+dz/2);
     box(dx, dy, dz);
-    translate(-1*(x+dx/2), -1*(y+dy/2), -1*(z+dz/2));
+    translate(-1*((x+group.xOffset)+dx/2), -1*((y+group.yOffset)+dy/2), -1*(z+dz/2));
   }
 
   boolean colide(float x, float y, boolean c) {
-    float x2 = this.x+dx, y2=this.y+dy;
-    if (x >= this.x && x <= x2 && y >= this.y && y <= y2/* terain hit box*/) {
+    Group group=getGroup();
+    if(!group.visable)
+      return false;
+    float x2 = (this.x+group.xOffset)+dx, y2=(this.y+group.yOffset)+dy;
+    if (x >= (this.x+group.xOffset) && x <= x2 && y >= (this.y+group.yOffset) && y <= y2/* terain hit box*/) {
       return true;
     }
     return false;
   }
 
   boolean colide(float x, float y, float z) {
-    float x2 = this.x+dx, y2=this.y+dy, z2=this.z+dz;
-    if (x >= this.x && x <= x2 && y >= this.y && y <= y2 && z>=this.z && z<=z2/* terain hit box*/) {
+    Group group=getGroup();
+    if(!group.visable)
+      return false;
+    float x2 = (this.x+group.xOffset)+dx, y2=(this.y+group.yOffset)+dy, z2=this.z+dz;
+    if (x >= (this.x+group.xOffset) && x <= x2 && y >= (this.y+group.yOffset) && y <= y2 && z>=this.z && z<=z2/* terain hit box*/) {
       return true;
     }
     return false;
@@ -342,6 +363,9 @@ class Holo extends StageComponent {//ground component
     if (stage_3D) {
       z=data.getFloat("z");
       dz=data.getFloat("dz");
+    }
+    if(!data.isNull("group")){
+      group=data.getInt("group");
     }
   }
   Holo(float X, float Y, float DX, float DY, int fcolor) {
@@ -378,26 +402,36 @@ class Holo extends StageComponent {//ground component
     }
     part.setInt("color", ccolor);
     part.setString("type", type);
+    part.setInt("group",group);
     return part;
   }
 
   void draw() {
+    Group group=getGroup();
+    if(!group.visable)
+      return;
     fill(ccolor);
-    rect(Scale*(x-drawCamPosX)-1, Scale*(y+drawCamPosY)-1, Scale*dx+2, Scale*dy+2);
+    rect(Scale*((x+group.xOffset)-drawCamPosX)-1, Scale*((y+group.yOffset)+drawCamPosY)-1, Scale*dx+2, Scale*dy+2);
   }
 
   void draw3D() {
+    Group group=getGroup();
+    if(!group.visable)
+      return;
     fill(ccolor);
     strokeWeight(0);
-    translate(x+dx/2, y+dy/2, z+dz/2);
+    translate((x+group.xOffset)+dx/2, (y+group.yOffset)+dy/2, z+dz/2);
     box(dx, dy, dz);
-    translate(-1*(x+dx/2), -1*(y+dy/2), -1*(z+dz/2));
+    translate(-1*((x+group.xOffset)+dx/2), -1*((y+group.yOffset)+dy/2), -1*(z+dz/2));
   }
 
   boolean colide(float x, float y, boolean c) {
+    Group group=getGroup();
+    if(!group.visable)
+      return false;
     if (c) {
-      float x2 = this.x+dx, y2=this.y+dy;
-      if (x >= this.x && x <= x2 && y >= this.y && y <= y2/* terain hit box*/) {
+      float x2 = (this.x+group.xOffset)+dx, y2=(this.y+group.yOffset)+dy;
+      if (x >= (this.x+group.xOffset) && x <= x2 && y >= (this.y+group.yOffset) && y <= y2/* terain hit box*/) {
         return true;
       }
     }
@@ -405,8 +439,11 @@ class Holo extends StageComponent {//ground component
   }
 
   boolean colide(float x, float y, float z) {
-    float x2 = this.x+dx, y2=this.y+dy, z2=this.z+dz;
-    if (x >= this.x && x <= x2 && y >= this.y && y <= y2 && z>=this.z && z<=z2/* terain hit box*/) {
+    Group group=getGroup();
+    if(!group.visable)
+      return false;
+    float x2 = (this.x+group.xOffset)+dx, y2=(this.y+group.yOffset)+dy, z2=this.z+dz;
+    if (x >= (this.x+group.xOffset) && x <= x2 && y >= (this.y+group.yOffset) && y <= y2 && z>=this.z && z<=z2/* terain hit box*/) {
       return true;
     }
     return false;
@@ -423,6 +460,9 @@ class DethPlane extends StageComponent {//ground component
     if (stage_3D) {
       z=data.getFloat("z");
       dz=data.getFloat("dz");
+    }
+    if(!data.isNull("group")){
+      group=data.getInt("group");
     }
   }
   DethPlane(float X, float Y, float DX, float DY) {
@@ -447,33 +487,46 @@ class DethPlane extends StageComponent {//ground component
       part.setFloat("dz", dz);
     }
     part.setString("type", type);
+    part.setInt("group",group);
     return part;
   }
 
   void draw() {
+    Group group=getGroup();
+    if(!group.visable)
+      return;
     fill(-114431);
-    rect(Scale*(x-drawCamPosX)-1, Scale*(y+drawCamPosY)-1, Scale*dx+2, Scale*dy+2);
+    rect(Scale*((x+group.xOffset)-drawCamPosX)-1, Scale*((y+group.yOffset)+drawCamPosY)-1, Scale*dx+2, Scale*dy+2);
   }
 
   void draw3D() {
+    Group group=getGroup();
+    if(!group.visable)
+      return;
     fill(-114431);
     strokeWeight(0);
-    translate(x+dx/2, y+dy/2, z+dz/2);
+    translate((x+group.xOffset)+dx/2, (y+group.yOffset)+dy/2, z+dz/2);
     box(dx, dy, dz);
-    translate(-1*(x+dx/2), -1*(y+dy/2), -1*(z+dz/2));
+    translate(-1*((x+group.xOffset)+dx/2), -1*((y+group.yOffset)+dy/2), -1*(z+dz/2));
   }
 
   boolean colide(float x, float y, boolean c) {
-    float x2 = this.x+dx, y2=this.y+dy;
-    if (x >= this.x && x <= x2 && y >= this.y && y <= y2/* terain hit box*/) {
+    Group group=getGroup();
+    if(!group.visable)
+      return false;
+    float x2 = (this.x+group.xOffset)+dx, y2=(this.y+group.yOffset)+dy;
+    if (x >= (this.x+group.xOffset) && x <= x2 && y >= (this.y+group.yOffset) && y <= y2/* terain hit box*/) {
       return true;
     }
     return false;
   }
 
   boolean colideDethPlane(float x, float y) {
-    float x2 =this. x+dx, y2=this.y+dy;
-    if (x >= this.x && x <= x2 && y >= this.y && y <= y2/* terain hit box*/) {
+    Group group=getGroup();
+    if(!group.visable)
+      return false;
+    float x2 =(this.x+group.xOffset)+dx, y2=(this.y+group.yOffset)+dy;
+    if (x >= (this.x+group.xOffset) && x <= x2 && y >= (this.y+group.yOffset) && y <= y2/* terain hit box*/) {
       return true;
     }
     return false;
@@ -488,6 +541,9 @@ class CheckPoint extends StageComponent {//ground component
     y=data.getFloat("y");
     if (stage_3D) {
       z=data.getFloat("z");
+    }
+    if(!data.isNull("group")){
+      group=data.getInt("group");
     }
   }
 
@@ -514,13 +570,17 @@ class CheckPoint extends StageComponent {//ground component
       part.setFloat("z", z);
     }
     part.setString("type", type);
+    part.setInt("group",group);
     return part;
   }
 
   void draw() {
+    Group group=getGroup();
+    if(!group.visable)
+      return;
     float playx=player1.getX();
     boolean po=false;
-    if (playx>=x-5 && playx<= x+5 && y-50 <= player1.getY() && y>=player1.getY()-10) {
+    if (playx>=(x+group.xOffset)-5 && playx<= (x+group.xOffset)+5 && (y+group.yOffset)-50 <= player1.getY() && (y+group.yOffset)>=player1.getY()-10) {
       respawnX=(int)x;
       respawnY=(int)y;
       respawnStage=currentStageIndex;
@@ -528,8 +588,8 @@ class CheckPoint extends StageComponent {//ground component
       checkpointIn3DStage=false;
     }
 
-    float x2=x-drawCamPosX;
-    float y2=y+drawCamPosY;
+    float x2=(x+group.xOffset)-drawCamPosX;
+    float y2=(y+group.yOffset)+drawCamPosY;
     if (po)
       fill(#E5C402);
     else
@@ -540,10 +600,13 @@ class CheckPoint extends StageComponent {//ground component
   }
 
   void draw3D() {
+    Group group=getGroup();
+    if(!group.visable)
+      return;
     noStroke();
     float playx=player1.getX();
     boolean po=false;
-    if (playx>=x-20 && playx<= x+20 && y-50 <= player1.getY() && y>=player1.getY()-10 && player1.z >= z-20 && player1.z <= z+20) {
+    if (playx>=(x+group.xOffset)-20 && playx<= (x+group.xOffset)+20 && (y+group.yOffset)-50 <= player1.getY() && (y+group.yOffset)>=player1.getY()-10 && player1.z >= z-20 && player1.z <= z+20) {
       respawnX=(int)x;
       respawnY=(int)y;
       respawnZ=(int)player1.z;
@@ -558,20 +621,23 @@ class CheckPoint extends StageComponent {//ground component
     else
       fill(#B9B9B9);
     strokeWeight(0);
-    translate(x, y-30, z);
+    translate((x+group.xOffset), (y+group.yOffset)-30, z);
     box(4, 60, 4);
-    translate(-x, -(y-30), -z);
+    translate(-(x+group.xOffset), -((y+group.yOffset)-30), -z);
     fill(#EA0202);
     stroke(#EA0202);
     strokeWeight(0);
-    translate(x+10, y-50, z);
+    translate((x+group.xOffset)+10, (y+group.yOffset)-50, z);
     box(20, 20, 2);
-    translate(-(x+10), -(y-50), -z);
+    translate(-((x+group.xOffset)+10), -((y+group.yOffset)-50), -z);
   }
 
   boolean colide(float x, float y, boolean c) {
+    Group group=getGroup();
+    if(!group.visable)
+      return false;
     if (c) {
-      if (x>=this.x-8 && x<= this.x+8 && y >= this.y-50 && y <= this.y) {
+      if (x>=(this.x+group.xOffset)-8 && x<= (this.x+group.xOffset)+8 && y >= (this.y+group.yOffset)-50 && y <= (this.y+group.yOffset)) {
         return true;
       }
     }
@@ -587,6 +653,9 @@ class Goal extends StageComponent {//ground component
     y=data.getFloat("y");
     if (stage_3D) {
       z=data.getFloat("z");
+    }
+    if(!data.isNull("group")){
+      group=data.getInt("group");
     }
   }
   Goal(float X, float Y) {
@@ -606,11 +675,15 @@ class Goal extends StageComponent {//ground component
       part.setFloat("z", z);
     }
     part.setString("type", type);
+    part.setInt("group",group);
     return part;
   }
 
   void draw() {
-    float x2 = x-drawCamPosX, y2 = y;
+    Group group=getGroup();
+    if(!group.visable)
+      return;
+    float x2 = (x+group.xOffset)-drawCamPosX, y2 = (y+group.yOffset);
     fill(255);
     rect(Scale*x2, Scale*(y2+drawCamPosY), Scale*50, Scale*50);
     rect(Scale*(x2+100), Scale*(y2+drawCamPosY), Scale*50, Scale*50);
@@ -630,8 +703,11 @@ class Goal extends StageComponent {//ground component
   }
 
   boolean colide(float x, float y, boolean c) {
+    Group group=getGroup();
+    if(!group.visable)
+      return false;
     if (c) {
-      if (x >= this.x && x <= (this.x) + 250 && y >= (this.y) - 50 && y <= (this.y) + 50) {
+      if (x >= (this.x+group.xOffset) && x <= ((this.x+group.xOffset)) + 250 && y >= ((this.y+group.yOffset)) - 50 && y <= ((this.y+group.yOffset)) + 50) {
         return true;
       }
     }
@@ -649,6 +725,9 @@ class Coin extends StageComponent {//ground component
       z=data.getFloat("z");
     }
     coinId=data.getInt("coin id");
+    if(!data.isNull("group")){
+      group=data.getInt("group");
+    }
   }
   Coin(float X, float Y, int ind) {
     x=X;
@@ -675,10 +754,14 @@ class Coin extends StageComponent {//ground component
     }
     part.setString("type", type);
     part.setInt("coin id", coinId);
+    part.setInt("group",group);
     return part;
   }
 
   void draw() {
+    Group group=getGroup();
+    if(!group.visable)
+      return;
     float playx=player1.getX(), playy=player1.getY();
     boolean collected;
     if (editingBlueprint) {
@@ -686,10 +769,10 @@ class Coin extends StageComponent {//ground component
     } else {
       collected=coins.get(coinId);
     }
-    float x2=x-drawCamPosX;
+    float x2=(x+group.xOffset)-drawCamPosX;
     if (!collected) {
-      drawCoin(Scale*x2, Scale*(y+drawCamPosY), Scale*3);
-      if (Math.sqrt(Math.pow(playx-drawCamPosX-x2, 2)+Math.pow(playy-y, 2))<30) {
+      drawCoin(Scale*x2, Scale*((y+group.yOffset)+drawCamPosY), Scale*3);
+      if (Math.sqrt(Math.pow(playx-drawCamPosX-x2, 2)+Math.pow(playy-(y+group.yOffset), 2))<30) {
         coins.set(coinId, true);
         coinCount++;
       }
@@ -697,16 +780,19 @@ class Coin extends StageComponent {//ground component
   }
 
   void draw3D() {
+    Group group=getGroup();
+    if(!group.visable)
+      return;
     float playx=player1.getX(), playy=player1.getY(), playz=player1.z;
     boolean collected=coins.get(coinId);
 
     if (!collected) {
-      translate(x, y, z);
+      translate((x+group.xOffset), (y+group.yOffset), z);
       rotateY(radians(coinRotation));
       shape(coin3D);
       rotateY(radians(-coinRotation));
-      translate(-x, -y, -z);
-      if (Math.sqrt(Math.pow(playx-x, 2)+Math.pow(playy-y, 2)+Math.pow(playz-z, 2))<35) {
+      translate(-(x+group.xOffset), -(y+group.yOffset), -z);
+      if (Math.sqrt(Math.pow(playx-(x+group.xOffset), 2)+Math.pow(playy-(y+group.yOffset), 2)+Math.pow(playz-z, 2))<35) {
         coins.set(coinId, true);
         coinCount++;
       }
@@ -714,8 +800,11 @@ class Coin extends StageComponent {//ground component
   }
 
   boolean colide(float x, float y, boolean c) {
+    Group group=getGroup();
+    if(!group.visable)
+      return false;
     if (c) {
-      if (Math.sqrt(Math.pow(x-this.x, 2)+Math.pow(y-this.y, 2))<19) {
+      if (Math.sqrt(Math.pow(x-(this.x+group.xOffset), 2)+Math.pow(y-(this.y+group.yOffset), 2))<19) {
         return true;
       }
     }
@@ -742,6 +831,9 @@ class Interdimentional_Portal extends StageComponent {//ground component
     catch(Throwable e) {
       linkZ=-1;
     }
+    if(!data.isNull("group")){
+      group=data.getInt("group");
+    }
   }
   StageComponent copy() {
     return null;
@@ -759,20 +851,24 @@ class Interdimentional_Portal extends StageComponent {//ground component
     part.setFloat("linkX", linkX);
     part.setFloat("linkY", linkY);
     part.setInt("link Index", linkIndex+1);
+    part.setInt("group",group);
     return part;
   }
 
   void draw() {
+    Group group=getGroup();
+    if(!group.visable)
+      return;
     float playx=player1.getX(), playy=player1.getY();
-    drawPortal(Scale*(x-drawCamPosX), Scale*(y+drawCamPosY), Scale*1);
-    if ((playx>x-25&&playx<x+25&&playy>y-50&&playy<y+60)) {
+    drawPortal(Scale*((x+group.xOffset)-drawCamPosX), Scale*((y+group.yOffset)+drawCamPosY), Scale*1);
+    if ((playx>(x+group.xOffset)-25&&playx<(x+group.xOffset)+25&&playy>(y+group.yOffset)-50&&playy<(y+group.yOffset)+60)) {
       fill(255);
       textSize(Scale*20);
       displayText="Press E";
       displayTextUntill=millis()+100;
     }
 
-    if (E_pressed&&(playx>x-25&&playx<x+25&&playy>y-50&&playy<y+60)) {
+    if (E_pressed&&(playx>(x+group.xOffset)-25&&playx<(x+group.xOffset)+25&&playy>(y+group.yOffset)-50&&playy<(y+group.yOffset)+60)) {
       E_pressed=false;
       selectedIndex=-1;
       stageIndex=linkIndex;
@@ -793,19 +889,22 @@ class Interdimentional_Portal extends StageComponent {//ground component
   }
 
   void draw3D() {
+    Group group=getGroup();
+    if(!group.visable)
+      return;
     float playx=player1.getX(), playy=player1.getY();
 
     translate(0, 0, z);
-    drawPortal(x, y, 1);
+    drawPortal((x+group.xOffset), (y+group.yOffset), 1);
     translate(0, 0, -z);
-    if ((playx>x-25&&playx<x+25&&playy>y-50&&playy<y+60&& player1.z >= z-20 && player1.z <= z+20)) {
+    if ((playx>(x+group.xOffset)-25&&playx<(x+group.xOffset)+25&&playy>(y+group.yOffset)-50&&playy<(y+group.yOffset)+60&& player1.z >= z-20 && player1.z <= z+20)) {
       fill(255);
       textSize(20);
       displayText="Press E";
       displayTextUntill=millis()+100;
     }
 
-    if (E_pressed&&(playx>x-25&&playx<x+25&&playy>y-50&&playy<y+60)) {
+    if (E_pressed&&(playx>(x+group.xOffset)-25&&playx<(x+group.xOffset)+25&&playy>(y+group.yOffset)-50&&playy<(y+group.yOffset)+60)) {
       E_pressed=false;
       selectedIndex=-1;
       stageIndex=linkIndex;
@@ -826,8 +925,11 @@ class Interdimentional_Portal extends StageComponent {//ground component
   }
 
   boolean colide(float x, float y, boolean c) {
+    Group group=getGroup();
+    if(!group.visable)
+      return false;
     if (c) {
-      if (x>this.x-25&&x<this.x+25&&y>this.y-50&&y<this.y+60) {
+      if (x>(this.x+group.xOffset)-25&&x<(this.x+group.xOffset)+25&&y>(this.y+group.yOffset)-50&&y<(this.y+group.yOffset)+60) {
         return true;
       }
     }
@@ -850,6 +952,9 @@ class Sloap extends StageComponent {//ground component
       dz=data.getFloat("dz");
     }
     direction=data.getInt("rotation");
+    if(!data.isNull("group")){
+      group=data.getInt("group");
+    }
   }
 
   Sloap(float x1, float y1, float x2, float y2, int rot, int fcolor) {
@@ -874,35 +979,45 @@ class Sloap extends StageComponent {//ground component
     part.setInt("color", ccolor);
     part.setString("type", type);
     part.setInt("rotation", direction);
+    part.setInt("group",group);
     return part;
   }
 
   void draw() {
+    Group group=getGroup();
+    if(!group.visable)
+      return;
     fill(ccolor);
     if (direction==0) {
-      triangle(Scale*(x-drawCamPosX), Scale*(y+drawCamPosY), Scale*(dx-drawCamPosX), Scale*(dy+drawCamPosY), Scale*(dx-drawCamPosX), Scale*(y+drawCamPosY));
+      triangle(Scale*((x+group.xOffset)-drawCamPosX), Scale*((y+group.yOffset)+drawCamPosY), Scale*((dx+group.xOffset)-drawCamPosX), Scale*((dy+group.yOffset)+drawCamPosY), Scale*((dx+group.xOffset)-drawCamPosX), Scale*((y+group.yOffset)+drawCamPosY));
     }
     if (direction==1) {
-      triangle(Scale*(x-drawCamPosX), Scale*(y+drawCamPosY), Scale*(x-drawCamPosX), Scale*(dy+drawCamPosY), Scale*(dx-drawCamPosX), Scale*(y+drawCamPosY));
+      triangle(Scale*((x+group.xOffset)-drawCamPosX), Scale*((y+group.yOffset)+drawCamPosY), Scale*((x+group.xOffset)-drawCamPosX), Scale*((dy+group.yOffset)+drawCamPosY), Scale*((dx+group.xOffset)-drawCamPosX), Scale*((y+group.yOffset)+drawCamPosY));
     }
     if (direction==2) {
-      triangle(Scale*(x-drawCamPosX), Scale*(y+drawCamPosY), Scale*(dx-drawCamPosX), Scale*(dy+drawCamPosY), Scale*(x-drawCamPosX), Scale*(dy+drawCamPosY));
+      triangle(Scale*((x+group.xOffset)-drawCamPosX), Scale*((y+group.yOffset)+drawCamPosY), Scale*((dx+group.xOffset)-drawCamPosX), Scale*((dy+group.yOffset)+drawCamPosY), Scale*((x+group.xOffset)-drawCamPosX), Scale*((dy+group.yOffset)+drawCamPosY));
     }
     if (direction==3) {
-      triangle(Scale*(x-drawCamPosX), Scale*(dy+drawCamPosY), Scale*(dx-drawCamPosX), Scale*(dy+drawCamPosY), Scale*(dx-drawCamPosX), Scale*(y+drawCamPosY));
+      triangle(Scale*((x+group.xOffset)-drawCamPosX), Scale*((dy+group.yOffset)+drawCamPosY), Scale*((dx+group.xOffset)-drawCamPosX), Scale*((dy+group.yOffset)+drawCamPosY), Scale*((dx+group.xOffset)-drawCamPosX), Scale*((y+group.yOffset)+drawCamPosY));
     }
   }
 
   void draw3D() {
+    Group group=getGroup();
+    if(!group.visable)
+      return;
     fill(ccolor);
     strokeWeight(0);
-    translate(x+dx/2, y+dy/2, z+dz/2);
+    translate((x+group.xOffset)+dx/2, (y+group.yOffset)+dy/2, z+dz/2);
     box(dx, dy, dz);
-    translate(-1*(x+dx/2), -1*(y+dy/2), -1*(z+dz/2));
+    translate(-1*((x+group.xOffset)+dx/2), -1*((y+group.yOffset)+dy/2), -1*(z+dz/2));
   }
 
   boolean colide(float x, float y, boolean c) {
-    float x2 = dx, y2=dy, y1=this.y, x1=this.x, rot=direction;
+    Group group=getGroup();
+    if(!group.visable)
+      return false;
+    float x2 = dx+group.xOffset, y2=dy+group.yOffset, y1=(this.y+group.yOffset), x1=(this.x+group.xOffset), rot=direction;
     if (rot==0) {
       if (x<=x2&&y>=y1&&y<=x*((y2-y1)/(x2-x1)) + (y2-(x2*((y2-y1)/(x2-x1))))  ) {
         return true;
@@ -945,6 +1060,9 @@ class HoloTriangle extends StageComponent {//ground component
       dz=data.getFloat("dz");
     }
     direction=data.getInt("rotation");
+    if(!data.isNull("group")){
+      group=data.getInt("group");
+    }
   }
   HoloTriangle(float x1, float y1, float x2, float y2, int rot, int fcolor) {
     type="holoTriangle";
@@ -968,36 +1086,46 @@ class HoloTriangle extends StageComponent {//ground component
     part.setInt("color", ccolor);
     part.setString("type", type);
     part.setInt("rotation", direction);
+    part.setInt("group",group);
     return part;
   }
 
   void draw() {
+    Group group=getGroup();
+    if(!group.visable)
+      return;
     fill(ccolor);
     if (direction==0) {
-      triangle(Scale*(x-drawCamPosX), Scale*(y+drawCamPosY), Scale*(dx-drawCamPosX), Scale*(dy+drawCamPosY), Scale*(dx-drawCamPosX), Scale*(y+drawCamPosY));
+      triangle(Scale*((x+group.xOffset)-drawCamPosX), Scale*((y+group.yOffset)+drawCamPosY), Scale*((dx+group.xOffset)-drawCamPosX), Scale*((dy+group.yOffset)+drawCamPosY), Scale*((dx+group.xOffset)-drawCamPosX), Scale*((y+group.yOffset)+drawCamPosY));
     }
     if (direction==1) {
-      triangle(Scale*(x-drawCamPosX), Scale*(y+drawCamPosY), Scale*(x-drawCamPosX), Scale*(dy+drawCamPosY), Scale*(dx-drawCamPosX), Scale*(y+drawCamPosY));
+      triangle(Scale*((x+group.xOffset)-drawCamPosX), Scale*((y+group.yOffset)+drawCamPosY), Scale*((x+group.xOffset)-drawCamPosX), Scale*((dy+group.yOffset)+drawCamPosY), Scale*((dx+group.xOffset)-drawCamPosX), Scale*((y+group.yOffset)+drawCamPosY));
     }
     if (direction==2) {
-      triangle(Scale*(x-drawCamPosX), Scale*(y+drawCamPosY), Scale*(dx-drawCamPosX), Scale*(dy+drawCamPosY), Scale*(x-drawCamPosX), Scale*(dy+drawCamPosY));
+      triangle(Scale*((x+group.xOffset)-drawCamPosX), Scale*((y+group.yOffset)+drawCamPosY), Scale*((dx+group.xOffset)-drawCamPosX), Scale*((dy+group.yOffset)+drawCamPosY), Scale*((x+group.xOffset)-drawCamPosX), Scale*((dy+group.yOffset)+drawCamPosY));
     }
     if (direction==3) {
-      triangle(Scale*(x-drawCamPosX), Scale*(dy+drawCamPosY), Scale*(dx-drawCamPosX), Scale*(dy+drawCamPosY), Scale*(dx-drawCamPosX), Scale*(y+drawCamPosY));
+      triangle(Scale*((x+group.xOffset)-drawCamPosX), Scale*((dy+group.yOffset)+drawCamPosY), Scale*((dx+group.xOffset)-drawCamPosX), Scale*((dy+group.yOffset)+drawCamPosY), Scale*((dx+group.xOffset)-drawCamPosX), Scale*((y+group.yOffset)+drawCamPosY));
     }
   }
 
   void draw3D() {
+    Group group=getGroup();
+    if(!group.visable)
+      return;
     fill(ccolor);
     strokeWeight(0);
-    translate(x+dx/2, y+dy/2, z+dz/2);
+    translate((x+group.xOffset)+dx/2, (y+group.yOffset)+dy/2, z+dz/2);
     box(dx, dy, dz);
-    translate(-1*(x+dx/2), -1*(y+dy/2), -1*(z+dz/2));
+    translate(-1*((x+group.xOffset)+dx/2), -1*((y+group.yOffset)+dy/2), -1*(z+dz/2));
   }
 
   boolean colide(float x, float y, boolean c) {
+    Group group=getGroup();
+    if(!group.visable)
+      return false;
     if (c) {
-      float x2 = dx, y2=dy, y1=this.y, x1=this.x, rot=direction;
+      float x2 = dx+group.xOffset, y2=dy+group.yOffset, y1=(this.y+group.yOffset), x1=(this.x+group.xOffset), rot=direction;
       if (rot==0) {
         if (x<=x2&&y>=y1&&y<=x*((y2-y1)/(x2-x1)) + (y2-(x2*((y2-y1)/(x2-x1))))  ) {
           return true;
@@ -1035,6 +1163,9 @@ class SWon3D extends StageComponent {//ground component
     if (stage_3D) {
       z=data.getFloat("z");
     }
+    if(!data.isNull("group")){
+      group=data.getInt("group");
+    }
   }
 
   SWon3D(float X, float Y, float Z) {
@@ -1054,12 +1185,16 @@ class SWon3D extends StageComponent {//ground component
       part.setFloat("z", z);
     }
     part.setString("type", type);
+    part.setInt("group",group);
     return part;
   }
 
   void draw() {
-    draw3DSwitch1((x-drawCamPosX)*Scale, (y+drawCamPosY)*Scale, Scale);
-    if (player1.x>=x-10&&player1.x<=x+10&&player1.y >=y-10&&player1.y<= y+2) {
+    Group group=getGroup();
+    if(!group.visable)
+      return;
+    draw3DSwitch1(((x+group.xOffset)-drawCamPosX)*Scale, ((y+group.yOffset)+drawCamPosY)*Scale, Scale);
+    if (player1.x>=(x+group.xOffset)-10&&player1.x<=(x+group.xOffset)+10&&player1.y >=(y+group.yOffset)-10&&player1.y<= (y+group.yOffset)+2) {
       player1.z=z;
       e3DMode=true;
       gmillis=millis()+1200;
@@ -1067,12 +1202,18 @@ class SWon3D extends StageComponent {//ground component
   }
 
   void draw3D() {
-    draw3DSwitch1(x, y, z, Scale);
+    Group group=getGroup();
+    if(!group.visable)
+      return;
+    draw3DSwitch1((x+group.xOffset), (y+group.yOffset), z, Scale);
   }
 
   boolean colide(float x, float y, boolean c) {
+    Group group=getGroup();
+    if(!group.visable)
+      return false;
     if (c) {
-      if (x >= (this.x)-20 && x <= (this.x) + 20 && y >= (this.y) - 10 && y <= this.y) {
+      if (x >= ((this.x+group.xOffset))-20 && x <= ((this.x+group.xOffset)) + 20 && y >= ((this.y+group.yOffset)) - 10 && y <= (this.y+group.yOffset)) {
         return true;
       }
     }
@@ -1087,6 +1228,9 @@ class SWoff3D extends StageComponent {//ground component
     y=data.getFloat("y");
     if (stage_3D) {
       z=data.getFloat("z");
+    }
+    if(!data.isNull("group")){
+      group=data.getInt("group");
     }
   }
 
@@ -1107,16 +1251,23 @@ class SWoff3D extends StageComponent {//ground component
       part.setFloat("z", z);
     }
     part.setString("type", type);
+    part.setInt("group",group);
     return part;
   }
 
   void draw() {
-    draw3DSwitch2((x-drawCamPosX)*Scale, (y+drawCamPosY)*Scale, Scale);
+    Group group=getGroup();
+    if(!group.visable)
+      return;
+    draw3DSwitch2(((x+group.xOffset)-drawCamPosX)*Scale, ((y+group.yOffset)+drawCamPosY)*Scale, Scale);
   }
 
   void draw3D() {
-    draw3DSwitch2(x, y, z, Scale);
-    if (player1.x>=x-10&&player1.x<=x+10&&player1.y >=y-10&&player1.y<= y+2 && player1.z >= z-10 && player1.z <= z+10) {
+    Group group=getGroup();
+    if(!group.visable)
+      return;
+    draw3DSwitch2((x+group.xOffset), y, z, Scale);
+    if (player1.x>=(x+group.xOffset)-10&&player1.x<=(x+group.xOffset)+10&&player1.y >=(y+group.yOffset)-10&&player1.y<= (y+group.yOffset)+2 && player1.z >= z-10 && player1.z <= z+10) {
       e3DMode=false;
       WPressed=false;
       SPressed=false;
@@ -1125,8 +1276,11 @@ class SWoff3D extends StageComponent {//ground component
   }
 
   boolean colide(float x, float y, boolean c) {
+    Group group=getGroup();
+    if(!group.visable)
+      return false;
     if (c) {
-      if (x >= (this.x)-20 && x <= (this.x) + 20 && y >= (this.y) - 10 && y <= this.y) {
+      if (x >= ((this.x+group.xOffset))-20 && x <= ((this.x+group.xOffset)) + 20 && y >= ((this.y+group.yOffset)) - 10 && y <= (this.y+group.yOffset)) {
         return true;
       }
     }
@@ -1144,6 +1298,9 @@ class WritableSign extends StageComponent {
       z=data.getFloat("z");
     }
     contents=data.getString("contents");
+    if(!data.isNull("group")){
+      group=data.getInt("group");
+    }
   }
   WritableSign(float X, float Y) {
     x=X;
@@ -1165,10 +1322,13 @@ class WritableSign extends StageComponent {
   }
 
   void draw() {
-    drawSign(Scale*(x-drawCamPosX), Scale*(y+drawCamPosY), Scale);
+    Group group=getGroup();
+    if(!group.visable)
+      return;
+    drawSign(Scale*((x+group.xOffset)-drawCamPosX), Scale*((y+group.yOffset)+drawCamPosY), Scale);
 
     float playx=player1.getX(), playy=player1.getY();
-    if (playx>x-35&&playx<x+35&&playy>y-40&&playy<y) {//display the press e message to the player
+    if (playx>(x+group.xOffset)-35&&playx<(x+group.xOffset)+35&&playy>(y+group.yOffset)-40&&playy<(y+group.yOffset)) {//display the press e message to the player
       fill(255);
       textSize(Scale*20);
       displayText="Press E";
@@ -1181,10 +1341,13 @@ class WritableSign extends StageComponent {
     }
   }
   void draw3D() {
-    drawSign(x, y, z, Scale);
+    Group group=getGroup();
+    if(!group.visable)
+      return;
+    drawSign((x+group.xOffset), (y+group.yOffset), z, Scale);
 
     float playx=player1.getX(), playy=player1.getY();
-    if (playx>x-35&&playx<x+35&&playy>y-40&&playy<y&& player1.z >= z-20 && player1.z <= z+20) {
+    if (playx>(x+group.xOffset)-35&&playx<(x+group.xOffset)+35&&playy>(y+group.yOffset)-40&&playy<(y+group.yOffset)&& player1.z >= z-20 && player1.z <= z+20) {
       fill(255);
       textSize(20);
       displayText="Press E";
@@ -1196,8 +1359,11 @@ class WritableSign extends StageComponent {
     }
   }
   boolean colide(float x, float y, boolean c) {
+    Group group=getGroup();
+    if(!group.visable)
+      return false;
     if (c) {
-      if (x >= (this.x)-35 && x <= (this.x) + 35 && y >= (this.y) - 65 && y <= this.y) {
+      if (x >= ((this.x+group.xOffset))-35 && x <= ((this.x+group.xOffset)) + 35 && y >= ((this.y+group.yOffset)) - 65 && y <= (this.y+group.yOffset)) {
         return true;
       }
     }
@@ -1213,6 +1379,7 @@ class WritableSign extends StageComponent {
     }
     part.setString("type", type);
     part.setString("contents", contents);
+    part.setInt("group",group);
     return part;
   }
 
@@ -1238,11 +1405,17 @@ class SoundBox extends StageComponent {
     x=data.getFloat("x");
     y=data.getFloat("y");
     soundKey=data.getString("sound key");
+    if(!data.isNull("group")){
+      group=data.getInt("group");
+    }
   }
 
   void draw() {
-    drawSoundBox(x-drawCamPosX, y+drawCamPosY);
-    if (player1.getX()>=x-30&&player1.getX()<=x+30&&player1.y>=y-30&&player1.getY()<y+30) {
+    Group group=getGroup();
+    if(!group.visable)
+      return;
+    drawSoundBox((x+group.xOffset)-drawCamPosX, (y+group.yOffset)+drawCamPosY);
+    if (player1.getX()>=(x+group.xOffset)-30&&player1.getX()<=(x+group.xOffset)+30&&player1.y>=(y+group.yOffset)-30&&player1.getY()<(y+group.yOffset)+30) {
       displayText="Press E";
       displayTextUntill=millis()+100;
       if (E_pressed) {
@@ -1259,8 +1432,11 @@ class SoundBox extends StageComponent {
   }
 
   boolean colide(float x, float y, boolean c) {
+    Group group=getGroup();
+    if(!group.visable)
+      return false;
     if (c) {
-      if (x >= (this.x)-30 && x <= (this.x) + 30 && y >= (this.y) - 30 && y <= this.y+30) {
+      if (x >= ((this.x+group.xOffset))-30 && x <= ((this.x+group.xOffset)) + 30 && y >= ((this.y+group.yOffset)) - 30 && y <= (this.y+group.yOffset)+30) {
         return true;
       }
     }
@@ -1273,6 +1449,7 @@ class SoundBox extends StageComponent {
     part.setFloat("y", y);
     part.setString("type", type);
     part.setString("sound key", soundKey);
+    part.setInt("group",group);
     return part;
   }
 
