@@ -254,6 +254,9 @@ abstract class StageComponent {//the base class for all components that exsist i
     return new Group();
     return level.groups.get(group);
   }
+  void setGroup(int grp){
+   group=grp; 
+  }
 }
 
 class Ground extends StageComponent {//ground component

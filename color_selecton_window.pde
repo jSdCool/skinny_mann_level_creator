@@ -9,7 +9,7 @@ class ToolBox extends PApplet {
   public int redVal=0, greenVal=0, blueVal=0, CC=0;
   int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset;
   String page="colors";
-  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton,testLogicPlaceButton,constantOnButton,setVariableButton,readVariableButton,setVisabilityButton,xOffsetButton,yOffsetButton,increase,increaseMore,increaseAlot,decrease,decreaseMore,decreaseAlot;
+  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton,testLogicPlaceButton,constantOnButton,setVariableButton,readVariableButton,setVisabilityButton,xOffsetButton,yOffsetButton,increase,increaseMore,increaseAlot,decrease,decreaseMore,decreaseAlot,nextGroup,prevGroup;
   boolean typingSign=false, settingSkyColor=false;
 
   public void settings() {
@@ -75,6 +75,8 @@ class ToolBox extends PApplet {
     decrease=new Button(this, width/2-180, height*0.5, 50, 50, "-", 255, 203).setStrokeWeight(5);
     decreaseMore=new Button(this, width/2-240, height*0.5, 50, 50, "--", 255, 203).setStrokeWeight(5);
     decreaseAlot=new Button(this, width/2-300, height*0.5, 50, 50, "---", 255, 203).setStrokeWeight(5);
+    nextGroup=new Button(this, width/2+225, height*0.9-25, 50, 50, ">", 255, 203).setStrokeWeight(5);
+    prevGroup=new Button(this, width/2-250, height*0.9-25, 50, 50, "<", 255, 203).setStrokeWeight(5);
   }
 
 
@@ -953,7 +955,22 @@ class ToolBox extends PApplet {
           fill(0);
           textSize(20);
           textAlign(CENTER, CENTER);
-          text("this object does not have any\nproperties that can be changed", width/2, height/2);
+          text("this object does not have any outher\nproperties that can be changed", width/2, height/2);
+        }
+        if(editingStage){//component group selector
+          fill(0);
+          textSize(20);
+          textAlign(CENTER,CENTER);
+          text("set group:",width/2,height*0.86);
+          if(thing.group==-1)
+            text("none",width/2,height*0.9);
+          else{
+            text(level.groupNames.get(thing.group),width/2,height*0.9);
+          }
+          if(thing.group<level.groups.size()-1)
+          nextGroup.draw();
+          if(thing.group>-1)
+          prevGroup.draw();
         }
       }//end of thing is selected
     }//end of selection page
@@ -1506,7 +1523,15 @@ class ToolBox extends PApplet {
              r.setOffset(r.getOffset()-100);
            }
         }
-      }//if something is elected
+        if(editingStage){
+          if(thing.group<level.groups.size()-1&&nextGroup.isMouseOver()){
+            thing.group++;
+          }
+          if(thing.group>-1&&prevGroup.isMouseOver()){
+            thing.group--;
+          }
+        }
+      }//if something is selected
     }//end of page is selection
     if (page.equals("stage settings")) {
       if (editingStage) {
