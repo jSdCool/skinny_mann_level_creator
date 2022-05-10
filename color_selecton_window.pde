@@ -7,10 +7,10 @@ class ToolBox extends PApplet {
   }
 
   public int redVal=0, greenVal=0, blueVal=0, CC=0;
-  int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset;
-  String page="colors";
-  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton,testLogicPlaceButton,constantOnButton,setVariableButton,readVariableButton,setVisabilityButton,xOffsetButton,yOffsetButton,increase,increaseMore,increaseAlot,decrease,decreaseMore,decreaseAlot,nextGroup,prevGroup;
-  boolean typingSign=false, settingSkyColor=false;
+  int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset,variableScroll=0,groupScroll=0;
+  String page="colors",newGroopName="";
+  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton,testLogicPlaceButton,constantOnButton,setVariableButton,readVariableButton,setVisabilityButton,xOffsetButton,yOffsetButton,increase,increaseMore,increaseAlot,decrease,decreaseMore,decreaseAlot,nextGroup,prevGroup,variablesAndGroups,variablesUP,variablesDOWN,groupsUP,groupsDOWN,addVariable,addGroup,typeGroopName;
+  boolean typingSign=false, settingSkyColor=false,typingGroopName=false;
 
   public void settings() {
     size(1280, 720, P2D);//mac os requires a render to be specified
@@ -22,6 +22,7 @@ class ToolBox extends PApplet {
     toolsPage=new Button(this, 155, 50, 100, 50, "tools");
     selectionPage=new Button(this, 260, 50, 100, 50, "selection");
     stageSettings=new Button(this, 365, 50, 100, 50, "stage settings");
+    variablesAndGroups=new Button(this, 470, 50, 100, 50, "variables/groups");
 
     toggle3DMode=new Button(this, 820, 40+100, 50, 50, "  3D  ", 255, 203).setStrokeWeight(5).setHoverText("toggle 3D mode");
     switch3D1=new Button(this, 880, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("turn 3D on switch");
@@ -77,6 +78,13 @@ class ToolBox extends PApplet {
     decreaseAlot=new Button(this, width/2-300, height*0.5, 50, 50, "---", 255, 203).setStrokeWeight(5);
     nextGroup=new Button(this, width/2+225, height*0.9-25, 50, 50, ">", 255, 203).setStrokeWeight(5);
     prevGroup=new Button(this, width/2-250, height*0.9-25, 50, 50, "<", 255, 203).setStrokeWeight(5);
+    variablesUP=new Button(this,45,190,30,30,"^");
+    variablesDOWN=new Button(this,45,440,30,30,"v");
+    groupsUP=new Button(this,520,190,30,30,"^");
+    groupsDOWN=new Button(this,520,440,30,30,"v");
+    addVariable=new Button(this,180,190,30,30,"+");
+    addGroup=new Button(this,640,190,30,30,"+");
+    typeGroopName=new Button(this,680,190,400,30);
   }
 
 
@@ -144,6 +152,7 @@ class ToolBox extends PApplet {
       toolsPage.draw();
       selectionPage.draw();
       stageSettings.draw();
+      variablesAndGroups.draw();
       if (settingSkyColor)
         setSkyColor.draw();
     }//end of if page is colors
@@ -153,6 +162,7 @@ class ToolBox extends PApplet {
       toolsPage.draw();
       selectionPage.draw();
       stageSettings.draw();
+      variablesAndGroups.draw();
 
       if (editingStage) {
 
@@ -839,6 +849,7 @@ class ToolBox extends PApplet {
       toolsPage.draw();
       selectionPage.draw();
       stageSettings.draw();
+      variablesAndGroups.draw();
 
       if (selectedIndex==-1) {//if nothing is selected
         fill(0);
@@ -980,6 +991,7 @@ class ToolBox extends PApplet {
       toolsPage.draw();
       selectionPage.draw();
       stageSettings.draw();
+      variablesAndGroups.draw();
       if (editingStage) {
         fill(0);
         textSize(25);
@@ -996,6 +1008,56 @@ class ToolBox extends PApplet {
         text("you are not currently editing a stage", width/2, height/2);
       }//end of not editing stage
     }//end of stage settings page
+    if(page.equals("variables and groups")){
+      background(#FCC740);
+      colorPage.draw();
+      toolsPage.draw();
+      selectionPage.draw();
+      stageSettings.draw();
+      variablesAndGroups.draw();
+      fill(0);
+      textSize(25);
+      textAlign(LEFT,CENTER);
+      if(level!=null){
+        text("variables",80,200);
+        text("groups",560,200);
+        for(int i=0;i<10&&i+variableScroll<level.variables.size();i++){
+          fill(0);
+          text("b"+(i+variableScroll),90,230+i*21);
+          if(level.variables.get(i+variableScroll)){
+            fill(#3FB700);
+          }else{
+            fill(#E30505);
+          }
+          rect(70,225+i*21,20,20);
+        }
+        if(variableScroll>0)
+          variablesUP.draw();
+        if(variableScroll+10<level.variables.size())
+          variablesDOWN.draw();
+         textSize(25);
+         textAlign(LEFT,CENTER);
+         for(int i=0;i+groupScroll<level.groupNames.size()&&i<10;i++){
+           fill(0);
+           text(level.groupNames.get(i+groupScroll),565,230+i*21);
+         }
+         if(groupScroll>0)
+           groupsUP.draw();
+         if(groupScroll+10<level.groupNames.size())
+           groupsDOWN.draw();
+         addVariable.draw();
+         addGroup.draw();
+         fill(0);
+         //typeGroopName.draw();
+         rect(680,220,400,1);
+         textSize(20);
+         textAlign(LEFT,BOTTOM);
+         if(typingGroopName)
+         text(newGroopName+coursorr,680,218);
+         else
+         text(newGroopName,680,218);
+      }//end of editing level
+    }//end of variables and groups
   }//end of draw
 
   public void mouseClicked() {
@@ -1050,6 +1112,9 @@ class ToolBox extends PApplet {
     }
     if (stageSettings.isMouseOver()) {
       page="stage settings";
+    }
+    if(variablesAndGroups.isMouseOver()){
+      page="variables and groups"; 
     }
 
     if (page.equals("tools")) {
@@ -1544,6 +1609,41 @@ class ToolBox extends PApplet {
         }//end of clicked on reset sky color
       }//end of editing stage
     }//end of page is stage settings
+    if(page.equals("variables and groups")){
+      if(level!=null){
+        if(variablesUP.isMouseOver()&&variableScroll>0){
+          variableScroll--;
+        }
+        if(variablesDOWN.isMouseOver()&&variableScroll+10<level.variables.size()){
+          variableScroll++;
+        }
+        //rect(70,225+i*21,20,20);
+        if(mouseX>=20&&mouseX<=90&&mouseY>=225&&mouseY<=435){//if clicking on a variable state
+          int varSel=((mouseY-225)/21)+variableScroll;
+          if(varSel<level.variables.size()){
+            level.variables.set(varSel,!level.variables.get(varSel));
+          }
+        }
+        if(groupsUP.isMouseOver()&&groupScroll>0){
+          groupScroll--;
+        }
+        if(groupsDOWN.isMouseOver()&&groupScroll+10<level.groupNames.size()){
+          groupScroll++;
+        }
+        if(typeGroopName.isMouseOver()){
+         typingGroopName=true; 
+        }
+        if(addVariable.isMouseOver()){
+         level.variables.add(false); 
+        }
+        if(addGroup.isMouseOver()&&!newGroopName.equals("")){
+           level.groupNames.add(newGroopName);
+           level.groups.add(new Group());
+           newGroopName="";
+           typingGroopName=false;
+        }
+      }//end of editing a level
+    }//end if page is varioables and groups
   }
 
   public void mouseDragged() {
@@ -1579,6 +1679,7 @@ class ToolBox extends PApplet {
         }
       }
     }//end of if page is colors
+    
   }
 
 
@@ -1596,6 +1697,13 @@ class ToolBox extends PApplet {
         }
       }
     }//end of page is selection
+    if(page.equals("variables and groups")){
+      if(level!=null){
+        if(typingGroopName){
+           newGroopName=getInput(newGroopName,0,keyCode,key);
+        }
+      } 
+    }//end of page is variables and groops
   }//end of keypressed
 
 

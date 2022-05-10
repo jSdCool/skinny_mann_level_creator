@@ -4,7 +4,7 @@ class Level {
   ArrayList<Boolean> variables=new ArrayList<>();
   ArrayList<Group> groups=new ArrayList<>();
   ArrayList<String> groupNames=new ArrayList<>();
-  public int mainStage, numOfCoins, levelID;
+  public int mainStage, numOfCoins, levelID,numlogicBoards=0,loadBoard,tickBoard,levelCompleteBoard;
   public String name, createdVersion;
   public float SpawnX, SpawnY, RewspawnX, RespawnY;
   public HashMap<String, StageSound> sounds=new HashMap<>();
@@ -61,6 +61,16 @@ class Level {
       }
       if (job.getString("type").equals("logicBoard")) {
         logicBoards.add(new LogicBoard(loadJSONArray(rootPath+job.getString("location")),this));
+        numlogicBoards++;
+        if(logicBoards.get(logicBoards.size()-1).name.equals("load")){
+          loadBoard=logicBoards.size()-1;
+        }
+        if(logicBoards.get(logicBoards.size()-1).name.equals("tick")){
+          tickBoard=logicBoards.size()-1;
+        }
+        if(logicBoards.get(logicBoards.size()-1).name.equals("levelComplete")){
+          levelCompleteBoard=logicBoards.size()-1;
+        }
       }
     }
 
@@ -68,11 +78,16 @@ class Level {
     for (int i=0; i<numOfCoins; i++) {
       coins.add(false);
     }
+    
+    if(numlogicBoards==0){
+      logicBoards.add(new LogicBoard("load"));
+      logicBoards.add(new LogicBoard("tick"));
+      logicBoards.add(new LogicBoard("level complete"));
+      loadBoard=0;
+      tickBoard=1;
+      levelCompleteBoard=2;
+    }
 
-    //logicBoards.add(new LogicBoard());//temporary
-    //logicBoards.get(0).components.add(new GenericLogicComponent(80,80,logicBoards.get(0)));
-    //logicBoards.get(0).components.add(new GenericLogicComponent(580,360,logicBoards.get(0)));
-    //logicBoards.get(0).components.get(0).connect(1,1);
   }
 
   void reloadCoins() {
