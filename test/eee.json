@@ -128,19 +128,19 @@
     }]
   },
   {
+    "offset": 0,
     "x": 801,
     "y": 460,
     "group number": 0,
     "type": "y-offset",
-    "connections": [],
-	"offset":0
+    "connections": []
   },
   {
+    "offset": 0,
     "x": 763,
     "y": 548,
     "group number": 0,
     "type": "x-offset",
-    "connections": [],
-	"offset":0
+    "connections": []
   }
 ]

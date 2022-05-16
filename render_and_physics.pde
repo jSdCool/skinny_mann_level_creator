@@ -660,6 +660,16 @@ void playerPhysics() {
     player1.verticalVelocity=0;
   }
   //////////////////////////////
+  if (simulating){//--------------------------------------------------------------------------------------------------modify this line in the final game
+    if(!logicTickingThread.isAlive()){//if the ticking thread has stoped for some reason
+      logicTickingThread.shouldRun=true;//then start it
+      logicTickingThread.start();
+    }
+  }else{
+   if(logicTickingThread.isAlive()){//if the ticking thread is running when we dont want it to be
+     logicTickingThread.shouldRun=false;//then stop it
+   }
+  }
 }
 /**check if a point is inside of a solid object
 
@@ -727,6 +737,26 @@ boolean stageLoopCondishen(int i, Stage stage) {
       return i<tutorialDrawLimit;
     } else {
       return i<stage.parts.size();
+    }
+  }
+}
+
+/**thread responcable for ticking the logic baord tick
+
+*/
+class LogicThread extends Thread{
+  boolean shouldRun=true;
+  int lastRun;
+  LogicThread(){
+    super("logic ticking thread");
+  }
+  void run(){
+    lastRun=millis();
+    while(shouldRun){//whlie we want the logic board to be ticked
+      if(millis()-lastRun>=20){//once 20 millisecconds have passed seince the last tick
+        lastRun=millis();//update the time of the last tick
+        level.logicBoards.get(level.tickBoard).tick();//tick the logic board
+      }
     }
   }
 }

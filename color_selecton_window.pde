@@ -9,7 +9,7 @@ class ToolBox extends PApplet {
   public int redVal=0, greenVal=0, blueVal=0, CC=0;
   int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset,variableScroll=0,groupScroll=0;
   String page="colors",newGroopName="";
-  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton,testLogicPlaceButton,constantOnButton,setVariableButton,readVariableButton,setVisabilityButton,xOffsetButton,yOffsetButton,increase,increaseMore,increaseAlot,decrease,decreaseMore,decreaseAlot,nextGroup,prevGroup,variablesAndGroups,variablesUP,variablesDOWN,groupsUP,groupsDOWN,addVariable,addGroup,typeGroopName;
+  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton,testLogicPlaceButton,constantOnButton,setVariableButton,readVariableButton,setVisabilityButton,xOffsetButton,yOffsetButton,increase,increaseMore,increaseAlot,decrease,decreaseMore,decreaseAlot,nextGroup,prevGroup,variablesAndGroups,variablesUP,variablesDOWN,groupsUP,groupsDOWN,addVariable,addGroup,typeGroopName,logicButtonButton;
   boolean typingSign=false, settingSkyColor=false,typingGroopName=false;
 
   public void settings() {
@@ -53,6 +53,7 @@ class ToolBox extends PApplet {
     movePlayerButton=new Button(this, 340, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("move player");
     gridModeButton=new Button(this, 400, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("grid mode");
     holoButton=new Button(this, 460, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("hologram (no collision)");
+    logicButtonButton=new Button(this, 100, 200, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("place button");
 
     connectLogicButton=new Button(this, 40, 40+100, 50, 50, "connect", 255, 203).setStrokeWeight(5).setHoverText("connect logic nodes");
     moveComponentsButton=new Button(this, 100, 40+100, 50, 50, "move", 255, 203).setStrokeWeight(5).setHoverText("move components arround");
@@ -358,8 +359,13 @@ class ToolBox extends PApplet {
           }
           select.draw();
         }//end of not in 3D mode
-
-
+        if(placingLogicButton){
+            logicButtonButton.setColor(255, #F2F258);
+          } else {
+            logicButtonButton.setColor(255, 203);
+          }
+        logicButtonButton.draw();
+        drawLogicButton(this,logicButtonButton.x+logicButtonButton.lengthX/2,logicButtonButton.y+logicButtonButton.lengthY/2,1,false);
         saveLevel.draw();
 
 
@@ -391,6 +397,7 @@ class ToolBox extends PApplet {
           sign.drawHoverText();
           select.drawHoverText();
         }//end of not 3d mode
+        logicButtonButton.drawHoverText();
         saveLevel.drawHoverText();
 
 
@@ -962,6 +969,20 @@ class ToolBox extends PApplet {
           decrease.draw();
           decreaseMore.draw();
           decreaseAlot.draw();
+        }else if(type.equals("logic button")){
+          int curvar=thing.getDataI();
+          if(curvar>0)
+            prevSound.draw();
+          if(curvar<level.variables.size()-1)
+            nextSound.draw();
+          fill(0);
+          textSize(25);
+          if(curvar==-1){
+            text("none", width/2, height*0.4);
+          }else{
+            text("b"+curvar, width/2, height*0.4);
+          }
+          text("current variable",width/2,height*0.36);
         }else {
           fill(0);
           textSize(20);
@@ -1362,6 +1383,11 @@ class ToolBox extends PApplet {
           gmillis=millis()+400+millisOffset;
           println("save complete"+gmillis);
         }
+        
+        if(logicButtonButton.isMouseOver()){
+          turnThingsOff();
+          placingLogicButton=true;
+        }
       }//end of edditing stage
       else if (editingBlueprint) {
         if (workingBlueprint.type.equals("blueprint")) {
@@ -1587,6 +1613,12 @@ class ToolBox extends PApplet {
            if(decreaseAlot.isMouseOver()){
              r.setOffset(r.getOffset()-100);
            }
+        }else if(type.equals("logic button")){
+          int curvar=thing.getDataI();
+          if (curvar>0&&prevSound.isMouseOver())
+              thing.setData(curvar-1);
+            if (curvar<level.variables.size()-1&&nextSound.isMouseOver())
+              thing.setData(curvar+1);
         }
         if(editingStage){
           if(thing.group<level.groups.size()-1&&nextGroup.isMouseOver()){

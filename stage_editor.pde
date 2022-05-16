@@ -505,6 +505,21 @@ void stageEditGUI() {
         drawSoundBox(mouseX, mouseY);
       }
     }
+    if (placingLogicButton) {//if placing a logic button
+        if (grid_mode) {//draw the switch
+          drawLogicButton(primaryWindow,Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size-camPos, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size+camPosY, 1,false);
+        } else {
+          drawLogicButton(primaryWindow,mouseX, mouseY, 1,false);
+        }
+      }
+    if (placingLogicButton&&draw) {//if attempting to add a logic button
+        if (grid_mode) {//add the button to the stage
+          current.parts.add(new LogicButton(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size));
+        } else {
+          current.parts.add(new LogicButton((int)mouseX+camPos, (int)mouseY-camPosY));
+        }
+        draw=false;
+      }
 
 
     //the accual gut part
@@ -759,6 +774,21 @@ void stageEditGUI() {
           drawSign(mouseX, mouseY, Scale);
         }
       }
+      if (placingLogicButton) {//if placing a logic button
+        if (grid_mode) {//draw the switch
+          drawLogicButton(primaryWindow,Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size-camPos, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size+camPosY, 1,false);
+        } else {
+          drawLogicButton(primaryWindow,mouseX, mouseY, 1,false);
+        }
+      }
+    if (placingLogicButton&&draw) {//if attempting to add a logic button
+        if (grid_mode) {//add the button to the stage
+          current.parts.add(new LogicButton(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size, startingDepth));
+        } else {
+          current.parts.add(new LogicButton((int)mouseX+camPos, (int)mouseY-camPosY, startingDepth));
+        }
+        draw=false;
+      }
     }//end of is 3d mode off if statment
     else {//if 3dmode is on
       engageHUDPosition();//move the draw position to align with the camera
@@ -795,6 +825,9 @@ void GUImouseClicked() {
         draw=true;
       }
     }
+    if(placingLogicButton){//if placing logic button
+      draw=true;
+    }
     if (deleteing) {//if deleteing
       if (mouseX >=buttonMin && mouseX <= buttonMax && mouseY >= 40 && mouseY <= 90) {
       } else {
@@ -816,7 +849,6 @@ void GUImouseClicked() {
       setPlayerPosTo=true;
     }
     if (drawCoins) {//if drawing coin
-      println("peepee poopoo");
       String tpe = current.type;
       if (grid_mode) {//add coins with data accorinding to how it needs to be integrated
         if (tpe.equals("stage")) {
