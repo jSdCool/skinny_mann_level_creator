@@ -709,10 +709,10 @@ void mouseClicked() {
         level.logicBoards.get(logicBoardIndex).components.add(new ConstantOnSignal(mouseX-50, mouseY-20, level.logicBoards.get(logicBoardIndex)));
       }
       if(placingSetVaravle){
-         level.logicBoards.get(logicBoardIndex).components.add(new ReadVariable(mouseX-50, mouseY-20, level.logicBoards.get(logicBoardIndex)));
+         level.logicBoards.get(logicBoardIndex).components.add(new SetVariable(mouseX-50, mouseY-20, level.logicBoards.get(logicBoardIndex)));
       }
       if(placingReadVariable){
-        level.logicBoards.get(logicBoardIndex).components.add(new SetVariable(mouseX-50, mouseY-20, level.logicBoards.get(logicBoardIndex)));
+        level.logicBoards.get(logicBoardIndex).components.add(new ReadVariable(mouseX-50, mouseY-20, level.logicBoards.get(logicBoardIndex)));
       }
       if(selecting){
         for(int i=0;i< level.logicBoards.get(logicBoardIndex).components.size();i++){

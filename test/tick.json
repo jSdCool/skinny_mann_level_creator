@@ -1,1 +1,69 @@
-[{"name": "tick"}]
+[
+  {"name": "tick"},
+  {
+    "variable number": 0,
+    "x": 343,
+    "y": 148,
+    "type": "read var",
+    "connections": [
+      {
+        "index": 1,
+        "terminal": 0
+      },
+      {
+        "index": 2,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 490,
+    "y": 149,
+    "group number": 0,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 488,
+    "y": 237,
+    "group number": 1,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "variable number": 1,
+    "x": 344,
+    "y": 196,
+    "type": "read var",
+    "connections": [
+      {
+        "index": 1,
+        "terminal": 1
+      },
+      {
+        "index": 2,
+        "terminal": 0
+      },
+      {
+        "index": 4,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "variable number": 2,
+    "x": 745,
+    "y": 330,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "x": 347,
+    "y": 375,
+    "type": "ON",
+    "connections": [{
+      "index": 4,
+      "terminal": 1
+    }]
+  }
+]
