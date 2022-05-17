@@ -753,8 +753,7 @@ class LogicThread extends Thread{
   void run(){
     lastRun=millis();
     while(shouldRun){//whlie we want the logic board to be ticked
-      if(millis()-lastRun>=20){//once 20 millisecconds have passed seince the last tick
-        //random();
+      if(millis()-lastRun>=20){//once 20 millisecconds have passed seince the last tick  
         lastRun=millis();//update the time of the last tick
         level.logicBoards.get(level.tickBoard).tick();//tick the logic board
       }

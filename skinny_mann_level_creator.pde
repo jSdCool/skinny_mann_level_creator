@@ -222,6 +222,7 @@ void draw() {
         fill(0);
         String displayName=level.logicBoards.get(i+ filesScrole-(level.stages.size()+level.sounds.size())).name;//get the name of the logic board
         text(displayName, 80, 130+60*(i));//display the name
+        logicIcon(40,100+60*i,1);
       }
     }
     textAlign(CENTER, CENTER);

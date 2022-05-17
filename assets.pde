@@ -159,3 +159,17 @@ void drawLogicButton(float x, float y, float z, float Scale,boolean pressed) {
     box(20, 5, 20);
   translate(-x, -(y-7.5), -z);
 }
+
+void logicIcon(float x,float y,float scale){
+  fill(#B9B9B9);
+  rect(x-10*scale,y+20*scale,20*scale,15*scale);
+  fill(#989898);
+  rect(x-10*scale,y+23*scale,20*scale,3*scale);
+  rect(x-10*scale,y+29*scale,20*scale,3*scale);
+  fill(#FFF300);
+  rect(x-15*scale,y-10*scale,30*scale,30*scale);
+  fill(#D38A00);
+  rect(x-8*scale,y,5*scale,20*scale);
+  rect(x+3*scale,y,5*scale,20*scale);
+  rect(x-3*scale,y,6*scale,5*scale);
+}
