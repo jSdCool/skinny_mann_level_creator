@@ -721,6 +721,9 @@ class Goal extends StageComponent {//ground component
     float px =player1.getX(), py=player1.getY();
 
     if (px >= x2+drawCamPosX && px <= x2+drawCamPosX + 250 && py >= y2 - 50 && py <= y2 + 50) {
+      if(!level_complete){
+        level.logicBoards.get(level.levelCompleteBoard).superTick(); 
+      }
       level_complete=true;
     }
   }

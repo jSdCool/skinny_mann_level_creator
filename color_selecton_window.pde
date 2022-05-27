@@ -9,7 +9,7 @@ class ToolBox extends PApplet {
   public int redVal=0, greenVal=0, blueVal=0, CC=0;
   int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset,variableScroll=0,groupScroll=0;
   String page="colors",newGroopName="";
-  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton,testLogicPlaceButton,constantOnButton,setVariableButton,readVariableButton,setVisabilityButton,xOffsetButton,yOffsetButton,increase,increaseMore,increaseAlot,decrease,decreaseMore,decreaseAlot,nextGroup,prevGroup,variablesAndGroups,variablesUP,variablesDOWN,groupsUP,groupsDOWN,addVariable,addGroup,typeGroopName,logicButtonButton;
+  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton,testLogicPlaceButton,constantOnButton,setVariableButton,readVariableButton,setVisabilityButton,xOffsetButton,yOffsetButton,increase,increaseMore,increaseAlot,decrease,decreaseMore,decreaseAlot,nextGroup,prevGroup,variablesAndGroups,variablesUP,variablesDOWN,groupsUP,groupsDOWN,addVariable,addGroup,typeGroopName,logicButtonButton,runLoad;
   boolean typingSign=false, settingSkyColor=false,typingGroopName=false;
 
   public void settings() {
@@ -86,6 +86,7 @@ class ToolBox extends PApplet {
     addVariable=new Button(this,180,190,30,30,"+");
     addGroup=new Button(this,640,190,30,30,"+");
     typeGroopName=new Button(this,680,190,400,30);
+    runLoad=new Button(this,500,550,200,50,"load").setHoverText("run the load logic board");
   }
 
 
@@ -358,14 +359,15 @@ class ToolBox extends PApplet {
             select.setColor(255, 203);
           }
           select.draw();
-        }//end of not in 3D mode
-        if(placingLogicButton){
+          if(placingLogicButton){
             logicButtonButton.setColor(255, #F2F258);
           } else {
             logicButtonButton.setColor(255, 203);
           }
         logicButtonButton.draw();
         drawLogicButton(this,logicButtonButton.x+logicButtonButton.lengthX/2,logicButtonButton.y+logicButtonButton.lengthY/2,1,false);
+        }//end of not in 3D mode
+        
         saveLevel.draw();
 
 
@@ -396,8 +398,9 @@ class ToolBox extends PApplet {
 
           sign.drawHoverText();
           select.drawHoverText();
+          logicButtonButton.drawHoverText();
         }//end of not 3d mode
-        logicButtonButton.drawHoverText();
+        
         saveLevel.drawHoverText();
 
 
@@ -1077,6 +1080,8 @@ class ToolBox extends PApplet {
          text(newGroopName+coursorr,680,218);
          else
          text(newGroopName,680,218);
+         runLoad.draw();
+         runLoad.drawHoverText();
       }//end of editing level
     }//end of variables and groups
   }//end of draw
@@ -1226,6 +1231,10 @@ class ToolBox extends PApplet {
             turnThingsOff();
             selecting=true;
           }
+          if(logicButtonButton.isMouseOver()){
+              turnThingsOff();
+              placingLogicButton=true;
+            }
           if (placeBlueprint.isMouseOver()) {
             turnThingsOff();
 
@@ -1349,6 +1358,10 @@ class ToolBox extends PApplet {
               turnThingsOff();
               selecting=true;
             }
+            if(logicButtonButton.isMouseOver()){
+              turnThingsOff();
+              placingLogicButton=true;
+            }
           } else {
             if (toggle3DMode.isMouseOver()) {
               e3DMode=false;
@@ -1374,6 +1387,7 @@ class ToolBox extends PApplet {
               turnThingsOff();
               selecting=true;
             }
+            
           }//end of 3D mode is on
         }
 
@@ -1384,10 +1398,7 @@ class ToolBox extends PApplet {
           println("save complete"+gmillis);
         }
         
-        if(logicButtonButton.isMouseOver()){
-          turnThingsOff();
-          placingLogicButton=true;
-        }
+        
       }//end of edditing stage
       else if (editingBlueprint) {
         if (workingBlueprint.type.equals("blueprint")) {
@@ -1673,6 +1684,9 @@ class ToolBox extends PApplet {
            level.groups.add(new Group());
            newGroopName="";
            typingGroopName=false;
+        }
+        if(runLoad.isMouseOver()){
+          level.logicBoards.get(level.loadBoard).superTick(); 
         }
       }//end of editing a level
     }//end if page is varioables and groups

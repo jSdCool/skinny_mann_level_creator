@@ -465,6 +465,7 @@ void mouseClicked() {
         catch(Throwable e) {//do nothign if loading fails
         }
         level=new Level(mainIndex);
+        level.logicBoards.get(level.loadBoard).superTick();
         return;
       }
     }
