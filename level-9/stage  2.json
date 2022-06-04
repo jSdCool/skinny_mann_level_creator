@@ -34,10 +34,26 @@
     "linkZ": 0,
     "x": 60,
     "y": 630,
-    "z": 0,
+    "z": 300,
     "type": "interdimentional Portal",
     "linkY": 620,
     "linkX": 2390,
     "group": -1
+  },
+  {
+    "contents": "find this button 5 times",
+    "x": 150,
+    "y": 680,
+    "z": 300,
+    "type": "WritableSign",
+    "group": -1
+  },
+  {
+    "x": 270,
+    "variable": 3,
+    "y": 680,
+    "z": 300,
+    "type": "logic button",
+    "group": 7
   }
 ]

@@ -143,7 +143,7 @@ class Level {
 
 class Group{
  boolean visable=true;
- float xOffset=0,yOffset=0;
+ float xOffset=0,yOffset=0,zOffset=0;
 }
 
 class Stage {
@@ -350,9 +350,9 @@ class Ground extends StageComponent {//ground component
       return;
     fill(ccolor);
     strokeWeight(0);
-    translate((x+group.xOffset)+dx/2, (y+group.yOffset)+dy/2, z+dz/2);
+    translate((x+group.xOffset)+dx/2, (y+group.yOffset)+dy/2, (z+group.zOffset)+dz/2);
     box(dx, dy, dz);
-    translate(-1*((x+group.xOffset)+dx/2), -1*((y+group.yOffset)+dy/2), -1*(z+dz/2));
+    translate(-1*((x+group.xOffset)+dx/2), -1*((y+group.yOffset)+dy/2), -1*((z+group.zOffset)+dz/2));
   }
 
   boolean colide(float x, float y, boolean c) {
@@ -370,8 +370,8 @@ class Ground extends StageComponent {//ground component
     Group group=getGroup();
     if(!group.visable)
       return false;
-    float x2 = (this.x+group.xOffset)+dx, y2=(this.y+group.yOffset)+dy, z2=this.z+dz;
-    if (x >= (this.x+group.xOffset) && x <= x2 && y >= (this.y+group.yOffset) && y <= y2 && z>=this.z && z<=z2/* terain hit box*/) {
+    float x2 = (this.x+group.xOffset)+dx, y2=(this.y+group.yOffset)+dy, z2=(this.z+group.zOffset)+dz;
+    if (x >= (this.x+group.xOffset) && x <= x2 && y >= (this.y+group.yOffset) && y <= y2 && z>=(this.z+group.zOffset) && z<=z2/* terain hit box*/) {
       return true;
     }
     return false;
@@ -446,9 +446,9 @@ class Holo extends StageComponent {//ground component
       return;
     fill(ccolor);
     strokeWeight(0);
-    translate((x+group.xOffset)+dx/2, (y+group.yOffset)+dy/2, z+dz/2);
+    translate((x+group.xOffset)+dx/2, (y+group.yOffset)+dy/2, (z+group.zOffset)+dz/2);
     box(dx, dy, dz);
-    translate(-1*((x+group.xOffset)+dx/2), -1*((y+group.yOffset)+dy/2), -1*(z+dz/2));
+    translate(-1*((x+group.xOffset)+dx/2), -1*((y+group.yOffset)+dy/2), -1*((z+group.zOffset)+dz/2));
   }
 
   boolean colide(float x, float y, boolean c) {
@@ -468,8 +468,8 @@ class Holo extends StageComponent {//ground component
     Group group=getGroup();
     if(!group.visable)
       return false;
-    float x2 = (this.x+group.xOffset)+dx, y2=(this.y+group.yOffset)+dy, z2=this.z+dz;
-    if (x >= (this.x+group.xOffset) && x <= x2 && y >= (this.y+group.yOffset) && y <= y2 && z>=this.z && z<=z2/* terain hit box*/) {
+    float x2 = (this.x+group.xOffset)+dx, y2=(this.y+group.yOffset)+dy, z2=(this.z+group.zOffset)+dz;
+    if (x >= (this.x+group.xOffset) && x <= x2 && y >= (this.y+group.yOffset) && y <= y2 && z>=(this.z+group.zOffset) && z<=z2/* terain hit box*/) {
       return true;
     }
     return false;
@@ -531,9 +531,9 @@ class DethPlane extends StageComponent {//ground component
       return;
     fill(-114431);
     strokeWeight(0);
-    translate((x+group.xOffset)+dx/2, (y+group.yOffset)+dy/2, z+dz/2);
+    translate((x+group.xOffset)+dx/2, (y+group.yOffset)+dy/2, (z+group.zOffset)+dz/2);
     box(dx, dy, dz);
-    translate(-1*((x+group.xOffset)+dx/2), -1*((y+group.yOffset)+dy/2), -1*(z+dz/2));
+    translate(-1*((x+group.xOffset)+dx/2), -1*((y+group.yOffset)+dy/2), -1*((z+group.zOffset)+dz/2));
   }
 
   boolean colide(float x, float y, boolean c) {
@@ -632,7 +632,7 @@ class CheckPoint extends StageComponent {//ground component
     noStroke();
     float playx=player1.getX();
     boolean po=false;
-    if (playx>=(x+group.xOffset)-20 && playx<= (x+group.xOffset)+20 && (y+group.yOffset)-50 <= player1.getY() && (y+group.yOffset)>=player1.getY()-10 && player1.z >= z-20 && player1.z <= z+20) {
+    if (playx>=(x+group.xOffset)-20 && playx<= (x+group.xOffset)+20 && (y+group.yOffset)-50 <= player1.getY() && (y+group.yOffset)>=player1.getY()-10 && player1.z >= (z+group.zOffset)-20 && player1.z <= (z+group.zOffset)+20) {
       respawnX=(int)x;
       respawnY=(int)y;
       respawnZ=(int)player1.z;
@@ -647,15 +647,15 @@ class CheckPoint extends StageComponent {//ground component
     else
       fill(#B9B9B9);
     strokeWeight(0);
-    translate((x+group.xOffset), (y+group.yOffset)-30, z);
+    translate((x+group.xOffset), (y+group.yOffset)-30, (z+group.zOffset));
     box(4, 60, 4);
-    translate(-(x+group.xOffset), -((y+group.yOffset)-30), -z);
+    translate(-(x+group.xOffset), -((y+group.yOffset)-30), -(z+group.zOffset));
     fill(#EA0202);
     stroke(#EA0202);
     strokeWeight(0);
-    translate((x+group.xOffset)+10, (y+group.yOffset)-50, z);
+    translate((x+group.xOffset)+10, (y+group.yOffset)-50, (z+group.zOffset));
     box(20, 20, 2);
-    translate(-((x+group.xOffset)+10), -((y+group.yOffset)-50), -z);
+    translate(-((x+group.xOffset)+10), -((y+group.yOffset)-50), -(z+group.zOffset));
   }
 
   boolean colide(float x, float y, boolean c) {
@@ -816,12 +816,12 @@ class Coin extends StageComponent {//ground component
     boolean collected=coins.get(coinId);
 
     if (!collected) {
-      translate((x+group.xOffset), (y+group.yOffset), z);
+      translate((x+group.xOffset), (y+group.yOffset), (z+group.zOffset));
       rotateY(radians(coinRotation));
       shape(coin3D);
       rotateY(radians(-coinRotation));
-      translate(-(x+group.xOffset), -(y+group.yOffset), -z);
-      if (Math.sqrt(Math.pow(playx-(x+group.xOffset), 2)+Math.pow(playy-(y+group.yOffset), 2)+Math.pow(playz-z, 2))<35) {
+      translate(-(x+group.xOffset), -(y+group.yOffset), -(z+group.zOffset));
+      if (Math.sqrt(Math.pow(playx-(x+group.xOffset), 2)+Math.pow(playy-(y+group.yOffset), 2)+Math.pow(playz-(z+group.zOffset), 2))<35) {
         coins.set(coinId, true);
         coinCount++;
       }
@@ -1232,7 +1232,7 @@ class SWon3D extends StageComponent {//ground component
     Group group=getGroup();
     if(!group.visable)
       return;
-    draw3DSwitch1((x+group.xOffset), (y+group.yOffset), z, Scale);
+    draw3DSwitch1((x+group.xOffset), (y+group.yOffset), (z+group.zOffset), Scale);
   }
 
   boolean colide(float x, float y, boolean c) {
@@ -1293,8 +1293,8 @@ class SWoff3D extends StageComponent {//ground component
     Group group=getGroup();
     if(!group.visable)
       return;
-    draw3DSwitch2((x+group.xOffset), y, z, Scale);
-    if (player1.x>=(x+group.xOffset)-10&&player1.x<=(x+group.xOffset)+10&&player1.y >=(y+group.yOffset)-10&&player1.y<= (y+group.yOffset)+2 && player1.z >= z-10 && player1.z <= z+10) {
+    draw3DSwitch2((x+group.xOffset), y, (z+group.zOffset), Scale);
+    if (player1.x>=(x+group.xOffset)-10&&player1.x<=(x+group.xOffset)+10&&player1.y >=(y+group.yOffset)-10&&player1.y<= (y+group.yOffset)+2 && player1.z >= (z+group.zOffset)-10 && player1.z <= (z+group.zOffset)+10) {
       e3DMode=false;
       WPressed=false;
       SPressed=false;
@@ -1371,10 +1371,10 @@ class WritableSign extends StageComponent {
     Group group=getGroup();
     if(!group.visable)
       return;
-    drawSign((x+group.xOffset), (y+group.yOffset), z, Scale);
+    drawSign((x+group.xOffset), (y+group.yOffset), (z+group.zOffset), Scale);
 
     float playx=player1.getX(), playy=player1.getY();
-    if (playx>(x+group.xOffset)-35&&playx<(x+group.xOffset)+35&&playy>(y+group.yOffset)-40&&playy<(y+group.yOffset)&& player1.z >= z-20 && player1.z <= z+20) {
+    if (playx>(x+group.xOffset)-35&&playx<(x+group.xOffset)+35&&playy>(y+group.yOffset)-40&&playy<(y+group.yOffset)&& player1.z >= (z+group.zOffset)-20 && player1.z <= (z+group.zOffset)+20) {
       fill(255);
       textSize(20);
       displayText="Press E";
@@ -1562,7 +1562,7 @@ int variable=-1;
       return;
     boolean state=false;
     if(variable!=-1){
-      if (player1.x>=(x+group.xOffset)-10&&player1.x<=(x+group.xOffset)+10&&player1.y >=(y+group.yOffset)-10&&player1.y<= (y+group.yOffset)+2 && player1.z >= z-10 && player1.z <= z+10) {
+      if (player1.x>=(x+group.xOffset)-10&&player1.x<=(x+group.xOffset)+10&&player1.y >=(y+group.yOffset)-10&&player1.y<= (y+group.yOffset)+2 && player1.z >= (z+group.zOffset)-10 && player1.z <= (z+group.zOffset)+10) {
         level.variables.set(variable,true);
       }else{
         level.variables.set(variable,false);
@@ -1571,7 +1571,7 @@ int variable=-1;
     if(variable!=-1){
       state=level.variables.get(variable);
     }
-    drawLogicButton((x+group.xOffset), (y+group.yOffset), z, Scale,state);
+    drawLogicButton((x+group.xOffset), (y+group.yOffset), (z+group.zOffset), Scale,state);
   }
 
   boolean colide(float x, float y, boolean c) {
@@ -1677,6 +1677,9 @@ class LogicBoard {//stores all the logic components
       }
       if(type.equals("delay")){
         components.add(new Delay(component, this));
+      }
+      if(type.equals("z-offset")){
+        components.add(new SetZOffset(component,this,level));
       }
     }
   }
@@ -2281,6 +2284,59 @@ class SetYOffset extends LogicOutputComponent{
   void setOffset(float of){
    offset=of; 
    button.setText("y-offset "+level.groupNames.get(groupNumber)+" by "+offset);
+  }
+  float getOffset(){
+   return offset; 
+  }
+}
+
+class SetZOffset extends LogicOutputComponent{
+  int groupNumber=0;
+  float offset=0;
+  SetZOffset(float x, float y, LogicBoard lb) {
+    super(x, y, "z-offset", lb);
+    button.setText("z-offset "+level.groupNames.get(groupNumber)+" by "+offset);
+  }
+
+  SetZOffset(JSONObject data, LogicBoard lb,Level level) {
+    super(data.getFloat("x"), data.getFloat("y"), "z-offset", lb, data.getJSONArray("connections"));
+    groupNumber=data.getInt("group number");
+    offset=data.getFloat("offset");
+    button.setText("z-offset "+level.groupNames.get(groupNumber)+" by "+offset);
+  }
+  void tick(){
+    if(inputTerminal1){
+      level.groups.get(groupNumber).zOffset=offset;
+    }
+    if(inputTerminal2){
+    level.groups.get(groupNumber).zOffset=0;
+    }
+  }
+  JSONObject save() {
+   JSONObject component=super.save();
+   component.setInt("group number",groupNumber);
+   component.setFloat("offset",offset);
+   return component;
+  }
+  void setData(int data){
+    groupNumber=data;
+    button.setText("z-offset "+level.groupNames.get(groupNumber)+" by "+offset);
+  }
+  int getData(){
+   return groupNumber;
+  }
+  
+  void draw(){
+   super.draw();
+   fill(0);
+   textSize(15);
+   textAlign(LEFT,CENTER);
+   text("set",x+5-camPos,y+16-camPosY);
+   text("reset",x+5-camPos,y+56-camPosY);
+  }
+  void setOffset(float of){
+   offset=of; 
+   button.setText("z-offset "+level.groupNames.get(groupNumber)+" by "+offset);
   }
   float getOffset(){
    return offset; 

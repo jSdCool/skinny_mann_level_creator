@@ -9,7 +9,7 @@ class ToolBox extends PApplet {
   public int redVal=0, greenVal=0, blueVal=0, CC=0;
   int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset,variableScroll=0,groupScroll=0;
   String page="colors",newGroopName="";
-  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton,testLogicPlaceButton,constantOnButton,setVariableButton,readVariableButton,setVisabilityButton,xOffsetButton,yOffsetButton,increase,increaseMore,increaseAlot,decrease,decreaseMore,decreaseAlot,nextGroup,prevGroup,variablesAndGroups,variablesUP,variablesDOWN,groupsUP,groupsDOWN,addVariable,addGroup,typeGroopName,logicButtonButton,runLoad,delayButton;
+  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton,testLogicPlaceButton,constantOnButton,setVariableButton,readVariableButton,setVisabilityButton,xOffsetButton,yOffsetButton,increase,increaseMore,increaseAlot,decrease,decreaseMore,decreaseAlot,nextGroup,prevGroup,variablesAndGroups,variablesUP,variablesDOWN,groupsUP,groupsDOWN,addVariable,addGroup,typeGroopName,logicButtonButton,runLoad,delayButton,zOffsetButton;
   boolean typingSign=false, settingSkyColor=false,typingGroopName=false;
 
   public void settings() {
@@ -71,6 +71,7 @@ class ToolBox extends PApplet {
     xOffsetButton=new Button(this, 880, 40+100, 50, 50,"offset X", 255, 203).setStrokeWeight(5).setHoverText("offset a group in the x-axis");
     yOffsetButton=new Button(this, 940, 40+100, 50, 50,"offset y", 255, 203).setStrokeWeight(5).setHoverText("offset a group in the y-axis");
     delayButton=new Button(this, 1060, 140, 50, 50,"delay", 255, 203).setStrokeWeight(5).setHoverText("delay a pulse in your logic");
+    zOffsetButton=new Button(this, 40, 100+100, 50, 50, "offset z", 255, 203).setStrokeWeight(5).setHoverText("offset a group in the z-axis");
     
     increase=new Button(this, width/2+180, height*0.5, 50, 50, "+", 255, 203).setStrokeWeight(5);
     increaseMore=new Button(this, width/2+240, height*0.5, 50, 50, "++", 255, 203).setStrokeWeight(5);
@@ -780,12 +781,12 @@ class ToolBox extends PApplet {
           xnorGateButton.setColor(255, 203);
         }
         xnorGateButton.draw();
-        if(placingTestLogic){///////////////////////////////////////////////////////////////////////
-          testLogicPlaceButton.setColor(255, #F2F258);
-        }else{
-          testLogicPlaceButton.setColor(255, 203);
-        }
-        testLogicPlaceButton.draw();
+        //if(placingTestLogic){///////////////////////////////////////////////////////////////////////
+        //  testLogicPlaceButton.setColor(255, #F2F258);
+        //}else{
+        //  testLogicPlaceButton.setColor(255, 203);
+        //}
+        //testLogicPlaceButton.draw();
         if(placingOnSingal){
           constantOnButton.setColor(255, #F2F258);
         }else{
@@ -834,6 +835,12 @@ class ToolBox extends PApplet {
           delayButton.setColor(255, 203);
         }
         delayButton.draw();
+        if(placingZOffset){
+          zOffsetButton.setColor(255, #F2F258);
+        }else{
+          zOffsetButton.setColor(255, 203);
+        }
+        zOffsetButton.draw();
 
         //draw hover text
         connectLogicButton.drawHoverText();
@@ -847,7 +854,7 @@ class ToolBox extends PApplet {
         nandGateButton.drawHoverText();
         norGateButton.drawHoverText();
         xnorGateButton.drawHoverText();
-        testLogicPlaceButton.drawHoverText();
+       // testLogicPlaceButton.drawHoverText();
         constantOnButton.drawHoverText();
         readVariableButton.drawHoverText();
         setVariableButton.drawHoverText();
@@ -855,6 +862,7 @@ class ToolBox extends PApplet {
         xOffsetButton.drawHoverText();
         yOffsetButton.drawHoverText();
         delayButton.drawHoverText();
+        zOffsetButton.drawHoverText();
       } else {
         fill(0);
         textSize(20);
@@ -974,6 +982,24 @@ class ToolBox extends PApplet {
           text("current group",width/2,height*0.36);
           text("offset",width/2,height*0.46);
           text(((SetYOffset)logicThing).getOffset(),width/2,height*0.53);
+          increase.draw();
+          increaseMore.draw();
+          increaseAlot.draw();
+          decrease.draw();
+          decreaseMore.draw();
+          decreaseAlot.draw();
+        }else if(type.equals("z-offset")){
+          int curgroop=logicThing.getData();
+          if(curgroop>0)
+            prevSound.draw();
+          if(curgroop<level.groups.size()-1)
+            nextSound.draw();
+          fill(0);
+          textSize(25);
+          text(level.groupNames.get(curgroop), width/2, height*0.4);
+          text("current group",width/2,height*0.36);
+          text("offset",width/2,height*0.46);
+          text(((SetZOffset)logicThing).getOffset(),width/2,height*0.53);
           increase.draw();
           increaseMore.draw();
           increaseAlot.draw();
@@ -1559,6 +1585,10 @@ class ToolBox extends PApplet {
           turnThingsOff();
           placingDelay=true;
         }
+        if(zOffsetButton.isMouseOver()){
+          turnThingsOff();
+          placingZOffset=true;
+        }
       }//end of edditing logic board
     }//end of tools
 
@@ -1610,7 +1640,7 @@ class ToolBox extends PApplet {
           int curvar=logicThing.getData();
           if (curvar>0&&prevSound.isMouseOver())
               logicThing.setData(curvar-1);
-            if (curvar<level.groups.size()-1&&nextSound.isMouseOver())
+          if (curvar<level.groups.size()-1&&nextSound.isMouseOver())
               logicThing.setData(curvar+1);
         }else if(type.equals("x-offset")){
           SetXOffset r=(SetXOffset)logicThing;
@@ -1632,6 +1662,11 @@ class ToolBox extends PApplet {
            if(decreaseAlot.isMouseOver()){
              r.setOffset(r.getOffset()-100);
            }
+           int curvar=logicThing.getData();
+          if (curvar>0&&prevSound.isMouseOver())
+              logicThing.setData(curvar-1);
+          if (curvar<level.groups.size()-1&&nextSound.isMouseOver())
+              logicThing.setData(curvar+1);
         }else if(type.equals("y-offset")){
           SetYOffset r=(SetYOffset)logicThing;
            if(increase.isMouseOver()){
@@ -1652,6 +1687,36 @@ class ToolBox extends PApplet {
            if(decreaseAlot.isMouseOver()){
              r.setOffset(r.getOffset()-100);
            }
+           int curvar=logicThing.getData();
+          if (curvar>0&&prevSound.isMouseOver())
+              logicThing.setData(curvar-1);
+          if (curvar<level.groups.size()-1&&nextSound.isMouseOver())
+              logicThing.setData(curvar+1);
+        }else if(type.equals("z-offset")){
+          SetZOffset r=(SetZOffset)logicThing;
+           if(increase.isMouseOver()){
+             r.setOffset(r.getOffset()+1);
+           }
+           if(increaseMore.isMouseOver()){
+             r.setOffset(r.getOffset()+10);
+           }
+           if(increaseAlot.isMouseOver()){
+             r.setOffset(r.getOffset()+100);
+           }
+           if(decrease.isMouseOver()){
+             r.setOffset(r.getOffset()-1);
+           }
+           if(decreaseMore.isMouseOver()){
+             r.setOffset(r.getOffset()-10);
+           }
+           if(decreaseAlot.isMouseOver()){
+             r.setOffset(r.getOffset()-100);
+           }
+           int curvar=logicThing.getData();
+          if (curvar>0&&prevSound.isMouseOver())
+              logicThing.setData(curvar-1);
+          if (curvar<level.groups.size()-1&&nextSound.isMouseOver())
+              logicThing.setData(curvar+1);
         }else if(type.equals("logic button")){
           int curvar=thing.getDataI();
           if (curvar>0&&prevSound.isMouseOver())
