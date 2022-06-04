@@ -211,6 +211,9 @@ void draw() {
         if (type.equals("stage")) {//if it is a stage then display the stage icon
           drawWorldSymbol(20, 90+60*(i));
         }
+        if(type.equals("3Dstage")){
+          draw3DStageIcon(43,100+60*i,0.7); 
+        }
       } else if (i+ filesScrole<level.stages.size()+level.sounds.size()) {//if the thing is in the range of sounds
         fill(0);
         String displayName=level.sounds.get(keys[i+ filesScrole-level.stages.size()]).name, type=level.sounds.get(keys[i+ filesScrole-level.stages.size()]).type;//get the name and type of a sound in the level
@@ -225,6 +228,8 @@ void draw() {
         logicIcon(40,100+60*i,1);
       }
     }
+
+    
     textAlign(CENTER, CENTER);
     newStage.draw();//draw the new file button
     fill(0);
@@ -434,6 +439,7 @@ void draw() {
   }
 
   disEngageHUDPosition();
+  
 }//end of draw
 
 
@@ -791,7 +797,6 @@ void keyPressed() {
       cam_down=true;
     }
   }//end of if sumilating
-
 
 
   if (key=='q') {//if 'q' is pressed then print debg info to the console

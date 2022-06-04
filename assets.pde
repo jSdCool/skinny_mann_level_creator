@@ -161,6 +161,7 @@ void drawLogicButton(float x, float y, float z, float Scale,boolean pressed) {
 }
 
 void logicIcon(float x,float y,float scale){
+  noStroke();
   fill(#B9B9B9);
   rect(x-10*scale,y+20*scale,20*scale,15*scale);
   fill(#989898);
@@ -172,4 +173,32 @@ void logicIcon(float x,float y,float scale){
   rect(x-8*scale,y,5*scale,20*scale);
   rect(x+3*scale,y,5*scale,20*scale);
   rect(x-3*scale,y,6*scale,5*scale);
+}
+
+void draw3DStageIcon(float x,float y, float scale){
+  directionalLight(255, 255, 255, 0.8, 1, -0.35);//setr up the lighting
+  ambientLight(102, 102, 102);
+  noStroke(); 
+  translate(x,y,0);
+  rotateX(-radians(30));rotateY(radians(75));rotateZ(radians(24));
+  
+  translate(0,20*scale,0);
+  fill(#00F73B);
+  box(40*scale,20*scale,40*scale);
+  translate(0,-20*scale,0);
+  translate(0,-10*scale,0);
+  fill(#BC6022);
+  box(10*scale,40*scale,10*scale);
+  translate(0,10*scale,0);
+  translate(0,-25*scale,0);
+  fill(#089D06);
+  box(25*scale,15*scale,25*scale);
+  translate(0,25*scale,0);
+  translate(0,-18*scale,0);
+  box(35*scale,12*scale,35*scale);
+  translate(0,18*scale,0);
+  
+  rotateZ(-radians(24));rotateY(-radians(75));rotateX(radians(30));
+  translate(-x,-y,0);
+  noLights();
 }
