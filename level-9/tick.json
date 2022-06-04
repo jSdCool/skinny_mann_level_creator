@@ -1,1 +1,215 @@
-[{"name": "tick"}]
+[
+  {"name": "tick"},
+  {
+    "x": 346,
+    "y": 10,
+    "group number": 1,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 345,
+    "y": 96,
+    "group number": 2,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 346,
+    "y": 181,
+    "group number": 3,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 346,
+    "y": 266,
+    "group number": 4,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "variable number": 0,
+    "x": 25,
+    "y": 393,
+    "type": "read var",
+    "connections": [
+      {
+        "index": 5,
+        "terminal": 0
+      },
+      {
+        "index": 10,
+        "terminal": 1
+      },
+      {
+        "index": 10,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "delay": 10,
+    "x": 169,
+    "y": 16,
+    "type": "delay",
+    "connections": [
+      {
+        "index": 6,
+        "terminal": 0
+      },
+      {
+        "index": 0,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "delay": 10,
+    "x": 165,
+    "y": 104,
+    "type": "delay",
+    "connections": [
+      {
+        "index": 7,
+        "terminal": 0
+      },
+      {
+        "index": 1,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "delay": 10,
+    "x": 164,
+    "y": 192,
+    "type": "delay",
+    "connections": [
+      {
+        "index": 8,
+        "terminal": 0
+      },
+      {
+        "index": 2,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "delay": 10,
+    "x": 164,
+    "y": 275,
+    "type": "delay",
+    "connections": [{
+      "index": 3,
+      "terminal": 1
+    }]
+  },
+  {
+    "variable number": 1,
+    "x": 17,
+    "y": 512,
+    "type": "read var",
+    "connections": [
+      {
+        "index": 14,
+        "terminal": 1
+      },
+      {
+        "index": 17,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "variable number": 1,
+    "x": 174,
+    "y": 383,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "delay": 50,
+    "x": 794,
+    "y": 337,
+    "type": "delay",
+    "connections": [
+      {
+        "index": 12,
+        "terminal": 0
+      },
+      {
+        "index": 15,
+        "terminal": 0
+      },
+      {
+        "index": 13,
+        "terminal": 1
+      },
+      {
+        "index": 17,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 985,
+    "y": 372,
+    "group number": 5,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 975,
+    "y": 467,
+    "group number": 6,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 481,
+    "y": 355,
+    "type": "AND",
+    "connections": [{
+      "index": 11,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 616,
+    "y": 439,
+    "type": "NOR",
+    "connections": [
+      {
+        "index": 14,
+        "terminal": 0
+      },
+      {
+        "index": 12,
+        "terminal": 1
+      },
+      {
+        "index": 13,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "variable number": 0,
+    "x": 606,
+    "y": 560,
+    "type": "read var",
+    "connections": [{
+      "index": 11,
+      "terminal": 1
+    }]
+  },
+  {
+    "variable number": 2,
+    "x": 792,
+    "y": 526,
+    "type": "set var",
+    "connections": []
+  }
+]

@@ -1,0 +1,43 @@
+[
+  {
+    "name": "stage  2",
+    "sky color": -7303023,
+    "type": "3Dstage"
+  },
+  {
+    "dx": 1280,
+    "color": -12237498,
+    "dy": 40,
+    "dz": 1000,
+    "x": 0,
+    "y": 680,
+    "z": 0,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "x": 60,
+    "y": 680,
+    "z": 300,
+    "type": "3DonSW",
+    "group": -1
+  },
+  {
+    "x": 60,
+    "y": 680,
+    "z": 300,
+    "type": "check point",
+    "group": -1
+  },
+  {
+    "link Index": 1,
+    "linkZ": 0,
+    "x": 60,
+    "y": 630,
+    "z": 0,
+    "type": "interdimentional Portal",
+    "linkY": 620,
+    "linkX": 2390,
+    "group": -1
+  }
+]

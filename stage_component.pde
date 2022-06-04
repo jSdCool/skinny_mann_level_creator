@@ -851,14 +851,12 @@ class Interdimentional_Portal extends StageComponent {//ground component
     linkX=data.getFloat("linkX");
     linkY=data.getFloat("linkY");
     linkIndex=data.getInt("link Index")-1;
-    if (stage_3D) {
-    }
-    try {
+    if (!data.isNull("z")) {
       z=data.getFloat("z");
-      linkZ=data.getFloat("linkZ");
+      
     }
-    catch(Throwable e) {
-      linkZ=-1;
+    if(!data.isNull("linkZ")){
+      linkZ=data.getFloat("linkZ");
     }
     if(!data.isNull("group")){
       group=data.getInt("group");
@@ -1985,6 +1983,7 @@ class Delay extends LogicComponent {
     }
     outputTerminal=mem.remove(0);
     mem.add(inputTerminal1);
+    //println(mem);
   }
   void setData(int data){
     time=data;

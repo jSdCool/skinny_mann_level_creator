@@ -893,7 +893,7 @@ void GUImouseClicked() {
         portalStage2.setInt("linkX", mouseX+camPos);
         portalStage2.setInt("linkY", mouseY-camPosY);
       }
-      if (stageType.equals("3Dstage")) {
+      if (level.stages.get(currentStageIndex).is3D) {
         portalStage1.setInt("z", startingDepth);
         portalStage2.setInt("linkZ", startingDepth);
       }
@@ -917,7 +917,7 @@ void GUImouseClicked() {
         portalStage1.setInt("linkY", mouseY-camPosY);
       }
       portalStage1.setInt("link Index", currentStageIndex+1);
-      if (stageType.equals("3Dstage")) {
+      if (level.stages.get(currentStageIndex).is3D) {
         portalStage2.setInt("z", startingDepth);
         portalStage1.setInt("linkZ", startingDepth);
       }

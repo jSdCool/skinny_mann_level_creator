@@ -398,7 +398,7 @@ void draw() {
     if(selectedIndex==i){
       strokeWeight(0);
      fill(255,0,0);
-     rect(level.logicBoards.get(logicBoardIndex).components.get(i).x-5,level.logicBoards.get(logicBoardIndex).components.get(i).y-5,level.logicBoards.get(logicBoardIndex).components.get(i).button.lengthX+10,level.logicBoards.get(logicBoardIndex).components.get(i).button.lengthY+10);
+     rect(level.logicBoards.get(logicBoardIndex).components.get(i).x-5-camPos,level.logicBoards.get(logicBoardIndex).components.get(i).y-5-camPosY,level.logicBoards.get(logicBoardIndex).components.get(i).button.lengthX+10,level.logicBoards.get(logicBoardIndex).components.get(i).button.lengthY+10);
     }
       level.logicBoards.get(logicBoardIndex).components.get(i).draw();
     }
