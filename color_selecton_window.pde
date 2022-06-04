@@ -1486,6 +1486,8 @@ class ToolBox extends PApplet {
           turnThingsOff();
           levelOverview=true;
           editinglogicBoard=false;
+          camPos=0;
+          camPosY=0;
         }
         if (nandGateButton.isMouseOver()) {
           turnThingsOff();

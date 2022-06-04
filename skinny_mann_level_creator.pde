@@ -400,8 +400,20 @@ void draw() {
     }
 
     if (movingLogicComponent&&moveLogicComponents) {
-      level.logicBoards.get(logicBoardIndex).components.get(movingLogicIndex).setPos(mouseX, mouseY);
+      level.logicBoards.get(logicBoardIndex).components.get(movingLogicIndex).setPos(mouseX+camPos, mouseY+camPosY);
     }
+    if (cam_left&&camPos>0) {
+        camPos-=4;
+      }
+      if (cam_right) {
+        camPos+=4;
+      }
+      if (cam_up&&camPosY>0) {
+        camPosY-=4;
+      }
+      if (cam_down) {
+        camPosY+=4;
+      }
   }
 
 
@@ -551,6 +563,8 @@ void mouseClicked() {
             levelOverview=false;
             editinglogicBoard=true;
             logicBoardIndex=overviewSelection-(level.stages.size()+level.sounds.size());
+            camPos=0;
+            camPosY=0;
           }
         }
       }//end of if something is selected
@@ -679,22 +693,22 @@ void mouseClicked() {
     }//end of loading blueprint
     if (editinglogicBoard) {
       if (placingAndGate) {
-        level.logicBoards.get(logicBoardIndex).components.add(new AndGate(mouseX-50, mouseY-40, level.logicBoards.get(logicBoardIndex)));
+        level.logicBoards.get(logicBoardIndex).components.add(new AndGate(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
       }
       if (placingOrGate) {
-        level.logicBoards.get(logicBoardIndex).components.add(new OrGate(mouseX-50, mouseY-40, level.logicBoards.get(logicBoardIndex)));
+        level.logicBoards.get(logicBoardIndex).components.add(new OrGate(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
       }
       if (placingXorGate) {
-        level.logicBoards.get(logicBoardIndex).components.add(new XorGate(mouseX-50, mouseY-40, level.logicBoards.get(logicBoardIndex)));
+        level.logicBoards.get(logicBoardIndex).components.add(new XorGate(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
       }
       if (placingNandGate) {
-        level.logicBoards.get(logicBoardIndex).components.add(new NAndGate(mouseX-50, mouseY-40, level.logicBoards.get(logicBoardIndex)));
+        level.logicBoards.get(logicBoardIndex).components.add(new NAndGate(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
       }
       if (placingNorGate) {
-        level.logicBoards.get(logicBoardIndex).components.add(new NOrGate(mouseX-50, mouseY-40, level.logicBoards.get(logicBoardIndex)));
+        level.logicBoards.get(logicBoardIndex).components.add(new NOrGate(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
       }
       if (placingXnorGate) {
-        level.logicBoards.get(logicBoardIndex).components.add(new XNorGate(mouseX-50, mouseY-40, level.logicBoards.get(logicBoardIndex)));
+        level.logicBoards.get(logicBoardIndex).components.add(new XNorGate(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
       }
       if (deleteing) {
         for (int i=0; i< level.logicBoards.get(logicBoardIndex).components.size(); i++) {
@@ -705,16 +719,16 @@ void mouseClicked() {
         }
       }
       if(placingTestLogic){
-        //level.logicBoards.get(logicBoardIndex).components.add(new GIL(mouseX-50, mouseY-40, level.logicBoards.get(logicBoardIndex)));
+        //level.logicBoards.get(logicBoardIndex).components.add(new GIL(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
       }
       if(placingOnSingal){
-        level.logicBoards.get(logicBoardIndex).components.add(new ConstantOnSignal(mouseX-50, mouseY-20, level.logicBoards.get(logicBoardIndex)));
+        level.logicBoards.get(logicBoardIndex).components.add(new ConstantOnSignal(mouseX-50+camPos, mouseY-20+camPosY, level.logicBoards.get(logicBoardIndex)));
       }
       if(placingSetVaravle){
-         level.logicBoards.get(logicBoardIndex).components.add(new SetVariable(mouseX-50, mouseY-20, level.logicBoards.get(logicBoardIndex)));
+         level.logicBoards.get(logicBoardIndex).components.add(new SetVariable(mouseX-50+camPos, mouseY-20+camPosY, level.logicBoards.get(logicBoardIndex)));
       }
       if(placingReadVariable){
-        level.logicBoards.get(logicBoardIndex).components.add(new ReadVariable(mouseX-50, mouseY-20, level.logicBoards.get(logicBoardIndex)));
+        level.logicBoards.get(logicBoardIndex).components.add(new ReadVariable(mouseX-50+camPos, mouseY-20+camPosY, level.logicBoards.get(logicBoardIndex)));
       }
       if(selecting){
         for(int i=0;i< level.logicBoards.get(logicBoardIndex).components.size();i++){
@@ -724,13 +738,13 @@ void mouseClicked() {
         }
       }
       if(placingSetVisibility){
-        level.logicBoards.get(logicBoardIndex).components.add(new SetVisibility(mouseX-50, mouseY-40, level.logicBoards.get(logicBoardIndex)));
+        level.logicBoards.get(logicBoardIndex).components.add(new SetVisibility(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
       }
       if(placingXOffset){
-         level.logicBoards.get(logicBoardIndex).components.add(new SetXOffset(mouseX-50, mouseY-40, level.logicBoards.get(logicBoardIndex)));
+         level.logicBoards.get(logicBoardIndex).components.add(new SetXOffset(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
       }
       if(placingYOffset){
-         level.logicBoards.get(logicBoardIndex).components.add(new SetYOffset(mouseX-50, mouseY-40, level.logicBoards.get(logicBoardIndex)));
+         level.logicBoards.get(logicBoardIndex).components.add(new SetYOffset(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
       }
     }//end of edditing logic board
   }//end of left mouse button clicked
@@ -763,7 +777,7 @@ void keyPressed() {
       }
     }//end of 3d mode
   }
-  if (!simulating) {//if the simulation is paused
+  if (!simulating||editinglogicBoard) {//if the simulation is paused
     if (keyCode==37) {//if LEFT ARROW is pressed
       cam_left=true;
     }
@@ -868,7 +882,7 @@ void keyReleased() {
   if (key=='e'||key=='E') {//if 'E' released
     E_pressed=false;
   }
-  if (!simulating) {//if the simulation is paused
+  if (!simulating||editinglogicBoard) {//if the simulation is paused
     if (keyCode==37) {//if LEFT ARROW released
       cam_left=false;
     }
@@ -963,7 +977,7 @@ void mouseReleased() {
     if (moveLogicComponents) {
       if (movingLogicComponent) {
         movingLogicComponent=false;
-        level.logicBoards.get(logicBoardIndex).components.get(movingLogicIndex).setPos(mouseX, mouseY);
+        level.logicBoards.get(logicBoardIndex).components.get(movingLogicIndex).setPos(mouseX+camPos, mouseY+camPosY);
       }
     }
   }//end of editing logic board

@@ -1758,25 +1758,27 @@ abstract class LogicComponent {//the base of all logic gam=ts and things
   }
 
   void draw() {
+    button.x=x-camPos;
+    button.y=y-camPosY;
     button.draw();
     fill(#FF98CF);
-    ellipse(x-2, y+20, 20, 20);
-    ellipse(x-2, y+60, 20, 20);
+    ellipse(x-2-camPos, y+20-camPosY, 20, 20);
+    ellipse(x-2-camPos, y+60-camPosY, 20, 20);
     fill(#FA5BD5);
-    ellipse(x+102, y+40, 20, 20);
+    ellipse(x+102-camPos, y+40-camPosY, 20, 20);
   }
 
   float[] getTerminalPos(int t) {
     if (t==0) {
-      return new float[]{x-2, y+20};
+      return new float[]{x-2-camPos, y+20-camPosY};
     }
     if (t==1) {
-      return new float[]{x-2, y+60};
+      return new float[]{x-2-camPos, y+60-camPosY};
     }
     if (t==2) {
-      return new float[]{x+102, y+40};
+      return new float[]{x+102-camPos, y+40-camPosY};
     }
-    return new float[]{-100, -100};
+    return new float[]{-1000, -1000};
   }
 
   void connect(int index, int terminal) {
@@ -1952,15 +1954,17 @@ abstract class LogicInputComponent extends LogicComponent{
     button=new Button(primaryWindow, x, y, 100, 40, "  "+type+"  ");
   }
   void draw() {
+    button.x=x-camPos;
+    button.y=y-camPosY;
     button.draw();
     fill(#FA5BD5);
-    ellipse(x+102, y+20, 20, 20);
+    ellipse(x+102-camPos, y+20-camPosY, 20, 20);
   }
   float[] getTerminalPos(int t) {
     if (t==2) {
-      return new float[]{x+102, y+20};
+      return new float[]{x+102-camPos, y+20-camPosY};
     }
-    return new float[]{-100, -100};
+    return new float[]{-1000, -1000};
   }
 }
 
@@ -1974,19 +1978,21 @@ abstract class LogicOutputComponent extends LogicComponent{
     button=new Button(primaryWindow, x, y, 100, 80, "  "+type+"  ");
   }
   void draw() {
+    button.x=x-camPos;
+    button.y=y-camPosY;
     button.draw();
     fill(#FF98CF);
-    ellipse(x-2, y+20, 20, 20);
-    ellipse(x-2, y+60, 20, 20);
+    ellipse(x-2-camPos, y+20-camPosY, 20, 20);
+    ellipse(x-2-camPos, y+60-camPosY, 20, 20);
   }
   float[] getTerminalPos(int t) {
     if (t==0) {
-      return new float[]{x-2, y+20};
+      return new float[]{x-2-camPos, y+20-camPosY};
     }
     if (t==1) {
-      return new float[]{x-2, y+60};
+      return new float[]{x-2-camPos, y+60-camPosY};
     }
-    return new float[]{-100, -100};
+    return new float[]{-1000, -1000};
   }
 }
 
@@ -2055,8 +2061,8 @@ class SetVariable extends LogicOutputComponent{
    fill(0);
    textSize(15);
    textAlign(LEFT,CENTER);
-   text("data",x+5,y+16);
-   text("set",x+5,y+56);
+   text("data",x+5-camPos,y+16-camPosY);
+   text("set",x+5-camPos,y+56-camPosY);
   }
   JSONObject save() {
    JSONObject component=super.save();
@@ -2110,8 +2116,8 @@ class SetVisibility extends LogicOutputComponent{
    fill(0);
    textSize(15);
    textAlign(LEFT,CENTER);
-   text("true",x+5,y+16);
-   text("false",x+5,y+56);
+   text("true",x+5-camPos,y+16-camPosY);
+   text("false",x+5-camPos,y+56-camPosY);
   }
 }
 
@@ -2156,8 +2162,8 @@ class SetXOffset extends LogicOutputComponent{
    fill(0);
    textSize(15);
    textAlign(LEFT,CENTER);
-   text("set",x+5,y+16);
-   text("reset",x+5,y+56);
+   text("set",x+5-camPos,y+16-camPosY);
+   text("reset",x+5-camPos,y+56-camPosY);
   }
   void setOffset(float of){
    offset=of; 
@@ -2209,8 +2215,8 @@ class SetYOffset extends LogicOutputComponent{
    fill(0);
    textSize(15);
    textAlign(LEFT,CENTER);
-   text("set",x+5,y+16);
-   text("reset",x+5,y+56);
+   text("set",x+5-camPos,y+16-camPosY);
+   text("reset",x+5-camPos,y+56-camPosY);
   }
   void setOffset(float of){
    offset=of; 
