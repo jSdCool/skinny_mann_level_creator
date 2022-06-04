@@ -9,7 +9,7 @@ class ToolBox extends PApplet {
   public int redVal=0, greenVal=0, blueVal=0, CC=0;
   int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset,variableScroll=0,groupScroll=0;
   String page="colors",newGroopName="";
-  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton,testLogicPlaceButton,constantOnButton,setVariableButton,readVariableButton,setVisabilityButton,xOffsetButton,yOffsetButton,increase,increaseMore,increaseAlot,decrease,decreaseMore,decreaseAlot,nextGroup,prevGroup,variablesAndGroups,variablesUP,variablesDOWN,groupsUP,groupsDOWN,addVariable,addGroup,typeGroopName,logicButtonButton,runLoad;
+  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton,testLogicPlaceButton,constantOnButton,setVariableButton,readVariableButton,setVisabilityButton,xOffsetButton,yOffsetButton,increase,increaseMore,increaseAlot,decrease,decreaseMore,decreaseAlot,nextGroup,prevGroup,variablesAndGroups,variablesUP,variablesDOWN,groupsUP,groupsDOWN,addVariable,addGroup,typeGroopName,logicButtonButton,runLoad,delayButton;
   boolean typingSign=false, settingSkyColor=false,typingGroopName=false;
 
   public void settings() {
@@ -70,6 +70,7 @@ class ToolBox extends PApplet {
     setVisabilityButton=new Button(this, 820, 40+100, 50, 50, "vis",255, 203).setStrokeWeight(5).setHoverText("set visability of a group");
     xOffsetButton=new Button(this, 880, 40+100, 50, 50,"offset X", 255, 203).setStrokeWeight(5).setHoverText("offset a group in the x-axis");
     yOffsetButton=new Button(this, 940, 40+100, 50, 50,"offset y", 255, 203).setStrokeWeight(5).setHoverText("offset a group in the y-axis");
+    delayButton=new Button(this, 1060, 140, 50, 50,"delay", 255, 203).setStrokeWeight(5).setHoverText("delay a pulse in your logic");
     
     increase=new Button(this, width/2+180, height*0.5, 50, 50, "+", 255, 203).setStrokeWeight(5);
     increaseMore=new Button(this, width/2+240, height*0.5, 50, 50, "++", 255, 203).setStrokeWeight(5);
@@ -827,6 +828,12 @@ class ToolBox extends PApplet {
           yOffsetButton.setColor(255, 203);
         }
         yOffsetButton.draw();
+        if(placingDelay){
+          delayButton.setColor(255, #F2F258);
+        }else{
+          delayButton.setColor(255, 203);
+        }
+        delayButton.draw();
 
         //draw hover text
         connectLogicButton.drawHoverText();
@@ -847,6 +854,7 @@ class ToolBox extends PApplet {
         setVisabilityButton.drawHoverText();
         xOffsetButton.drawHoverText();
         yOffsetButton.drawHoverText();
+        delayButton.drawHoverText();
       } else {
         fill(0);
         textSize(20);
@@ -986,6 +994,20 @@ class ToolBox extends PApplet {
             text("b"+curvar, width/2, height*0.4);
           }
           text("current variable",width/2,height*0.36);
+        }else if(type.equals("delay")){
+          fill(0);
+          textSize(25);
+          text("delay in ticks (50tps)",width/2,height*0.46);
+          text(logicThing.getData(),width/2,height*0.53);
+          increase.draw();
+          increaseMore.draw();
+          increaseAlot.draw();
+          if(logicThing.getData()>1)
+          decrease.draw();
+          if(logicThing.getData()>10)
+          decreaseMore.draw();
+          if(logicThing.getData()>100)
+          decreaseAlot.draw();
         }else {
           fill(0);
           textSize(20);
@@ -1533,6 +1555,10 @@ class ToolBox extends PApplet {
           turnThingsOff();
           placingYOffset=true;
         }
+        if(delayButton.isMouseOver()){
+          turnThingsOff();
+          placingDelay=true;
+        }
       }//end of edditing logic board
     }//end of tools
 
@@ -1632,6 +1658,26 @@ class ToolBox extends PApplet {
               thing.setData(curvar-1);
             if (curvar<level.variables.size()-1&&nextSound.isMouseOver())
               thing.setData(curvar+1);
+        }else if(type.equals("delay")){
+          int curval=logicThing.getData();
+          if(increase.isMouseOver()){
+             logicThing.setData(logicThing.getData()+1);
+           }
+           if(increaseMore.isMouseOver()){
+             logicThing.setData(logicThing.getData()+10);
+           }
+           if(increaseAlot.isMouseOver()){
+             logicThing.setData(logicThing.getData()+100);
+           }
+           if(decrease.isMouseOver()&&curval>1){
+             logicThing.setData(logicThing.getData()-1);
+           }
+           if(decreaseMore.isMouseOver()&&curval>10){
+             logicThing.setData(logicThing.getData()-10);
+           }
+           if(decreaseAlot.isMouseOver()&&curval>100){
+             logicThing.setData(logicThing.getData()-100);
+           }
         }
         if(editingStage){
           if(thing.group<level.groups.size()-1&&nextGroup.isMouseOver()){

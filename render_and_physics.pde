@@ -662,6 +662,7 @@ void playerPhysics() {
   //////////////////////////////
   if (simulating){//--------------------------------------------------------------------------------------------------modify this line in the final game
     if(!logicTickingThread.isAlive()){//if the ticking thread has stoped for some reason
+      logicTickingThread=new LogicThread();
       logicTickingThread.shouldRun=true;//then start it
       logicTickingThread.start();
     }
