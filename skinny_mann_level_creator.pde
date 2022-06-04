@@ -297,6 +297,7 @@ void draw() {
     strokeWeight(0);
     if (overviewSelection!=-1) {//if sonethign is selected
       rect(0, (overviewSelection- filesScrole)*60+80, 1280, 60);//highlight
+      if (overviewSelection<level.stages.size())
       if (level.stages.get(overviewSelection).type.equals("stage")||level.stages.get(overviewSelection).type.equals("3Dstage")) {//if the selected thing is a posible destination stage
         selectStage.draw();//draw the select stage button
         textAlign(LEFT, BOTTOM);
@@ -314,7 +315,7 @@ void draw() {
     textSize(30);
     String[] keys=new String[0];//create a string array that can be used to place the sound keys in
     keys=level.sounds.keySet().toArray(keys);//place the sound keys into the array
-    for (int i=0; i < 11 && i + filesScrole < level.stages.size()+level.sounds.size(); i++) {//loop through all the stages and sounds and display 11 of them on screen
+    for (int i=0; i < 11 && i + filesScrole < level.stages.size()+level.sounds.size()+level.logicBoards.size(); i++) {//loop through all the stages and sounds and display 11 of them on screen
       if (i+ filesScrole<level.stages.size()) {//if the current thing attemping to diaply is in the range of stages
         fill(0);
         String displayName=level.stages.get(i+ filesScrole).name, type=level.stages.get(i+ filesScrole).type;//get the name and type of the stages
@@ -322,19 +323,27 @@ void draw() {
         if (type.equals("stage")) {//if it is a stage then display the stage icon
           drawWorldSymbol(20, 90+60*(i));
         }
-      } else {//if the thing is not a stage type
+        if(type.equals("3Dstage")){
+          draw3DStageIcon(43,100+60*i,0.7); 
+        }
+      } else if (i+ filesScrole<level.stages.size()+level.sounds.size()) {//if the thing is not a stage type
         fill(0);
         String displayName=level.sounds.get(keys[i+ filesScrole-level.stages.size()]).name, type=level.sounds.get(keys[i+ filesScrole-level.stages.size()]).type;//get the name and type of a sound in the level
         text(displayName, 80, 130+60*(i));//display the name
         if (type.equals("sound")) {//if the thing is a sound then display the sound icon
           drawSpeakericon(this, 40, 110+60*(i), 0.5);
         }
+      } else {
+        fill(0);
+        String displayName=level.logicBoards.get(i+ filesScrole-(level.stages.size()+level.sounds.size())).name;//get the name of the logic board
+        text(displayName, 80, 130+60*(i));//display the name
+        logicIcon(40,100+60*i,1);
       }
     }
     textAlign(CENTER, CENTER);
 
     fill(0);
-    textSize(90);
+    textSize(60);
     text("select destenation stage", 640, 30);
     if (filesScrole>0)//scroll buttons
       overviewUp.draw();
