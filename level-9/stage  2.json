@@ -55,5 +55,60 @@
     "z": 300,
     "type": "logic button",
     "group": 7
+  },
+  {
+    "dx": 150,
+    "color": -8900351,
+    "dy": 630,
+    "dz": 100,
+    "x": 330,
+    "y": 50,
+    "z": 0,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 360,
+    "color": -8900351,
+    "dy": 260,
+    "dz": 300,
+    "x": 420,
+    "y": 420,
+    "z": 480,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 190,
+    "color": -8900351,
+    "dy": 70,
+    "dz": 140,
+    "x": 700,
+    "y": 150,
+    "z": 100,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 330,
+    "color": -8900351,
+    "dy": 60,
+    "dz": 140,
+    "x": 790,
+    "y": 210,
+    "z": 740,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "link Index": 3,
+    "linkZ": 400,
+    "x": 1240,
+    "y": 630,
+    "z": 400,
+    "type": "interdimentional Portal",
+    "linkY": 630,
+    "linkX": 30,
+    "group": 8
   }
 ]

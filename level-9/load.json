@@ -48,7 +48,18 @@
       {
         "index": 3,
         "terminal": 0
+      },
+      {
+        "index": 5,
+        "terminal": 1
       }
     ]
+  },
+  {
+    "x": 263,
+    "y": 305,
+    "group number": 8,
+    "type": "set visable",
+    "connections": []
   }
 ]

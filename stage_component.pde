@@ -2253,7 +2253,7 @@ class SetYOffset extends LogicOutputComponent{
   }
   void tick(){
     if(inputTerminal1){
-      level.groups.get(groupNumber).yOffset=offset;
+      level.groups.get(groupNumber).yOffset=-offset;
     }
     if(inputTerminal2){
     level.groups.get(groupNumber).yOffset=0;

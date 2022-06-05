@@ -1845,7 +1845,7 @@ class ToolBox extends PApplet {
   void keyPressed() {
 
     if (page.equals("selection")) {
-      if (selectedIndex!=-1) {
+      if (selectedIndex!=-1&&editingStage) {
         StageComponent thing = level.stages.get(currentStageIndex).parts.get(selectedIndex);
         String type=thing.type;
         if (type.equals("WritableSign")) {//if the current selected object is a sign

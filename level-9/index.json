@@ -3,7 +3,7 @@
     "mainStage": 0,
     "coins": 0,
     "level_id": 79233326,
-    "number of variable": 5,
+    "number of variable": 12,
     "spawnX": 20,
     "name": "level-9",
     "spawn pointX": 20,
@@ -15,7 +15,9 @@
       "main door 4",
       "coloms 1",
       "coloms 2",
-      "find the button"
+      "find the button",
+      "stage 2 exit portal",
+      "fast jumps 1"
     ],
     "spawn pointY": 700,
     "game version": "0.6.0_Early_Access",
@@ -29,6 +31,11 @@
   {
     "name": "stage  2",
     "location": "/stage  2.json",
+    "type": "3Dstage"
+  },
+  {
+    "name": "stage 3",
+    "location": "/stage 3.json",
     "type": "3Dstage"
   },
   {

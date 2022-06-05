@@ -764,6 +764,9 @@ void mouseClicked() {
       if(placingDelay){
         level.logicBoards.get(logicBoardIndex).components.add(new Delay(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
       }
+      if(placingZOffset){
+        level.logicBoards.get(logicBoardIndex).components.add(new SetZOffset(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
+      }
     }//end of edditing logic board
   }//end of left mouse button clicked
 }//end of mouse clicked
