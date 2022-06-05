@@ -68,12 +68,11 @@ class Level {
         if(logicBoards.get(logicBoards.size()-1).name.equals("tick")){
           tickBoard=logicBoards.size()-1;
         }
-        if(logicBoards.get(logicBoards.size()-1).name.equals("levelComplete")){
+        if(logicBoards.get(logicBoards.size()-1).name.equals("level complete")){
           levelCompleteBoard=logicBoards.size()-1;
         }
       }
     }
-
     coins=new ArrayList<Boolean>();
     for (int i=0; i<numOfCoins; i++) {
       coins.add(false);
@@ -723,6 +722,7 @@ class Goal extends StageComponent {//ground component
     if (px >= x2+drawCamPosX && px <= x2+drawCamPosX + 250 && py >= y2 - 50 && py <= y2 + 50) {
       if(!level_complete){
         level.logicBoards.get(level.levelCompleteBoard).superTick(); 
+        println("cmplete");
       }
       level_complete=true;
     }
@@ -1979,7 +1979,7 @@ class Delay extends LogicComponent {
 
   void tick() {
     if(inputTerminal2){
-      ArrayList<Boolean> mem=new ArrayList<>();
+      mem=new ArrayList<>();
       for(int i=0;i<time;i++){
         mem.add(false);
       }  
@@ -1991,7 +1991,7 @@ class Delay extends LogicComponent {
   void setData(int data){
     time=data;
     button.setText("delay "+time+" ticks  ");
-    ArrayList<Boolean> mem=new ArrayList<>();
+    mem=new ArrayList<>();
     for(int i=0;i<time;i++){
       mem.add(false);
     }
@@ -2160,6 +2160,7 @@ class SetVisibility extends LogicOutputComponent{
     if(inputTerminal2){
     level.groups.get(groupNumber).visable=false;
     }
+    
   }
   JSONObject save() {
    JSONObject component=super.save();

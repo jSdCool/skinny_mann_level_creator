@@ -17,7 +17,10 @@
       "coloms 2",
       "find the button",
       "stage 2 exit portal",
-      "fast jumps 1"
+      "fast jumps 1",
+      "fast jumps 2",
+      "thing",
+      "end"
     ],
     "spawn pointY": 700,
     "game version": "0.6.0_Early_Access",
@@ -37,6 +40,11 @@
     "name": "stage 3",
     "location": "/stage 3.json",
     "type": "3Dstage"
+  },
+  {
+    "name": "stage 4",
+    "location": "/stage 4.json",
+    "type": "stage"
   },
   {
     "name": "load",

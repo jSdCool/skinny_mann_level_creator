@@ -1049,5 +1049,51 @@
       "index": 83,
       "terminal": 1
     }]
+  },
+  {
+    "variable number": 5,
+    "x": 633,
+    "y": 180,
+    "type": "read var",
+    "connections": [
+      {
+        "index": 87,
+        "terminal": 1
+      },
+      {
+        "index": 88,
+        "terminal": 1
+      },
+      {
+        "index": 89,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 757,
+    "y": 131,
+    "type": "NOR",
+    "connections": [{
+      "index": 88,
+      "terminal": 0
+    }]
+  },
+  {
+    "delay": 600,
+    "x": 945,
+    "y": 136,
+    "type": "delay",
+    "connections": [{
+      "index": 89,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 1156,
+    "y": 130,
+    "group number": 10,
+    "type": "set visable",
+    "connections": []
   }
 ]
