@@ -56,6 +56,10 @@
       {
         "index": 6,
         "terminal": 1
+      },
+      {
+        "index": 7,
+        "terminal": 0
       }
     ]
   },
@@ -71,6 +75,14 @@
     "y": 422,
     "group number": 12,
     "type": "set visable",
+    "connections": []
+  },
+  {
+    "offset": -20,
+    "x": 272,
+    "y": 366,
+    "group number": 11,
+    "type": "z-offset",
     "connections": []
   }
 ]

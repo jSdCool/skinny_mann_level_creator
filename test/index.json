@@ -120,8 +120,8 @@
     "type": "logicBoard"
   },
   {
-    "name": "levelComplete",
-    "location": "/levelComplete.json",
+    "name": "level complete",
+    "location": "/level complete.json",
     "type": "logicBoard"
   }
 ]
