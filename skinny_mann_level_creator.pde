@@ -15,7 +15,7 @@ void setup() {
   coin3D.scale(3);
   initlizeButtons();
 }
-boolean startup=true, editing_level=true, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, loading=false, newLevel=false, simulating=false, entering_file_path=false, coursor=false, level_complete=false, dead=false, entering_name=false, cam_left=false, cam_right=false, drawing=false, draw=false, extra=false, ground=false, check_point=false, goal=false, deleteing=false, delete=false, moving_player=false, grid_mode=false, holo_gram=false, editingStage=false, levelOverview=false, newFile=false, drawCoins=false, drawingPortal=false, drawingPortal2=false, drawingPortal3=false, E_pressed=false, saveColors=false, sloap=false, loopThread2=true, cam_up=false, cam_down=false, holoTriangle=false, dethPlane=false, setPlayerPosTo=false, e3DMode=false, WPressed=false, SPressed=false, draw3DSwitch1=false, draw3DSwitch2=false, checkpointIn3DStage=false, shadow3D=true, tutorialMode=false, drawingSign=false, selecting=false, viewingItemContents=false, loadingBlueprint=false, creatingNewBlueprint=false, editingBlueprint=false, selectingBlueprint=false, placingSound=false, editinglogicBoard=false, connectingLogic=false, connecting=false, moveLogicComponents=false, movingLogicComponent, placingAndGate=false, placingOrGate=false, placingXorGate=false, placingNandGate=false, placingNorGate=false, placingXnorGate=false,placingTestLogic=false,placingOnSingal=false,placingReadVariable=false,placingSetVaravle=false,placingSetVisibility=false,placingXOffset=false,placingYOffset=false,placingLogicButton=false,placingDelay=false,placingZOffset,pnttst;
+boolean startup=true, editing_level=true, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, loading=false, newLevel=false, simulating=false, entering_file_path=false, coursor=false, level_complete=false, dead=false, entering_name=false, cam_left=false, cam_right=false, drawing=false, draw=false, extra=false, ground=false, check_point=false, goal=false, deleteing=false, delete=false, moving_player=false, grid_mode=false, holo_gram=false, editingStage=false, levelOverview=false, newFile=false, drawCoins=false, drawingPortal=false, drawingPortal2=false, drawingPortal3=false, E_pressed=false, saveColors=false, sloap=false, loopThread2=true, cam_up=false, cam_down=false, holoTriangle=false, dethPlane=false, setPlayerPosTo=false, e3DMode=false, WPressed=false, SPressed=false, draw3DSwitch1=false, draw3DSwitch2=false, checkpointIn3DStage=false, shadow3D=true, tutorialMode=false, drawingSign=false, selecting=false, viewingItemContents=false, loadingBlueprint=false, creatingNewBlueprint=false, editingBlueprint=false, selectingBlueprint=false, placingSound=false, editinglogicBoard=false, connectingLogic=false, connecting=false, moveLogicComponents=false, movingLogicComponent, placingAndGate=false, placingOrGate=false, placingXorGate=false, placingNandGate=false, placingNorGate=false, placingXnorGate=false,placingTestLogic=false,placingOnSingal=false,placingReadVariable=false,placingSetVaravle=false,placingSetVisibility=false,placingXOffset=false,placingYOffset=false,placingLogicButton=false,placingDelay=false,placingZOffset,pnttst,settingPlayerSpawn=false;
 String file_path, new_name="my_level", GAME_version="0.6.0_Early_Access", EDITOR_version="0.0.2_EAc", rootPath="", coursorr="", newFileName="", newFileType="2D", stageType="", author="your name here", displayText="", fileToCoppyPath="";
 //int player1 []={20,700,1,0,1,0}; // old player data
 Player player1 =new Player(20, 699, 1, "red");
@@ -429,6 +429,14 @@ void draw() {
         camPosY+=4;
       }
   }
+  if(settingPlayerSpawn){
+    draw_mann(mouseX,mouseY,1,1,"red");
+    fill(0);
+    textSize(35);
+    textAlign(CENTER,CENTER);
+    text("select the spawn location of the player",width/2,height*0.1);
+    
+  }
 
 
   engageHUDPosition();//setup for HUD incase of being in 3D mode
@@ -522,7 +530,7 @@ void mouseClicked() {
         return;
       }
     }
-
+    if(!e3DMode)
     GUImouseClicked();//gui clicking code
 
 
@@ -561,6 +569,11 @@ void mouseClicked() {
             if (setMainStage.isMouseOver()) {//set main stage button
               level.mainStage=overviewSelection;
               background(0);
+              settingPlayerSpawn=true;
+              levelOverview=false;
+              editingStage=true;
+              currentStageIndex=overviewSelection;
+              respawnStage=currentStageIndex;
               return;
             }
           }
@@ -768,6 +781,13 @@ void mouseClicked() {
         level.logicBoards.get(logicBoardIndex).components.add(new SetZOffset(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
       }
     }//end of edditing logic board
+    if(settingPlayerSpawn){
+      level.SpawnX=mouseX+camPos;
+      level.SpawnY=mouseY-camPosY;
+      level.RewspawnX=mouseX+camPos;
+      level.RespawnY=mouseY-camPosY;
+      settingPlayerSpawn=false;
+    }
   }//end of left mouse button clicked
 }//end of mouse clicked
 
@@ -1143,6 +1163,7 @@ void turnThingsOff() {
   placingLogicButton=false;
   placingDelay=false;
   placingZOffset=false;
+  settingPlayerSpawn=false;
 }
 
 int curMills=0, lasMills=0, mspc=0;

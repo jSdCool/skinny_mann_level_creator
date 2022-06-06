@@ -813,6 +813,9 @@ class Coin extends StageComponent {//ground component
     if (editingBlueprint) {
       collected=false;
     } else {
+      if(coins.size()==0)
+      collected=false;
+      else
       collected=coins.get(coinId);
     }
     float x2=(x+group.xOffset)-drawCamPosX;
