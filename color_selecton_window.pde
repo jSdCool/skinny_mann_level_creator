@@ -9,7 +9,7 @@ class ToolBox extends PApplet {
   public int redVal=0, greenVal=0, blueVal=0, CC=0;
   int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset,variableScroll=0,groupScroll=0;
   String page="colors",newGroopName="";
-  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton,testLogicPlaceButton,constantOnButton,setVariableButton,readVariableButton,setVisabilityButton,xOffsetButton,yOffsetButton,increase,increaseMore,increaseAlot,decrease,decreaseMore,decreaseAlot,nextGroup,prevGroup,variablesAndGroups,variablesUP,variablesDOWN,groupsUP,groupsDOWN,addVariable,addGroup,typeGroopName,logicButtonButton,runLoad,delayButton,zOffsetButton;
+  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton,testLogicPlaceButton,constantOnButton,setVariableButton,readVariableButton,setVisabilityButton,xOffsetButton,yOffsetButton,increase,increaseMore,increaseAlot,decrease,decreaseMore,decreaseAlot,nextGroup,prevGroup,variablesAndGroups,variablesUP,variablesDOWN,groupsUP,groupsDOWN,addVariable,addGroup,typeGroopName,logicButtonButton,runLoad,delayButton,zOffsetButton,logicHelpButton;
   boolean typingSign=false, settingSkyColor=false,typingGroopName=false;
 
   public void settings() {
@@ -71,7 +71,8 @@ class ToolBox extends PApplet {
     xOffsetButton=new Button(this, 880, 40+100, 50, 50,"offset X", 255, 203).setStrokeWeight(5).setHoverText("offset a group in the x-axis");
     yOffsetButton=new Button(this, 940, 40+100, 50, 50,"offset y", 255, 203).setStrokeWeight(5).setHoverText("offset a group in the y-axis");
     delayButton=new Button(this, 1060, 140, 50, 50,"delay", 255, 203).setStrokeWeight(5).setHoverText("delay a pulse in your logic");
-    zOffsetButton=new Button(this, 40, 100+100, 50, 50, "offset z", 255, 203).setStrokeWeight(5).setHoverText("offset a group in the z-axis");
+    zOffsetButton=new Button(this, 40, 200, 50, 50, "offset z", 255, 203).setStrokeWeight(5).setHoverText("offset a group in the z-axis");
+    logicHelpButton=new Button(this, 100, 200, 50, 50, "?", 255, 203).setStrokeWeight(5).setHoverText("help");
     
     increase=new Button(this, width/2+180, height*0.5, 50, 50, "+", 255, 203).setStrokeWeight(5);
     increaseMore=new Button(this, width/2+240, height*0.5, 50, 50, "++", 255, 203).setStrokeWeight(5);
@@ -841,6 +842,7 @@ class ToolBox extends PApplet {
           zOffsetButton.setColor(255, 203);
         }
         zOffsetButton.draw();
+        logicHelpButton.draw();
 
         //draw hover text
         connectLogicButton.drawHoverText();
@@ -863,6 +865,7 @@ class ToolBox extends PApplet {
         yOffsetButton.drawHoverText();
         delayButton.drawHoverText();
         zOffsetButton.drawHoverText();
+        logicHelpButton.drawHoverText();
       } else {
         fill(0);
         textSize(20);
@@ -1588,6 +1591,9 @@ class ToolBox extends PApplet {
         if(zOffsetButton.isMouseOver()){
           turnThingsOff();
           placingZOffset=true;
+        }
+        if(logicHelpButton.isMouseOver()){
+         link("bout:blank"); 
         }
       }//end of edditing logic board
     }//end of tools

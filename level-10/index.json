@@ -2,7 +2,8 @@
   {
     "mainStage": 0,
     "coins": 216,
-    "level_id": 529022286,
+    "level_id": 10,
+	"author":"jSdCool",
     "number of variable": 15,
     "spawnX": 50,
     "name": "level-10",
