@@ -554,7 +554,7 @@ void mouseClicked() {
         println("save complete");
       }
       if (help.isMouseOver()) {//help button in the level overview
-        link("https://youtu.be/dh07dk1xXew");
+        link("https://youtu.be/hg38NQbLbrA");
       }
       if (overviewSelection!=-1) {//if something is selected
         if (overviewSelection<level.stages.size()) {//if the selection is in rage of the stages

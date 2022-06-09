@@ -1593,7 +1593,7 @@ class ToolBox extends PApplet {
           placingZOffset=true;
         }
         if(logicHelpButton.isMouseOver()){
-         link("bout:blank"); 
+         link("https://youtu.be/3ac1G1qWK6g"); 
         }
       }//end of edditing logic board
     }//end of tools
