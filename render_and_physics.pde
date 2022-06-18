@@ -69,6 +69,14 @@ void stageLevelDraw() {
       fill(255,0,0);
       box(5);
       translate(-mousePoint.x,-mousePoint.y,-mousePoint.z);
+      fill(0,255,255);
+      for(int i=0;i<500;i++){
+       Point3D np=genMousePoint(i);
+       translate(np.x,np.y,np.z);
+       box(5);
+       translate(-np.x,-np.y,-np.z);
+      }
+      
       draw_mann_3D(player1.x, player1.y, player1.z, player1.getPose(), player1.getScale(), player1.getColor());//draw the player
 
       if (shadow3D) {//if the 3D shadow is enabled

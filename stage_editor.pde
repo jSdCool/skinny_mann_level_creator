@@ -1254,12 +1254,12 @@ Point3D genMousePoint(float hyp) {//calcualte the coords of a new point that is 
   calcMousePoint();//make shure the mouse position is up to date
   float x, y, z, ry_xz, rx_z, xzh;//define variables that will be used
   hyp*=-1;//invert the inputed distance
-  xzh=dist(cam3Dx+DX, cam3Dz+DZ, mousePoint.x, mousePoint.z);//calcuate the original displacment distance on the x-z plane
-  ry_xz=atan2((cam3Dy+DY)-mousePoint.y, xzh);//find the rotation of the orignal line to the x-z plane
-  rx_z=atan2((cam3Dz+DZ)-mousePoint.z, (cam3Dx+DX)-mousePoint.x);//find the rotation of the x-z component of the prevous line
-  y=(sin(ry_xz)*hyp)+cam3Dy+DY;//calculate the y component of the new line
+  xzh=dist(cam3Dx+DX, cam3Dz-DZ, mousePoint.x, mousePoint.z);//calcuate the original displacment distance on the x-z plane
+  ry_xz=atan2((cam3Dy-DY)-mousePoint.y, xzh);//find the rotation of the orignal line to the x-z plane
+  rx_z=atan2((cam3Dz-DZ)-mousePoint.z, (cam3Dx+DX)-mousePoint.x);//find the rotation of the x-z component of the prevous line
+  y=(sin(ry_xz)*hyp)+cam3Dy-DY;//calculate the y component of the new line
   float nh = cos(ry_xz)*hyp;//calculate the total length of the x-z component of the new linw
-  z=(sin(rx_z)*nh)+cam3Dz+DZ;//calculate the z component of the new line
+  z=(sin(rx_z)*nh)+cam3Dz-DZ;//calculate the z component of the new line
   x=(cos(rx_z)*nh)+cam3Dx+DX;//calculate the x component of the new line`
 
   return new Point3D(x, y, z);
