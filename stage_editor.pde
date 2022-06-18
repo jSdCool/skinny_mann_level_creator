@@ -1220,3 +1220,56 @@ void renderBlueprint() {//render the blueprint on top of the stage
     displayBlueprint.parts.get(i).draw();
   }
 }
+
+//                                      dfa=default aspect ratio car=current aspect ratio
+float dfa=1280.0/720, car=1.0*width/height;
+Point3D mousePoint=new Point3D(0,0,0);
+void calcMousePoint() {//get a 3d point that is at the same postition as the mouse curser
+cam3Dx=player1.x;
+cam3Dy=player1.y;
+cam3Dz=player1.z;
+  car=1.0*width/height;
+  float planeDist=622/*700*/;
+  float camCentercCalcX, camCentercCalcY, camCentercCalcZ;//get a point that is a certain distance from where the camera eyes are in the center if the screen
+  camCentercCalcY=sin(radians(yangle))*planeDist+cam3Dy-DY;//calculate the center point of the camera on the plane that is a distacne from the eye point of the camera
+  float hd2=cos(radians(yangle))*-planeDist;//calcualte a new hypotenuse for the x/z axis where the result from the calculation of the Y coord is taken into account
+  camCentercCalcX=sin(radians(xangle))*hd2+cam3Dx+DX;//use the new hypotenuse to calculate the x and z points
+  camCentercCalcZ=cos(radians(xangle))*-hd2+cam3Dz-DZ;
+  //println(camCentercCalcX+" "+camCentercCalcY+" "+camCentercCalcZ);
+  //println(cam3Dx+" "+cam3Dy+" "+cam3Dz);
+  //println(cam3Dx+DX+" "+(cam3Dy-DY)+" "+(cam3Dz-DZ));
+  //println(dist(camCentercCalcX,camCentercCalcY,camCentercCalcZ,cam3Dx+DX,(cam3Dy-DY),(cam3Dz-DZ))+" "+dist(camCentercCalcX,camCentercCalcY,camCentercCalcZ,cam3Dx,cam3Dy,cam3Dz)+" "+dist(cam3Dx,cam3Dy,cam3Dz,cam3Dx+DX,(cam3Dy-DY),(cam3Dz-DZ)));
+  //println("===");
+  float midDistX=-1*(mouseX-width/2)/((width/1280.0)/(car/dfa)), midDistY=(mouseY-height/2)/(height/720.0);//calculate the mouse's distance from the center of the window adjusted to the plane that is a distacne from the camera
+  float nz=sin(radians(-xangle))*midDistX, nx=cos(radians(-xangle))*midDistX;//calcuate the new distacne from the cenetr of trhe plane the points are at
+  float ny=cos(radians(yangle))*midDistY, nd=sin(radians(yangle))*midDistY;
+  nz+=cos(radians(xangle))*nd;//adjust those points for the rotation of the plane
+  nx+=sin(radians(xangle))*nd;
+//calculate the final coorinates of the point that is at the cameras pos
+  mousePoint=new Point3D(camCentercCalcX+nx,camCentercCalcY+ny,camCentercCalcZ-nz);
+}
+//camera(player1.x+DX, player1.y-DY, player1.z-DZ, player1.x, player1.y, player1.z, 0, 1, 0);//set the camera
+
+Point3D genMousePoint(float hyp) {//calcualte the coords of a new point that is in line toth the mouse pointer at a set distance from the camera
+  calcMousePoint();//make shure the mouse position is up to date
+  float x, y, z, ry_xz, rx_z, xzh;//define variables that will be used
+  hyp*=-1;//invert the inputed distance
+  xzh=dist(cam3Dx+DX, cam3Dz+DZ, mousePoint.x, mousePoint.z);//calcuate the original displacment distance on the x-z plane
+  ry_xz=atan2((cam3Dy+DY)-mousePoint.y, xzh);//find the rotation of the orignal line to the x-z plane
+  rx_z=atan2((cam3Dz+DZ)-mousePoint.z, (cam3Dx+DX)-mousePoint.x);//find the rotation of the x-z component of the prevous line
+  y=(sin(ry_xz)*hyp)+cam3Dy+DY;//calculate the y component of the new line
+  float nh = cos(ry_xz)*hyp;//calculate the total length of the x-z component of the new linw
+  z=(sin(rx_z)*nh)+cam3Dz+DZ;//calculate the z component of the new line
+  x=(cos(rx_z)*nh)+cam3Dx+DX;//calculate the x component of the new line`
+
+  return new Point3D(x, y, z);
+}
+
+class Point3D{
+  float x,y,z;
+  Point3D(float x,float y,float z){
+    this.x=x;
+    this.y=y;
+    this.z=z;
+  }
+}

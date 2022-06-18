@@ -1,5 +1,5 @@
 int xangle=25+180, yangle=15, dist=700;//camera presets  //<>//
-float DY=sin(radians(yangle))*dist, hd=cos(radians(yangle))*dist, DX=sin(radians(xangle))*hd, DZ=cos(radians(xangle))*hd;//camera rotation
+float DY=sin(radians(yangle))*dist, hd=cos(radians(yangle))*dist, DX=sin(radians(xangle))*hd, DZ=cos(radians(xangle))*hd,cam3Dx,cam3Dy,cam3Dz;//camera rotation
 
 /**draws all the elements of a stage
 
@@ -64,6 +64,11 @@ void stageLevelDraw() {
         }
       }
 
+      calcMousePoint();
+      translate(mousePoint.x,mousePoint.y,mousePoint.z);
+      fill(255,0,0);
+      box(5);
+      translate(-mousePoint.x,-mousePoint.y,-mousePoint.z);
       draw_mann_3D(player1.x, player1.y, player1.z, player1.getPose(), player1.getScale(), player1.getColor());//draw the player
 
       if (shadow3D) {//if the 3D shadow is enabled
@@ -85,6 +90,11 @@ void stageLevelDraw() {
           translate(-player1.x, -(shadowAltitude-1), -player1.z);
         }
       }
+      
+      
+      
+      
+      
     } else {//redner the level in 2D
       camera();//reset the camera
       drawCamPosX=camPos;//versions of the camera position variblaes that only get updated once every frame and not on every physics tick
