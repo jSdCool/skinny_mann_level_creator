@@ -1221,7 +1221,7 @@ void renderBlueprint() {//render the blueprint on top of the stage
   }
 }
 
-//                                      dfa=default aspect ratio car=current aspect ratio
+//dfa=default aspect ratio car=current aspect ratio
 float dfa=1280.0/720, car=1.0*width/height;
 Point3D mousePoint=new Point3D(0,0,0);
 void calcMousePoint() {//get a 3d point that is at the same postition as the mouse curser
@@ -1235,11 +1235,8 @@ cam3Dz=player1.z;
   float hd2=cos(radians(yangle))*-planeDist;//calcualte a new hypotenuse for the x/z axis where the result from the calculation of the Y coord is taken into account
   camCentercCalcX=sin(radians(xangle))*hd2+cam3Dx+DX;//use the new hypotenuse to calculate the x and z points
   camCentercCalcZ=cos(radians(xangle))*-hd2+cam3Dz-DZ;
-  //println(camCentercCalcX+" "+camCentercCalcY+" "+camCentercCalcZ);
-  //println(cam3Dx+" "+cam3Dy+" "+cam3Dz);
-  //println(cam3Dx+DX+" "+(cam3Dy-DY)+" "+(cam3Dz-DZ));
-  //println(dist(camCentercCalcX,camCentercCalcY,camCentercCalcZ,cam3Dx+DX,(cam3Dy-DY),(cam3Dz-DZ))+" "+dist(camCentercCalcX,camCentercCalcY,camCentercCalcZ,cam3Dx,cam3Dy,cam3Dz)+" "+dist(cam3Dx,cam3Dy,cam3Dz,cam3Dx+DX,(cam3Dy-DY),(cam3Dz-DZ)));
-  //println("===");
+  
+  
   float midDistX=-1*(mouseX-width/2)/((width/1280.0)/(car/dfa)), midDistY=(mouseY-height/2)/(height/720.0);//calculate the mouse's distance from the center of the window adjusted to the plane that is a distacne from the camera
   float nz=sin(radians(-xangle))*midDistX, nx=cos(radians(-xangle))*midDistX;//calcuate the new distacne from the cenetr of trhe plane the points are at
   float ny=cos(radians(yangle))*midDistY, nd=sin(radians(yangle))*midDistY;
@@ -1248,7 +1245,6 @@ cam3Dz=player1.z;
 //calculate the final coorinates of the point that is at the cameras pos
   mousePoint=new Point3D(camCentercCalcX+nx,camCentercCalcY+ny,camCentercCalcZ-nz);
 }
-//camera(player1.x+DX, player1.y-DY, player1.z-DZ, player1.x, player1.y, player1.z, 0, 1, 0);//set the camera
 
 Point3D genMousePoint(float hyp) {//calcualte the coords of a new point that is in line toth the mouse pointer at a set distance from the camera
   calcMousePoint();//make shure the mouse position is up to date
@@ -1264,7 +1260,6 @@ Point3D genMousePoint(float hyp) {//calcualte the coords of a new point that is 
 
   return new Point3D(x, y, z);
 }
-
 class Point3D{
   float x,y,z;
   Point3D(float x,float y,float z){

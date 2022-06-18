@@ -532,6 +532,7 @@ void mouseClicked() {
     }
     if(!e3DMode)
     GUImouseClicked();//gui clicking code
+    
 
 
     if (levelOverview) {//if on level overview
