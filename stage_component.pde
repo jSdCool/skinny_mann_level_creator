@@ -366,7 +366,7 @@ class Ground extends StageComponent {//ground component
     if(!group.visable)
       return;
     fill(ccolor);
-    strokeWeight(0);
+    //strokeWeight(0);
     translate((x+group.xOffset)+dx/2, (y+group.yOffset)+dy/2, (z+group.zOffset)+dz/2);
     box(dx, dy, dz);
     translate(-1*((x+group.xOffset)+dx/2), -1*((y+group.yOffset)+dy/2), -1*((z+group.zOffset)+dz/2));
@@ -462,7 +462,7 @@ class Holo extends StageComponent {//ground component
     if(!group.visable)
       return;
     fill(ccolor);
-    strokeWeight(0);
+    //strokeWeight(0);
     translate((x+group.xOffset)+dx/2, (y+group.yOffset)+dy/2, (z+group.zOffset)+dz/2);
     box(dx, dy, dz);
     translate(-1*((x+group.xOffset)+dx/2), -1*((y+group.yOffset)+dy/2), -1*((z+group.zOffset)+dz/2));

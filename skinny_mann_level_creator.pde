@@ -13,9 +13,15 @@ void setup() {
   thread("thrdCalc2");//start the physics thread
   coin3D=loadShape("data/modles/coin/tinker.obj");//load the 3d coin modle
   coin3D.scale(3);
+  redArrow=loadShape("data/modles/red arrow/arrow.obj");
+  greenArrow=loadShape("data/modles/green arrow/arrow.obj");
+  blueArrow=loadShape("data/modles/blue arrow/arrow.obj");
+  yellowArrow=loadShape("data/modles/yellow arrow/arrow.obj");
+
+  
   initlizeButtons();
 }
-boolean startup=true, editing_level=true, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, loading=false, newLevel=false, simulating=false, entering_file_path=false, coursor=false, level_complete=false, dead=false, entering_name=false, cam_left=false, cam_right=false, drawing=false, draw=false, extra=false, ground=false, check_point=false, goal=false, deleteing=false, delete=false, moving_player=false, grid_mode=false, holo_gram=false, editingStage=false, levelOverview=false, newFile=false, drawCoins=false, drawingPortal=false, drawingPortal2=false, drawingPortal3=false, E_pressed=false, saveColors=false, sloap=false, loopThread2=true, cam_up=false, cam_down=false, holoTriangle=false, dethPlane=false, setPlayerPosTo=false, e3DMode=false, WPressed=false, SPressed=false, draw3DSwitch1=false, draw3DSwitch2=false, checkpointIn3DStage=false, shadow3D=true, tutorialMode=false, drawingSign=false, selecting=false, viewingItemContents=false, loadingBlueprint=false, creatingNewBlueprint=false, editingBlueprint=false, selectingBlueprint=false, placingSound=false, editinglogicBoard=false, connectingLogic=false, connecting=false, moveLogicComponents=false, movingLogicComponent, placingAndGate=false, placingOrGate=false, placingXorGate=false, placingNandGate=false, placingNorGate=false, placingXnorGate=false,placingTestLogic=false,placingOnSingal=false,placingReadVariable=false,placingSetVaravle=false,placingSetVisibility=false,placingXOffset=false,placingYOffset=false,placingLogicButton=false,placingDelay=false,placingZOffset,pnttst,settingPlayerSpawn=false;
+boolean startup=true, editing_level=true, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, loading=false, newLevel=false, simulating=false, entering_file_path=false, coursor=false, level_complete=false, dead=false, entering_name=false, cam_left=false, cam_right=false, drawing=false, draw=false, extra=false, ground=false, check_point=false, goal=false, deleteing=false, delete=false, moving_player=false, grid_mode=false, holo_gram=false, editingStage=false, levelOverview=false, newFile=false, drawCoins=false, drawingPortal=false, drawingPortal2=false, drawingPortal3=false, E_pressed=false, saveColors=false, sloap=false, loopThread2=true, cam_up=false, cam_down=false, holoTriangle=false, dethPlane=false, setPlayerPosTo=false, e3DMode=false, WPressed=false, SPressed=false, draw3DSwitch1=false, draw3DSwitch2=false, checkpointIn3DStage=false, shadow3D=true, tutorialMode=false, drawingSign=false, selecting=false, viewingItemContents=false, loadingBlueprint=false, creatingNewBlueprint=false, editingBlueprint=false, selectingBlueprint=false, placingSound=false, editinglogicBoard=false, connectingLogic=false, connecting=false, moveLogicComponents=false, movingLogicComponent, placingAndGate=false, placingOrGate=false, placingXorGate=false, placingNandGate=false, placingNorGate=false, placingXnorGate=false,placingTestLogic=false,placingOnSingal=false,placingReadVariable=false,placingSetVaravle=false,placingSetVisibility=false,placingXOffset=false,placingYOffset=false,placingLogicButton=false,placingDelay=false,placingZOffset,pnttst,settingPlayerSpawn=false,translateXaxis=false,translateYaxis=false,translateZaxis=false;
 String file_path, new_name="my_level", GAME_version="0.6.0_Early_Access", EDITOR_version="0.0.2_EAc", rootPath="", coursorr="", newFileName="", newFileType="2D", stageType="", author="your name here", displayText="", fileToCoppyPath="";
 //int player1 []={20,700,1,0,1,0}; // old player data
 Player player1 =new Player(20, 699, 1, "red");
@@ -26,12 +32,13 @@ JSONArray mainIndex, colors;
 JSONObject portalStage1, portalStage2;
 float downX, downY, upX, upY, Scale=1, gravity=0.001;
 ToolBox scr2 ;
-PShape coin3D;
+PShape coin3D,redArrow,greenArrow,blueArrow,yellowArrow;
 Level level;
 ArrayList<Boolean> coins = new ArrayList<Boolean>();
 Stage workingBlueprint, blueprints[], displayBlueprint;
 PApplet primaryWindow=this;
 LogicThread logicTickingThread=new LogicThread();
+Point3D initalMousePoint=new Point3D(0,0,0),initalObjectPos=new Point3D(0,0,0);
 void draw() {
 
   if (frameCount%20==0) {//curcor blinking code
@@ -532,6 +539,9 @@ void mouseClicked() {
     }
     if(!e3DMode)
     GUImouseClicked();//gui clicking code
+    else{
+      mouseClicked3D();
+    }
     
 
 
@@ -941,6 +951,7 @@ void keyReleased() {
 }//end of key relaesed
 
 void mousePressed() {
+  if(mouseButton==LEFT){
   if (editingStage||editingBlueprint) {//if edditing a stage or blueprint
     GUImousePressed();
   }
@@ -967,9 +978,48 @@ void mousePressed() {
       }
     }
   }//end of editng logic board
+    if(e3DMode&&selectedIndex!=-1){
+      StageComponent ct=level.stages.get(currentStageIndex).parts.get(selectedIndex);
+      for(int i=0;i<5000;i++){
+       Point3D testPoint=genMousePoint(i);
+       if(testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= ct.z+ct.dz && testPoint.z <= ct.z+ct.dz+60){
+         translateZaxis=true;
+         break;
+       }
+       
+       if(testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= ct.z-60 && testPoint.z <= ct.z){
+         translateZaxis=true;
+         break;
+       }
+       
+       if(testPoint.x >= ct.x-60 && testPoint.x <= ct.x && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5){
+         translateXaxis=true;
+         break;
+       }
+       
+       if(testPoint.x >= ct.x+ct.dx && testPoint.x <= ct.x+ct.dx+60 && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5){
+         translateXaxis=true;
+         break;
+       }
+       
+       if(testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= ct.y-60 && testPoint.y <= ct.y && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5){
+         translateYaxis=true;
+         break;
+       }
+       
+       if(testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= ct.y+ct.dy && testPoint.y <= ct.y+ct.dy+60 && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5){
+         translateYaxis=true;
+         break;
+       }
+      }
+      initalMousePoint=mousePoint;
+      initalObjectPos=new Point3D(ct.x,ct.y,ct.z);
+    }
+  }
 }
 
 void mouseReleased() {
+  if(mouseButton==LEFT){
   if (editingStage||editingBlueprint) {//if edditing a stage or blueprint
     GUImouseReleased();
   }
@@ -1023,6 +1073,12 @@ void mouseReleased() {
       }
     }
   }//end of editing logic board
+    if(e3DMode&&selectedIndex!=-1){
+      translateZaxis=false;
+      translateXaxis=false;
+      translateYaxis=false;
+    }
+  }
 }
 
 

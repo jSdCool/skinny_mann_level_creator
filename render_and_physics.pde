@@ -58,6 +58,10 @@ void stageLevelDraw() {
       for (int i=0; stageLoopCondishen(i, stage); i++) {//loop through all elements in the stage
         strokeWeight(0);
         noStroke();
+        if (selectedIndex==i) {//if the current element is the element the mouse is hovering over while the selection tool is active
+          stroke(#FFFF00);//give that element a blue border
+          strokeWeight(2);
+        }
         stage.parts.get(i).draw3D();//draw the element in 3D
         if (viewingItemContents&&viewingItemIndex==-1) {//if the current element has decided that you want to view it's contence but no element has been selected
           viewingItemIndex=i;//set the cuurent viewing item to this element 
@@ -735,6 +739,19 @@ int colid_index(float x, float y, Stage stage) {
   }
   return -1;
 }
+
+/**the index of the 3d element that the point is inside of
+
+*/
+int colid_index(float x, float y,float z, Stage stage) {
+  for (int i=stage.parts.size()-1; i>=0; i--) {
+    if (stage.parts.get(i).colide(x, y, z)) {
+      return i;
+    }
+  }
+  return -1;
+}
+
 /** wather the for loop drawing the stage shouold continue
 
 */

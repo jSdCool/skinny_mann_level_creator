@@ -791,6 +791,116 @@ void stageEditGUI() {
       }
     }//end of is 3d mode off if statment
     else {//if 3dmode is on
+    if(selectedIndex!=-1){
+      boolean b1=false,b2=false,r1=false,r2=false,g1=false,g2=false;
+      StageComponent ct=current.parts.get(selectedIndex);
+      for(int i=0;i<5000;i++){
+       Point3D testPoint=genMousePoint(i);
+       if(testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= ct.z+ct.dz && testPoint.z <= ct.z+ct.dz+60){
+         b1=true;
+         break;
+       }
+       
+       if(testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= ct.z-60 && testPoint.z <= ct.z){
+         b2=true;
+         break;
+       }
+       
+       if(testPoint.x >= ct.x-60 && testPoint.x <= ct.x && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5){
+         r1=true;
+         break;
+       }
+       
+       if(testPoint.x >= ct.x+ct.dx && testPoint.x <= ct.x+ct.dx+60 && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5){
+         r2=true;
+         break;
+       }
+       
+       if(testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= ct.y-60 && testPoint.y <= ct.y && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5){
+         g1=true;
+         break;
+       }
+       
+       if(testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= ct.y+ct.dy && testPoint.y <= ct.y+ct.dy+60 && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5){
+         g2=true;
+         break;
+       }
+      }
+     translate(ct.x+ct.dx/2,ct.y+ct.dy/2,ct.z+ct.dz);
+     if(b1)
+     shape(yellowArrow);
+     else
+     shape(blueArrow);
+
+     translate(-(ct.x+ct.dx/2),-(ct.y+ct.dy/2),-(ct.z+ct.dz));
+    
+     translate(ct.x+ct.dx/2,ct.y+ct.dy/2,ct.z);
+     rotateY(radians(180));
+     if(b2)
+     shape(yellowArrow);
+     else
+     shape(blueArrow);
+     rotateY(-radians(180));
+     translate(-(ct.x+ct.dx/2),-(ct.y+ct.dy/2),-(ct.z));
+     
+     translate(ct.x,ct.y+ct.dy/2,ct.z+ct.dz/2);
+     rotateY(-radians(90));
+     if(r1)
+     shape(yellowArrow);
+     else
+     shape(redArrow);
+     rotateY(radians(90));
+     translate(-(ct.x),-(ct.y+ct.dy/2),-(ct.z+ct.dz/2));
+     
+     translate(ct.x+ct.dx,ct.y+ct.dy/2,ct.z+ct.dz/2);
+     rotateY(radians(90));
+     if(r2)
+     shape(yellowArrow);
+     else
+     shape(redArrow);
+     rotateY(-radians(90));
+     translate(-(ct.x+ct.dx),-(ct.y+ct.dy/2),-(ct.z+ct.dz/2));
+     
+     translate(ct.x+ct.dx/2,ct.y,ct.z+ct.dz/2);
+     rotateX(radians(90));
+     if(g1)
+     shape(yellowArrow);
+     else
+     shape(greenArrow);
+     rotateX(-radians(90));
+     translate(-(ct.x+ct.dx/2),-(ct.y),-(ct.z+ct.dz/2));
+     
+     translate(ct.x+ct.dx/2,ct.y+ct.dy,ct.z+ct.dz/2);
+     rotateX(-radians(90));
+     if(g2)
+     shape(yellowArrow);
+     else
+     shape(greenArrow);
+     rotateX(radians(90));
+     translate(-(ct.x+ct.dx/2),-(ct.y+ct.dy),-(ct.z+ct.dz/2));
+      
+     if(grid_mode){//Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size
+       if(translateZaxis){
+         ct.z=initalObjectPos.z-Math.round((initalMousePoint.z-mousePoint.z)*1.0/grid_size)*grid_size;
+       }
+       if(translateXaxis){
+         ct.x=initalObjectPos.x-Math.round((initalMousePoint.x-mousePoint.x)*1.0/grid_size)*grid_size;;
+       }
+       if(translateYaxis){
+         ct.y=initalObjectPos.y-Math.round((initalMousePoint.y-mousePoint.y)*1.0/grid_size)*grid_size;;
+       }
+     }else{
+       if(translateZaxis){
+         ct.z=initalObjectPos.z-(initalMousePoint.z-mousePoint.z);
+       }
+       if(translateXaxis){
+         ct.x=initalObjectPos.x-(initalMousePoint.x-mousePoint.x);
+       }
+       if(translateYaxis){
+         ct.y=initalObjectPos.y-(initalMousePoint.y-mousePoint.y);
+       }
+     }
+  }
       engageHUDPosition();//move the draw position to align with the camera
 
 
@@ -1025,6 +1135,16 @@ void GUImouseReleased() {
       drawing=false;
       draw=true;
     }
+  }
+}
+
+
+void mouseClicked3D(){
+  for(int i=0;i<5000;i++){
+    Point3D testPoint = genMousePoint(i);
+    selectedIndex=colid_index(testPoint.x,testPoint.y,testPoint.z,level.stages.get(currentStageIndex));
+    if(selectedIndex!=-1)
+    break;
   }
 }
 
