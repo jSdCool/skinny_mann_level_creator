@@ -47,7 +47,13 @@ void stageLevelDraw() {
     //====================================================================================================================================================================================================
   } else if (stage.type.equals("3Dstage")) {//if the stage is a 3D stage
     if (e3DMode) {//if 3D mode is turned on
-      camera(player1.x+DX, player1.y-DY, player1.z-DZ, player1.x, player1.y, player1.z, 0, 1, 0);//set the camera
+    
+       if (simulating)//--------------------------------------------------------------------------------------------------remove this line in the final game
+       camera3DpositionSimulating();
+       else
+       camera3DpositionNotSimulating();
+
+      camera(cam3Dx+DX, cam3Dy-DY, cam3Dz-DZ, cam3Dx, cam3Dy, cam3Dz, 0, 1, 0);//set the camera
       directionalLight(255, 255, 255, 0.8, 1, -0.35);//setr up the lighting
       ambientLight(102, 102, 102);
       coinRotation+=3;//rotate the coins
@@ -185,6 +191,85 @@ void blueprintEditDraw() {
         }
     }
   }
+}
+
+void camera3DpositionSimulating(){
+  cam3Dx=player1.x;
+  cam3Dy=player1.y;
+  cam3Dz=player1.z;
+  if(cam_left){
+    xangle+=2;
+    if(xangle>240)
+    xangle=240;
+  }
+  if(cam_right){
+    xangle-=2;
+    if(xangle<190)
+    xangle=190;
+  }
+  if(cam_up){
+    yangle+=1;
+    if(yangle>=30)
+    yangle=30;
+  }
+  if(cam_down){
+    yangle-=1;
+    if(yangle<10)
+    yangle=10;
+  }
+  //xangle=205;
+  //yangle=15;
+  DY=sin(radians(yangle))*dist;
+  hd=cos(radians(yangle))*dist;
+  DX=sin(radians(xangle))*hd;
+  DZ=cos(radians(xangle))*hd;
+}
+
+void camera3DpositionNotSimulating(){
+  if(space3D){
+    cam3Dy-=20;
+  }
+  if(shift3D){
+   cam3Dy+=20; 
+  }
+  if(w3D){
+    cam3Dx+=20*sin(radians(-xangle));
+    cam3Dz+=20*cos(radians(-xangle));
+  }
+  if(s3D){
+    cam3Dx-=20*sin(radians(-xangle));
+    cam3Dz-=20*cos(radians(-xangle));
+  }
+  if(a3D){
+    cam3Dx+=20*cos(radians(xangle));
+    cam3Dz+=20*sin(radians(xangle));
+  }
+  if(d3D){
+    cam3Dx-=20*cos(radians(xangle));
+    cam3Dz-=20*sin(radians(xangle));
+  }
+  
+  
+  if(cam_left){
+    xangle+=2;
+  }
+  if(cam_right){
+    xangle-=2;
+  }
+  if(cam_up){
+    yangle+=1;
+    if(yangle>=90)
+    yangle=89;
+  }
+  if(cam_down){
+    yangle-=1;
+    if(yangle<0)
+    yangle=0;
+  }
+  DY=sin(radians(yangle))*dist;
+  hd=cos(radians(yangle))*dist;
+  DX=sin(radians(xangle))*hd;
+  DZ=cos(radians(xangle))*hd;
 }
 //////////////////////////////////////////-----------------------------------------------------
 

@@ -21,7 +21,7 @@ void setup() {
   
   initlizeButtons();
 }
-boolean startup=true, editing_level=true, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, loading=false, newLevel=false, simulating=false, entering_file_path=false, coursor=false, level_complete=false, dead=false, entering_name=false, cam_left=false, cam_right=false, drawing=false, draw=false, extra=false, ground=false, check_point=false, goal=false, deleteing=false, delete=false, moving_player=false, grid_mode=false, holo_gram=false, editingStage=false, levelOverview=false, newFile=false, drawCoins=false, drawingPortal=false, drawingPortal2=false, drawingPortal3=false, E_pressed=false, saveColors=false, sloap=false, loopThread2=true, cam_up=false, cam_down=false, holoTriangle=false, dethPlane=false, setPlayerPosTo=false, e3DMode=false, WPressed=false, SPressed=false, draw3DSwitch1=false, draw3DSwitch2=false, checkpointIn3DStage=false, shadow3D=true, tutorialMode=false, drawingSign=false, selecting=false, viewingItemContents=false, loadingBlueprint=false, creatingNewBlueprint=false, editingBlueprint=false, selectingBlueprint=false, placingSound=false, editinglogicBoard=false, connectingLogic=false, connecting=false, moveLogicComponents=false, movingLogicComponent, placingAndGate=false, placingOrGate=false, placingXorGate=false, placingNandGate=false, placingNorGate=false, placingXnorGate=false,placingTestLogic=false,placingOnSingal=false,placingReadVariable=false,placingSetVaravle=false,placingSetVisibility=false,placingXOffset=false,placingYOffset=false,placingLogicButton=false,placingDelay=false,placingZOffset,pnttst,settingPlayerSpawn=false,translateXaxis=false,translateYaxis=false,translateZaxis=false;
+boolean startup=true, editing_level=true, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, loading=false, newLevel=false, simulating=false, entering_file_path=false, coursor=false, level_complete=false, dead=false, entering_name=false, cam_left=false, cam_right=false, drawing=false, draw=false, extra=false, ground=false, check_point=false, goal=false, deleteing=false, delete=false, moving_player=false, grid_mode=false, holo_gram=false, editingStage=false, levelOverview=false, newFile=false, drawCoins=false, drawingPortal=false, drawingPortal2=false, drawingPortal3=false, E_pressed=false, saveColors=false, sloap=false, loopThread2=true, cam_up=false, cam_down=false, holoTriangle=false, dethPlane=false, setPlayerPosTo=false, e3DMode=false, WPressed=false, SPressed=false, draw3DSwitch1=false, draw3DSwitch2=false, checkpointIn3DStage=false, shadow3D=true, tutorialMode=false, drawingSign=false, selecting=false, viewingItemContents=false, loadingBlueprint=false, creatingNewBlueprint=false, editingBlueprint=false, selectingBlueprint=false, placingSound=false, editinglogicBoard=false, connectingLogic=false, connecting=false, moveLogicComponents=false, movingLogicComponent, placingAndGate=false, placingOrGate=false, placingXorGate=false, placingNandGate=false, placingNorGate=false, placingXnorGate=false,placingTestLogic=false,placingOnSingal=false,placingReadVariable=false,placingSetVaravle=false,placingSetVisibility=false,placingXOffset=false,placingYOffset=false,placingLogicButton=false,placingDelay=false,placingZOffset,pnttst,settingPlayerSpawn=false,translateXaxis=false,translateYaxis=false,translateZaxis=false,w3D=false,a3D=false,s3D=false,d3D=false,space3D=false,shift3D=false;
 String file_path, new_name="my_level", GAME_version="0.6.0_Early_Access", EDITOR_version="0.0.2_EAc", rootPath="", coursorr="", newFileName="", newFileType="2D", stageType="", author="your name here", displayText="", fileToCoppyPath="";
 //int player1 []={20,700,1,0,1,0}; // old player data
 Player player1 =new Player(20, 699, 1, "red");
@@ -829,7 +829,7 @@ void keyPressed() {
       }
     }//end of 3d mode
   }
-  if (!simulating||editinglogicBoard) {//if the simulation is paused
+  if (!simulating||editinglogicBoard||e3DMode) {//if the simulation is paused
     if (keyCode==37) {//if LEFT ARROW is pressed
       cam_left=true;
     }
@@ -843,6 +843,27 @@ void keyPressed() {
       cam_down=true;
     }
   }//end of if sumilating
+  if(!simulating&&e3DMode){
+    if (keyCode==65) {//if 'A' is pressed
+      a3D=true;
+    }
+    if (keyCode==68) {//if 'D' is pressed
+      d3D=true;
+    }
+    if (keyCode==32) {//if SPACE is pressed
+      space3D=true;
+    }
+    if (keyCode==16) {//if 'SHIFT' is pressed
+      shift3D=true;
+    }
+    if (keyCode==87) {//if 'W' is pressed
+      w3D=true;
+      key = 0;//clear key so CTRL + W doesent close the program
+    }
+    if (keyCode==83) {//if 'S' is pressed
+      s3D=true;
+    }
+  }
 
 
   if (key=='q') {//if 'q' is pressed then print debg info to the console
@@ -908,7 +929,7 @@ void keyPressed() {
   if (startup) {//if on the main menue
     author = getInput(author, 0);//typing for the author name
   }
-  //System.out.println(keyCode);//usefull to figureout what key is what
+  System.out.println(keyCode);//usefull to figureout what key is what
 }
 
 void keyReleased() {
@@ -934,7 +955,7 @@ void keyReleased() {
   if (key=='e'||key=='E') {//if 'E' released
     E_pressed=false;
   }
-  if (!simulating||editinglogicBoard) {//if the simulation is paused
+  if (!simulating||editinglogicBoard||e3DMode) {//if the simulation is paused
     if (keyCode==37) {//if LEFT ARROW released
       cam_left=false;
     }
@@ -948,6 +969,27 @@ void keyReleased() {
       cam_down=false;
     }
   }//end of simulation pasued
+  if(!simulating&&e3DMode){
+    if (keyCode==65) {//if 'A' is pressed
+      a3D=false;
+    }
+    if (keyCode==68) {//if 'D' is pressed
+      d3D=false;
+    }
+    if (keyCode==32) {//if SPACE is pressed
+      space3D=false;
+    }
+    if (keyCode==16) {//if 'SHIFT' is pressed
+      shift3D=false;
+    }
+    if (keyCode==87) {//if 'W' is pressed
+      w3D=false;
+      key = 0;//clear key so CTRL + W doesent close the program
+    }
+    if (keyCode==83) {//if 'S' is pressed
+      s3D=false;
+    }
+  }
 }//end of key relaesed
 
 void mousePressed() {

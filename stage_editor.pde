@@ -1345,9 +1345,7 @@ void renderBlueprint() {//render the blueprint on top of the stage
 float dfa=1280.0/720, car=1.0*width/height;
 Point3D mousePoint=new Point3D(0,0,0);
 void calcMousePoint() {//get a 3d point that is at the same postition as the mouse curser
-cam3Dx=player1.x;
-cam3Dy=player1.y;
-cam3Dz=player1.z;
+
   car=1.0*width/height;
   float planeDist=622/*700*/;
   float camCentercCalcX, camCentercCalcY, camCentercCalcZ;//get a point that is a certain distance from where the camera eyes are in the center if the screen
