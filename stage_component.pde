@@ -269,7 +269,7 @@ abstract class StageComponent {//the base class for all components that exsist i
   boolean colide(float x, float y, boolean c) {
     return false;
   };//c= is colideing with click box
-  boolean colide(float x, float y, float z) {
+  boolean colide(float x, float y, float z,boolean c) {
     return false;
   };
   boolean colideDethPlane(float x, float Y) {
@@ -383,7 +383,7 @@ class Ground extends StageComponent {//ground component
     return false;
   }
 
-  boolean colide(float x, float y, float z) {
+  boolean colide(float x, float y, float z,boolean c) {
     Group group=getGroup();
     if(!group.visable)
       return false;
@@ -481,7 +481,7 @@ class Holo extends StageComponent {//ground component
     return false;
   }
 
-  boolean colide(float x, float y, float z) {
+  boolean colide(float x, float y, float z,boolean c) {
     Group group=getGroup();
     if(!group.visable)
       return false;
@@ -646,7 +646,7 @@ class CheckPoint extends StageComponent {//ground component
     Group group=getGroup();
     if(!group.visable)
       return;
-    noStroke();
+    //noStroke();
     float playx=player1.getX();
     boolean po=false;
     if (playx>=(x+group.xOffset)-20 && playx<= (x+group.xOffset)+20 && (y+group.yOffset)-50 <= player1.getY() && (y+group.yOffset)>=player1.getY()-10 && player1.z >= (z+group.zOffset)-20 && player1.z <= (z+group.zOffset)+20) {
@@ -684,6 +684,18 @@ class CheckPoint extends StageComponent {//ground component
         return true;
       }
     }
+    return false;
+  }
+  
+  boolean colide(float x, float y, float z,boolean c) {
+    Group group=getGroup();
+    if(!group.visable)
+      return false;
+   if(c){
+     if (x>=(this.x+group.xOffset)-8 && x<= (this.x+group.xOffset)+8 && y >= (this.y+group.yOffset)-50 && y <= (this.y+group.yOffset) && z>=(this.z+group.zOffset)-8 && z<= (this.z+group.zOffset)+8 ) {
+        return true;
+      }
+   }
     return false;
   }
 }
@@ -859,6 +871,18 @@ class Coin extends StageComponent {//ground component
     }
     return false;
   }
+  
+  boolean colide(float x, float y, float z,boolean c) {
+   Group group=getGroup();
+    if(!group.visable)
+      return false;
+    if (c) {
+      if (Math.sqrt(Math.pow(x-(this.x+group.xOffset), 2)+Math.pow(y-(this.y+group.yOffset), 2)+Math.pow(z-(this.z+group.zOffset), 2))<19) {
+        return true;
+      }
+    }
+    return false;
+  }
 }
 
 class Interdimentional_Portal extends StageComponent {//ground component
@@ -977,6 +1001,17 @@ class Interdimentional_Portal extends StageComponent {//ground component
       return false;
     if (c) {
       if (x>(this.x+group.xOffset)-25&&x<(this.x+group.xOffset)+25&&y>(this.y+group.yOffset)-50&&y<(this.y+group.yOffset)+60) {
+        return true;
+      }
+    }
+    return false;
+  }
+  
+  boolean colide(float x, float y, float z,boolean c) {
+    Group group=getGroup();
+    if(!group.visable)
+   if (c) {
+      if (x > (this.x+group.xOffset)-25 && x < (this.x+group.xOffset)+25 && y >(this.y+group.yOffset)-50 && y < (this.y+group.yOffset)+60 && z > (this.z+group.zOffset)-2 && z < (this.z+group.zOffset)+2) {
         return true;
       }
     }
@@ -1266,6 +1301,18 @@ class SWon3D extends StageComponent {//ground component
     }
     return false;
   }
+  
+  boolean colide(float x, float y, float z,boolean c) {
+   Group group=getGroup();
+    if(!group.visable)
+      return false;
+    if (c) {
+      if (x >= ((this.x+group.xOffset))-20 && x <= ((this.x+group.xOffset)) + 20 && y >= ((this.y+group.yOffset)) - 10 && y <= (this.y+group.yOffset) && z >= ((this.z+group.zOffset)) - 10 && z <= (this.z+group.zOffset)) {
+        return true;
+      }
+    }
+    return false;
+  }
 }
 
 class SWoff3D extends StageComponent {//ground component
@@ -1328,6 +1375,18 @@ class SWoff3D extends StageComponent {//ground component
       return false;
     if (c) {
       if (x >= ((this.x+group.xOffset))-20 && x <= ((this.x+group.xOffset)) + 20 && y >= ((this.y+group.yOffset)) - 10 && y <= (this.y+group.yOffset)) {
+        return true;
+      }
+    }
+    return false;
+  }
+  
+  boolean colide(float x, float y, float z,boolean c) {
+   Group group=getGroup();
+    if(!group.visable)
+      return false;
+    if (c) {
+      if (x >= ((this.x+group.xOffset))-20 && x <= ((this.x+group.xOffset)) + 20 && y >= ((this.y+group.yOffset)) - 10 && y <= (this.y+group.yOffset) && z >= ((this.z+group.zOffset)) - 10 && z <= (this.z+group.zOffset)) {
         return true;
       }
     }
@@ -1411,6 +1470,18 @@ class WritableSign extends StageComponent {
       return false;
     if (c) {
       if (x >= ((this.x+group.xOffset))-35 && x <= ((this.x+group.xOffset)) + 35 && y >= ((this.y+group.yOffset)) - 65 && y <= (this.y+group.yOffset)) {
+        return true;
+      }
+    }
+    return false;
+  }
+  
+  boolean colide(float x, float y, float z,boolean c) {
+   Group group=getGroup();
+    if(!group.visable)
+      return false;
+    if (c) {
+      if (x >= ((this.x+group.xOffset))-35 && x <= ((this.x+group.xOffset)) + 35 && y >= ((this.y+group.yOffset)) - 65 && y <= (this.y+group.yOffset) && z >= ((this.z+group.yOffset)) - 5 && z <= (this.z+group.zOffset)+5) {
         return true;
       }
     }

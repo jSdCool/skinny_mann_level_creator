@@ -791,7 +791,7 @@ boolean level_colide(float x, float y) {
 boolean level_colide(float x, float y, float z) {//3d collions
   Stage stage=level.stages.get(currentStageIndex);
   for (int i=0; stageLoopCondishen(i, stage); i++) {
-    if (stage.parts.get(i).colide(x, y, z)) {
+    if (stage.parts.get(i).colide(x, y, z,false)) {
 
       return true;
     }
@@ -830,7 +830,7 @@ int colid_index(float x, float y, Stage stage) {
 */
 int colid_index(float x, float y,float z, Stage stage) {
   for (int i=stage.parts.size()-1; i>=0; i--) {
-    if (stage.parts.get(i).colide(x, y, z)) {
+    if (stage.parts.get(i).colide(x, y, z,true)) {
       return i;
     }
   }

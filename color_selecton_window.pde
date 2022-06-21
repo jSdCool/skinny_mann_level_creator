@@ -9,7 +9,7 @@ class ToolBox extends PApplet {
   public int redVal=0, greenVal=0, blueVal=0, CC=0;
   int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset,variableScroll=0,groupScroll=0;
   String page="colors",newGroopName="";
-  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton,testLogicPlaceButton,constantOnButton,setVariableButton,readVariableButton,setVisabilityButton,xOffsetButton,yOffsetButton,increase,increaseMore,increaseAlot,decrease,decreaseMore,decreaseAlot,nextGroup,prevGroup,variablesAndGroups,variablesUP,variablesDOWN,groupsUP,groupsDOWN,addVariable,addGroup,typeGroopName,logicButtonButton,runLoad,delayButton,zOffsetButton,logicHelpButton;
+  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton,testLogicPlaceButton,constantOnButton,setVariableButton,readVariableButton,setVisabilityButton,xOffsetButton,yOffsetButton,increase,increaseMore,increaseAlot,decrease,decreaseMore,decreaseAlot,nextGroup,prevGroup,variablesAndGroups,variablesUP,variablesDOWN,groupsUP,groupsDOWN,addVariable,addGroup,typeGroopName,logicButtonButton,runLoad,delayButton,zOffsetButton,logicHelpButton,move3DButton,size3DButton;
   boolean typingSign=false, settingSkyColor=false,typingGroopName=false;
 
   public void settings() {
@@ -54,6 +54,8 @@ class ToolBox extends PApplet {
     gridModeButton=new Button(this, 400, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("grid mode");
     holoButton=new Button(this, 460, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("hologram (no collision)");
     logicButtonButton=new Button(this, 100, 200, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("place button");
+    move3DButton=new Button(this, 160, 200, 50, 50,"move", 255, 203).setStrokeWeight(5).setHoverText("move things in 3D");
+    size3DButton=new Button(this, 220, 200, 50, 50,"size", 255, 203).setStrokeWeight(5).setHoverText("resize things in 3D");
 
     connectLogicButton=new Button(this, 40, 40+100, 50, 50, "connect", 255, 203).setStrokeWeight(5).setHoverText("connect logic nodes");
     moveComponentsButton=new Button(this, 100, 40+100, 50, 50, "move", 255, 203).setStrokeWeight(5).setHoverText("move components arround");
@@ -574,7 +576,43 @@ class ToolBox extends PApplet {
           else {
             toggle3DMode.setColor(255, #F2F258);
             toggle3DMode.draw();
-            textAlign(LEFT, BOTTOM);
+            if (grid_mode) {
+              gridModeButton.setColor(255, #F2F258);
+            } else {
+              gridModeButton.setColor(255, 203);
+            }
+            gridModeButton.draw();
+            textSize(20);
+            fill(0);
+            stroke(0);
+            strokeWeight(1);
+            line(410, 42+100, 410, 87+100);
+            line(420, 42+100, 420, 87+100);
+            line(430, 42+100, 430, 87+100);
+            line(440, 42+100, 440, 87+100);
+            line(402, 50+100, 448, 50+100);
+            line(402, 60+100, 448, 60+100);
+            line(402, 70+100, 448, 70+100);
+            line(402, 80+100, 448, 80+100);
+            text(grid_size, 410, 80+100);
+            strokeWeight(0);
+            
+            if(current3DTransformMode==2){
+             size3DButton.setColor(255, #F2F258);
+            } else {
+              size3DButton.setColor(255, 203);
+            }
+            size3DButton.draw();
+            if(current3DTransformMode==1){
+             move3DButton.setColor(255, #F2F258);
+            } else {
+              move3DButton.setColor(255, 203);
+            }
+            move3DButton.draw();
+            
+            move3DButton.drawHoverText();
+            size3DButton.drawHoverText();
+            gridModeButton.drawHoverText();
             toggle3DMode.drawHoverText();
           }
         }//end of if stage is 3D
@@ -1438,6 +1476,23 @@ class ToolBox extends PApplet {
               turnThingsOff();
               selecting=true;
             }
+            if (gridModeButton.isMouseOver()) {
+            extra=true;
+            if (extra&&grid_mode) {
+              grid_mode=false;
+              extra=false;
+            }
+            if (extra&&!grid_mode) {
+              grid_mode=true;
+              extra=false;
+            }
+          }
+          if(size3DButton.isMouseOver()){
+           current3DTransformMode=2; 
+          }
+          if(move3DButton.isMouseOver()){
+           current3DTransformMode=1; 
+          }
             
           }//end of 3D mode is on
         }

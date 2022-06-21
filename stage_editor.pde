@@ -11,7 +11,7 @@ void stageEditGUI() {
   }
   Color=(int)(RC*Math.pow(16, 4)+GC*Math.pow(16, 2)+BC+adj)-16777215;
   Color=scr2.CC;
-  
+
   Stage current=null;//setup a varable that can be used for the current stage or blueprint
   if (editingStage) {
     current=level.stages.get(currentStageIndex);
@@ -332,7 +332,7 @@ void stageEditGUI() {
 
     if (deleteing&&delete) {//if attempting to delete something
       int index=colid_index(mouseX+camPos, mouseY-camPosY, current);//get the index of the elemtn the mouse is currently over
-      if (index==-1) {//if the mouse was over nothing then do nothing 
+      if (index==-1) {//if the mouse was over nothing then do nothing
       } else {
         current.parts.remove(index);//remove the object the mosue was over
       }
@@ -356,7 +356,7 @@ void stageEditGUI() {
     }
 
     if (drawingPortal3) {//if drawing portal part 3
-      if (grid_mode) {//if gridmode is on 
+      if (grid_mode) {//if gridmode is on
         drawPortal(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size-camPos, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size+camPosY, 1);//draw a grid aligned portal
       } else {
         drawPortal(mouseX, mouseY, 1);//draw a portal
@@ -365,7 +365,7 @@ void stageEditGUI() {
 
     if (sloap&&draw) {//if drawing a triangle
       int X1=0, X2=0, Y1=0, Y2=0;
-      if (grid_mode) {//if gridmode is on 
+      if (grid_mode) {//if gridmode is on
 
 
         if (upX>downX) {//calcualte corner positions
@@ -506,20 +506,20 @@ void stageEditGUI() {
       }
     }
     if (placingLogicButton) {//if placing a logic button
-        if (grid_mode) {//draw the switch
-          drawLogicButton(primaryWindow,Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size-camPos, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size+camPosY, 1,false);
-        } else {
-          drawLogicButton(primaryWindow,mouseX, mouseY, 1,false);
-        }
+      if (grid_mode) {//draw the switch
+        drawLogicButton(primaryWindow, Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size-camPos, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size+camPosY, 1, false);
+      } else {
+        drawLogicButton(primaryWindow, mouseX, mouseY, 1, false);
       }
+    }
     if (placingLogicButton&&draw) {//if attempting to add a logic button
-        if (grid_mode) {//add the button to the stage
-          current.parts.add(new LogicButton(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size));
-        } else {
-          current.parts.add(new LogicButton((int)mouseX+camPos, (int)mouseY-camPosY));
-        }
-        draw=false;
+      if (grid_mode) {//add the button to the stage
+        current.parts.add(new LogicButton(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size));
+      } else {
+        current.parts.add(new LogicButton((int)mouseX+camPos, (int)mouseY-camPosY));
       }
+      draw=false;
+    }
 
 
     //the accual gut part
@@ -689,7 +689,7 @@ void stageEditGUI() {
         draw=false;
       }
 
-      if (deleteing&&delete) {//if deleting things 
+      if (deleteing&&delete) {//if deleting things
         int index=colid_index(mouseX+camPos, mouseY-camPosY, level.stages.get(currentStageIndex));//figure out what thing the mouse is over
         if (index==-1) {//if the mouse is over nothing then do nothing
         } else {
@@ -720,7 +720,7 @@ void stageEditGUI() {
         draw=false;
       }
 
-      if (draw3DSwitch2&&draw) {//if attempting to add a 3D switch 
+      if (draw3DSwitch2&&draw) {//if attempting to add a 3D switch
         if (grid_mode) {//add the 3D switch to the stage
           current.parts.add(new SWoff3D(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size, startingDepth));
         } else {
@@ -746,7 +746,7 @@ void stageEditGUI() {
         }
       }
 
-      if (drawingPortal3) {//if placing a portal part 3 
+      if (drawingPortal3) {//if placing a portal part 3
         if (grid_mode) {//display the portal
           drawPortal(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size-camPos, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size+camPosY, 1);
         } else {
@@ -776,12 +776,12 @@ void stageEditGUI() {
       }
       if (placingLogicButton) {//if placing a logic button
         if (grid_mode) {//draw the switch
-          drawLogicButton(primaryWindow,Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size-camPos, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size+camPosY, 1,false);
+          drawLogicButton(primaryWindow, Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size-camPos, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size+camPosY, 1, false);
         } else {
-          drawLogicButton(primaryWindow,mouseX, mouseY, 1,false);
+          drawLogicButton(primaryWindow, mouseX, mouseY, 1, false);
         }
       }
-    if (placingLogicButton&&draw) {//if attempting to add a logic button
+      if (placingLogicButton&&draw) {//if attempting to add a logic button
         if (grid_mode) {//add the button to the stage
           current.parts.add(new LogicButton(Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size, Math.round(((int)mouseY-camPosY)*1.0/grid_size)*grid_size, startingDepth));
         } else {
@@ -791,116 +791,120 @@ void stageEditGUI() {
       }
     }//end of is 3d mode off if statment
     else {//if 3dmode is on
-    if(selectedIndex!=-1){
-      boolean b1=false,b2=false,r1=false,r2=false,g1=false,g2=false;
-      StageComponent ct=current.parts.get(selectedIndex);
-      for(int i=0;i<5000;i++){
-       Point3D testPoint=genMousePoint(i);
-       if(testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= ct.z+ct.dz && testPoint.z <= ct.z+ct.dz+60){
-         b1=true;
-         break;
-       }
-       
-       if(testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= ct.z-60 && testPoint.z <= ct.z){
-         b2=true;
-         break;
-       }
-       
-       if(testPoint.x >= ct.x-60 && testPoint.x <= ct.x && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5){
-         r1=true;
-         break;
-       }
-       
-       if(testPoint.x >= ct.x+ct.dx && testPoint.x <= ct.x+ct.dx+60 && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5){
-         r2=true;
-         break;
-       }
-       
-       if(testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= ct.y-60 && testPoint.y <= ct.y && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5){
-         g1=true;
-         break;
-       }
-       
-       if(testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= ct.y+ct.dy && testPoint.y <= ct.y+ct.dy+60 && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5){
-         g2=true;
-         break;
-       }
-      }
-     translate(ct.x+ct.dx/2,ct.y+ct.dy/2,ct.z+ct.dz);
-     if(b1)
-     shape(yellowArrow);
-     else
-     shape(blueArrow);
+      if (selectedIndex!=-1) {
+        boolean b1=false, b2=false, r1=false, r2=false, g1=false, g2=false;
+        StageComponent ct=current.parts.get(selectedIndex);
+        for (int i=0; i<5000; i++) {
+          Point3D testPoint=genMousePoint(i);
+          if (testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= ct.z+ct.dz && testPoint.z <= ct.z+ct.dz+60) {
+            b1=true;
+            break;
+          }
 
-     translate(-(ct.x+ct.dx/2),-(ct.y+ct.dy/2),-(ct.z+ct.dz));
-    
-     translate(ct.x+ct.dx/2,ct.y+ct.dy/2,ct.z);
-     rotateY(radians(180));
-     if(b2)
-     shape(yellowArrow);
-     else
-     shape(blueArrow);
-     rotateY(-radians(180));
-     translate(-(ct.x+ct.dx/2),-(ct.y+ct.dy/2),-(ct.z));
-     
-     translate(ct.x,ct.y+ct.dy/2,ct.z+ct.dz/2);
-     rotateY(-radians(90));
-     if(r1)
-     shape(yellowArrow);
-     else
-     shape(redArrow);
-     rotateY(radians(90));
-     translate(-(ct.x),-(ct.y+ct.dy/2),-(ct.z+ct.dz/2));
-     
-     translate(ct.x+ct.dx,ct.y+ct.dy/2,ct.z+ct.dz/2);
-     rotateY(radians(90));
-     if(r2)
-     shape(yellowArrow);
-     else
-     shape(redArrow);
-     rotateY(-radians(90));
-     translate(-(ct.x+ct.dx),-(ct.y+ct.dy/2),-(ct.z+ct.dz/2));
-     
-     translate(ct.x+ct.dx/2,ct.y,ct.z+ct.dz/2);
-     rotateX(radians(90));
-     if(g1)
-     shape(yellowArrow);
-     else
-     shape(greenArrow);
-     rotateX(-radians(90));
-     translate(-(ct.x+ct.dx/2),-(ct.y),-(ct.z+ct.dz/2));
-     
-     translate(ct.x+ct.dx/2,ct.y+ct.dy,ct.z+ct.dz/2);
-     rotateX(-radians(90));
-     if(g2)
-     shape(yellowArrow);
-     else
-     shape(greenArrow);
-     rotateX(radians(90));
-     translate(-(ct.x+ct.dx/2),-(ct.y+ct.dy),-(ct.z+ct.dz/2));
-      
-     if(grid_mode){//Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size
-       if(translateZaxis){
-         ct.z=initalObjectPos.z-Math.round((initalMousePoint.z-mousePoint.z)*1.0/grid_size)*grid_size;
-       }
-       if(translateXaxis){
-         ct.x=initalObjectPos.x-Math.round((initalMousePoint.x-mousePoint.x)*1.0/grid_size)*grid_size;;
-       }
-       if(translateYaxis){
-         ct.y=initalObjectPos.y-Math.round((initalMousePoint.y-mousePoint.y)*1.0/grid_size)*grid_size;;
-       }
-     }else{
-       if(translateZaxis){
-         ct.z=initalObjectPos.z-(initalMousePoint.z-mousePoint.z);
-       }
-       if(translateXaxis){
-         ct.x=initalObjectPos.x-(initalMousePoint.x-mousePoint.x);
-       }
-       if(translateYaxis){
-         ct.y=initalObjectPos.y-(initalMousePoint.y-mousePoint.y);
-       }
-     }
-  }
+          if (testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= ct.z-60 && testPoint.z <= ct.z) {
+            b2=true;
+            break;
+          }
+
+          if (testPoint.x >= ct.x-60 && testPoint.x <= ct.x && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5) {
+            r1=true;
+            break;
+          }
+
+          if (testPoint.x >= ct.x+ct.dx && testPoint.x <= ct.x+ct.dx+60 && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5) {
+            r2=true;
+            break;
+          }
+
+          if (testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= ct.y-60 && testPoint.y <= ct.y && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5) {
+            g1=true;
+            break;
+          }
+
+          if (testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= ct.y+ct.dy && testPoint.y <= ct.y+ct.dy+60 && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5) {
+            g2=true;
+            break;
+          }
+        }
+        if (current3DTransformMode==1) {
+          translate(ct.x+ct.dx/2, ct.y+ct.dy/2, ct.z+ct.dz);
+          if (b1)
+            shape(yellowArrow);
+          else
+            shape(blueArrow);
+
+          translate(-(ct.x+ct.dx/2), -(ct.y+ct.dy/2), -(ct.z+ct.dz));
+
+          translate(ct.x+ct.dx/2, ct.y+ct.dy/2, ct.z);
+          rotateY(radians(180));
+          if (b2)
+            shape(yellowArrow);
+          else
+            shape(blueArrow);
+          rotateY(-radians(180));
+          translate(-(ct.x+ct.dx/2), -(ct.y+ct.dy/2), -(ct.z));
+
+          translate(ct.x, ct.y+ct.dy/2, ct.z+ct.dz/2);
+          rotateY(-radians(90));
+          if (r1)
+            shape(yellowArrow);
+          else
+            shape(redArrow);
+          rotateY(radians(90));
+          translate(-(ct.x), -(ct.y+ct.dy/2), -(ct.z+ct.dz/2));
+
+          translate(ct.x+ct.dx, ct.y+ct.dy/2, ct.z+ct.dz/2);
+          rotateY(radians(90));
+          if (r2)
+            shape(yellowArrow);
+          else
+            shape(redArrow);
+          rotateY(-radians(90));
+          translate(-(ct.x+ct.dx), -(ct.y+ct.dy/2), -(ct.z+ct.dz/2));
+
+          translate(ct.x+ct.dx/2, ct.y, ct.z+ct.dz/2);
+          rotateX(radians(90));
+          if (g1)
+            shape(yellowArrow);
+          else
+            shape(greenArrow);
+          rotateX(-radians(90));
+          translate(-(ct.x+ct.dx/2), -(ct.y), -(ct.z+ct.dz/2));
+
+          translate(ct.x+ct.dx/2, ct.y+ct.dy, ct.z+ct.dz/2);
+          rotateX(-radians(90));
+          if (g2)
+            shape(yellowArrow);
+          else
+            shape(greenArrow);
+          rotateX(radians(90));
+          translate(-(ct.x+ct.dx/2), -(ct.y+ct.dy), -(ct.z+ct.dz/2));
+
+          if (grid_mode) {//Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size
+            if (translateZaxis) {
+              ct.z=initalObjectPos.z-Math.round((initalMousePoint.z-mousePoint.z)*1.0/grid_size)*grid_size;
+            }
+            if (translateXaxis) {
+              ct.x=initalObjectPos.x-Math.round((initalMousePoint.x-mousePoint.x)*1.0/grid_size)*grid_size;
+              ;
+            }
+            if (translateYaxis) {
+              ct.y=initalObjectPos.y-Math.round((initalMousePoint.y-mousePoint.y)*1.0/grid_size)*grid_size;
+              ;
+            }
+          } else {
+            if (translateZaxis) {
+              ct.z=initalObjectPos.z-(initalMousePoint.z-mousePoint.z);
+            }
+            if (translateXaxis) {
+              ct.x=initalObjectPos.x-(initalMousePoint.x-mousePoint.x);
+            }
+            if (translateYaxis) {
+              ct.y=initalObjectPos.y-(initalMousePoint.y-mousePoint.y);
+            }
+          }
+        }
+      }//end of 3d tranform is move mode
       engageHUDPosition();//move the draw position to align with the camera
 
 
@@ -935,7 +939,7 @@ void GUImouseClicked() {
         draw=true;
       }
     }
-    if(placingLogicButton){//if placing logic button
+    if (placingLogicButton) {//if placing logic button
       draw=true;
     }
     if (deleteing) {//if deleteing
@@ -1037,7 +1041,7 @@ void GUImouseClicked() {
       portalStage1=null;
       drawingPortal3=false;
     }
-    //add switches 
+    //add switches
     if (draw3DSwitch1) {
       draw=true;
     }
@@ -1139,12 +1143,12 @@ void GUImouseReleased() {
 }
 
 
-void mouseClicked3D(){
-  for(int i=0;i<5000;i++){
+void mouseClicked3D() {
+  for (int i=0; i<5000; i++) {
     Point3D testPoint = genMousePoint(i);
-    selectedIndex=colid_index(testPoint.x,testPoint.y,testPoint.z,level.stages.get(currentStageIndex));
-    if(selectedIndex!=-1)
-    break;
+    selectedIndex=colid_index(testPoint.x, testPoint.y, testPoint.z, level.stages.get(currentStageIndex));
+    if (selectedIndex!=-1)
+      break;
   }
 }
 
@@ -1309,8 +1313,8 @@ void disEngageHUDPosition() {
 }
 
 /**coppy the blueprint so it can be correctly positoned on top of the stage for viewing
-
-*/
+ 
+ */
 void generateDisplayBlueprint() {
   displayBlueprint=new Stage("tmp", "blueprint");
   int ix, iy;
@@ -1343,7 +1347,7 @@ void renderBlueprint() {//render the blueprint on top of the stage
 
 //dfa=default aspect ratio car=current aspect ratio
 float dfa=1280.0/720, car=1.0*width/height;
-Point3D mousePoint=new Point3D(0,0,0);
+Point3D mousePoint=new Point3D(0, 0, 0);
 void calcMousePoint() {//get a 3d point that is at the same postition as the mouse curser
 
   car=1.0*width/height;
@@ -1353,15 +1357,15 @@ void calcMousePoint() {//get a 3d point that is at the same postition as the mou
   float hd2=cos(radians(yangle))*-planeDist;//calcualte a new hypotenuse for the x/z axis where the result from the calculation of the Y coord is taken into account
   camCentercCalcX=sin(radians(xangle))*hd2+cam3Dx+DX;//use the new hypotenuse to calculate the x and z points
   camCentercCalcZ=cos(radians(xangle))*-hd2+cam3Dz-DZ;
-  
-  
+
+
   float midDistX=-1*(mouseX-width/2)/((width/1280.0)/(car/dfa)), midDistY=(mouseY-height/2)/(height/720.0);//calculate the mouse's distance from the center of the window adjusted to the plane that is a distacne from the camera
   float nz=sin(radians(-xangle))*midDistX, nx=cos(radians(-xangle))*midDistX;//calcuate the new distacne from the cenetr of trhe plane the points are at
   float ny=cos(radians(yangle))*midDistY, nd=sin(radians(yangle))*midDistY;
   nz+=cos(radians(xangle))*nd;//adjust those points for the rotation of the plane
   nx+=sin(radians(xangle))*nd;
-//calculate the final coorinates of the point that is at the cameras pos
-  mousePoint=new Point3D(camCentercCalcX+nx,camCentercCalcY+ny,camCentercCalcZ-nz);
+  //calculate the final coorinates of the point that is at the cameras pos
+  mousePoint=new Point3D(camCentercCalcX+nx, camCentercCalcY+ny, camCentercCalcZ-nz);
 }
 
 Point3D genMousePoint(float hyp) {//calcualte the coords of a new point that is in line toth the mouse pointer at a set distance from the camera
@@ -1378,9 +1382,9 @@ Point3D genMousePoint(float hyp) {//calcualte the coords of a new point that is 
 
   return new Point3D(x, y, z);
 }
-class Point3D{
-  float x,y,z;
-  Point3D(float x,float y,float z){
+class Point3D {
+  float x, y, z;
+  Point3D(float x, float y, float z) {
     this.x=x;
     this.y=y;
     this.z=z;
