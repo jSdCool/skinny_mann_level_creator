@@ -903,7 +903,134 @@ void stageEditGUI() {
               ct.y=initalObjectPos.y-(initalMousePoint.y-mousePoint.y);
             }
           }
-        }
+        }//end of 3d transform mode is move
+
+        if (current3DTransformMode==2&&(ct instanceof Ground || ct instanceof Holo)) {
+          translate(ct.x+ct.dx/2, ct.y+ct.dy/2, ct.z+ct.dz);
+          if (b1)
+            shape(yellowScaler);
+          else
+            shape(blueScaler);
+
+          translate(-(ct.x+ct.dx/2), -(ct.y+ct.dy/2), -(ct.z+ct.dz));
+
+          translate(ct.x+ct.dx/2, ct.y+ct.dy/2, ct.z);
+          rotateY(radians(180));
+          if (b2)
+            shape(yellowScaler);
+          else
+            shape(blueScaler);
+          rotateY(-radians(180));
+          translate(-(ct.x+ct.dx/2), -(ct.y+ct.dy/2), -(ct.z));
+
+          translate(ct.x, ct.y+ct.dy/2, ct.z+ct.dz/2);
+          rotateY(-radians(90));
+          if (r1)
+            shape(yellowScaler);
+          else
+            shape(redScaler);
+          rotateY(radians(90));
+          translate(-(ct.x), -(ct.y+ct.dy/2), -(ct.z+ct.dz/2));
+
+          translate(ct.x+ct.dx, ct.y+ct.dy/2, ct.z+ct.dz/2);
+          rotateY(radians(90));
+          if (r2)
+            shape(yellowScaler);
+          else
+            shape(redScaler);
+          rotateY(-radians(90));
+          translate(-(ct.x+ct.dx), -(ct.y+ct.dy/2), -(ct.z+ct.dz/2));
+
+          translate(ct.x+ct.dx/2, ct.y, ct.z+ct.dz/2);
+          rotateX(radians(90));
+          if (g1)
+            shape(yellowScaler);
+          else
+            shape(greenScaler);
+          rotateX(-radians(90));
+          translate(-(ct.x+ct.dx/2), -(ct.y), -(ct.z+ct.dz/2));
+
+          translate(ct.x+ct.dx/2, ct.y+ct.dy, ct.z+ct.dz/2);
+          rotateX(-radians(90));
+          if (g2)
+            shape(yellowScaler);
+          else
+            shape(greenScaler);
+          rotateX(radians(90));
+          translate(-(ct.x+ct.dx/2), -(ct.y+ct.dy), -(ct.z+ct.dz/2));
+
+          if (grid_mode) {
+            if (transformComponentNumber==1) {
+              if (translateZaxis) {
+                if (initialObjectDim.z-Math.round((initalMousePoint.z-mousePoint.z)*1.0/grid_size)*grid_size > 0)
+                  ct.dz=initialObjectDim.z-Math.round((initalMousePoint.z-mousePoint.z)*1.0/grid_size)*grid_size;
+              }
+              if (translateXaxis) {
+                if (initialObjectDim.x-Math.round((initalMousePoint.x-mousePoint.x)*1.0/grid_size)*grid_size > 0)
+                  ct.dx=initialObjectDim.x-Math.round((initalMousePoint.x-mousePoint.x)*1.0/grid_size)*grid_size;
+              }
+              if (translateYaxis) {
+                if (initialObjectDim.y-Math.round((initalMousePoint.y-mousePoint.y)*1.0/grid_size)*grid_size > 0)
+                  ct.dy=initialObjectDim.y-Math.round((initalMousePoint.y-mousePoint.y)*1.0/grid_size)*grid_size;
+              }
+            }
+            if (transformComponentNumber==2) {
+              if (translateZaxis) {
+                if (initialObjectDim.z+Math.round((initalMousePoint.z-mousePoint.z)*1.0/grid_size)*grid_size > 0){
+                  ct.dz=initialObjectDim.z+Math.round((initalMousePoint.z-mousePoint.z)*1.0/grid_size)*grid_size;
+                  ct.z=(initalObjectPos.z-Math.round((initalMousePoint.z-mousePoint.z)*1.0/grid_size)*grid_size);
+                }
+              }
+              if (translateXaxis) {
+                if (initialObjectDim.x+Math.round((initalMousePoint.x-mousePoint.x)*1.0/grid_size)*grid_size > 0){
+                  ct.dx=initialObjectDim.x+Math.round((initalMousePoint.x-mousePoint.x)*1.0/grid_size)*grid_size;
+                  ct.x=(initalObjectPos.x-Math.round((initalMousePoint.x-mousePoint.x)*1.0/grid_size)*grid_size);
+                }
+              }
+              if (translateYaxis) {
+                if (initialObjectDim.y+Math.round((initalMousePoint.y-mousePoint.y)*1.0/grid_size)*grid_size > 0){
+                  ct.dy=initialObjectDim.y+Math.round((initalMousePoint.y-mousePoint.y)*1.0/grid_size)*grid_size;
+                  ct.y=(initalObjectPos.y-Math.round((initalMousePoint.y-mousePoint.y)*1.0/grid_size)*grid_size);
+                }
+              }
+            }
+          } else {
+            if (transformComponentNumber==1) {
+              if (translateZaxis) {
+                if (initialObjectDim.z-(initalMousePoint.z-mousePoint.z) > 0)
+                  ct.dz=initialObjectDim.z-(initalMousePoint.z-mousePoint.z);
+              }
+              if (translateXaxis) {
+                if (initialObjectDim.x-(initalMousePoint.x-mousePoint.x) > 0)
+                  ct.dx=initialObjectDim.x-(initalMousePoint.x-mousePoint.x);
+              }
+              if (translateYaxis) {
+                if (initialObjectDim.y-(initalMousePoint.y-mousePoint.y) > 0);
+                ct.dy=initialObjectDim.y-(initalMousePoint.y-mousePoint.y);
+              }
+            }
+            if (transformComponentNumber==2) {
+              if (translateZaxis) {
+                if (initialObjectDim.z+(initalMousePoint.z-mousePoint.z) > 0){
+                  ct.dz=initialObjectDim.z+(initalMousePoint.z-mousePoint.z);
+                  ct.z=initalObjectPos.z-(initalMousePoint.z-mousePoint.z);
+                }
+              }
+              if (translateXaxis) {
+                if (initialObjectDim.x+(initalMousePoint.x-mousePoint.x) > 0){
+                  ct.dx=initialObjectDim.x+(initalMousePoint.x-mousePoint.x);
+                  ct.x=initalObjectPos.x-(initalMousePoint.x-mousePoint.x);
+                }
+              }
+              if (translateYaxis) {
+                if (initialObjectDim.y+(initalMousePoint.y-mousePoint.y) > 0){
+                ct.dy=initialObjectDim.y+(initalMousePoint.y-mousePoint.y);
+                ct.y=initalObjectPos.y-(initalMousePoint.y-mousePoint.y);
+                }
+              }
+            }
+          }
+        }//end of 3d transform mode is scale
       }//end of 3d tranform is move mode
       engageHUDPosition();//move the draw position to align with the camera
 

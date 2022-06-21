@@ -17,6 +17,11 @@ void setup() {
   greenArrow=loadShape("data/modles/green arrow/arrow.obj");
   blueArrow=loadShape("data/modles/blue arrow/arrow.obj");
   yellowArrow=loadShape("data/modles/yellow arrow/arrow.obj");
+  
+  redScaler=loadShape("data/modles/red scaler/obj.obj");
+  greenScaler=loadShape("data/modles/green scaler/obj.obj");
+  blueScaler=loadShape("data/modles/blue scaler/obj.obj");
+  yellowScaler=loadShape("data/modles/yellow scaler/obj.obj");
 
   
   initlizeButtons();
@@ -26,19 +31,19 @@ String file_path, new_name="my_level", GAME_version="0.6.0_Early_Access", EDITOR
 //int player1 []={20,700,1,0,1,0}; // old player data
 Player player1 =new Player(20, 699, 1, "red");
 int camPos=0, camPosY=0, death_cool_down, start_down, eadgeScroleDist=300, respawnX=20, respawnY=700, spdelay=0, Color=0, RedPos=0, BluePos=0, GreenPos=0, RC=0, GC=0, BC=0, grid_size=10, filesScrole=0, overviewSelection=-1, portalIndex1, stageIndex, preSI, respawnStage, setPlayerPosX, setPlayerPosY, setPlayerPosZ, startingDepth=0, totalDepth=300, respawnZ=50, coinRotation=0, coinCount=0, gmillis=0, eadgeScroleDistV=250, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, drawCamPosX=0, drawCamPosY;
-int buttonMin=0, buttonMax=0, coinsIndex, triangleMode=0, selectedIndex=-1, viewingItemIndex=-1, currentBluieprintIndex=0, logicBoardIndex, connectingFromIndex, movingLogicIndex,current3DTransformMode=1;
+int buttonMin=0, buttonMax=0, coinsIndex, triangleMode=0, selectedIndex=-1, viewingItemIndex=-1, currentBluieprintIndex=0, logicBoardIndex, connectingFromIndex, movingLogicIndex,current3DTransformMode=1,transformComponentNumber;
 float[]tpCords=new float[3];
 JSONArray mainIndex, colors;
 JSONObject portalStage1, portalStage2;
 float downX, downY, upX, upY, Scale=1, gravity=0.001;
 ToolBox scr2 ;
-PShape coin3D,redArrow,greenArrow,blueArrow,yellowArrow;
+PShape coin3D,redArrow,greenArrow,blueArrow,yellowArrow,redScaler,greenScaler,blueScaler,yellowScaler;
 Level level;
 ArrayList<Boolean> coins = new ArrayList<Boolean>();
 Stage workingBlueprint, blueprints[], displayBlueprint;
 PApplet primaryWindow=this;
 LogicThread logicTickingThread=new LogicThread();
-Point3D initalMousePoint=new Point3D(0,0,0),initalObjectPos=new Point3D(0,0,0);
+Point3D initalMousePoint=new Point3D(0,0,0),initalObjectPos=new Point3D(0,0,0),initialObjectDim=new Point3D(0,0,0);
 void draw() {
 
   if (frameCount%20==0) {//curcor blinking code
@@ -1026,36 +1031,43 @@ void mousePressed() {
        Point3D testPoint=genMousePoint(i);
        if(testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= ct.z+ct.dz && testPoint.z <= ct.z+ct.dz+60){
          translateZaxis=true;
+         transformComponentNumber=1;
          break;
        }
        
        if(testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= ct.z-60 && testPoint.z <= ct.z){
          translateZaxis=true;
+         transformComponentNumber=2;
          break;
        }
        
        if(testPoint.x >= ct.x-60 && testPoint.x <= ct.x && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5){
          translateXaxis=true;
+         transformComponentNumber=2;
          break;
        }
        
        if(testPoint.x >= ct.x+ct.dx && testPoint.x <= ct.x+ct.dx+60 && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5){
          translateXaxis=true;
+         transformComponentNumber=1;
          break;
        }
        
        if(testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= ct.y-60 && testPoint.y <= ct.y && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5){
          translateYaxis=true;
+         transformComponentNumber=2;
          break;
        }
        
        if(testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= ct.y+ct.dy && testPoint.y <= ct.y+ct.dy+60 && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5){
          translateYaxis=true;
+         transformComponentNumber=1;
          break;
        }
       }
       initalMousePoint=mousePoint;
       initalObjectPos=new Point3D(ct.x,ct.y,ct.z);
+      initialObjectDim=new Point3D(ct.dx,ct.dy,ct.dz);
     }
   }
 }
