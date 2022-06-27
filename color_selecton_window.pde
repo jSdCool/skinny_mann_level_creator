@@ -597,23 +597,37 @@ class ToolBox extends PApplet {
             text(grid_size, 410, 80+100);
             strokeWeight(0);
             
-            if(current3DTransformMode==2){
+            if(current3DTransformMode==2&&selecting){
              size3DButton.setColor(255, #F2F258);
             } else {
               size3DButton.setColor(255, 203);
             }
             size3DButton.draw();
-            if(current3DTransformMode==1){
+            if(current3DTransformMode==1&&selecting){
              move3DButton.setColor(255, #F2F258);
             } else {
               move3DButton.setColor(255, 203);
             }
             move3DButton.draw();
+            strokeWeight(0);
+          if (ground) {
+            groundButton.setColor(255, #F2F258);
+          } else {
+            groundButton.setColor(255, 203);
+          }
+          groundButton.draw();
+          fill(-7254783);
+          stroke(-7254783);
+          rect(100, 70+100, 50, 20);
+          fill(-16732415);
+          stroke(-16732415);
+          rect(100, 60+100, 50, 10);
             
             move3DButton.drawHoverText();
             size3DButton.drawHoverText();
             gridModeButton.drawHoverText();
             toggle3DMode.drawHoverText();
+            groundButton.drawHoverText();
           }
         }//end of if stage is 3D
 
@@ -1417,6 +1431,8 @@ class ToolBox extends PApplet {
 
             if (toggle3DMode.isMouseOver()) {
               e3DMode=true;
+              turnThingsOff();
+              selecting=true;
               return;
             }
             if (switch3D1.isMouseOver()) {
@@ -1454,6 +1470,7 @@ class ToolBox extends PApplet {
           } else {
             if (toggle3DMode.isMouseOver()) {
               e3DMode=false;
+              turnThingsOff();
             }
 
             if (playPauseButton.isMouseOver()) {
@@ -1489,10 +1506,18 @@ class ToolBox extends PApplet {
           }
           if(size3DButton.isMouseOver()){
            current3DTransformMode=2; 
+           turnThingsOff();
+           selecting=true;
           }
           if(move3DButton.isMouseOver()){
            current3DTransformMode=1; 
+           turnThingsOff();
+           selecting=true;
           }
+          if (groundButton.isMouseOver()) {
+              turnThingsOff();
+              ground=true;
+            }
             
           }//end of 3D mode is on
         }

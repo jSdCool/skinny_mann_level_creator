@@ -1271,11 +1271,34 @@ void GUImouseReleased() {
 
 
 void mouseClicked3D() {
+  if(selecting)
   for (int i=0; i<5000; i++) {
     Point3D testPoint = genMousePoint(i);
     selectedIndex=colid_index(testPoint.x, testPoint.y, testPoint.z, level.stages.get(currentStageIndex));
     if (selectedIndex!=-1)
       break;
+  }
+  if(ground){
+    calcMousePoint();
+    Point3D omp=mousePoint;
+     for (int i=0; i<5000; i++) {
+      Point3D testPoint = genMousePoint(i);
+      omp.x=testPoint.x;
+      if(colid_index(testPoint.x, testPoint.y, testPoint.z, level.stages.get(currentStageIndex))!=-1){
+        level.stages.get(currentStageIndex).parts.add(new Ground(testPoint.x-5, testPoint.y-5, testPoint.z-5,10,10,10,Color));
+        break;
+      }
+      omp.y=testPoint.y;
+      if(colid_index(testPoint.x, testPoint.y, testPoint.z, level.stages.get(currentStageIndex))!=-1){
+        level.stages.get(currentStageIndex).parts.add(new Ground(testPoint.x-5, testPoint.y-5, testPoint.z-5,10,10,10,Color));
+        break;
+      }
+      omp.z=testPoint.z;
+      if(colid_index(testPoint.x, testPoint.y, testPoint.z, level.stages.get(currentStageIndex))!=-1){
+        level.stages.get(currentStageIndex).parts.add(new Ground(testPoint.x-5, testPoint.y-5, testPoint.z-5,10,10,10,Color));
+        break;
+      }
+     }
   }
 }
 
