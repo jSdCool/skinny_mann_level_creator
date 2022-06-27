@@ -663,13 +663,13 @@ class CheckPoint extends StageComponent {//ground component
       fill(#E5C402);
     else
       fill(#B9B9B9);
-    strokeWeight(0);
+    //strokeWeight(0);
     translate((x+group.xOffset), (y+group.yOffset)-30, (z+group.zOffset));
     box(4, 60, 4);
     translate(-(x+group.xOffset), -((y+group.yOffset)-30), -(z+group.zOffset));
     fill(#EA0202);
-    stroke(#EA0202);
-    strokeWeight(0);
+    //stroke(#EA0202);
+    //strokeWeight(0);
     translate((x+group.xOffset)+10, (y+group.yOffset)-50, (z+group.zOffset));
     box(20, 20, 2);
     translate(-((x+group.xOffset)+10), -((y+group.yOffset)-50), -(z+group.zOffset));
@@ -1010,6 +1010,7 @@ class Interdimentional_Portal extends StageComponent {//ground component
   boolean colide(float x, float y, float z,boolean c) {
     Group group=getGroup();
     if(!group.visable)
+    return false;
    if (c) {
       if (x > (this.x+group.xOffset)-25 && x < (this.x+group.xOffset)+25 && y >(this.y+group.yOffset)-50 && y < (this.y+group.yOffset)+60 && z > (this.z+group.zOffset)-2 && z < (this.z+group.zOffset)+2) {
         return true;

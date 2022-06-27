@@ -45,7 +45,7 @@ void draw3DSwitch1(float x, float y, float Scale) {
 
 void draw3DSwitch1(float x, float y, float z, float Scale) {
   fill(196);
-  strokeWeight(0);
+  //strokeWeight(0);
   translate(x, y-2.5, z);
   box(40, 5, 40);
   fill(#FAB800);
@@ -61,7 +61,7 @@ void draw3DSwitch2(float x, float y, float Scale) {
 
 void draw3DSwitch2(float x, float y, float z, float Scale) {
   fill(196);
-  strokeWeight(0);
+  //strokeWeight(0);
   translate(x, y-2.5, z);
   box(40, 5, 40);
   fill(#FF03D1);
