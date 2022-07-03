@@ -746,9 +746,7 @@ void playerPhysics() {
 
     player1.setX(respawnX);//move the player back to their spawnpoint
     player1.setY(respawnY);
-    if (checkpointIn3DStage) {
-      player1.z=respawnZ;
-    }
+    player1.z=respawnZ;
   }
   if (setPlayerPosTo) {//move the player to a position that is wanted 
     player1.setX(tpCords[0]).setY(tpCords[1]);

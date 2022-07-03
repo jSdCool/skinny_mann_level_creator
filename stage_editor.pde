@@ -1280,22 +1280,41 @@ void mouseClicked3D() {
   }
   if(ground){
     calcMousePoint();
-    Point3D omp=mousePoint;
+    Point3D omp=genMousePoint(0);
+    float xzh=dist(cam3Dx+DX, cam3Dz-DZ, mousePoint.x, mousePoint.z);//calcuate the original displacment distance on the x-z plane
+    float ry_xz=atan2((cam3Dy-DY)-mousePoint.y, xzh);//find the rotation of the orignal line to the x-z plane
+    float rx_z=atan2((cam3Dz-DZ)-mousePoint.z, (cam3Dx+DX)-mousePoint.x);//find the rotation of the x-z component of the prevous line
      for (int i=0; i<5000; i++) {
       Point3D testPoint = genMousePoint(i);
+      
       omp.x=testPoint.x;
-      if(colid_index(testPoint.x, testPoint.y, testPoint.z, level.stages.get(currentStageIndex))!=-1){
-        level.stages.get(currentStageIndex).parts.add(new Ground(testPoint.x-5, testPoint.y-5, testPoint.z-5,10,10,10,Color));
+      if(colid_index(omp.x, omp.y, omp.z, level.stages.get(currentStageIndex))!=-1){
+        float direction=((cam3Dx+DX)-testPoint.x)/abs((cam3Dx+DX)-testPoint.x);
+        if(Float.isNaN(direction)){
+          direction=cos(rx_z)/abs(cos(rx_z));
+        }
+        level.stages.get(currentStageIndex).parts.add(new Ground(testPoint.x-5+5*direction, testPoint.y-5, testPoint.z-5,10,10,10,Color));
+        println(direction+" x "+(testPoint.x-5+5*direction)); 
         break;
       }
       omp.y=testPoint.y;
-      if(colid_index(testPoint.x, testPoint.y, testPoint.z, level.stages.get(currentStageIndex))!=-1){
-        level.stages.get(currentStageIndex).parts.add(new Ground(testPoint.x-5, testPoint.y-5, testPoint.z-5,10,10,10,Color));
+      if(colid_index(omp.x, omp.y, omp.z, level.stages.get(currentStageIndex))!=-1){
+        float direction=((cam3Dy-DY)-testPoint.y)/abs((cam3Dy-DY)-testPoint.y);
+        if(Float.isNaN(direction)){
+          direction=sin(ry_xz)/abs(sin(ry_xz));
+        }
+        level.stages.get(currentStageIndex).parts.add(new Ground(testPoint.x-5, testPoint.y-5+5*direction, testPoint.z-5,10,10,10,Color));
+        println(direction+" y");
         break;
       }
       omp.z=testPoint.z;
-      if(colid_index(testPoint.x, testPoint.y, testPoint.z, level.stages.get(currentStageIndex))!=-1){
-        level.stages.get(currentStageIndex).parts.add(new Ground(testPoint.x-5, testPoint.y-5, testPoint.z-5,10,10,10,Color));
+      if(colid_index(omp.x, omp.y, omp.z, level.stages.get(currentStageIndex))!=-1){
+        float direction=((cam3Dz-DZ)-testPoint.z)/abs((cam3Dz-DZ)-testPoint.z);
+        if(Float.isNaN(direction)){
+          direction=sin(rx_z)/abs(sin(rx_z));
+        }
+        level.stages.get(currentStageIndex).parts.add(new Ground(testPoint.x-5, testPoint.y-5, testPoint.z-5+5*direction,10,10,10,Color));
+        println(direction+" z");
         break;
       }
      }
@@ -1538,5 +1557,9 @@ class Point3D {
     this.x=x;
     this.y=y;
     this.z=z;
+  }
+  
+  public String toString(){
+    return x+" "+y+" "+z;
   }
 }

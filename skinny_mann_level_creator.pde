@@ -934,7 +934,7 @@ void keyPressed() {
   if (startup) {//if on the main menue
     author = getInput(author, 0);//typing for the author name
   }
-  System.out.println(keyCode);//usefull to figureout what key is what
+  //System.out.println(keyCode);//usefull to figureout what key is what
 }
 
 void keyReleased() {
