@@ -1436,6 +1436,94 @@ void mouseClicked3D() {
       }
     }
   }
+  if (draw3DSwitch1) {
+    calcMousePoint();
+    Point3D omp=genMousePoint(0);
+    float xzh=dist(cam3Dx+DX, cam3Dz-DZ, mousePoint.x, mousePoint.z);//calcuate the original displacment distance on the x-z plane   used in case the direction calculation return NAN
+    float ry_xz=atan2((cam3Dy-DY)-mousePoint.y, xzh);//find the rotation of the orignal line to the x-z plane
+    float rx_z=atan2((cam3Dz-DZ)-mousePoint.z, (cam3Dx+DX)-mousePoint.x);//find the rotation of the x-z component of the prevous line
+    for (int i=0; i<5000; i++) {//ray cast
+      Point3D testPoint = genMousePoint(i);
+
+      omp.x=testPoint.x;//change the current testing x avlue
+      if (colid_index(omp.x, omp.y, omp.z, level.stages.get(currentStageIndex))!=-1) {//check if the new xpoint colides with something
+        float direction=((cam3Dx+DX)-testPoint.x)/abs((cam3Dx+DX)-testPoint.x);//figure out what diretion the cast was going in
+        if (Float.isNaN(direction)) {//ckeck if the direction is NaN
+          direction=cos(rx_z)/abs(cos(rx_z));//use another silly method to get the direction
+        }
+        level.stages.get(currentStageIndex).parts.add(new SWon3D(testPoint.x+20*direction, testPoint.y, testPoint.z));//create the new object
+        coins.add(false);
+        level.numOfCoins++;
+        break;
+      }
+      omp.y=testPoint.y;//change the current testing y value
+      if (colid_index(omp.x, omp.y, omp.z, level.stages.get(currentStageIndex))!=-1) {//check if the new ypoint colides with something
+        float direction=((cam3Dy-DY)-testPoint.y)/abs((cam3Dy-DY)-testPoint.y);//figure out what direction the case was going in
+        if (Float.isNaN(direction)) {//if the direction is NaN
+          direction=sin(ry_xz)/abs(sin(ry_xz));//use another silly method to get the direction
+        }
+        level.stages.get(currentStageIndex).parts.add(new SWon3D(testPoint.x, testPoint.y, testPoint.z));//create the new object
+        coins.add(false);
+        level.numOfCoins++;
+        break;
+      }
+      omp.z=testPoint.z;//change the current testing z value
+      if (colid_index(omp.x, omp.y, omp.z, level.stages.get(currentStageIndex))!=-1) {//check if the new zpoint colies with something
+        float direction=((cam3Dz-DZ)-testPoint.z)/abs((cam3Dz-DZ)-testPoint.z);//figure out the direction the cast was going in
+        if (Float.isNaN(direction)) {//if the diretion is nan
+          direction=sin(rx_z)/abs(sin(rx_z));//use another silly method to get the direction
+        }
+        level.stages.get(currentStageIndex).parts.add(new SWon3D(testPoint.x, testPoint.y, testPoint.z+20*direction));//create the new object
+        coins.add(false);
+        level.numOfCoins++;
+        break;
+      }
+    }
+  }
+  if (draw3DSwitch2) {
+    calcMousePoint();
+    Point3D omp=genMousePoint(0);
+    float xzh=dist(cam3Dx+DX, cam3Dz-DZ, mousePoint.x, mousePoint.z);//calcuate the original displacment distance on the x-z plane   used in case the direction calculation return NAN
+    float ry_xz=atan2((cam3Dy-DY)-mousePoint.y, xzh);//find the rotation of the orignal line to the x-z plane
+    float rx_z=atan2((cam3Dz-DZ)-mousePoint.z, (cam3Dx+DX)-mousePoint.x);//find the rotation of the x-z component of the prevous line
+    for (int i=0; i<5000; i++) {//ray cast
+      Point3D testPoint = genMousePoint(i);
+
+      omp.x=testPoint.x;//change the current testing x avlue
+      if (colid_index(omp.x, omp.y, omp.z, level.stages.get(currentStageIndex))!=-1) {//check if the new xpoint colides with something
+        float direction=((cam3Dx+DX)-testPoint.x)/abs((cam3Dx+DX)-testPoint.x);//figure out what diretion the cast was going in
+        if (Float.isNaN(direction)) {//ckeck if the direction is NaN
+          direction=cos(rx_z)/abs(cos(rx_z));//use another silly method to get the direction
+        }
+        level.stages.get(currentStageIndex).parts.add(new SWoff3D(testPoint.x+20*direction, testPoint.y, testPoint.z));//create the new object
+        coins.add(false);
+        level.numOfCoins++;
+        break;
+      }
+      omp.y=testPoint.y;//change the current testing y value
+      if (colid_index(omp.x, omp.y, omp.z, level.stages.get(currentStageIndex))!=-1) {//check if the new ypoint colides with something
+        float direction=((cam3Dy-DY)-testPoint.y)/abs((cam3Dy-DY)-testPoint.y);//figure out what direction the case was going in
+        if (Float.isNaN(direction)) {//if the direction is NaN
+          direction=sin(ry_xz)/abs(sin(ry_xz));//use another silly method to get the direction
+        }
+        level.stages.get(currentStageIndex).parts.add(new SWoff3D(testPoint.x, testPoint.y, testPoint.z));//create the new object
+        coins.add(false);
+        level.numOfCoins++;
+        break;
+      }
+      omp.z=testPoint.z;//change the current testing z value
+      if (colid_index(omp.x, omp.y, omp.z, level.stages.get(currentStageIndex))!=-1) {//check if the new zpoint colies with something
+        float direction=((cam3Dz-DZ)-testPoint.z)/abs((cam3Dz-DZ)-testPoint.z);//figure out the direction the cast was going in
+        if (Float.isNaN(direction)) {//if the diretion is nan
+          direction=sin(rx_z)/abs(sin(rx_z));//use another silly method to get the direction
+        }
+        level.stages.get(currentStageIndex).parts.add(new SWoff3D(testPoint.x, testPoint.y, testPoint.z+20*direction));//create the new object
+        coins.add(false);
+        level.numOfCoins++;
+        break;
+      }
+    }
+  }
 }
 
 

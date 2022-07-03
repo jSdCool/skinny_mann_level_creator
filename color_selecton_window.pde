@@ -648,6 +648,21 @@ class ToolBox extends PApplet {
             }
             draw_coin.draw();
             drawCoin(605, 65+100, 4);
+            if (draw3DSwitch1) {
+              switch3D1.setColor(255, #F2F258);
+            } else {
+              switch3D1.setColor(255, 203);
+            }
+            switch3D1.draw();
+            draw3DSwitch1(905, 80+100, 1);
+
+            if (draw3DSwitch2) {
+              switch3D2.setColor(255, #F2F258);
+            } else {
+              switch3D2.setColor(255, 203);
+            }
+            switch3D2.draw();
+            draw3DSwitch2(965, 80+100, 1);
 
             move3DButton.drawHoverText();
             size3DButton.drawHoverText();
@@ -666,6 +681,8 @@ class ToolBox extends PApplet {
             }
             checkpointButton.drawHoverText();
             draw_coin.drawHoverText();
+            switch3D1.drawHoverText();
+            switch3D2.drawHoverText();
           }
         }//end of if stage is 3D
 
@@ -1567,6 +1584,14 @@ class ToolBox extends PApplet {
             if (draw_coin.isMouseOver()) {
               turnThingsOff();
               drawCoins=true;
+            }
+            if (switch3D1.isMouseOver()) {
+              turnThingsOff();
+              draw3DSwitch1=true;
+            }
+            if (switch3D2.isMouseOver()) {
+              turnThingsOff();
+              draw3DSwitch2=true;
             }
           }//end of 3D mode is on
         }
