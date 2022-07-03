@@ -663,6 +663,20 @@ class ToolBox extends PApplet {
             }
             switch3D2.draw();
             draw3DSwitch2(965, 80+100, 1);
+            if (drawingSign) {
+            sign.setColor(255, #F2F258);
+          } else {
+            sign.setColor(255, 203);
+          }
+          sign.draw();
+          drawSign(sign.x+sign.lengthX/2, sign.y+sign.lengthY, 0.6);
+          if (placingLogicButton) {
+            logicButtonButton.setColor(255, #F2F258);
+          } else {
+            logicButtonButton.setColor(255, 203);
+          }
+          logicButtonButton.draw();
+          drawLogicButton(this, logicButtonButton.x+logicButtonButton.lengthX/2, logicButtonButton.y+logicButtonButton.lengthY/2, 1, false);
 
             move3DButton.drawHoverText();
             size3DButton.drawHoverText();
@@ -683,6 +697,8 @@ class ToolBox extends PApplet {
             draw_coin.drawHoverText();
             switch3D1.drawHoverText();
             switch3D2.drawHoverText();
+            sign.drawHoverText();
+            logicButtonButton.drawHoverText();
           }
         }//end of if stage is 3D
 
@@ -1593,6 +1609,14 @@ class ToolBox extends PApplet {
               turnThingsOff();
               draw3DSwitch2=true;
             }
+            if (sign.isMouseOver()) {
+              turnThingsOff();
+              drawingSign=true;
+            }
+            if (logicButtonButton.isMouseOver()) {
+            turnThingsOff();
+            placingLogicButton=true;
+          }
           }//end of 3D mode is on
         }
 
