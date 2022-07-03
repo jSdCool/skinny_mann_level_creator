@@ -140,65 +140,69 @@ void drawSoundBox(float x, float y) {
   rect(x-30, y-30, 60, 60);
 }
 
-void drawLogicButton(PApplet screen,float x, float y, float Scale,boolean pressed) {
+void drawLogicButton(PApplet screen, float x, float y, float Scale, boolean pressed) {
   screen.fill(196);
   screen.rect((x-20*Scale), (y-5*Scale), 40*Scale, 5*Scale);
-  if(!pressed){
+  if (!pressed) {
     screen.fill(#FC2121);
     screen.rect((x-10*Scale), (y-10*Scale), 20*Scale, 5*Scale);
   }
 }
-void drawLogicButton(float x, float y, float z, float Scale,boolean pressed) {
+void drawLogicButton(float x, float y, float z, float Scale, boolean pressed) {
   fill(196);
   strokeWeight(0);
   translate(x, y-2.5, z);
   box(40, 5, 40);
   fill(#FC2121);
   translate(0, -5, 0);
-  if(!pressed)
+  if (!pressed)
     box(20, 5, 20);
   translate(-x, -(y-7.5), -z);
 }
 
-void logicIcon(float x,float y,float scale){
+void logicIcon(float x, float y, float scale) {
   noStroke();
   fill(#B9B9B9);
-  rect(x-10*scale,y+20*scale,20*scale,15*scale);
+  rect(x-10*scale, y+20*scale, 20*scale, 15*scale);
   fill(#989898);
-  rect(x-10*scale,y+23*scale,20*scale,3*scale);
-  rect(x-10*scale,y+29*scale,20*scale,3*scale);
+  rect(x-10*scale, y+23*scale, 20*scale, 3*scale);
+  rect(x-10*scale, y+29*scale, 20*scale, 3*scale);
   fill(#FFF300);
-  rect(x-15*scale,y-10*scale,30*scale,30*scale);
+  rect(x-15*scale, y-10*scale, 30*scale, 30*scale);
   fill(#D38A00);
-  rect(x-8*scale,y,5*scale,20*scale);
-  rect(x+3*scale,y,5*scale,20*scale);
-  rect(x-3*scale,y,6*scale,5*scale);
+  rect(x-8*scale, y, 5*scale, 20*scale);
+  rect(x+3*scale, y, 5*scale, 20*scale);
+  rect(x-3*scale, y, 6*scale, 5*scale);
 }
 
-void draw3DStageIcon(float x,float y, float scale){
+void draw3DStageIcon(float x, float y, float scale) {
   directionalLight(255, 255, 255, 0.8, 1, -0.35);//setr up the lighting
   ambientLight(102, 102, 102);
-  noStroke(); 
-  translate(x,y,0);
-  rotateX(-radians(30));rotateY(radians(75));rotateZ(radians(24));
-  
-  translate(0,20*scale,0);
+  noStroke();
+  translate(x, y, 0);
+  rotateX(-radians(30));
+  rotateY(radians(75));
+  rotateZ(radians(24));
+
+  translate(0, 20*scale, 0);
   fill(#00F73B);
-  box(40*scale,20*scale,40*scale);
-  translate(0,-20*scale,0);
-  translate(0,-10*scale,0);
+  box(40*scale, 20*scale, 40*scale);
+  translate(0, -20*scale, 0);
+  translate(0, -10*scale, 0);
   fill(#BC6022);
-  box(10*scale,40*scale,10*scale);
-  translate(0,10*scale,0);
-  translate(0,-25*scale,0);
+  box(10*scale, 40*scale, 10*scale);
+  translate(0, 10*scale, 0);
+  translate(0, -25*scale, 0);
   fill(#089D06);
-  box(25*scale,15*scale,25*scale);
-  translate(0,25*scale,0);
-  translate(0,-18*scale,0);
-  box(35*scale,12*scale,35*scale);
-  translate(0,18*scale,0);
-  
-  rotateZ(-radians(24));rotateY(-radians(75));rotateX(radians(30));
-  translate(-x,-y,0);
+  box(25*scale, 15*scale, 25*scale);
+  translate(0, 25*scale, 0);
+  translate(0, -18*scale, 0);
+  box(35*scale, 12*scale, 35*scale);
+  translate(0, 18*scale, 0);
+
+  rotateZ(-radians(24));
+  rotateY(-radians(75));
+  rotateX(radians(30));
+  translate(-x, -y, 0);
   noLights();
 }

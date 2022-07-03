@@ -7,10 +7,10 @@ class ToolBox extends PApplet {
   }
 
   public int redVal=0, greenVal=0, blueVal=0, CC=0;
-  int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset,variableScroll=0,groupScroll=0;
-  String page="colors",newGroopName="";
-  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton,testLogicPlaceButton,constantOnButton,setVariableButton,readVariableButton,setVisabilityButton,xOffsetButton,yOffsetButton,increase,increaseMore,increaseAlot,decrease,decreaseMore,decreaseAlot,nextGroup,prevGroup,variablesAndGroups,variablesUP,variablesDOWN,groupsUP,groupsDOWN,addVariable,addGroup,typeGroopName,logicButtonButton,runLoad,delayButton,zOffsetButton,logicHelpButton,move3DButton,size3DButton;
-  boolean typingSign=false, settingSkyColor=false,typingGroopName=false;
+  int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset, variableScroll=0, groupScroll=0;
+  String page="colors", newGroopName="";
+  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton, testLogicPlaceButton, constantOnButton, setVariableButton, readVariableButton, setVisabilityButton, xOffsetButton, yOffsetButton, increase, increaseMore, increaseAlot, decrease, decreaseMore, decreaseAlot, nextGroup, prevGroup, variablesAndGroups, variablesUP, variablesDOWN, groupsUP, groupsDOWN, addVariable, addGroup, typeGroopName, logicButtonButton, runLoad, delayButton, zOffsetButton, logicHelpButton, move3DButton, size3DButton;
+  boolean typingSign=false, settingSkyColor=false, typingGroopName=false;
 
   public void settings() {
     size(1280, 720, P2D);//mac os requires a render to be specified
@@ -54,8 +54,8 @@ class ToolBox extends PApplet {
     gridModeButton=new Button(this, 400, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("grid mode");
     holoButton=new Button(this, 460, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("hologram (no collision)");
     logicButtonButton=new Button(this, 100, 200, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("place button");
-    move3DButton=new Button(this, 160, 200, 50, 50,"move", 255, 203).setStrokeWeight(5).setHoverText("move things in 3D");
-    size3DButton=new Button(this, 220, 200, 50, 50,"size", 255, 203).setStrokeWeight(5).setHoverText("resize things in 3D");
+    move3DButton=new Button(this, 160, 200, 50, 50, "move", 255, 203).setStrokeWeight(5).setHoverText("move things in 3D");
+    size3DButton=new Button(this, 220, 200, 50, 50, "size", 255, 203).setStrokeWeight(5).setHoverText("resize things in 3D");
 
     connectLogicButton=new Button(this, 40, 40+100, 50, 50, "connect", 255, 203).setStrokeWeight(5).setHoverText("connect logic nodes");
     moveComponentsButton=new Button(this, 100, 40+100, 50, 50, "move", 255, 203).setStrokeWeight(5).setHoverText("move components arround");
@@ -66,16 +66,16 @@ class ToolBox extends PApplet {
     norGateButton=new Button(this, 460, 40+100, 50, 50, "NOR", 255, 203).setStrokeWeight(5).setHoverText("inverted or gate");
     xnorGateButton=new Button(this, 580, 40+100, 50, 50, "XNOR", 255, 203).setStrokeWeight(5).setHoverText("inverted exclucive or gate");
     testLogicPlaceButton=new Button(this, 40, 100+100, 50, 50, "test", 255, 203).setStrokeWeight(5).setHoverText("this should not exsist");
-    constantOnButton=new Button(this, 640, 40+100, 50, 50,"ON", 255, 203).setStrokeWeight(5).setHoverText("constant on signal");
-    readVariableButton=new Button(this, 700, 40+100, 50, 50,"read", 255, 203).setStrokeWeight(5).setHoverText("read the state of a variable");
-    setVariableButton=new Button(this, 760, 40+100, 50, 50,"set", 255, 203).setStrokeWeight(5).setHoverText("set the state of a varable");
-    setVisabilityButton=new Button(this, 820, 40+100, 50, 50, "vis",255, 203).setStrokeWeight(5).setHoverText("set visability of a group");
-    xOffsetButton=new Button(this, 880, 40+100, 50, 50,"offset X", 255, 203).setStrokeWeight(5).setHoverText("offset a group in the x-axis");
-    yOffsetButton=new Button(this, 940, 40+100, 50, 50,"offset y", 255, 203).setStrokeWeight(5).setHoverText("offset a group in the y-axis");
-    delayButton=new Button(this, 1060, 140, 50, 50,"delay", 255, 203).setStrokeWeight(5).setHoverText("delay a pulse in your logic");
+    constantOnButton=new Button(this, 640, 40+100, 50, 50, "ON", 255, 203).setStrokeWeight(5).setHoverText("constant on signal");
+    readVariableButton=new Button(this, 700, 40+100, 50, 50, "read", 255, 203).setStrokeWeight(5).setHoverText("read the state of a variable");
+    setVariableButton=new Button(this, 760, 40+100, 50, 50, "set", 255, 203).setStrokeWeight(5).setHoverText("set the state of a varable");
+    setVisabilityButton=new Button(this, 820, 40+100, 50, 50, "vis", 255, 203).setStrokeWeight(5).setHoverText("set visability of a group");
+    xOffsetButton=new Button(this, 880, 40+100, 50, 50, "offset X", 255, 203).setStrokeWeight(5).setHoverText("offset a group in the x-axis");
+    yOffsetButton=new Button(this, 940, 40+100, 50, 50, "offset y", 255, 203).setStrokeWeight(5).setHoverText("offset a group in the y-axis");
+    delayButton=new Button(this, 1060, 140, 50, 50, "delay", 255, 203).setStrokeWeight(5).setHoverText("delay a pulse in your logic");
     zOffsetButton=new Button(this, 40, 200, 50, 50, "offset z", 255, 203).setStrokeWeight(5).setHoverText("offset a group in the z-axis");
     logicHelpButton=new Button(this, 100, 200, 50, 50, "?", 255, 203).setStrokeWeight(5).setHoverText("help");
-    
+
     increase=new Button(this, width/2+180, height*0.5, 50, 50, "+", 255, 203).setStrokeWeight(5);
     increaseMore=new Button(this, width/2+240, height*0.5, 50, 50, "++", 255, 203).setStrokeWeight(5);
     increaseAlot=new Button(this, width/2+300, height*0.5, 50, 50, "+++", 255, 203).setStrokeWeight(5);
@@ -84,14 +84,14 @@ class ToolBox extends PApplet {
     decreaseAlot=new Button(this, width/2-300, height*0.5, 50, 50, "---", 255, 203).setStrokeWeight(5);
     nextGroup=new Button(this, width/2+225, height*0.9-25, 50, 50, ">", 255, 203).setStrokeWeight(5);
     prevGroup=new Button(this, width/2-250, height*0.9-25, 50, 50, "<", 255, 203).setStrokeWeight(5);
-    variablesUP=new Button(this,45,190,30,30,"^");
-    variablesDOWN=new Button(this,45,440,30,30,"v");
-    groupsUP=new Button(this,520,190,30,30,"^");
-    groupsDOWN=new Button(this,520,440,30,30,"v");
-    addVariable=new Button(this,180,190,30,30,"+");
-    addGroup=new Button(this,640,190,30,30,"+");
-    typeGroopName=new Button(this,680,190,400,30);
-    runLoad=new Button(this,500,550,200,50,"load").setHoverText("run the load logic board");
+    variablesUP=new Button(this, 45, 190, 30, 30, "^");
+    variablesDOWN=new Button(this, 45, 440, 30, 30, "v");
+    groupsUP=new Button(this, 520, 190, 30, 30, "^");
+    groupsDOWN=new Button(this, 520, 440, 30, 30, "v");
+    addVariable=new Button(this, 180, 190, 30, 30, "+");
+    addGroup=new Button(this, 640, 190, 30, 30, "+");
+    typeGroopName=new Button(this, 680, 190, 400, 30);
+    runLoad=new Button(this, 500, 550, 200, 50, "load").setHoverText("run the load logic board");
   }
 
 
@@ -364,15 +364,15 @@ class ToolBox extends PApplet {
             select.setColor(255, 203);
           }
           select.draw();
-          if(placingLogicButton){
+          if (placingLogicButton) {
             logicButtonButton.setColor(255, #F2F258);
           } else {
             logicButtonButton.setColor(255, 203);
           }
-        logicButtonButton.draw();
-        drawLogicButton(this,logicButtonButton.x+logicButtonButton.lengthX/2,logicButtonButton.y+logicButtonButton.lengthY/2,1,false);
+          logicButtonButton.draw();
+          drawLogicButton(this, logicButtonButton.x+logicButtonButton.lengthX/2, logicButtonButton.y+logicButtonButton.lengthY/2, 1, false);
         }//end of not in 3D mode
-        
+
         saveLevel.draw();
 
 
@@ -405,7 +405,7 @@ class ToolBox extends PApplet {
           select.drawHoverText();
           logicButtonButton.drawHoverText();
         }//end of not 3d mode
-        
+
         saveLevel.drawHoverText();
 
 
@@ -596,45 +596,45 @@ class ToolBox extends PApplet {
             line(402, 80+100, 448, 80+100);
             text(grid_size, 410, 80+100);
             strokeWeight(0);
-            
-            if(current3DTransformMode==2&&selecting){
-             size3DButton.setColor(255, #F2F258);
+
+            if (current3DTransformMode==2&&selecting) {
+              size3DButton.setColor(255, #F2F258);
             } else {
               size3DButton.setColor(255, 203);
             }
             size3DButton.draw();
-            if(current3DTransformMode==1&&selecting){
-             move3DButton.setColor(255, #F2F258);
+            if (current3DTransformMode==1&&selecting) {
+              move3DButton.setColor(255, #F2F258);
             } else {
               move3DButton.setColor(255, 203);
             }
             move3DButton.draw();
             strokeWeight(0);
-          if (ground) {
-            groundButton.setColor(255, #F2F258);
-          } else {
-            groundButton.setColor(255, 203);
-          }
-          groundButton.draw();
-          fill(-7254783);
-          stroke(-7254783);
-          rect(100, 70+100, 50, 20);
-          fill(-16732415);
-          stroke(-16732415);
-          rect(100, 60+100, 50, 10);
-          if (holo_gram) {
-            holoButton.setColor(255, #F2F258);
-          } else {
-            holoButton.setColor(255, 203);
-          }
-          holoButton.draw();
-          if (check_point) {
-            checkpointButton.setColor(255, #F2F258);
-          } else {
-            checkpointButton.setColor(255, 203);
-          }
-          checkpointButton.draw();
-          fill(#B9B9B9);
+            if (ground) {
+              groundButton.setColor(255, #F2F258);
+            } else {
+              groundButton.setColor(255, 203);
+            }
+            groundButton.draw();
+            fill(-7254783);
+            stroke(-7254783);
+            rect(100, 70+100, 50, 20);
+            fill(-16732415);
+            stroke(-16732415);
+            rect(100, 60+100, 50, 10);
+            if (holo_gram) {
+              holoButton.setColor(255, #F2F258);
+            } else {
+              holoButton.setColor(255, 203);
+            }
+            holoButton.draw();
+            if (check_point) {
+              checkpointButton.setColor(255, #F2F258);
+            } else {
+              checkpointButton.setColor(255, 203);
+            }
+            checkpointButton.draw();
+            fill(#B9B9B9);
             strokeWeight(0);
             rect(168, 45+100, 5, 40);
             fill(#EA0202);
@@ -642,13 +642,13 @@ class ToolBox extends PApplet {
             strokeWeight(0);
             triangle(170, 85-60+20+100, 170, 85-40+20+100, 170+30, 85-50+20+100);
             if (drawCoins) {
-            draw_coin.setColor(255, #F2F258);
-          } else {
-            draw_coin.setColor(255, 203);
-          }
-          draw_coin.draw();
-          drawCoin(605, 65+100, 4);
-            
+              draw_coin.setColor(255, #F2F258);
+            } else {
+              draw_coin.setColor(255, 203);
+            }
+            draw_coin.draw();
+            drawCoin(605, 65+100, 4);
+
             move3DButton.drawHoverText();
             size3DButton.drawHoverText();
             gridModeButton.drawHoverText();
@@ -661,7 +661,7 @@ class ToolBox extends PApplet {
               rect(mouseX-4, mouseY-13, 165, 16);
               fill(0);
               textSize(15);
-              textAlign(LEFT,BOTTOM);
+              textAlign(LEFT, BOTTOM);
               text("hologram (solid in 3D)", mouseX, mouseY+5);
             }
             checkpointButton.drawHoverText();
@@ -878,21 +878,21 @@ class ToolBox extends PApplet {
         //  testLogicPlaceButton.setColor(255, 203);
         //}
         //testLogicPlaceButton.draw();
-        if(placingOnSingal){
+        if (placingOnSingal) {
           constantOnButton.setColor(255, #F2F258);
-        }else{
+        } else {
           constantOnButton.setColor(255, 203);
         }
         constantOnButton.draw();
-        if(placingReadVariable){
+        if (placingReadVariable) {
           readVariableButton.setColor(255, #F2F258);
-        }else{
+        } else {
           readVariableButton.setColor(255, 203);
         }
         readVariableButton.draw();
-        if(placingSetVaravle){
+        if (placingSetVaravle) {
           setVariableButton.setColor(255, #F2F258);
-        }else{
+        } else {
           setVariableButton.setColor(255, 203);
         }
         setVariableButton.draw();
@@ -902,33 +902,33 @@ class ToolBox extends PApplet {
           select.setColor(255, 203);
         }
         select.draw();
-        if(placingSetVisibility){
+        if (placingSetVisibility) {
           setVisabilityButton.setColor(255, #F2F258);
-        }else{
+        } else {
           setVisabilityButton.setColor(255, 203);
         }
         setVisabilityButton.draw();
-        if(placingXOffset){
+        if (placingXOffset) {
           xOffsetButton.setColor(255, #F2F258);
-        }else{
+        } else {
           xOffsetButton.setColor(255, 203);
         }
         xOffsetButton.draw();
-        if(placingYOffset){
+        if (placingYOffset) {
           yOffsetButton.setColor(255, #F2F258);
-        }else{
+        } else {
           yOffsetButton.setColor(255, 203);
         }
         yOffsetButton.draw();
-        if(placingDelay){
+        if (placingDelay) {
           delayButton.setColor(255, #F2F258);
-        }else{
+        } else {
           delayButton.setColor(255, 203);
         }
         delayButton.draw();
-        if(placingZOffset){
+        if (placingZOffset) {
           zOffsetButton.setColor(255, #F2F258);
-        }else{
+        } else {
           zOffsetButton.setColor(255, 203);
         }
         zOffsetButton.draw();
@@ -946,7 +946,7 @@ class ToolBox extends PApplet {
         nandGateButton.drawHoverText();
         norGateButton.drawHoverText();
         xnorGateButton.drawHoverText();
-       // testLogicPlaceButton.drawHoverText();
+        // testLogicPlaceButton.drawHoverText();
         constantOnButton.drawHoverText();
         readVariableButton.drawHoverText();
         setVariableButton.drawHoverText();
@@ -978,12 +978,12 @@ class ToolBox extends PApplet {
       } else {
         String type="";
         StageComponent thing= new GenericStageComponent();
-        LogicComponent logicThing=new GenericLogicComponent(-10,-10,null);
-        if(editingStage){
-         thing= level.stages.get(currentStageIndex).parts.get(selectedIndex);
-        type=thing.type;
+        LogicComponent logicThing=new GenericLogicComponent(-10, -10, null);
+        if (editingStage) {
+          thing= level.stages.get(currentStageIndex).parts.get(selectedIndex);
+          type=thing.type;
         }
-        if(editinglogicBoard){
+        if (editinglogicBoard) {
           logicThing=level.logicBoards.get(logicBoardIndex).components.get(selectedIndex);
           type=logicThing.type;
         }
@@ -1025,128 +1025,128 @@ class ToolBox extends PApplet {
             if (fileind<keys.length-1)
               nextSound.draw();
           }
-        } else if(type.equals("read var")||type.equals("set var")){
+        } else if (type.equals("read var")||type.equals("set var")) {
           int curvar=logicThing.getData();
-          if(curvar>0)
+          if (curvar>0)
             prevSound.draw();
-          if(curvar<level.variables.size()-1)
+          if (curvar<level.variables.size()-1)
             nextSound.draw();
           fill(0);
           textSize(25);
           text("b"+curvar, width/2, height*0.4);
-          text("current variable",width/2,height*0.36);
-        }else if(type.equals("set visable")){
+          text("current variable", width/2, height*0.36);
+        } else if (type.equals("set visable")) {
           int curgroop=logicThing.getData();
-          if(curgroop>0)
+          if (curgroop>0)
             prevSound.draw();
-          if(curgroop<level.groups.size()-1)
+          if (curgroop<level.groups.size()-1)
             nextSound.draw();
           fill(0);
           textSize(25);
           text(level.groupNames.get(curgroop), width/2, height*0.4);
-          text("current group",width/2,height*0.36);
-        }else if(type.equals("x-offset")){
+          text("current group", width/2, height*0.36);
+        } else if (type.equals("x-offset")) {
           int curgroop=logicThing.getData();
-          if(curgroop>0)
+          if (curgroop>0)
             prevSound.draw();
-          if(curgroop<level.groups.size()-1)
+          if (curgroop<level.groups.size()-1)
             nextSound.draw();
           fill(0);
           textSize(25);
           text(level.groupNames.get(curgroop), width/2, height*0.4);
-          text("current group",width/2,height*0.36);
-          text("offset",width/2,height*0.46);
-          text(((SetXOffset)logicThing).getOffset(),width/2,height*0.53);
+          text("current group", width/2, height*0.36);
+          text("offset", width/2, height*0.46);
+          text(((SetXOffset)logicThing).getOffset(), width/2, height*0.53);
           increase.draw();
           increaseMore.draw();
           increaseAlot.draw();
           decrease.draw();
           decreaseMore.draw();
           decreaseAlot.draw();
-        }else if(type.equals("y-offset")){
+        } else if (type.equals("y-offset")) {
           int curgroop=logicThing.getData();
-          if(curgroop>0)
+          if (curgroop>0)
             prevSound.draw();
-          if(curgroop<level.groups.size()-1)
+          if (curgroop<level.groups.size()-1)
             nextSound.draw();
           fill(0);
           textSize(25);
           text(level.groupNames.get(curgroop), width/2, height*0.4);
-          text("current group",width/2,height*0.36);
-          text("offset",width/2,height*0.46);
-          text(((SetYOffset)logicThing).getOffset(),width/2,height*0.53);
+          text("current group", width/2, height*0.36);
+          text("offset", width/2, height*0.46);
+          text(((SetYOffset)logicThing).getOffset(), width/2, height*0.53);
           increase.draw();
           increaseMore.draw();
           increaseAlot.draw();
           decrease.draw();
           decreaseMore.draw();
           decreaseAlot.draw();
-        }else if(type.equals("z-offset")){
+        } else if (type.equals("z-offset")) {
           int curgroop=logicThing.getData();
-          if(curgroop>0)
+          if (curgroop>0)
             prevSound.draw();
-          if(curgroop<level.groups.size()-1)
+          if (curgroop<level.groups.size()-1)
             nextSound.draw();
           fill(0);
           textSize(25);
           text(level.groupNames.get(curgroop), width/2, height*0.4);
-          text("current group",width/2,height*0.36);
-          text("offset",width/2,height*0.46);
-          text(((SetZOffset)logicThing).getOffset(),width/2,height*0.53);
+          text("current group", width/2, height*0.36);
+          text("offset", width/2, height*0.46);
+          text(((SetZOffset)logicThing).getOffset(), width/2, height*0.53);
           increase.draw();
           increaseMore.draw();
           increaseAlot.draw();
           decrease.draw();
           decreaseMore.draw();
           decreaseAlot.draw();
-        }else if(type.equals("logic button")){
+        } else if (type.equals("logic button")) {
           int curvar=thing.getDataI();
-          if(curvar>0)
+          if (curvar>0)
             prevSound.draw();
-          if(curvar<level.variables.size()-1)
+          if (curvar<level.variables.size()-1)
             nextSound.draw();
           fill(0);
           textSize(25);
-          if(curvar==-1){
+          if (curvar==-1) {
             text("none", width/2, height*0.4);
-          }else{
+          } else {
             text("b"+curvar, width/2, height*0.4);
           }
-          text("current variable",width/2,height*0.36);
-        }else if(type.equals("delay")){
+          text("current variable", width/2, height*0.36);
+        } else if (type.equals("delay")) {
           fill(0);
           textSize(25);
-          text("delay in ticks (50tps)",width/2,height*0.46);
-          text(logicThing.getData(),width/2,height*0.53);
+          text("delay in ticks (50tps)", width/2, height*0.46);
+          text(logicThing.getData(), width/2, height*0.53);
           increase.draw();
           increaseMore.draw();
           increaseAlot.draw();
-          if(logicThing.getData()>1)
-          decrease.draw();
-          if(logicThing.getData()>10)
-          decreaseMore.draw();
-          if(logicThing.getData()>100)
-          decreaseAlot.draw();
-        }else {
+          if (logicThing.getData()>1)
+            decrease.draw();
+          if (logicThing.getData()>10)
+            decreaseMore.draw();
+          if (logicThing.getData()>100)
+            decreaseAlot.draw();
+        } else {
           fill(0);
           textSize(20);
           textAlign(CENTER, CENTER);
           text("this object does not have any outher\nproperties that can be changed", width/2, height/2);
         }
-        if(editingStage){//component group selector
+        if (editingStage) {//component group selector
           fill(0);
           textSize(20);
-          textAlign(CENTER,CENTER);
-          text("set group:",width/2,height*0.86);
-          if(thing.group==-1)
-            text("none",width/2,height*0.9);
-          else{
-            text(level.groupNames.get(thing.group),width/2,height*0.9);
+          textAlign(CENTER, CENTER);
+          text("set group:", width/2, height*0.86);
+          if (thing.group==-1)
+            text("none", width/2, height*0.9);
+          else {
+            text(level.groupNames.get(thing.group), width/2, height*0.9);
           }
-          if(thing.group<level.groups.size()-1)
-          nextGroup.draw();
-          if(thing.group>-1)
-          prevGroup.draw();
+          if (thing.group<level.groups.size()-1)
+            nextGroup.draw();
+          if (thing.group>-1)
+            prevGroup.draw();
         }
       }//end of thing is selected
     }//end of selection page
@@ -1173,7 +1173,7 @@ class ToolBox extends PApplet {
         text("you are not currently editing a stage", width/2, height/2);
       }//end of not editing stage
     }//end of stage settings page
-    if(page.equals("variables and groups")){
+    if (page.equals("variables and groups")) {
       background(#FCC740);
       colorPage.draw();
       toolsPage.draw();
@@ -1182,47 +1182,47 @@ class ToolBox extends PApplet {
       variablesAndGroups.draw();
       fill(0);
       textSize(25);
-      textAlign(LEFT,CENTER);
-      if(level!=null){
-        text("variables",80,200);
-        text("groups",560,200);
-        for(int i=0;i<10&&i+variableScroll<level.variables.size();i++){
+      textAlign(LEFT, CENTER);
+      if (level!=null) {
+        text("variables", 80, 200);
+        text("groups", 560, 200);
+        for (int i=0; i<10&&i+variableScroll<level.variables.size(); i++) {
           fill(0);
-          text("b"+(i+variableScroll),90,230+i*21);
-          if(level.variables.get(i+variableScroll)){
+          text("b"+(i+variableScroll), 90, 230+i*21);
+          if (level.variables.get(i+variableScroll)) {
             fill(#3FB700);
-          }else{
+          } else {
             fill(#E30505);
           }
-          rect(70,225+i*21,20,20);
+          rect(70, 225+i*21, 20, 20);
         }
-        if(variableScroll>0)
+        if (variableScroll>0)
           variablesUP.draw();
-        if(variableScroll+10<level.variables.size())
+        if (variableScroll+10<level.variables.size())
           variablesDOWN.draw();
-         textSize(25);
-         textAlign(LEFT,CENTER);
-         for(int i=0;i+groupScroll<level.groupNames.size()&&i<10;i++){
-           fill(0);
-           text(level.groupNames.get(i+groupScroll),565,230+i*21);
-         }
-         if(groupScroll>0)
-           groupsUP.draw();
-         if(groupScroll+10<level.groupNames.size())
-           groupsDOWN.draw();
-         addVariable.draw();
-         addGroup.draw();
-         fill(0);
-         //typeGroopName.draw();
-         rect(680,220,400,1);
-         textSize(20);
-         textAlign(LEFT,BOTTOM);
-         if(typingGroopName)
-         text(newGroopName+coursorr,680,218);
-         else
-         text(newGroopName,680,218);
-         runLoad.draw();
-         runLoad.drawHoverText();
+        textSize(25);
+        textAlign(LEFT, CENTER);
+        for (int i=0; i+groupScroll<level.groupNames.size()&&i<10; i++) {
+          fill(0);
+          text(level.groupNames.get(i+groupScroll), 565, 230+i*21);
+        }
+        if (groupScroll>0)
+          groupsUP.draw();
+        if (groupScroll+10<level.groupNames.size())
+          groupsDOWN.draw();
+        addVariable.draw();
+        addGroup.draw();
+        fill(0);
+        //typeGroopName.draw();
+        rect(680, 220, 400, 1);
+        textSize(20);
+        textAlign(LEFT, BOTTOM);
+        if (typingGroopName)
+          text(newGroopName+coursorr, 680, 218);
+        else
+          text(newGroopName, 680, 218);
+        runLoad.draw();
+        runLoad.drawHoverText();
       }//end of editing level
     }//end of variables and groups
   }//end of draw
@@ -1280,8 +1280,8 @@ class ToolBox extends PApplet {
     if (stageSettings.isMouseOver()) {
       page="stage settings";
     }
-    if(variablesAndGroups.isMouseOver()){
-      page="variables and groups"; 
+    if (variablesAndGroups.isMouseOver()) {
+      page="variables and groups";
     }
 
     if (page.equals("tools")) {
@@ -1372,10 +1372,10 @@ class ToolBox extends PApplet {
             turnThingsOff();
             selecting=true;
           }
-          if(logicButtonButton.isMouseOver()){
-              turnThingsOff();
-              placingLogicButton=true;
-            }
+          if (logicButtonButton.isMouseOver()) {
+            turnThingsOff();
+            placingLogicButton=true;
+          }
           if (placeBlueprint.isMouseOver()) {
             turnThingsOff();
 
@@ -1501,7 +1501,7 @@ class ToolBox extends PApplet {
               turnThingsOff();
               selecting=true;
             }
-            if(logicButtonButton.isMouseOver()){
+            if (logicButtonButton.isMouseOver()) {
               turnThingsOff();
               placingLogicButton=true;
             }
@@ -1532,43 +1532,42 @@ class ToolBox extends PApplet {
               selecting=true;
             }
             if (gridModeButton.isMouseOver()) {
-            extra=true;
-            if (extra&&grid_mode) {
-              grid_mode=false;
-              extra=false;
+              extra=true;
+              if (extra&&grid_mode) {
+                grid_mode=false;
+                extra=false;
+              }
+              if (extra&&!grid_mode) {
+                grid_mode=true;
+                extra=false;
+              }
             }
-            if (extra&&!grid_mode) {
-              grid_mode=true;
-              extra=false;
+            if (size3DButton.isMouseOver()) {
+              current3DTransformMode=2;
+              turnThingsOff();
+              selecting=true;
             }
-          }
-          if(size3DButton.isMouseOver()){
-           current3DTransformMode=2; 
-           turnThingsOff();
-           selecting=true;
-          }
-          if(move3DButton.isMouseOver()){
-           current3DTransformMode=1; 
-           turnThingsOff();
-           selecting=true;
-          }
-          if (groundButton.isMouseOver()) {
+            if (move3DButton.isMouseOver()) {
+              current3DTransformMode=1;
+              turnThingsOff();
+              selecting=true;
+            }
+            if (groundButton.isMouseOver()) {
               turnThingsOff();
               ground=true;
             }
-          if (holoButton.isMouseOver()) {
+            if (holoButton.isMouseOver()) {
               turnThingsOff();
               holo_gram=true;
             }
-          if (checkpointButton.isMouseOver()) {
-            turnThingsOff();
-            check_point=true;
-          }
-          if (draw_coin.isMouseOver()) {
+            if (checkpointButton.isMouseOver()) {
+              turnThingsOff();
+              check_point=true;
+            }
+            if (draw_coin.isMouseOver()) {
               turnThingsOff();
               drawCoins=true;
             }
-            
           }//end of 3D mode is on
         }
 
@@ -1578,8 +1577,6 @@ class ToolBox extends PApplet {
           gmillis=millis()+400+millisOffset;
           println("save complete"+gmillis);
         }
-        
-        
       }//end of edditing stage
       else if (editingBlueprint) {
         if (workingBlueprint.type.equals("blueprint")) {
@@ -1682,48 +1679,48 @@ class ToolBox extends PApplet {
           turnThingsOff();
           placingXnorGate=true;
         }
-        if(testLogicPlaceButton.isMouseOver()){/////////////////////////////////
+        if (testLogicPlaceButton.isMouseOver()) {/////////////////////////////////
           turnThingsOff();
           placingTestLogic=true;
         }
-        if(constantOnButton.isMouseOver()){
+        if (constantOnButton.isMouseOver()) {
           turnThingsOff();
           placingOnSingal=true;
         }
-        if(readVariableButton.isMouseOver()){
+        if (readVariableButton.isMouseOver()) {
           turnThingsOff();
           placingReadVariable=true;
         }
-        if(setVariableButton.isMouseOver()){
+        if (setVariableButton.isMouseOver()) {
           turnThingsOff();
           placingSetVaravle=true;
         }
         if (select.isMouseOver()) {
-            turnThingsOff();
-            selecting=true;
+          turnThingsOff();
+          selecting=true;
         }
-        if(setVisabilityButton.isMouseOver()){
+        if (setVisabilityButton.isMouseOver()) {
           turnThingsOff();
           placingSetVisibility=true;
         }
-        if(xOffsetButton.isMouseOver()){
+        if (xOffsetButton.isMouseOver()) {
           turnThingsOff();
           placingXOffset=true;
         }
-        if(yOffsetButton.isMouseOver()){
+        if (yOffsetButton.isMouseOver()) {
           turnThingsOff();
           placingYOffset=true;
         }
-        if(delayButton.isMouseOver()){
+        if (delayButton.isMouseOver()) {
           turnThingsOff();
           placingDelay=true;
         }
-        if(zOffsetButton.isMouseOver()){
+        if (zOffsetButton.isMouseOver()) {
           turnThingsOff();
           placingZOffset=true;
         }
-        if(logicHelpButton.isMouseOver()){
-         link("https://youtu.be/3ac1G1qWK6g"); 
+        if (logicHelpButton.isMouseOver()) {
+          link("https://youtu.be/3ac1G1qWK6g");
         }
       }//end of edditing logic board
     }//end of tools
@@ -1732,12 +1729,12 @@ class ToolBox extends PApplet {
       if (selectedIndex!=-1) {
         String type="";
         StageComponent thing= new GenericStageComponent();
-        LogicComponent logicThing=new GenericLogicComponent(-10,-10,null);
-        if(editingStage){
-         thing= level.stages.get(currentStageIndex).parts.get(selectedIndex);
-        type=thing.type;
+        LogicComponent logicThing=new GenericLogicComponent(-10, -10, null);
+        if (editingStage) {
+          thing= level.stages.get(currentStageIndex).parts.get(selectedIndex);
+          type=thing.type;
         }
-        if(editinglogicBoard){
+        if (editinglogicBoard) {
           logicThing=level.logicBoards.get(logicBoardIndex).components.get(selectedIndex);
           type=logicThing.type;
         }
@@ -1766,125 +1763,125 @@ class ToolBox extends PApplet {
             if (fileind<keys.length-1&&nextSound.isMouseOver())
               thing.setData(keys[fileind+1]);
           }
-        } else if(type.equals("read var")||type.equals("set var")){
+        } else if (type.equals("read var")||type.equals("set var")) {
           int curvar=logicThing.getData();
           if (curvar>0&&prevSound.isMouseOver())
-              logicThing.setData(curvar-1);
-            if (curvar<level.variables.size()-1&&nextSound.isMouseOver())
-              logicThing.setData(curvar+1);
-        }else if(type.equals("set visable")){
+            logicThing.setData(curvar-1);
+          if (curvar<level.variables.size()-1&&nextSound.isMouseOver())
+            logicThing.setData(curvar+1);
+        } else if (type.equals("set visable")) {
           int curvar=logicThing.getData();
           if (curvar>0&&prevSound.isMouseOver())
-              logicThing.setData(curvar-1);
+            logicThing.setData(curvar-1);
           if (curvar<level.groups.size()-1&&nextSound.isMouseOver())
-              logicThing.setData(curvar+1);
-        }else if(type.equals("x-offset")){
+            logicThing.setData(curvar+1);
+        } else if (type.equals("x-offset")) {
           SetXOffset r=(SetXOffset)logicThing;
-           if(increase.isMouseOver()){
-             r.setOffset(r.getOffset()+1);
-           }
-           if(increaseMore.isMouseOver()){
-             r.setOffset(r.getOffset()+10);
-           }
-           if(increaseAlot.isMouseOver()){
-             r.setOffset(r.getOffset()+100);
-           }
-           if(decrease.isMouseOver()){
-             r.setOffset(r.getOffset()-1);
-           }
-           if(decreaseMore.isMouseOver()){
-             r.setOffset(r.getOffset()-10);
-           }
-           if(decreaseAlot.isMouseOver()){
-             r.setOffset(r.getOffset()-100);
-           }
-           int curvar=logicThing.getData();
+          if (increase.isMouseOver()) {
+            r.setOffset(r.getOffset()+1);
+          }
+          if (increaseMore.isMouseOver()) {
+            r.setOffset(r.getOffset()+10);
+          }
+          if (increaseAlot.isMouseOver()) {
+            r.setOffset(r.getOffset()+100);
+          }
+          if (decrease.isMouseOver()) {
+            r.setOffset(r.getOffset()-1);
+          }
+          if (decreaseMore.isMouseOver()) {
+            r.setOffset(r.getOffset()-10);
+          }
+          if (decreaseAlot.isMouseOver()) {
+            r.setOffset(r.getOffset()-100);
+          }
+          int curvar=logicThing.getData();
           if (curvar>0&&prevSound.isMouseOver())
-              logicThing.setData(curvar-1);
+            logicThing.setData(curvar-1);
           if (curvar<level.groups.size()-1&&nextSound.isMouseOver())
-              logicThing.setData(curvar+1);
-        }else if(type.equals("y-offset")){
+            logicThing.setData(curvar+1);
+        } else if (type.equals("y-offset")) {
           SetYOffset r=(SetYOffset)logicThing;
-           if(increase.isMouseOver()){
-             r.setOffset(r.getOffset()+1);
-           }
-           if(increaseMore.isMouseOver()){
-             r.setOffset(r.getOffset()+10);
-           }
-           if(increaseAlot.isMouseOver()){
-             r.setOffset(r.getOffset()+100);
-           }
-           if(decrease.isMouseOver()){
-             r.setOffset(r.getOffset()-1);
-           }
-           if(decreaseMore.isMouseOver()){
-             r.setOffset(r.getOffset()-10);
-           }
-           if(decreaseAlot.isMouseOver()){
-             r.setOffset(r.getOffset()-100);
-           }
-           int curvar=logicThing.getData();
+          if (increase.isMouseOver()) {
+            r.setOffset(r.getOffset()+1);
+          }
+          if (increaseMore.isMouseOver()) {
+            r.setOffset(r.getOffset()+10);
+          }
+          if (increaseAlot.isMouseOver()) {
+            r.setOffset(r.getOffset()+100);
+          }
+          if (decrease.isMouseOver()) {
+            r.setOffset(r.getOffset()-1);
+          }
+          if (decreaseMore.isMouseOver()) {
+            r.setOffset(r.getOffset()-10);
+          }
+          if (decreaseAlot.isMouseOver()) {
+            r.setOffset(r.getOffset()-100);
+          }
+          int curvar=logicThing.getData();
           if (curvar>0&&prevSound.isMouseOver())
-              logicThing.setData(curvar-1);
+            logicThing.setData(curvar-1);
           if (curvar<level.groups.size()-1&&nextSound.isMouseOver())
-              logicThing.setData(curvar+1);
-        }else if(type.equals("z-offset")){
+            logicThing.setData(curvar+1);
+        } else if (type.equals("z-offset")) {
           SetZOffset r=(SetZOffset)logicThing;
-           if(increase.isMouseOver()){
-             r.setOffset(r.getOffset()+1);
-           }
-           if(increaseMore.isMouseOver()){
-             r.setOffset(r.getOffset()+10);
-           }
-           if(increaseAlot.isMouseOver()){
-             r.setOffset(r.getOffset()+100);
-           }
-           if(decrease.isMouseOver()){
-             r.setOffset(r.getOffset()-1);
-           }
-           if(decreaseMore.isMouseOver()){
-             r.setOffset(r.getOffset()-10);
-           }
-           if(decreaseAlot.isMouseOver()){
-             r.setOffset(r.getOffset()-100);
-           }
-           int curvar=logicThing.getData();
+          if (increase.isMouseOver()) {
+            r.setOffset(r.getOffset()+1);
+          }
+          if (increaseMore.isMouseOver()) {
+            r.setOffset(r.getOffset()+10);
+          }
+          if (increaseAlot.isMouseOver()) {
+            r.setOffset(r.getOffset()+100);
+          }
+          if (decrease.isMouseOver()) {
+            r.setOffset(r.getOffset()-1);
+          }
+          if (decreaseMore.isMouseOver()) {
+            r.setOffset(r.getOffset()-10);
+          }
+          if (decreaseAlot.isMouseOver()) {
+            r.setOffset(r.getOffset()-100);
+          }
+          int curvar=logicThing.getData();
           if (curvar>0&&prevSound.isMouseOver())
-              logicThing.setData(curvar-1);
+            logicThing.setData(curvar-1);
           if (curvar<level.groups.size()-1&&nextSound.isMouseOver())
-              logicThing.setData(curvar+1);
-        }else if(type.equals("logic button")){
+            logicThing.setData(curvar+1);
+        } else if (type.equals("logic button")) {
           int curvar=thing.getDataI();
           if (curvar>0&&prevSound.isMouseOver())
-              thing.setData(curvar-1);
-            if (curvar<level.variables.size()-1&&nextSound.isMouseOver())
-              thing.setData(curvar+1);
-        }else if(type.equals("delay")){
+            thing.setData(curvar-1);
+          if (curvar<level.variables.size()-1&&nextSound.isMouseOver())
+            thing.setData(curvar+1);
+        } else if (type.equals("delay")) {
           int curval=logicThing.getData();
-          if(increase.isMouseOver()){
-             logicThing.setData(logicThing.getData()+1);
-           }
-           if(increaseMore.isMouseOver()){
-             logicThing.setData(logicThing.getData()+10);
-           }
-           if(increaseAlot.isMouseOver()){
-             logicThing.setData(logicThing.getData()+100);
-           }
-           if(decrease.isMouseOver()&&curval>1){
-             logicThing.setData(logicThing.getData()-1);
-           }
-           if(decreaseMore.isMouseOver()&&curval>10){
-             logicThing.setData(logicThing.getData()-10);
-           }
-           if(decreaseAlot.isMouseOver()&&curval>100){
-             logicThing.setData(logicThing.getData()-100);
-           }
+          if (increase.isMouseOver()) {
+            logicThing.setData(logicThing.getData()+1);
+          }
+          if (increaseMore.isMouseOver()) {
+            logicThing.setData(logicThing.getData()+10);
+          }
+          if (increaseAlot.isMouseOver()) {
+            logicThing.setData(logicThing.getData()+100);
+          }
+          if (decrease.isMouseOver()&&curval>1) {
+            logicThing.setData(logicThing.getData()-1);
+          }
+          if (decreaseMore.isMouseOver()&&curval>10) {
+            logicThing.setData(logicThing.getData()-10);
+          }
+          if (decreaseAlot.isMouseOver()&&curval>100) {
+            logicThing.setData(logicThing.getData()-100);
+          }
         }
-        if(editingStage){
-          if(thing.group<level.groups.size()-1&&nextGroup.isMouseOver()){
+        if (editingStage) {
+          if (thing.group<level.groups.size()-1&&nextGroup.isMouseOver()) {
             thing.group++;
           }
-          if(thing.group>-1&&prevGroup.isMouseOver()){
+          if (thing.group>-1&&prevGroup.isMouseOver()) {
             thing.group--;
           }
         }
@@ -1901,41 +1898,41 @@ class ToolBox extends PApplet {
         }//end of clicked on reset sky color
       }//end of editing stage
     }//end of page is stage settings
-    if(page.equals("variables and groups")){
-      if(level!=null){
-        if(variablesUP.isMouseOver()&&variableScroll>0){
+    if (page.equals("variables and groups")) {
+      if (level!=null) {
+        if (variablesUP.isMouseOver()&&variableScroll>0) {
           variableScroll--;
         }
-        if(variablesDOWN.isMouseOver()&&variableScroll+10<level.variables.size()){
+        if (variablesDOWN.isMouseOver()&&variableScroll+10<level.variables.size()) {
           variableScroll++;
         }
         //rect(70,225+i*21,20,20);
-        if(mouseX>=20&&mouseX<=90&&mouseY>=225&&mouseY<=435){//if clicking on a variable state
+        if (mouseX>=20&&mouseX<=90&&mouseY>=225&&mouseY<=435) {//if clicking on a variable state
           int varSel=((mouseY-225)/21)+variableScroll;
-          if(varSel<level.variables.size()){
-            level.variables.set(varSel,!level.variables.get(varSel));
+          if (varSel<level.variables.size()) {
+            level.variables.set(varSel, !level.variables.get(varSel));
           }
         }
-        if(groupsUP.isMouseOver()&&groupScroll>0){
+        if (groupsUP.isMouseOver()&&groupScroll>0) {
           groupScroll--;
         }
-        if(groupsDOWN.isMouseOver()&&groupScroll+10<level.groupNames.size()){
+        if (groupsDOWN.isMouseOver()&&groupScroll+10<level.groupNames.size()) {
           groupScroll++;
         }
-        if(typeGroopName.isMouseOver()){
-         typingGroopName=true; 
+        if (typeGroopName.isMouseOver()) {
+          typingGroopName=true;
         }
-        if(addVariable.isMouseOver()){
-         level.variables.add(false); 
+        if (addVariable.isMouseOver()) {
+          level.variables.add(false);
         }
-        if(addGroup.isMouseOver()&&!newGroopName.equals("")){
-           level.groupNames.add(newGroopName);
-           level.groups.add(new Group());
-           newGroopName="";
-           typingGroopName=false;
+        if (addGroup.isMouseOver()&&!newGroopName.equals("")) {
+          level.groupNames.add(newGroopName);
+          level.groups.add(new Group());
+          newGroopName="";
+          typingGroopName=false;
         }
-        if(runLoad.isMouseOver()){
-          level.logicBoards.get(level.loadBoard).superTick(); 
+        if (runLoad.isMouseOver()) {
+          level.logicBoards.get(level.loadBoard).superTick();
         }
       }//end of editing a level
     }//end if page is varioables and groups
@@ -1974,7 +1971,6 @@ class ToolBox extends PApplet {
         }
       }
     }//end of if page is colors
-    
   }
 
 
@@ -1992,12 +1988,12 @@ class ToolBox extends PApplet {
         }
       }
     }//end of page is selection
-    if(page.equals("variables and groups")){
-      if(level!=null){
-        if(typingGroopName){
-           newGroopName=getInput(newGroopName,0,keyCode,key);
+    if (page.equals("variables and groups")) {
+      if (level!=null) {
+        if (typingGroopName) {
+          newGroopName=getInput(newGroopName, 0, keyCode, key);
         }
-      } 
+      }
     }//end of page is variables and groops
   }//end of keypressed
 

@@ -17,33 +17,33 @@ void setup() {
   greenArrow=loadShape("data/modles/green arrow/arrow.obj");
   blueArrow=loadShape("data/modles/blue arrow/arrow.obj");
   yellowArrow=loadShape("data/modles/yellow arrow/arrow.obj");
-  
+
   redScaler=loadShape("data/modles/red scaler/obj.obj");
   greenScaler=loadShape("data/modles/green scaler/obj.obj");
   blueScaler=loadShape("data/modles/blue scaler/obj.obj");
   yellowScaler=loadShape("data/modles/yellow scaler/obj.obj");
 
-  
+
   initlizeButtons();
 }
-boolean startup=true, editing_level=true, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, loading=false, newLevel=false, simulating=false, entering_file_path=false, coursor=false, level_complete=false, dead=false, entering_name=false, cam_left=false, cam_right=false, drawing=false, draw=false, extra=false, ground=false, check_point=false, goal=false, deleteing=false, delete=false, moving_player=false, grid_mode=false, holo_gram=false, editingStage=false, levelOverview=false, newFile=false, drawCoins=false, drawingPortal=false, drawingPortal2=false, drawingPortal3=false, E_pressed=false, saveColors=false, sloap=false, loopThread2=true, cam_up=false, cam_down=false, holoTriangle=false, dethPlane=false, setPlayerPosTo=false, e3DMode=false, WPressed=false, SPressed=false, draw3DSwitch1=false, draw3DSwitch2=false, checkpointIn3DStage=false, shadow3D=true, tutorialMode=false, drawingSign=false, selecting=false, viewingItemContents=false, loadingBlueprint=false, creatingNewBlueprint=false, editingBlueprint=false, selectingBlueprint=false, placingSound=false, editinglogicBoard=false, connectingLogic=false, connecting=false, moveLogicComponents=false, movingLogicComponent, placingAndGate=false, placingOrGate=false, placingXorGate=false, placingNandGate=false, placingNorGate=false, placingXnorGate=false,placingTestLogic=false,placingOnSingal=false,placingReadVariable=false,placingSetVaravle=false,placingSetVisibility=false,placingXOffset=false,placingYOffset=false,placingLogicButton=false,placingDelay=false,placingZOffset,pnttst,settingPlayerSpawn=false,translateXaxis=false,translateYaxis=false,translateZaxis=false,w3D=false,a3D=false,s3D=false,d3D=false,space3D=false,shift3D=false;
+boolean startup=true, editing_level=true, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, loading=false, newLevel=false, simulating=false, entering_file_path=false, coursor=false, level_complete=false, dead=false, entering_name=false, cam_left=false, cam_right=false, drawing=false, draw=false, extra=false, ground=false, check_point=false, goal=false, deleteing=false, delete=false, moving_player=false, grid_mode=false, holo_gram=false, editingStage=false, levelOverview=false, newFile=false, drawCoins=false, drawingPortal=false, drawingPortal2=false, drawingPortal3=false, E_pressed=false, saveColors=false, sloap=false, loopThread2=true, cam_up=false, cam_down=false, holoTriangle=false, dethPlane=false, setPlayerPosTo=false, e3DMode=false, WPressed=false, SPressed=false, draw3DSwitch1=false, draw3DSwitch2=false, checkpointIn3DStage=false, shadow3D=true, tutorialMode=false, drawingSign=false, selecting=false, viewingItemContents=false, loadingBlueprint=false, creatingNewBlueprint=false, editingBlueprint=false, selectingBlueprint=false, placingSound=false, editinglogicBoard=false, connectingLogic=false, connecting=false, moveLogicComponents=false, movingLogicComponent, placingAndGate=false, placingOrGate=false, placingXorGate=false, placingNandGate=false, placingNorGate=false, placingXnorGate=false, placingTestLogic=false, placingOnSingal=false, placingReadVariable=false, placingSetVaravle=false, placingSetVisibility=false, placingXOffset=false, placingYOffset=false, placingLogicButton=false, placingDelay=false, placingZOffset, pnttst, settingPlayerSpawn=false, translateXaxis=false, translateYaxis=false, translateZaxis=false, w3D=false, a3D=false, s3D=false, d3D=false, space3D=false, shift3D=false;
 String file_path, new_name="my_level", GAME_version="0.6.0_Early_Access", EDITOR_version="0.0.2_EAc", rootPath="", coursorr="", newFileName="", newFileType="2D", stageType="", author="your name here", displayText="", fileToCoppyPath="";
 //int player1 []={20,700,1,0,1,0}; // old player data
 Player player1 =new Player(20, 699, 1, "red");
 int camPos=0, camPosY=0, death_cool_down, start_down, eadgeScroleDist=300, respawnX=20, respawnY=700, spdelay=0, Color=0, RedPos=0, BluePos=0, GreenPos=0, RC=0, GC=0, BC=0, grid_size=10, filesScrole=0, overviewSelection=-1, portalIndex1, stageIndex, preSI, respawnStage, setPlayerPosX, setPlayerPosY, setPlayerPosZ, startingDepth=0, totalDepth=300, respawnZ=50, coinRotation=0, coinCount=0, gmillis=0, eadgeScroleDistV=250, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, drawCamPosX=0, drawCamPosY;
-int buttonMin=0, buttonMax=0, coinsIndex, triangleMode=0, selectedIndex=-1, viewingItemIndex=-1, currentBluieprintIndex=0, logicBoardIndex, connectingFromIndex, movingLogicIndex,current3DTransformMode=1,transformComponentNumber;
+int buttonMin=0, buttonMax=0, coinsIndex, triangleMode=0, selectedIndex=-1, viewingItemIndex=-1, currentBluieprintIndex=0, logicBoardIndex, connectingFromIndex, movingLogicIndex, current3DTransformMode=1, transformComponentNumber;
 float[]tpCords=new float[3];
 JSONArray mainIndex, colors;
 JSONObject portalStage1, portalStage2;
 float downX, downY, upX, upY, Scale=1, gravity=0.001;
 ToolBox scr2 ;
-PShape coin3D,redArrow,greenArrow,blueArrow,yellowArrow,redScaler,greenScaler,blueScaler,yellowScaler;
+PShape coin3D, redArrow, greenArrow, blueArrow, yellowArrow, redScaler, greenScaler, blueScaler, yellowScaler;
 Level level;
 ArrayList<Boolean> coins = new ArrayList<Boolean>();
 Stage workingBlueprint, blueprints[], displayBlueprint;
 PApplet primaryWindow=this;
 LogicThread logicTickingThread=new LogicThread();
-Point3D initalMousePoint=new Point3D(0,0,0),initalObjectPos=new Point3D(0,0,0),initialObjectDim=new Point3D(0,0,0);
+Point3D initalMousePoint=new Point3D(0, 0, 0), initalObjectPos=new Point3D(0, 0, 0), initialObjectDim=new Point3D(0, 0, 0);
 void draw() {
 
   if (frameCount%20==0) {//curcor blinking code
@@ -223,8 +223,8 @@ void draw() {
         if (type.equals("stage")) {//if it is a stage then display the stage icon
           drawWorldSymbol(20, 90+60*(i));
         }
-        if(type.equals("3Dstage")){
-          draw3DStageIcon(43,100+60*i,0.7); 
+        if (type.equals("3Dstage")) {
+          draw3DStageIcon(43, 100+60*i, 0.7);
         }
       } else if (i+ filesScrole<level.stages.size()+level.sounds.size()) {//if the thing is in the range of sounds
         fill(0);
@@ -237,11 +237,11 @@ void draw() {
         fill(0);
         String displayName=level.logicBoards.get(i+ filesScrole-(level.stages.size()+level.sounds.size())).name;//get the name of the logic board
         text(displayName, 80, 130+60*(i));//display the name
-        logicIcon(40,100+60*i,1);
+        logicIcon(40, 100+60*i, 1);
       }
     }
 
-    
+
     textAlign(CENTER, CENTER);
     newStage.draw();//draw the new file button
     fill(0);
@@ -310,14 +310,14 @@ void draw() {
     if (overviewSelection!=-1) {//if sonethign is selected
       rect(0, (overviewSelection- filesScrole)*60+80, 1280, 60);//highlight
       if (overviewSelection<level.stages.size())
-      if (level.stages.get(overviewSelection).type.equals("stage")||level.stages.get(overviewSelection).type.equals("3Dstage")) {//if the selected thing is a posible destination stage
-        selectStage.draw();//draw the select stage button
-        textAlign(LEFT, BOTTOM);
-        stroke(0, 255, 0);
-        strokeWeight(7);
-        line(1212, 44, 1224, 55);//checkmark
-        line(1224, 55, 1253, 29);
-      }
+        if (level.stages.get(overviewSelection).type.equals("stage")||level.stages.get(overviewSelection).type.equals("3Dstage")) {//if the selected thing is a posible destination stage
+          selectStage.draw();//draw the select stage button
+          textAlign(LEFT, BOTTOM);
+          stroke(0, 255, 0);
+          strokeWeight(7);
+          line(1212, 44, 1224, 55);//checkmark
+          line(1224, 55, 1253, 29);
+        }
     }
     textAlign(LEFT, BOTTOM);
     stroke(0);
@@ -335,8 +335,8 @@ void draw() {
         if (type.equals("stage")) {//if it is a stage then display the stage icon
           drawWorldSymbol(20, 90+60*(i));
         }
-        if(type.equals("3Dstage")){
-          draw3DStageIcon(43,100+60*i,0.7); 
+        if (type.equals("3Dstage")) {
+          draw3DStageIcon(43, 100+60*i, 0.7);
         }
       } else if (i+ filesScrole<level.stages.size()+level.sounds.size()) {//if the thing is not a stage type
         fill(0);
@@ -349,7 +349,7 @@ void draw() {
         fill(0);
         String displayName=level.logicBoards.get(i+ filesScrole-(level.stages.size()+level.sounds.size())).name;//get the name of the logic board
         text(displayName, 80, 130+60*(i));//display the name
-        logicIcon(40,100+60*i,1);
+        logicIcon(40, 100+60*i, 1);
       }
     }
     textAlign(CENTER, CENTER);
@@ -407,11 +407,11 @@ void draw() {
   if (editinglogicBoard) {//if editing a logic board
     background(#FFECA0);
     for (int i=0; i<level.logicBoards.get(logicBoardIndex).components.size(); i++) {//draw the components
-    if(selectedIndex==i){
-      strokeWeight(0);
-     fill(255,0,0);
-     rect(level.logicBoards.get(logicBoardIndex).components.get(i).x-5-camPos,level.logicBoards.get(logicBoardIndex).components.get(i).y-5-camPosY,level.logicBoards.get(logicBoardIndex).components.get(i).button.lengthX+10,level.logicBoards.get(logicBoardIndex).components.get(i).button.lengthY+10);
-    }
+      if (selectedIndex==i) {
+        strokeWeight(0);
+        fill(255, 0, 0);
+        rect(level.logicBoards.get(logicBoardIndex).components.get(i).x-5-camPos, level.logicBoards.get(logicBoardIndex).components.get(i).y-5-camPosY, level.logicBoards.get(logicBoardIndex).components.get(i).button.lengthX+10, level.logicBoards.get(logicBoardIndex).components.get(i).button.lengthY+10);
+      }
       level.logicBoards.get(logicBoardIndex).components.get(i).draw();
     }
     for (int i=0; i<level.logicBoards.get(logicBoardIndex).components.size(); i++) {//draw the connections
@@ -429,25 +429,24 @@ void draw() {
       level.logicBoards.get(logicBoardIndex).components.get(movingLogicIndex).setPos(mouseX+camPos, mouseY+camPosY);
     }
     if (cam_left&&camPos>0) {
-        camPos-=4;
-      }
-      if (cam_right) {
-        camPos+=4;
-      }
-      if (cam_up&&camPosY>0) {
-        camPosY-=4;
-      }
-      if (cam_down) {
-        camPosY+=4;
-      }
+      camPos-=4;
+    }
+    if (cam_right) {
+      camPos+=4;
+    }
+    if (cam_up&&camPosY>0) {
+      camPosY-=4;
+    }
+    if (cam_down) {
+      camPosY+=4;
+    }
   }
-  if(settingPlayerSpawn){
-    draw_mann(mouseX,mouseY,1,1,"red");
+  if (settingPlayerSpawn) {
+    draw_mann(mouseX, mouseY, 1, 1, "red");
     fill(0);
     textSize(35);
-    textAlign(CENTER,CENTER);
-    text("select the spawn location of the player",width/2,height*0.1);
-    
+    textAlign(CENTER, CENTER);
+    text("select the spawn location of the player", width/2, height*0.1);
   }
 
 
@@ -468,7 +467,6 @@ void draw() {
   }
 
   disEngageHUDPosition();
-  
 }//end of draw
 
 
@@ -542,12 +540,12 @@ void mouseClicked() {
         return;
       }
     }
-    if(!e3DMode)
-    GUImouseClicked();//gui clicking code
-    else{
+    if (!e3DMode)
+      GUImouseClicked();//gui clicking code
+    else {
       mouseClicked3D();
     }
-    
+
 
 
     if (levelOverview) {//if on level overview
@@ -762,42 +760,42 @@ void mouseClicked() {
           }
         }
       }
-      if(placingTestLogic){
+      if (placingTestLogic) {
         //level.logicBoards.get(logicBoardIndex).components.add(new GIL(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
       }
-      if(placingOnSingal){
+      if (placingOnSingal) {
         level.logicBoards.get(logicBoardIndex).components.add(new ConstantOnSignal(mouseX-50+camPos, mouseY-20+camPosY, level.logicBoards.get(logicBoardIndex)));
       }
-      if(placingSetVaravle){
-         level.logicBoards.get(logicBoardIndex).components.add(new SetVariable(mouseX-50+camPos, mouseY-20+camPosY, level.logicBoards.get(logicBoardIndex)));
+      if (placingSetVaravle) {
+        level.logicBoards.get(logicBoardIndex).components.add(new SetVariable(mouseX-50+camPos, mouseY-20+camPosY, level.logicBoards.get(logicBoardIndex)));
       }
-      if(placingReadVariable){
+      if (placingReadVariable) {
         level.logicBoards.get(logicBoardIndex).components.add(new ReadVariable(mouseX-50+camPos, mouseY-20+camPosY, level.logicBoards.get(logicBoardIndex)));
       }
-      if(selecting){
-        for(int i=0;i< level.logicBoards.get(logicBoardIndex).components.size();i++){
-          if(level.logicBoards.get(logicBoardIndex).components.get(i).button.isMouseOver()){
-            selectedIndex=i; 
+      if (selecting) {
+        for (int i=0; i< level.logicBoards.get(logicBoardIndex).components.size(); i++) {
+          if (level.logicBoards.get(logicBoardIndex).components.get(i).button.isMouseOver()) {
+            selectedIndex=i;
           }
         }
       }
-      if(placingSetVisibility){
+      if (placingSetVisibility) {
         level.logicBoards.get(logicBoardIndex).components.add(new SetVisibility(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
       }
-      if(placingXOffset){
-         level.logicBoards.get(logicBoardIndex).components.add(new SetXOffset(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
+      if (placingXOffset) {
+        level.logicBoards.get(logicBoardIndex).components.add(new SetXOffset(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
       }
-      if(placingYOffset){
-         level.logicBoards.get(logicBoardIndex).components.add(new SetYOffset(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
+      if (placingYOffset) {
+        level.logicBoards.get(logicBoardIndex).components.add(new SetYOffset(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
       }
-      if(placingDelay){
+      if (placingDelay) {
         level.logicBoards.get(logicBoardIndex).components.add(new Delay(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
       }
-      if(placingZOffset){
+      if (placingZOffset) {
         level.logicBoards.get(logicBoardIndex).components.add(new SetZOffset(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
       }
     }//end of edditing logic board
-    if(settingPlayerSpawn){
+    if (settingPlayerSpawn) {
       level.SpawnX=mouseX+camPos;
       level.SpawnY=mouseY-camPosY;
       level.RewspawnX=mouseX+camPos;
@@ -848,7 +846,7 @@ void keyPressed() {
       cam_down=true;
     }
   }//end of if sumilating
-  if(!simulating&&e3DMode){
+  if (!simulating&&e3DMode) {
     if (keyCode==65) {//if 'A' is pressed
       a3D=true;
     }
@@ -974,7 +972,7 @@ void keyReleased() {
       cam_down=false;
     }
   }//end of simulation pasued
-  if(!simulating&&e3DMode){
+  if (!simulating&&e3DMode) {
     if (keyCode==65) {//if 'A' is pressed
       a3D=false;
     }
@@ -998,136 +996,136 @@ void keyReleased() {
 }//end of key relaesed
 
 void mousePressed() {
-  if(mouseButton==LEFT){
-  if (editingStage||editingBlueprint) {//if edditing a stage or blueprint
-    GUImousePressed();
-  }
-  if (editinglogicBoard) {
-    if (connectingLogic) {
-      LogicBoard board=level.logicBoards.get(logicBoardIndex);
-      for (int i=0; i<board.components.size(); i++) {
-        float[] nodePos=board.components.get(i).getTerminalPos(2);
-        if (Math.sqrt(Math.pow(nodePos[0]-mouseX, 2)+Math.pow(nodePos[1]-mouseY, 2))<=10) {
-          connecting=true;
-          connectingFromIndex=i;
-          return;
+  if (mouseButton==LEFT) {
+    if (editingStage||editingBlueprint) {//if edditing a stage or blueprint
+      GUImousePressed();
+    }
+    if (editinglogicBoard) {
+      if (connectingLogic) {
+        LogicBoard board=level.logicBoards.get(logicBoardIndex);
+        for (int i=0; i<board.components.size(); i++) {
+          float[] nodePos=board.components.get(i).getTerminalPos(2);
+          if (Math.sqrt(Math.pow(nodePos[0]-mouseX, 2)+Math.pow(nodePos[1]-mouseY, 2))<=10) {
+            connecting=true;
+            connectingFromIndex=i;
+            return;
+          }
         }
       }
-    }
-    if (moveLogicComponents) {
-      LogicBoard board=level.logicBoards.get(logicBoardIndex);
-      for (int i=0; i<board.components.size(); i++) {
-        if (board.components.get(i).button.isMouseOver()) {
-          movingLogicIndex=i;
-          movingLogicComponent=true;
-          return;
+      if (moveLogicComponents) {
+        LogicBoard board=level.logicBoards.get(logicBoardIndex);
+        for (int i=0; i<board.components.size(); i++) {
+          if (board.components.get(i).button.isMouseOver()) {
+            movingLogicIndex=i;
+            movingLogicComponent=true;
+            return;
+          }
         }
       }
-    }
-  }//end of editng logic board
-    if(e3DMode&&selectedIndex!=-1){
+    }//end of editng logic board
+    if (e3DMode&&selectedIndex!=-1) {
       StageComponent ct=level.stages.get(currentStageIndex).parts.get(selectedIndex);
-      for(int i=0;i<5000;i++){
-       Point3D testPoint=genMousePoint(i);
-       if(testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= ct.z+ct.dz && testPoint.z <= ct.z+ct.dz+60){
-         translateZaxis=true;
-         transformComponentNumber=1;
-         break;
-       }
-       
-       if(testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= ct.z-60 && testPoint.z <= ct.z){
-         translateZaxis=true;
-         transformComponentNumber=2;
-         break;
-       }
-       
-       if(testPoint.x >= ct.x-60 && testPoint.x <= ct.x && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5){
-         translateXaxis=true;
-         transformComponentNumber=2;
-         break;
-       }
-       
-       if(testPoint.x >= ct.x+ct.dx && testPoint.x <= ct.x+ct.dx+60 && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5){
-         translateXaxis=true;
-         transformComponentNumber=1;
-         break;
-       }
-       
-       if(testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= ct.y-60 && testPoint.y <= ct.y && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5){
-         translateYaxis=true;
-         transformComponentNumber=2;
-         break;
-       }
-       
-       if(testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= ct.y+ct.dy && testPoint.y <= ct.y+ct.dy+60 && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5){
-         translateYaxis=true;
-         transformComponentNumber=1;
-         break;
-       }
+      for (int i=0; i<5000; i++) {
+        Point3D testPoint=genMousePoint(i);
+        if (testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= ct.z+ct.dz && testPoint.z <= ct.z+ct.dz+60) {
+          translateZaxis=true;
+          transformComponentNumber=1;
+          break;
+        }
+
+        if (testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= ct.z-60 && testPoint.z <= ct.z) {
+          translateZaxis=true;
+          transformComponentNumber=2;
+          break;
+        }
+
+        if (testPoint.x >= ct.x-60 && testPoint.x <= ct.x && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5) {
+          translateXaxis=true;
+          transformComponentNumber=2;
+          break;
+        }
+
+        if (testPoint.x >= ct.x+ct.dx && testPoint.x <= ct.x+ct.dx+60 && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5) {
+          translateXaxis=true;
+          transformComponentNumber=1;
+          break;
+        }
+
+        if (testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= ct.y-60 && testPoint.y <= ct.y && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5) {
+          translateYaxis=true;
+          transformComponentNumber=2;
+          break;
+        }
+
+        if (testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= ct.y+ct.dy && testPoint.y <= ct.y+ct.dy+60 && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5) {
+          translateYaxis=true;
+          transformComponentNumber=1;
+          break;
+        }
       }
       initalMousePoint=mousePoint;
-      initalObjectPos=new Point3D(ct.x,ct.y,ct.z);
-      initialObjectDim=new Point3D(ct.dx,ct.dy,ct.dz);
+      initalObjectPos=new Point3D(ct.x, ct.y, ct.z);
+      initialObjectDim=new Point3D(ct.dx, ct.dy, ct.dz);
     }
   }
 }
 
 void mouseReleased() {
-  if(mouseButton==LEFT){
-  if (editingStage||editingBlueprint) {//if edditing a stage or blueprint
-    GUImouseReleased();
-  }
-  if (editinglogicBoard) {
-    if (connectingLogic&&connecting) {//if attempting to connect terminals
-      connecting=false;//stop more connecting
-      LogicBoard board=level.logicBoards.get(logicBoardIndex);
-      for (int i=0; i<board.components.size(); i++) {//srech through all components in the current board
-        float[] nodePos1=board.components.get(i).getTerminalPos(0), nodePos2=board.components.get(i).getTerminalPos(1);//gets the positions of the terminals of the component
-        if (Math.sqrt(Math.pow(nodePos1[0]-mouseX, 2)+Math.pow(nodePos1[1]-mouseY, 2))<=10) {//if the mmouse is over terminal 0
-          for (int j=0; j<board.components.get(connectingFromIndex).connections.size(); j++) {//checkif the connection allready exsists
-            if (board.components.get(connectingFromIndex).connections.get(j)[0]==i&&board.components.get(connectingFromIndex).connections.get(j)[1]==0) {//if so then remove the connection
-              board.components.get(connectingFromIndex).connections.remove(j);
-              return;
-            }
-          }
-          for (int j=0; j<board.components.size(); j++) {//check if any outher components are connecting to this terminal allready
-            for (int k=0; k<board.components.get(j).connections.size(); k++) {
-              if ( board.components.get(j).connections.get(k)[0]==i&&board.components.get(j).connections.get(k)[1]==0) {//if so then do nothing
+  if (mouseButton==LEFT) {
+    if (editingStage||editingBlueprint) {//if edditing a stage or blueprint
+      GUImouseReleased();
+    }
+    if (editinglogicBoard) {
+      if (connectingLogic&&connecting) {//if attempting to connect terminals
+        connecting=false;//stop more connecting
+        LogicBoard board=level.logicBoards.get(logicBoardIndex);
+        for (int i=0; i<board.components.size(); i++) {//srech through all components in the current board
+          float[] nodePos1=board.components.get(i).getTerminalPos(0), nodePos2=board.components.get(i).getTerminalPos(1);//gets the positions of the terminals of the component
+          if (Math.sqrt(Math.pow(nodePos1[0]-mouseX, 2)+Math.pow(nodePos1[1]-mouseY, 2))<=10) {//if the mmouse is over terminal 0
+            for (int j=0; j<board.components.get(connectingFromIndex).connections.size(); j++) {//checkif the connection allready exsists
+              if (board.components.get(connectingFromIndex).connections.get(j)[0]==i&&board.components.get(connectingFromIndex).connections.get(j)[1]==0) {//if so then remove the connection
+                board.components.get(connectingFromIndex).connections.remove(j);
                 return;
               }
             }
-          }
-          board.components.get(connectingFromIndex).connect(i, 0);//make the connection
-          return;
-        }
-        if (Math.sqrt(Math.pow(nodePos2[0]-mouseX, 2)+Math.pow(nodePos2[1]-mouseY, 2))<=10) {//if the mmouse is over terminal 1
-          for (int j=0; j<board.components.get(connectingFromIndex).connections.size(); j++) {//checkif the connection allready exsists
-            if (board.components.get(connectingFromIndex).connections.get(j)[0]==i&&board.components.get(connectingFromIndex).connections.get(j)[1]==1) {//if so then remove the connection
-              board.components.get(connectingFromIndex).connections.remove(j);
-              return;
+            for (int j=0; j<board.components.size(); j++) {//check if any outher components are connecting to this terminal allready
+              for (int k=0; k<board.components.get(j).connections.size(); k++) {
+                if ( board.components.get(j).connections.get(k)[0]==i&&board.components.get(j).connections.get(k)[1]==0) {//if so then do nothing
+                  return;
+                }
+              }
             }
+            board.components.get(connectingFromIndex).connect(i, 0);//make the connection
+            return;
           }
+          if (Math.sqrt(Math.pow(nodePos2[0]-mouseX, 2)+Math.pow(nodePos2[1]-mouseY, 2))<=10) {//if the mmouse is over terminal 1
+            for (int j=0; j<board.components.get(connectingFromIndex).connections.size(); j++) {//checkif the connection allready exsists
+              if (board.components.get(connectingFromIndex).connections.get(j)[0]==i&&board.components.get(connectingFromIndex).connections.get(j)[1]==1) {//if so then remove the connection
+                board.components.get(connectingFromIndex).connections.remove(j);
+                return;
+              }
+            }
 
-          for (int j=0; j<board.components.size(); j++) {//check if any outher components are connecting to this terminal allready
-            for (int k=0; k<board.components.get(j).connections.size(); k++) {
-              if ( board.components.get(j).connections.get(k)[0]==i&&board.components.get(j).connections.get(k)[1]==1) {//if so then do nothing
-                return;
+            for (int j=0; j<board.components.size(); j++) {//check if any outher components are connecting to this terminal allready
+              for (int k=0; k<board.components.get(j).connections.size(); k++) {
+                if ( board.components.get(j).connections.get(k)[0]==i&&board.components.get(j).connections.get(k)[1]==1) {//if so then do nothing
+                  return;
+                }
               }
             }
+            board.components.get(connectingFromIndex).connect(i, 1);
+            return;
           }
-          board.components.get(connectingFromIndex).connect(i, 1);
-          return;
         }
       }
-    }
-    if (moveLogicComponents) {
-      if (movingLogicComponent) {
-        movingLogicComponent=false;
-        level.logicBoards.get(logicBoardIndex).components.get(movingLogicIndex).setPos(mouseX+camPos, mouseY+camPosY);
+      if (moveLogicComponents) {
+        if (movingLogicComponent) {
+          movingLogicComponent=false;
+          level.logicBoards.get(logicBoardIndex).components.get(movingLogicIndex).setPos(mouseX+camPos, mouseY+camPosY);
+        }
       }
-    }
-  }//end of editing logic board
-    if(e3DMode&&selectedIndex!=-1){
+    }//end of editing logic board
+    if (e3DMode&&selectedIndex!=-1) {
       translateZaxis=false;
       translateXaxis=false;
       translateYaxis=false;

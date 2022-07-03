@@ -1,11 +1,11 @@
 //button class V1.2.0
 class Button {
   protected float x, y, lengthX, lengthY;
-  private int fColor=#FFFFFF, sColor=#AAAAAA, textcolor=0,htFill=200,htStroke=0,htColor=0;
-  private String text="",hoverText="";
+  private int fColor=#FFFFFF, sColor=#AAAAAA, textcolor=0, htFill=200, htStroke=0, htColor=0;
+  private String text="", hoverText="";
   private float textScaleFactor=2.903, strokeWeight=3;
   private PApplet window;
-  Button(PApplet window,float X, float Y, float DX, float DY) {
+  Button(PApplet window, float X, float Y, float DX, float DY) {
     this.window=window;
     x=X;
     y=Y;
@@ -13,9 +13,8 @@ class Button {
     lengthY=DY;
     findTextScale();
     strokeWeight=3;
-    
   }
-  Button(PApplet window,float X, float Y, float DX, float DY, String Text) {
+  Button(PApplet window, float X, float Y, float DX, float DY, String Text) {
     this.window=window;
     x=X;
     y=Y;
@@ -25,7 +24,7 @@ class Button {
     findTextScale();
     strokeWeight=3;
   }
-  Button(PApplet window,float X, float Y, float DX, float DY, int c1, int c2) {
+  Button(PApplet window, float X, float Y, float DX, float DY, int c1, int c2) {
     this.window=window;
     x=X;
     y=Y;
@@ -36,7 +35,7 @@ class Button {
     findTextScale();
     strokeWeight=3;
   }
-  Button(PApplet window,float X, float Y, float DX, float DY, String Text, int c1, int c2) {
+  Button(PApplet window, float X, float Y, float DX, float DY, String Text, int c1, int c2) {
     this.window=window;
     x=X;
     y=Y;
@@ -73,9 +72,9 @@ class Button {
     }
     return this;
   }
-  
-  public Button drawHoverText(){
-    if(isMouseOver()){
+
+  public Button drawHoverText() {
+    if (isMouseOver()) {
       window.textAlign(LEFT, BOTTOM);
       window.strokeWeight(0);
       window.fill(htStroke);
@@ -84,7 +83,7 @@ class Button {
       window.fill(htFill);
       window.rect(window.mouseX-4, window.mouseY-13, window.textWidth(hoverText)+8, 16);
       window.fill(htColor);
-      window.text(hoverText,window.mouseX, window.mouseY+5);
+      window.text(hoverText, window.mouseX, window.mouseY+5);
     }
     return this;
   }
