@@ -622,12 +622,50 @@ class ToolBox extends PApplet {
           fill(-16732415);
           stroke(-16732415);
           rect(100, 60+100, 50, 10);
+          if (holo_gram) {
+            holoButton.setColor(255, #F2F258);
+          } else {
+            holoButton.setColor(255, 203);
+          }
+          holoButton.draw();
+          if (check_point) {
+            checkpointButton.setColor(255, #F2F258);
+          } else {
+            checkpointButton.setColor(255, 203);
+          }
+          checkpointButton.draw();
+          fill(#B9B9B9);
+            strokeWeight(0);
+            rect(168, 45+100, 5, 40);
+            fill(#EA0202);
+            stroke(#EA0202);
+            strokeWeight(0);
+            triangle(170, 85-60+20+100, 170, 85-40+20+100, 170+30, 85-50+20+100);
+            if (drawCoins) {
+            draw_coin.setColor(255, #F2F258);
+          } else {
+            draw_coin.setColor(255, 203);
+          }
+          draw_coin.draw();
+          drawCoin(605, 65+100, 4);
             
             move3DButton.drawHoverText();
             size3DButton.drawHoverText();
             gridModeButton.drawHoverText();
             toggle3DMode.drawHoverText();
             groundButton.drawHoverText();
+            if (holoButton.isMouseOver()) {//this one has to stay
+              stroke(0);
+              fill(200);
+              strokeWeight(2);
+              rect(mouseX-4, mouseY-13, 165, 16);
+              fill(0);
+              textSize(15);
+              textAlign(LEFT,BOTTOM);
+              text("hologram (solid in 3D)", mouseX, mouseY+5);
+            }
+            checkpointButton.drawHoverText();
+            draw_coin.drawHoverText();
           }
         }//end of if stage is 3D
 
@@ -1517,6 +1555,18 @@ class ToolBox extends PApplet {
           if (groundButton.isMouseOver()) {
               turnThingsOff();
               ground=true;
+            }
+          if (holoButton.isMouseOver()) {
+              turnThingsOff();
+              holo_gram=true;
+            }
+          if (checkpointButton.isMouseOver()) {
+            turnThingsOff();
+            check_point=true;
+          }
+          if (draw_coin.isMouseOver()) {
+              turnThingsOff();
+              drawCoins=true;
             }
             
           }//end of 3D mode is on
