@@ -1,4 +1,4 @@
-class Level { //<>// //<>//
+class Level { //<>// //<>// //<>// //<>// //<>// //<>//
   ArrayList<Stage> stages=new ArrayList<>();
   ArrayList<LogicBoard> logicBoards=new ArrayList<>();
   ArrayList<Boolean> variables=new ArrayList<>();

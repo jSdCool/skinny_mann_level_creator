@@ -677,6 +677,22 @@ class ToolBox extends PApplet {
           }
           logicButtonButton.draw();
           drawLogicButton(this, logicButtonButton.x+logicButtonButton.lengthX/2, logicButtonButton.y+logicButtonButton.lengthY/2, 1, false);
+          if (deleteing) {
+            deleteButton.setColor(255, #F2F258);
+          } else {
+            deleteButton.setColor(255, 203);
+          }
+          deleteButton.draw();
+          fill(203);
+          stroke(203);
+          strokeWeight(0);
+          rect(285, 55+100, 40, 5);
+          rect(300, 50+100, 10, 5);
+          rect(290, 60+100, 5, 20);
+          rect(290, 80+100, 30, 5);
+          rect(315, 60+100, 5, 20);
+          rect(298, 60+100, 5, 20);
+          rect(307, 60+100, 5, 20);
 
             move3DButton.drawHoverText();
             size3DButton.drawHoverText();
@@ -699,6 +715,7 @@ class ToolBox extends PApplet {
             switch3D2.drawHoverText();
             sign.drawHoverText();
             logicButtonButton.drawHoverText();
+            deleteButton.drawHoverText();
           }
         }//end of if stage is 3D
 
@@ -1616,6 +1633,10 @@ class ToolBox extends PApplet {
             if (logicButtonButton.isMouseOver()) {
             turnThingsOff();
             placingLogicButton=true;
+          }
+          if(deleteButton.isMouseOver()){
+            turnThingsOff();
+            deleteing=true;
           }
           }//end of 3D mode is on
         }

@@ -1612,6 +1612,16 @@ void mouseClicked3D() {
       }
     }
   }
+  if(deleteing){
+   for (int i=0; i<5000; i++) {
+      Point3D testPoint = genMousePoint(i);
+      int deleteIndex=colid_index(testPoint.x, testPoint.y, testPoint.z, level.stages.get(currentStageIndex));
+      if (deleteIndex!=-1){
+        level.stages.get(currentStageIndex).parts.remove(deleteIndex);
+        break;
+      }
+    } 
+  }
 }
 
 
