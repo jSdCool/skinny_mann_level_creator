@@ -1,0 +1,40 @@
+[
+  {
+    "mainStage": 0,
+    "coins": 5,
+    "level_id": 581306180,
+    "number of variable": 5,
+    "spawnX": 90,
+    "name": "LC tutorial",
+    "spawn pointX": 90,
+    "groups": ["group 0"],
+    "spawn pointY": 598,
+    "game version": "0.6.0_Early_Access",
+    "spawnY": 598
+  },
+  {
+    "name": "stage 1",
+    "location": "/stage 1.json",
+    "type": "stage"
+  },
+  {
+    "name": "stage2",
+    "location": "/stage2.json",
+    "type": "3Dstage"
+  },
+  {
+    "name": "load",
+    "location": "/load.json",
+    "type": "logicBoard"
+  },
+  {
+    "name": "tick",
+    "location": "/tick.json",
+    "type": "logicBoard"
+  },
+  {
+    "name": "level complete",
+    "location": "/level complete.json",
+    "type": "logicBoard"
+  }
+]
