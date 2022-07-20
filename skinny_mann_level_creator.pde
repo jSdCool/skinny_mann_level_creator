@@ -25,6 +25,7 @@ void setup() {
 
 
   initlizeButtons();
+  sourceInitilize();
 }
 boolean startup=true, editing_level=true, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, loading=false, newLevel=false, simulating=false, entering_file_path=false, coursor=false, level_complete=false, dead=false, entering_name=false, cam_left=false, cam_right=false, drawing=false, draw=false, extra=false, ground=false, check_point=false, goal=false, deleteing=false, delete=false, moving_player=false, grid_mode=false, holo_gram=false, editingStage=false, levelOverview=false, newFile=false, drawCoins=false, drawingPortal=false, drawingPortal2=false, drawingPortal3=false, E_pressed=false, saveColors=false, sloap=false, loopThread2=true, cam_up=false, cam_down=false, holoTriangle=false, dethPlane=false, setPlayerPosTo=false, e3DMode=false, WPressed=false, SPressed=false, draw3DSwitch1=false, draw3DSwitch2=false, checkpointIn3DStage=false, shadow3D=true, tutorialMode=false, drawingSign=false, selecting=false, viewingItemContents=false, loadingBlueprint=false, creatingNewBlueprint=false, editingBlueprint=false, selectingBlueprint=false, placingSound=false, editinglogicBoard=false, connectingLogic=false, connecting=false, moveLogicComponents=false, movingLogicComponent, placingAndGate=false, placingOrGate=false, placingXorGate=false, placingNandGate=false, placingNorGate=false, placingXnorGate=false, placingTestLogic=false, placingOnSingal=false, placingReadVariable=false, placingSetVaravle=false, placingSetVisibility=false, placingXOffset=false, placingYOffset=false, placingLogicButton=false, placingDelay=false, placingZOffset, pnttst, settingPlayerSpawn=false, translateXaxis=false, translateYaxis=false, translateZaxis=false, w3D=false, a3D=false, s3D=false, d3D=false, space3D=false, shift3D=false,placing3Dsetter=false,placing3Dreader;
 String file_path, new_name="my_level", GAME_version="0.6.1_Early_Access", EDITOR_version="0.0.3_EAc", rootPath="", coursorr="", newFileName="", newFileType="2D", stageType="", author="your name here", displayText="", fileToCoppyPath="";
@@ -1336,4 +1337,11 @@ void fileSelected(File selection) {
     println("invalid extenchen");
     return;
   }
+}
+
+void sourceInitilize(){
+  Level.source=this;
+  Stage.source=this;
+  StageComponent.source=this;
+  LogicBoard.source=this;
 }
