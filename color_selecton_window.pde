@@ -1460,7 +1460,7 @@ class ToolBox extends PApplet {
                 pointer++;
               }
             }
-            println(blueprints.length);
+            System.out.println(blueprints.length);
             selectingBlueprint=true;
             currentBluieprintIndex=0;
           }
@@ -1658,10 +1658,10 @@ class ToolBox extends PApplet {
         }
 
         if (saveLevel.isMouseOver()) {
-          println("saving level");
+          System.out.println("saving level");
           level.save();
           gmillis=millis()+400+millisOffset;
-          println("save complete"+gmillis);
+          System.out.println("save complete"+gmillis);
         }
       }//end of edditing stage
       else if (editingBlueprint) {
@@ -1708,10 +1708,10 @@ class ToolBox extends PApplet {
             holoTriangle=true;
           }
           if (saveLevel.isMouseOver()) {
-            println("saving blueprint");
+            System.out.println("saving blueprint");
             workingBlueprint.save();
             gmillis=millis()+400+millisOffset;
-            println("save complete"+gmillis);
+            System.out.println("save complete"+gmillis);
           }
         }//end of type is blueprint
       }//end of editing blueprint
@@ -1741,10 +1741,10 @@ class ToolBox extends PApplet {
           placingXorGate=true;
         }
         if (saveLevel.isMouseOver()) {
-          println("saving level");
+          System.out.println("saving level");
           level.save();
           gmillis=millis()+400+millisOffset;
-          println("save complete"+gmillis);
+          System.out.println("save complete"+gmillis);
         }
         if (exitStageEdit.isMouseOver()) {
           turnThingsOff();

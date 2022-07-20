@@ -4,6 +4,7 @@ import processing.data.*;
 import java.util.ArrayList;
 
 class CheckPoint extends StageComponent {//ground component
+static skinny_mann_level_creator source;
   CheckPoint(JSONObject data, boolean stage_3D) {
     type="check point";
     x=data.getFloat("x");
@@ -49,10 +50,10 @@ class CheckPoint extends StageComponent {//ground component
       return;
     float playx=source.player1.getX();
     boolean po=false;
-    if (playx>=(x+group.xOffset)-5 && playx<= (x+group.xOffset)+5 && (y+group.yOffset)-50 <= player1.getY() && (y+group.yOffset)>=player1.getY()-10) {
+    if (playx>=(x+group.xOffset)-5 && playx<= (x+group.xOffset)+5 && (y+group.yOffset)-50 <= source.player1.getY() && (y+group.yOffset)>=source.player1.getY()-10) {
       source.respawnX=(int)x;
       source.respawnY=(int)y;
-      source.respawnStage=currentStageIndex;
+      source.respawnStage=source.currentStageIndex;
       po=true;
       source.checkpointIn3DStage=false;
     }
@@ -60,11 +61,11 @@ class CheckPoint extends StageComponent {//ground component
     float x2=(x+group.xOffset)-source.drawCamPosX;
     float y2=(y+group.yOffset)+source.drawCamPosY;
     if (po)
-      source.fill(#E5C402);
+      source.fill(-1719293);
     else
-      source.fill(#B9B9B9);
+      source.fill(-4605510);
     source.rect((x2-3)*source.Scale, (y2-60)*source.Scale, 5*source.Scale, 60*source.Scale);
-    source.fill(#EA0202);
+    source.fill(-1441277);
     source.triangle(x2*source.Scale, (y2-60)*source.Scale, x2*source.Scale, (y2-40)*source.Scale, (x2+30)*source.Scale, (y2-50)*source.Scale);
   }
 
@@ -78,22 +79,22 @@ class CheckPoint extends StageComponent {//ground component
     if (playx>=(x+group.xOffset)-20 && playx<= (x+group.xOffset)+20 && (y+group.yOffset)-50 <= source.player1.getY() && (y+group.yOffset)>=source.player1.getY()-10 && source.player1.z >= (z+group.zOffset)-20 && source.player1.z <= (z+group.zOffset)+20) {
       source.respawnX=(int)x;
       source.respawnY=(int)y;
-      source.respawnZ=(int)player1.z;
-      source.respawnStage=stageIndex;
+      source.respawnZ=(int)source.player1.z;
+      source.respawnStage=source.stageIndex;
       source.checkpointIn3DStage=true;
       po=true;
     }
 
 
     if (po)
-      source.fill(#E5C402);
+      source.fill(-1719293);
     else
-      source.fill(#B9B9B9);
+      source.fill(-4605510);
     //strokeWeight(0);
     source.translate((x+group.xOffset), (y+group.yOffset)-30, (z+group.zOffset));
     source.box(4, 60, 4);
     source.translate(-(x+group.xOffset), -((y+group.yOffset)-30), -(z+group.zOffset));
-    source.fill(#EA0202);
+    source.fill(-1441277);
     source.translate((x+group.xOffset)+10, (y+group.yOffset)-50, (z+group.zOffset));
     source.box(20, 20, 2);
     source.translate(-((x+group.xOffset)+10), -((y+group.yOffset)-50), -(z+group.zOffset));

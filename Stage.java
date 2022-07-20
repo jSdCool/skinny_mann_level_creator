@@ -8,7 +8,7 @@ class Stage implements Serializable{
   public ArrayList<StageComponent> parts = new ArrayList<>();
   public boolean is3D=false;
   public String type, name;
-  public int stageID, skyColor=#74ABFF;
+  public int stageID, skyColor=-9131008;
   Stage(JSONArray file) {//single varible instance for a stage
     load(file);
   }
@@ -93,7 +93,7 @@ class Stage implements Serializable{
     for (int i=0; i<parts.size(); i++) {
       staeg.setJSONObject(i+1, parts.get(i).save(is3D));
     }
-    saveJSONArray(staeg, source.rootPath+"/"+name+".json");
+    source.saveJSONArray(staeg, source.rootPath+"/"+name+".json");
     return "/"+name+".json";
   }
 }

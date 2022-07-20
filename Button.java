@@ -1,9 +1,12 @@
 //button class V1.2.0
-class Button {
+import java.io.Serializable;
+import processing.core.*;
+import processing.data.*;
+class Button implements Serializable{
   protected float x, y, lengthX, lengthY;
-  private int fColor=#FFFFFF, sColor=#AAAAAA, textcolor=0, htFill=200, htStroke=0, htColor=0;
+  private int fColor=255, sColor=-5592405, textcolor=0, htFill=200, htStroke=0, htColor=0;
   private String text="", hoverText="";
-  private float textScaleFactor=2.903, strokeWeight=3;
+  private float textScaleFactor=2.903f, strokeWeight=3;
   private PApplet window;
   Button(PApplet window, float X, float Y, float DX, float DY) {
     this.window=window;
@@ -65,7 +68,7 @@ class Button {
     window.fill(fColor);
     window.rect(x, y, lengthX, lengthY);
     window.fill(textcolor);
-    window.textAlign(CENTER, CENTER);
+    window.textAlign(window.CENTER, window.CENTER);
     if (!text.equals("")) {
       window.textSize(textScaleFactor);
       window.text(text, lengthX/2+x, lengthY/2+y);
@@ -75,7 +78,7 @@ class Button {
 
   public Button drawHoverText() {
     if (isMouseOver()) {
-      window.textAlign(LEFT, BOTTOM);
+      window.textAlign(window.LEFT, window.BOTTOM);
       window.strokeWeight(0);
       window.fill(htStroke);
       window.textSize(15);

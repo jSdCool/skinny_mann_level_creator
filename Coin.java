@@ -52,20 +52,20 @@ class Coin extends StageComponent {//ground component
       return;
     float playx=source.player1.getX(), playy=source.player1.getY();
     boolean collected;
-    if (editingBlueprint) {
+    if (source.editingBlueprint) {
       collected=false;
     } else {
-      if (coins.size()==0)
+      if (source.coins.size()==0)
         collected=false;
       else
-        collected=coins.get(coinId);
+        collected=source.coins.get(coinId);
     }
     float x2=(x+group.xOffset)-source.drawCamPosX;
     if (!collected) {
       source.drawCoin(source.Scale*x2, source.Scale*((y+group.yOffset)+source.drawCamPosY), source.Scale*3);
       if (Math.sqrt(Math.pow(playx-source.drawCamPosX-x2, 2)+Math.pow(playy-(y+group.yOffset), 2))<30) {
-        coins.set(coinId, true);
-        coinCount++;
+        source.coins.set(coinId, true);
+        source.coinCount++;
       }
     }
   }
@@ -75,7 +75,7 @@ class Coin extends StageComponent {//ground component
     if (!group.visable)
       return;
     float playx=source.player1.getX(), playy=source.player1.getY(), playz=source.player1.z;
-    boolean collected=coins.get(coinId);
+    boolean collected=source.coins.get(coinId);
 
     if (!collected) {
       source.translate((x+group.xOffset), (y+group.yOffset), (z+group.zOffset));
@@ -84,8 +84,8 @@ class Coin extends StageComponent {//ground component
       source.rotateY(source.radians(-source.coinRotation));
       source.translate(-(x+group.xOffset), -(y+group.yOffset), -(z+group.zOffset));
       if (Math.sqrt(Math.pow(playx-(x+group.xOffset), 2)+Math.pow(playy-(y+group.yOffset), 2)+Math.pow(playz-(z+group.zOffset), 2))<35) {
-        coins.set(coinId, true);
-        coinCount++;
+        source.coins.set(coinId, true);
+        source.coinCount++;
       }
     }
   }

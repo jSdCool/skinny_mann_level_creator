@@ -1,4 +1,4 @@
-int xangle=25+180, yangle=15, dist=700;//camera presets //<>// //<>// //<>// //<>//
+int xangle=25+180, yangle=15, dist=700;//camera presets //<>//
 float DY=sin(radians(yangle))*dist, hd=cos(radians(yangle))*dist, DX=sin(radians(xangle))*hd, DZ=cos(radians(xangle))*hd, cam3Dx, cam3Dy, cam3Dz;//camera rotation
 
 /**draws all the elements of a stage
@@ -858,7 +858,7 @@ class LogicThread extends Thread {
     lastRun=millis();
     while (shouldRun) {//whlie we want the logic board to be ticked
       if (millis()-lastRun>=20) {//once 20 millisecconds have passed seince the last tick
-        //println(millis()-lastRun);
+        //System.out.println(millis()-lastRun);
         lastRun=millis();//update the time of the last tick
         level.logicBoards.get(level.tickBoard).tick();//tick the logic board
       }

@@ -2,6 +2,7 @@ import java.io.Serializable;
 import processing.core.*;
 import processing.data.*;
 import java.util.ArrayList;
+import processing.sound.*;
 
 class SoundBox extends StageComponent {
   String soundKey="";

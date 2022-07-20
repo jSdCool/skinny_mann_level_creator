@@ -13,6 +13,6 @@ class Read3DMode extends LogicInputComponent {
     super(data.getFloat("x"), data.getFloat("y"), "read 3D ", lb, data.getJSONArray("connections"));
   }
   void tick() {
-    outputTerminal=e3DMode;
+    outputTerminal=source.e3DMode;
   }
 }

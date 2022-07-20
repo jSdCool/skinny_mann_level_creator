@@ -60,7 +60,7 @@ class LogicButton extends StageComponent {//ground component
     if (variable!=-1) {
       state=source.level.variables.get(variable);
     }
-    source.drawLogicButton(source., ((x+group.xOffset)-source.drawCamPosX)*source.Scale, ((y+group.yOffset)+source.drawCamPosY)*source.Scale, source.Scale, state);
+    source.drawLogicButton(source, ((x+group.xOffset)-source.drawCamPosX)*source.Scale, ((y+group.yOffset)+source.drawCamPosY)*source.Scale, source.Scale, state);
   }
 
   void draw3D() {

@@ -38,7 +38,7 @@ static skinny_mann_level_creator source;
   Group getGroup() {
     if (group==-1)
       return new Group();
-    return level.groups.get(group);
+    return source.level.groups.get(group);
   }
   void setGroup(int grp) {
     group=grp;

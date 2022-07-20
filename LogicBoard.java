@@ -71,7 +71,7 @@ static skinny_mann_level_creator source;
     for (int i=0; i<components.size(); i++) {
       logicComponents.setJSONObject(i+1, components.get(i).save());
     }
-    saveJSONArray(logicComponents, source.rootPath+"/"+name+".json");
+    source.saveJSONArray(logicComponents, source.rootPath+"/"+name+".json");
     return "/"+name+".json";
   }
 

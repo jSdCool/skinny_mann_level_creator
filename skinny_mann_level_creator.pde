@@ -474,7 +474,7 @@ void draw() {
 void mouseClicked() {
 
   if (mouseButton==LEFT) {//if the button pressed was the left button
-    println(mouseX+" "+mouseY);//print the location the mouse clicked to the console
+    System.out.println(mouseX+" "+mouseY);//print the location the mouse clicked to the console
     if (startup) {//if on the startup screen
       if (mouseX >=200 && mouseX <= 400 && mouseY >= 300 && mouseY <= 380) {//new level button
         startup=false;
@@ -563,10 +563,10 @@ void mouseClicked() {
       }
 
       if (overview_saveLevel.isMouseOver()) {//save button in the level overview
-        println("saving level");
+        System.out.println("saving level");
         level.save();
         gmillis=millis()+400;//glitch effect
-        println("save complete");
+        System.out.println("save complete");
       }
       if (help.isMouseOver()) {//help button in the level overview
         link("https://youtu.be/5QXhi2uu1RM");
@@ -634,18 +634,18 @@ void mouseClicked() {
           }
           String pathSegments[]=fileToCoppyPath.split("/|\\\\");//split the file path at directory seperator
           try {//attempt to coppy the file
-            println("attempting to coppy file");
+            System.out.println("attempting to coppy file");
             java.nio.file.Files.copy(new File(fileToCoppyPath).toPath(), new File(sketchPath()+"/"+rootPath+"/"+pathSegments[pathSegments.length-1]).toPath());
           }
           catch(IOException i) {
             i.printStackTrace();
           }
-          println("adding sound to level");
+          System.out.println("adding sound to level");
           level.sounds.put(newFileName, new StageSound(newFileName, "/"+pathSegments[pathSegments.length-1]));//add the sound to the level
-          println("saving level");
+          System.out.println("saving level");
           level.save();//save the level
           gmillis=millis()+400;///glitch effect
-          println("save complete"+gmillis);
+          System.out.println("save complete"+gmillis);
           newFile=false;//return back to the obverview
           newFileName="";
           fileToCoppyPath="";
@@ -877,7 +877,7 @@ void keyPressed() {
 
 
   if (key=='q') {//if 'q' is pressed then print debg info to the console
-    println(player1.x+" "+player1.y+" "+player1.z);
+    System.out.println(player1.x+" "+player1.y+" "+player1.z);
   }
 
 
@@ -939,7 +939,7 @@ void keyPressed() {
   if (startup) {//if on the main menue
     author = getInput(author, 0);//typing for the author name
   }
-  //System.out.println(keyCode);//usefull to figureout what key is what
+  //System.out.System.out.println(keyCode);//usefull to figureout what key is what
 }
 
 void keyReleased() {
@@ -1290,7 +1290,7 @@ int curMills=0, lasMills=0, mspc=0;
  
  */
 void thrdCalc2() {
-  println("ere");
+  System.out.println("ere");
   while (loopThread2) {
     curMills=millis();
     mspc=curMills-lasMills;//calculate how long its been sence the last physics calculation
@@ -1308,7 +1308,7 @@ void thrdCalc2() {
       random(10);//make preocessing think that this thread is still active while it waits
     }
     lasMills=curMills;
-    //println(mspc);
+    //System.out.println(mspc);
   }
 }
 
@@ -1327,14 +1327,14 @@ void fileSelected(File selection) {
     return;
   }
   String path = selection.getAbsolutePath();
-  println(path);
+  System.out.println(path);
   String extenchen=path.substring(path.length()-3, path.length()).toLowerCase();
-  println(extenchen);
+  System.out.println(extenchen);
   if (extenchen.equals("wav")||extenchen.equals("mp3")||extenchen.equals("afi")) {//check if the file type is valid
 
     fileToCoppyPath=path;
   } else {
-    println("invalid extenchen");
+    System.out.println("invalid extenchen");
     return;
   }
 }
@@ -1344,4 +1344,7 @@ void sourceInitilize(){
   Stage.source=this;
   StageComponent.source=this;
   LogicBoard.source=this;
+  CheckPoint.source=this;
+  StageSound.source=this;
+  LogicComponent.source=this;
 }

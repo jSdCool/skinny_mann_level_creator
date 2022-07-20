@@ -2,8 +2,10 @@ import java.io.Serializable;
 import processing.core.*;
 import processing.data.*;
 import java.util.ArrayList;
+import processing.sound.*;
 
 class StageSound {
+  static skinny_mann_level_creator source;
   String path, name, type="sound";
   protected SoundFile sound;
   StageSound(JSONObject input) {

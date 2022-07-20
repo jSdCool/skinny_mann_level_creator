@@ -15,10 +15,10 @@ class Set3DMode extends LogicOutputComponent {
   }
   void tick() {
     if (inputTerminal1) {
-      e3DMode=true;
+      source.e3DMode=true;
     }
     if (inputTerminal2) {
-      e3DMode=false;
+      source.e3DMode=false;
     }
   }
 
@@ -26,7 +26,7 @@ class Set3DMode extends LogicOutputComponent {
     super.draw();
     source.fill(0);
     source.textSize(15);
-    source.textAlign(LEFT, CENTER);
+    source.textAlign(source.LEFT, source.CENTER);
     source.text("true", x+5-source.camPos, y+16-source.camPosY);
     source.text("false", x+5-source.camPos, y+56-source.camPosY);
   }

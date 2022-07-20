@@ -16,7 +16,7 @@ static skinny_mann_level_creator source;
     this.x=x;
     this.y=y;
     this.type=type;
-    button=new Button(primaryWindow, x, y, 100, 80, "  "+type+"  ");
+    button=new Button(source, x, y, 100, 80, "  "+type+"  ");
     lb=board;
   }
 
@@ -24,7 +24,7 @@ static skinny_mann_level_creator source;
     this.x=x;
     this.y=y;
     this.type=type;
-    button=new Button(primaryWindow, x, y, 100, 80, "  "+type+"  ");
+    button=new Button(source, x, y, 100, 80, "  "+type+"  ");
     lb=board;
     for (int i=0; i<cnects.size(); i++) {
       JSONObject data= cnects.getJSONObject(i);
@@ -36,10 +36,10 @@ static skinny_mann_level_creator source;
     button.x=x-source.camPos;
     button.y=y-source.camPosY;
     button.draw();
-    source.fill(#FF98CF);
+    source.fill(-26416);
     source.ellipse(x-2-source.camPos, y+20-source.camPosY, 20, 20);
     source.ellipse(x-2-source.camPos, y+60-source.camPosY, 20, 20);
-    source.fill(#FA5BD5);
+    source.fill(-369706);
     source.ellipse(x+102-source.camPos, y+40-source.camPosY, 20, 20);
   }
 

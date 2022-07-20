@@ -2,6 +2,7 @@ import java.io.Serializable;
 import processing.core.*;
 import processing.data.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 class Level implements Serializable{
 static skinny_mann_level_creator source;
@@ -17,7 +18,7 @@ static skinny_mann_level_creator source;
   
 
   Level(JSONArray file) {
-    println("loading level");
+    System.out.println("loading level");
     JSONObject job =file.getJSONObject(0);
     mainStage=job.getInt("mainStage");
     numOfCoins=job.getInt("coins");
@@ -31,7 +32,7 @@ static skinny_mann_level_creator source;
     source.author=job.getString("author");
     source.currentStageIndex=mainStage;
     if (job.isNull("number of variable")) {
-      println("setting up variables because none exsisted before");
+      System.out.println("setting up variables because none exsisted before");
       variables.add(false);
       variables.add(false);
       variables.add(false);
@@ -41,7 +42,7 @@ static skinny_mann_level_creator source;
       for (int i=0; i<job.getInt("number of variable"); i++) {
         variables.add(false);
       }
-      println("loaded "+variables.size()+" variables");
+      System.out.println("loaded "+variables.size()+" variables");
     }
     if (!job.isNull("groups")) {
       JSONArray gps= job.getJSONArray("groups");
@@ -49,9 +50,9 @@ static skinny_mann_level_creator source;
         groupNames.add(gps.getString(i));
         groups.add(new Group());
       }
-      println("loaded "+groups.size()+" groups");
+      System.out.println("loaded "+groups.size()+" groups");
     } else {
-      println("no groups found, creating default");
+      System.out.println("no groups found, creating default");
       groupNames.add("group 0");
       groups.add(new Group());
     }
@@ -59,51 +60,51 @@ static skinny_mann_level_creator source;
     source.player1.y=SpawnY;
     source.respawnX=(int)RewspawnX;
     source.respawnY=(int)RespawnY;
-    source.respawnStage=currentStageIndex;
-    println("checking game version compatablility");
+    source.respawnStage=source.currentStageIndex;
+    System.out.println("checking game version compatablility");
     if (!source.gameVersionCompatibilityCheck(createdVersion)) {
-      println("game version not compatable with the verion of this level");
+      System.out.println("game version not compatable with the verion of this level");
       throw new RuntimeException("this level is not compatable with this version of the game");
     }
-    println("game version is compatable with this level");
-    println("loading level components");
+    System.out.println("game version is compatable with this level");
+    System.out.println("loading level components");
     for (int i=1; i<file.size(); i++) {
       job=file.getJSONObject(i);
       if (job.getString("type").equals("stage")||job.getString("type").equals("3Dstage")) {
-        stages.add(new Stage(loadJSONArray(rootPath+job.getString("location"))));
-        println("loaded stage: "+stages.get(stages.size()-1).name);
+        stages.add(new Stage(source.loadJSONArray(source.rootPath+job.getString("location"))));
+        System.out.println("loaded stage: "+stages.get(stages.size()-1).name);
       }
       if (job.getString("type").equals("sound")) {
         sounds.put(job.getString("name"), new StageSound(job));
-        println("loaded sound: "+job.getString("name"));
+        System.out.println("loaded sound: "+job.getString("name"));
       }
       if (job.getString("type").equals("logicBoard")) {
-        logicBoards.add(new LogicBoard(loadJSONArray(rootPath+job.getString("location")), this));
+        logicBoards.add(new LogicBoard(source.loadJSONArray(source.rootPath+job.getString("location")), this));
         numlogicBoards++;
-        print("loaded logicboard: "+logicBoards.get(logicBoards.size()-1).name);
+        System.out.print("loaded logicboard: "+logicBoards.get(logicBoards.size()-1).name);
         if (logicBoards.get(logicBoards.size()-1).name.equals("load")) {
           loadBoard=logicBoards.size()-1;
-          print(" board id set to: "+loadBoard);
+          System.out.print(" board id set to: "+loadBoard);
         }
         if (logicBoards.get(logicBoards.size()-1).name.equals("tick")) {
           tickBoard=logicBoards.size()-1;
-          print(" board id set to: "+tickBoard);
+          System.out.print(" board id set to: "+tickBoard);
         }
         if (logicBoards.get(logicBoards.size()-1).name.equals("level complete")) {
           levelCompleteBoard=logicBoards.size()-1;
-          print(" board id set to: "+levelCompleteBoard);
+          System.out.print(" board id set to: "+levelCompleteBoard);
         }
-        println("");
+        System.out.println("");
       }
     }
-    coins=new ArrayList<Boolean>();
+    source.coins=new ArrayList<Boolean>();
     for (int i=0; i<numOfCoins; i++) {
-      coins.add(false);
+      source.coins.add(false);
     }
-    println("loaded "+coins.size()+" coins");
+    System.out.println("loaded "+source.coins.size()+" coins");
 
     if (numlogicBoards==0) {
-      println("generating new logic boards as none exsisted");
+      System.out.println("generating new logic boards as none exsisted");
       logicBoards.add(new LogicBoard("load"));
       logicBoards.add(new LogicBoard("tick"));
       logicBoards.add(new LogicBoard("level complete"));
@@ -111,13 +112,13 @@ static skinny_mann_level_creator source;
       tickBoard=1;
       levelCompleteBoard=2;
     }
-    println("level load complete");
+    System.out.println("level load complete");
   }
 
   void reloadCoins() {
-    coins=new ArrayList<Boolean>();
+    source.coins=new ArrayList<Boolean>();
     for (int i=0; i<numOfCoins; i++) {
-      coins.add(false);
+      source.coins.add(false);
     }
   }
 
@@ -161,6 +162,6 @@ static skinny_mann_level_creator source;
       board.setString("location", logicBoards.get(i).save());
       index.setJSONObject(index.size(), board);
     }
-    saveJSONArray(index, source.rootPath+"/index.json");
+    source.saveJSONArray(index, source.rootPath+"/index.json");
   }
 }

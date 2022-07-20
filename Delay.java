@@ -28,9 +28,9 @@ class Delay extends LogicComponent {
     super.draw();
     source.fill(0);
     source.textSize(15);
-    source.textAlign(LEFT, CENTER);
-    source.text("input", x+5-camPos, y+16-camPosY);
-    source.text("clear", x+5-camPos, y+56-camPosY);
+    source.textAlign(source.LEFT, source.CENTER);
+    source.text("input", x+5-source.camPos, y+16-source.camPosY);
+    source.text("clear", x+5-source.camPos, y+56-source.camPosY);
   }
 
   void tick() {
@@ -42,7 +42,7 @@ class Delay extends LogicComponent {
     }
     outputTerminal=mem.remove(0);
     mem.add(inputTerminal1);
-    //println(mem);
+    //System.out.println(mem);
   }
   void setData(int data) {
     time=data;

@@ -47,7 +47,7 @@ class Interdimentional_Portal extends StageComponent {//ground component
     Group group=getGroup();
     if (!group.visable)
       return;
-    float playx=player1.getX(), playy=player1.getY();
+    float playx=source.player1.getX(), playy=source.player1.getY();
     source.drawPortal(source.Scale*((x+group.xOffset)-source.drawCamPosX), source.Scale*((y+group.yOffset)+source.drawCamPosY), source.Scale*1);
     if ((playx>(x+group.xOffset)-25&&playx<(x+group.xOffset)+25&&playy>(y+group.yOffset)-50&&playy<(y+group.yOffset)+60)) {
       source.fill(255);
@@ -80,7 +80,7 @@ class Interdimentional_Portal extends StageComponent {//ground component
     Group group=getGroup();
     if (!group.visable)
       return;
-    float playx=source.player1.getX(), playy=player1.getY();
+    float playx=source.player1.getX(), playy=source.player1.getY();
 
     source.translate(0, 0, z);
     source.drawPortal((x+group.xOffset), (y+group.yOffset), 1);
