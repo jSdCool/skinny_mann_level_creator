@@ -8,21 +8,21 @@ class SetXOffset extends LogicOutputComponent {
   float offset=0;
   SetXOffset(float x, float y, LogicBoard lb) {
     super(x, y, "x-offset", lb);
-    button.setText("x-offset "+level.groupNames.get(groupNumber)+" by "+offset);
+    button.setText("x-offset "+source.level.groupNames.get(groupNumber)+" by "+offset);
   }
 
   SetXOffset(JSONObject data, LogicBoard lb, Level level) {
     super(data.getFloat("x"), data.getFloat("y"), "x-offset", lb, data.getJSONArray("connections"));
     groupNumber=data.getInt("group number");
     offset=data.getFloat("offset");
-    button.setText("x-offset "+level.groupNames.get(groupNumber)+" by "+offset);
+    button.setText("x-offset "+source.level.groupNames.get(groupNumber)+" by "+offset);
   }
   void tick() {
     if (inputTerminal1) {
-      level.groups.get(groupNumber).xOffset=offset;
+      source.level.groups.get(groupNumber).xOffset=offset;
     }
     if (inputTerminal2) {
-      level.groups.get(groupNumber).xOffset=0;
+      source.level.groups.get(groupNumber).xOffset=0;
     }
   }
   JSONObject save() {
@@ -33,7 +33,7 @@ class SetXOffset extends LogicOutputComponent {
   }
   void setData(int data) {
     groupNumber=data;
-    button.setText("x-offset "+level.groupNames.get(groupNumber)+" by "+offset);
+    button.setText("x-offset "+source.level.groupNames.get(groupNumber)+" by "+offset);
   }
   int getData() {
     return groupNumber;
@@ -41,15 +41,15 @@ class SetXOffset extends LogicOutputComponent {
 
   void draw() {
     super.draw();
-    fill(0);
-    textSize(15);
-    textAlign(LEFT, CENTER);
-    text("set", x+5-camPos, y+16-camPosY);
-    text("reset", x+5-camPos, y+56-camPosY);
+    source.fill(0);
+    source.textSize(15);
+    source.textAlign(LEFT, CENTER);
+    source.text("set", x+5-source.camPos, y+16-source.camPosY);
+    source.text("reset", x+5-source.camPos, y+56-source.camPosY);
   }
   void setOffset(float of) {
     offset=of;
-    button.setText("x-offset "+level.groupNames.get(groupNumber)+" by "+offset);
+    button.setText("x-offset "+source.level.groupNames.get(groupNumber)+" by "+offset);
   }
   float getOffset() {
     return offset;

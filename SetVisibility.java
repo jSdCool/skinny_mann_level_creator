@@ -7,20 +7,20 @@ class SetVisibility extends LogicOutputComponent {
   int groupNumber=0;
   SetVisibility(float x, float y, LogicBoard lb) {
     super(x, y, "set visable", lb);
-    button.setText("  visibility of "+level.groupNames.get(groupNumber));
+    button.setText("  visibility of "+source.level.groupNames.get(groupNumber));
   }
 
   SetVisibility(JSONObject data, LogicBoard lb, Level level) {
     super(data.getFloat("x"), data.getFloat("y"), "set visable", lb, data.getJSONArray("connections"));
     groupNumber=data.getInt("group number");
-    button.setText("  visibility of "+level.groupNames.get(groupNumber));
+    button.setText("  visibility of "+source.level.groupNames.get(groupNumber));
   }
   void tick() {
     if (inputTerminal1) {
-      level.groups.get(groupNumber).visable=true;
+      source.level.groups.get(groupNumber).visable=true;
     }
     if (inputTerminal2) {
-      level.groups.get(groupNumber).visable=false;
+      source.level.groups.get(groupNumber).visable=false;
     }
   }
   JSONObject save() {
@@ -30,7 +30,7 @@ class SetVisibility extends LogicOutputComponent {
   }
   void setData(int data) {
     groupNumber=data;
-    button.setText("  visibility of "+level.groupNames.get(groupNumber));
+    button.setText("  visibility of "+source.level.groupNames.get(groupNumber));
   }
   int getData() {
     return groupNumber;
@@ -38,10 +38,10 @@ class SetVisibility extends LogicOutputComponent {
 
   void draw() {
     super.draw();
-    fill(0);
-    textSize(15);
-    textAlign(LEFT, CENTER);
-    text("true", x+5-camPos, y+16-camPosY);
-    text("false", x+5-camPos, y+56-camPosY);
+    source.fill(0);
+    source.textSize(15);
+    source.textAlign(LEFT, CENTER);
+    source.text("true", x+5-source.camPos, y+16-source.camPosY);
+    source.text("false", x+5-source.camPos, y+56-source.camPosY);
   }
 }

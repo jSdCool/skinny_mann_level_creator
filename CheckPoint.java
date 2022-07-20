@@ -47,25 +47,25 @@ class CheckPoint extends StageComponent {//ground component
     Group group=getGroup();
     if (!group.visable)
       return;
-    float playx=player1.getX();
+    float playx=source.player1.getX();
     boolean po=false;
     if (playx>=(x+group.xOffset)-5 && playx<= (x+group.xOffset)+5 && (y+group.yOffset)-50 <= player1.getY() && (y+group.yOffset)>=player1.getY()-10) {
-      respawnX=(int)x;
-      respawnY=(int)y;
-      respawnStage=currentStageIndex;
+      source.respawnX=(int)x;
+      source.respawnY=(int)y;
+      source.respawnStage=currentStageIndex;
       po=true;
-      checkpointIn3DStage=false;
+      source.checkpointIn3DStage=false;
     }
 
-    float x2=(x+group.xOffset)-drawCamPosX;
-    float y2=(y+group.yOffset)+drawCamPosY;
+    float x2=(x+group.xOffset)-source.drawCamPosX;
+    float y2=(y+group.yOffset)+source.drawCamPosY;
     if (po)
-      fill(#E5C402);
+      source.fill(#E5C402);
     else
-      fill(#B9B9B9);
-    rect((x2-3)*Scale, (y2-60)*Scale, 5*Scale, 60*Scale);
-    fill(#EA0202);
-    triangle(x2*Scale, (y2-60)*Scale, x2*Scale, (y2-40)*Scale, (x2+30)*Scale, (y2-50)*Scale);
+      source.fill(#B9B9B9);
+    source.rect((x2-3)*source.Scale, (y2-60)*source.Scale, 5*source.Scale, 60*source.Scale);
+    source.fill(#EA0202);
+    source.triangle(x2*source.Scale, (y2-60)*source.Scale, x2*source.Scale, (y2-40)*source.Scale, (x2+30)*source.Scale, (y2-50)*source.Scale);
   }
 
   void draw3D() {
@@ -73,32 +73,30 @@ class CheckPoint extends StageComponent {//ground component
     if (!group.visable)
       return;
     //noStroke();
-    float playx=player1.getX();
+    float playx=source.player1.getX();
     boolean po=false;
-    if (playx>=(x+group.xOffset)-20 && playx<= (x+group.xOffset)+20 && (y+group.yOffset)-50 <= player1.getY() && (y+group.yOffset)>=player1.getY()-10 && player1.z >= (z+group.zOffset)-20 && player1.z <= (z+group.zOffset)+20) {
-      respawnX=(int)x;
-      respawnY=(int)y;
-      respawnZ=(int)player1.z;
-      respawnStage=stageIndex;
-      checkpointIn3DStage=true;
+    if (playx>=(x+group.xOffset)-20 && playx<= (x+group.xOffset)+20 && (y+group.yOffset)-50 <= source.player1.getY() && (y+group.yOffset)>=source.player1.getY()-10 && source.player1.z >= (z+group.zOffset)-20 && source.player1.z <= (z+group.zOffset)+20) {
+      source.respawnX=(int)x;
+      source.respawnY=(int)y;
+      source.respawnZ=(int)player1.z;
+      source.respawnStage=stageIndex;
+      source.checkpointIn3DStage=true;
       po=true;
     }
 
 
     if (po)
-      fill(#E5C402);
+      source.fill(#E5C402);
     else
-      fill(#B9B9B9);
+      source.fill(#B9B9B9);
     //strokeWeight(0);
-    translate((x+group.xOffset), (y+group.yOffset)-30, (z+group.zOffset));
-    box(4, 60, 4);
-    translate(-(x+group.xOffset), -((y+group.yOffset)-30), -(z+group.zOffset));
-    fill(#EA0202);
-    //stroke(#EA0202);
-    //strokeWeight(0);
-    translate((x+group.xOffset)+10, (y+group.yOffset)-50, (z+group.zOffset));
-    box(20, 20, 2);
-    translate(-((x+group.xOffset)+10), -((y+group.yOffset)-50), -(z+group.zOffset));
+    source.translate((x+group.xOffset), (y+group.yOffset)-30, (z+group.zOffset));
+    source.box(4, 60, 4);
+    source.translate(-(x+group.xOffset), -((y+group.yOffset)-30), -(z+group.zOffset));
+    source.fill(#EA0202);
+    source.translate((x+group.xOffset)+10, (y+group.yOffset)-50, (z+group.zOffset));
+    source.box(20, 20, 2);
+    source.translate(-((x+group.xOffset)+10), -((y+group.yOffset)-50), -(z+group.zOffset));
   }
 
   boolean colide(float x, float y, boolean c) {

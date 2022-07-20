@@ -40,22 +40,22 @@ class Goal extends StageComponent {//ground component
     Group group=getGroup();
     if (!group.visable)
       return;
-    float x2 = (x+group.xOffset)-drawCamPosX, y2 = (y+group.yOffset);
-    fill(255);
-    rect(Scale*x2, Scale*(y2+drawCamPosY), Scale*50, Scale*50);
-    rect(Scale*(x2+100), Scale*(y2+drawCamPosY), Scale*50, Scale*50);
-    rect(Scale*(x2+200), Scale*(y2+drawCamPosY), Scale*50, Scale*50);
-    fill(0);
-    rect(Scale*(x2+50), Scale*(y2+drawCamPosY), Scale*50, Scale*50);
-    rect(Scale*(x2+150), Scale*(y2+drawCamPosY), Scale*50, Scale*50);
+    float x2 = (x+group.xOffset)-source.drawCamPosX, y2 = (y+group.yOffset);
+    source.fill(255);
+    source.rect(source.Scale*x2, source.Scale*(y2+source.drawCamPosY), source.Scale*50, source.Scale*50);
+    source.rect(source.Scale*(x2+100), source.Scale*(y2+source.drawCamPosY), source.Scale*50, source.Scale*50);
+    source.rect(source.Scale*(x2+200), source.Scale*(y2+source.drawCamPosY), source.Scale*50, source.Scale*50);
+    source.fill(0);
+    source.rect(source.Scale*(x2+50), source.Scale*(y2+source.drawCamPosY), source.Scale*50, source.Scale*50);
+    source.rect(source.Scale*(x2+150), source.Scale*(y2+source.drawCamPosY), source.Scale*50, source.Scale*50);
 
-    float px =player1.getX(), py=player1.getY();
+    float px =source.player1.getX(), py=source.player1.getY();
 
-    if (px >= x2+drawCamPosX && px <= x2+drawCamPosX + 250 && py >= y2 - 50 && py <= y2 + 50) {
+    if (px >= x2+source.drawCamPosX && px <= x2+source.drawCamPosX + 250 && py >= y2 - 50 && py <= y2 + 50) {
       if (!level_complete) {
         level.logicBoards.get(level.levelCompleteBoard).superTick();
       }
-      level_complete=true;
+      source.level_complete=true;
     }
   }
 

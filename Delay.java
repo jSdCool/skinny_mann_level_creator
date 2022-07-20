@@ -26,11 +26,11 @@ class Delay extends LogicComponent {
 
   void draw() {
     super.draw();
-    fill(0);
-    textSize(15);
-    textAlign(LEFT, CENTER);
-    text("input", x+5-camPos, y+16-camPosY);
-    text("clear", x+5-camPos, y+56-camPosY);
+    source.fill(0);
+    source.textSize(15);
+    source.textAlign(LEFT, CENTER);
+    source.text("input", x+5-camPos, y+16-camPosY);
+    source.text("clear", x+5-camPos, y+56-camPosY);
   }
 
   void tick() {

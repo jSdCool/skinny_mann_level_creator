@@ -3,7 +3,7 @@ import processing.core.*;
 import processing.data.*;
 import java.util.ArrayList;
 
-abstract class StageComponent Serializable{//the base class for all components that exsist inside a stage
+abstract class StageComponent implements Serializable{//the base class for all components that exsist inside a stage
 static skinny_mann_level_creator source;
   public float x, y, z, dx, dy, dz;
   public int ccolor, group=-1;

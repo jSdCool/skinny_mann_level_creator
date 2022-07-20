@@ -48,31 +48,31 @@ class Interdimentional_Portal extends StageComponent {//ground component
     if (!group.visable)
       return;
     float playx=player1.getX(), playy=player1.getY();
-    drawPortal(Scale*((x+group.xOffset)-drawCamPosX), Scale*((y+group.yOffset)+drawCamPosY), Scale*1);
+    source.drawPortal(source.Scale*((x+group.xOffset)-source.drawCamPosX), source.Scale*((y+group.yOffset)+source.drawCamPosY), source.Scale*1);
     if ((playx>(x+group.xOffset)-25&&playx<(x+group.xOffset)+25&&playy>(y+group.yOffset)-50&&playy<(y+group.yOffset)+60)) {
-      fill(255);
-      textSize(Scale*20);
-      displayText="Press E";
-      displayTextUntill=millis()+100;
+      source.fill(255);
+      source.textSize(source.Scale*20);
+      source.displayText="Press E";
+      source.displayTextUntill=source.millis()+100;
     }
 
-    if (E_pressed&&(playx>(x+group.xOffset)-25&&playx<(x+group.xOffset)+25&&playy>(y+group.yOffset)-50&&playy<(y+group.yOffset)+60)) {
-      E_pressed=false;
-      selectedIndex=-1;
-      stageIndex=linkIndex;
-      currentStageIndex=linkIndex;
+    if (source.E_pressed&&(playx>(x+group.xOffset)-25&&playx<(x+group.xOffset)+25&&playy>(y+group.yOffset)-50&&playy<(y+group.yOffset)+60)) {
+      source.E_pressed=false;
+      source.selectedIndex=-1;
+      source.stageIndex=linkIndex;
+      source.currentStageIndex=linkIndex;
 
-      background(0);
+      source.background(0);
       if (linkZ!=-1) {
-        setPlayerPosZ=(int)linkZ;
-        player1.z=linkZ;
-        tpCords[2]=linkZ;
+        source.setPlayerPosZ=(int)linkZ;
+        source.player1.z=linkZ;
+        source.tpCords[2]=linkZ;
       }
-      player1.setX(linkX).setY(linkY);
-      setPlayerPosTo=true;
-      tpCords[0]=(int)linkX;
-      tpCords[1]=(int)linkY;
-      gmillis=millis()+850;
+      source.player1.setX(linkX).setY(linkY);
+      source.setPlayerPosTo=true;
+      source.tpCords[0]=(int)linkX;
+      source.tpCords[1]=(int)linkY;
+      source.gmillis=source.millis()+850;
     }
   }
 
@@ -80,35 +80,35 @@ class Interdimentional_Portal extends StageComponent {//ground component
     Group group=getGroup();
     if (!group.visable)
       return;
-    float playx=player1.getX(), playy=player1.getY();
+    float playx=source.player1.getX(), playy=player1.getY();
 
-    translate(0, 0, z);
-    drawPortal((x+group.xOffset), (y+group.yOffset), 1);
-    translate(0, 0, -z);
-    if ((playx>(x+group.xOffset)-25&&playx<(x+group.xOffset)+25&&playy>(y+group.yOffset)-50&&playy<(y+group.yOffset)+60&& player1.z >= z-20 && player1.z <= z+20)) {
-      fill(255);
-      textSize(20);
-      displayText="Press E";
-      displayTextUntill=millis()+100;
+    source.translate(0, 0, z);
+    source.drawPortal((x+group.xOffset), (y+group.yOffset), 1);
+    source.translate(0, 0, -z);
+    if ((playx>(x+group.xOffset)-25&&playx<(x+group.xOffset)+25&&playy>(y+group.yOffset)-50&&playy<(y+group.yOffset)+60&& source.player1.z >= z-20 && source.player1.z <= z+20)) {
+      source.fill(255);
+      source.textSize(20);
+      source.displayText="Press E";
+      source.displayTextUntill=source.millis()+100;
     }
 
-    if (E_pressed&&(playx>(x+group.xOffset)-25&&playx<(x+group.xOffset)+25&&playy>(y+group.yOffset)-50&&playy<(y+group.yOffset)+60)) {
-      E_pressed=false;
-      selectedIndex=-1;
-      stageIndex=linkIndex;
-      currentStageIndex=linkIndex;
+    if (source.E_pressed&&(playx>(x+group.xOffset)-25&&playx<(x+group.xOffset)+25&&playy>(y+group.yOffset)-50&&playy<(y+group.yOffset)+60)) {
+      source.E_pressed=false;
+      source.selectedIndex=-1;
+      source.stageIndex=linkIndex;
+      source.currentStageIndex=linkIndex;
 
-      background(0);
+      source.background(0);
       if (linkZ!=-1) {
-        setPlayerPosZ=(int)linkZ;
-        player1.z=linkZ;
-        tpCords[2]=linkZ;
+        source.setPlayerPosZ=(int)linkZ;
+        source.player1.z=linkZ;
+        source.tpCords[2]=linkZ;
       }
-      player1.setX(linkX).setY(linkY);
-      setPlayerPosTo=true;
-      tpCords[0]=(int)linkX;
-      tpCords[1]=(int)linkY;
-      gmillis=millis()+850;
+      source.player1.setX(linkX).setY(linkY);
+      source.setPlayerPosTo=true;
+      source.tpCords[0]=(int)linkX;
+      source.tpCords[1]=(int)linkY;
+      source.gmillis=source.millis()+850;
     }
   }
 

@@ -51,16 +51,16 @@ class LogicButton extends StageComponent {//ground component
       return;
     boolean state=false;
     if (variable!=-1) {
-      if (player1.x>=(x+group.xOffset)-10&&player1.x<=(x+group.xOffset)+10&&player1.y >=(y+group.yOffset)-10&&player1.y<= (y+group.yOffset)+2) {
-        level.variables.set(variable, true);
+      if (source.player1.x>=(x+group.xOffset)-10&&source.player1.x<=(x+group.xOffset)+10&&source.player1.y >=(y+group.yOffset)-10&&source.player1.y<= (y+group.yOffset)+2) {
+        source.level.variables.set(variable, true);
       } else {
-        level.variables.set(variable, false);
+        source.level.variables.set(variable, false);
       }
     }
     if (variable!=-1) {
-      state=level.variables.get(variable);
+      state=source.level.variables.get(variable);
     }
-    drawLogicButton(primaryWindow, ((x+group.xOffset)-drawCamPosX)*Scale, ((y+group.yOffset)+drawCamPosY)*Scale, Scale, state);
+    source.drawLogicButton(source., ((x+group.xOffset)-source.drawCamPosX)*source.Scale, ((y+group.yOffset)+source.drawCamPosY)*source.Scale, source.Scale, state);
   }
 
   void draw3D() {
@@ -69,16 +69,16 @@ class LogicButton extends StageComponent {//ground component
       return;
     boolean state=false;
     if (variable!=-1) {
-      if (player1.x>=(x+group.xOffset)-10&&player1.x<=(x+group.xOffset)+10&&player1.y >=(y+group.yOffset)-10&&player1.y<= (y+group.yOffset)+2 && player1.z >= (z+group.zOffset)-10 && player1.z <= (z+group.zOffset)+10) {
-        level.variables.set(variable, true);
+      if (source.player1.x>=(x+group.xOffset)-10&&source.player1.x<=(x+group.xOffset)+10&&source.player1.y >=(y+group.yOffset)-10&&source.player1.y<= (y+group.yOffset)+2 && source.player1.z >= (z+group.zOffset)-10 && source.player1.z <= (z+group.zOffset)+10) {
+        source.level.variables.set(variable, true);
       } else {
-        level.variables.set(variable, false);
+        source.level.variables.set(variable, false);
       }
     }
     if (variable!=-1) {
-      state=level.variables.get(variable);
+      state=source.level.variables.get(variable);
     }
-    drawLogicButton((x+group.xOffset), (y+group.yOffset), (z+group.zOffset), Scale, state);
+    source.drawLogicButton((x+group.xOffset), (y+group.yOffset), (z+group.zOffset), 1, state);
   }
 
   boolean colide(float x, float y, boolean c) {

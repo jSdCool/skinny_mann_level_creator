@@ -16,7 +16,7 @@ class ReadVariable extends LogicInputComponent {
     button.setText("read var b"+variableNumber+"  ");
   }
   void tick() {
-    outputTerminal=level.variables.get(variableNumber);
+    outputTerminal=source.level.variables.get(variableNumber);
   }
   JSONObject save() {
     JSONObject component=super.save();

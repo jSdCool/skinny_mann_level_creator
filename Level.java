@@ -28,8 +28,8 @@ static skinny_mann_level_creator source;
     RespawnY=job.getFloat("spawn pointY");
     name=job.getString("name");
     createdVersion=job.getString("game version");
-    author=job.getString("author");
-    currentStageIndex=mainStage;
+    source.author=job.getString("author");
+    source.currentStageIndex=mainStage;
     if (job.isNull("number of variable")) {
       println("setting up variables because none exsisted before");
       variables.add(false);
@@ -132,8 +132,8 @@ static skinny_mann_level_creator source;
     head.setFloat("spawn pointX", RewspawnX);
     head.setFloat("spawn pointY", RespawnY);
     head.setString("name", name);
-    head.setString("game version", GAME_version);
-    head.setString("author", author);
+    head.setString("game version", source.GAME_version);
+    head.setString("author", source.author);
     head.setInt("number of variable", variables.size());
     JSONArray grps=new JSONArray();
     for (int i=0; i<groupNames.size(); i++) {
@@ -161,6 +161,6 @@ static skinny_mann_level_creator source;
       board.setString("location", logicBoards.get(i).save());
       index.setJSONObject(index.size(), board);
     }
-    saveJSONArray(index, rootPath+"/index.json");
+    saveJSONArray(index, source.rootPath+"/index.json");
   }
 }

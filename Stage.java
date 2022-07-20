@@ -3,7 +3,7 @@ import processing.core.*;
 import processing.data.*;
 import java.util.ArrayList;
 
-class Stage Serializable{
+class Stage implements Serializable{
   static skinny_mann_level_creator source;
   public ArrayList<StageComponent> parts = new ArrayList<>();
   public boolean is3D=false;
@@ -93,7 +93,7 @@ class Stage Serializable{
     for (int i=0; i<parts.size(); i++) {
       staeg.setJSONObject(i+1, parts.get(i).save(is3D));
     }
-    saveJSONArray(staeg, rootPath+"/"+name+".json");
+    saveJSONArray(staeg, source.rootPath+"/"+name+".json");
     return "/"+name+".json";
   }
 }

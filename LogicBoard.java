@@ -44,19 +44,19 @@ static skinny_mann_level_creator source;
         components.add(new SetVariable(component, this));
       }
       if (type.equals("set visable")) {
-        components.add(new SetVisibility(component, this, level));
+        components.add(new SetVisibility(component, this, source.level));
       }
       if (type.equals("y-offset")) {
-        components.add(new SetYOffset(component, this, level));
+        components.add(new SetYOffset(component, this, source.level));
       }
       if (type.equals("x-offset")) {
-        components.add(new SetXOffset(component, this, level));
+        components.add(new SetXOffset(component, this, source.level));
       }
       if (type.equals("delay")) {
         components.add(new Delay(component, this));
       }
       if (type.equals("z-offset")) {
-        components.add(new SetZOffset(component, this, level));
+        components.add(new SetZOffset(component, this, source.level));
       }
     }
   }
@@ -71,7 +71,7 @@ static skinny_mann_level_creator source;
     for (int i=0; i<components.size(); i++) {
       logicComponents.setJSONObject(i+1, components.get(i).save());
     }
-    saveJSONArray(logicComponents, rootPath+"/"+name+".json");
+    saveJSONArray(logicComponents, source.rootPath+"/"+name+".json");
     return "/"+name+".json";
   }
 

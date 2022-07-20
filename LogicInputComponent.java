@@ -14,15 +14,15 @@ abstract class LogicInputComponent extends LogicComponent {
     button=new Button(primaryWindow, x, y, 100, 40, "  "+type+"  ");
   }
   void draw() {
-    button.x=x-camPos;
-    button.y=y-camPosY;
+    button.x=x-source.camPos;
+    button.y=y-source.camPosY;
     button.draw();
-    fill(#FA5BD5);
-    ellipse(x+102-camPos, y+20-camPosY, 20, 20);
+    source.fill(#FA5BD5);
+    source.ellipse(x+102-source.camPos, y+20-source.camPosY, 20, 20);
   }
   float[] getTerminalPos(int t) {
     if (t==2) {
-      return new float[]{x+102-camPos, y+20-camPosY};
+      return new float[]{x+102-source.camPos, y+20-source.camPosY};
     }
     return new float[]{-1000, -1000};
   }

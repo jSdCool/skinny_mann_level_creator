@@ -41,19 +41,19 @@ class SWoff3D extends StageComponent {//ground component
     Group group=getGroup();
     if (!group.visable)
       return;
-    draw3DSwitch2(((x+group.xOffset)-drawCamPosX)*Scale, ((y+group.yOffset)+drawCamPosY)*Scale, Scale);
+    source.draw3DSwitch2(((x+group.xOffset)-source.drawCamPosX)*source.Scale, ((y+group.yOffset)+source.drawCamPosY)*source.Scale, source.Scale);
   }
 
   void draw3D() {
     Group group=getGroup();
     if (!group.visable)
       return;
-    draw3DSwitch2((x+group.xOffset), y, (z+group.zOffset), Scale);
-    if (player1.x>=(x+group.xOffset)-10&&player1.x<=(x+group.xOffset)+10&&player1.y >=(y+group.yOffset)-10&&player1.y<= (y+group.yOffset)+2 && player1.z >= (z+group.zOffset)-10 && player1.z <= (z+group.zOffset)+10) {
-      e3DMode=false;
-      WPressed=false;
-      SPressed=false;
-      gmillis=millis()+1200;
+    source.draw3DSwitch2((x+group.xOffset), (y+group.yOffset), (z+group.zOffset), source.Scale);
+    if (source.player1.x>=(x+group.xOffset)-10&&source.player1.x<=(x+group.xOffset)+10&&source.player1.y >=(y+group.yOffset)-10&&source.player1.y<= (y+group.yOffset)+2 && source.player1.z >= (z+group.zOffset)-10 && source.player1.z <= (z+group.zOffset)+10) {
+      source.e3DMode=false;
+      source.WPressed=false;
+      source.SPressed=false;
+      source.gmillis=source.millis()+1200;
     }
   }
 

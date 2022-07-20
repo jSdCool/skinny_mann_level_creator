@@ -9,12 +9,12 @@ class StageSound {
   StageSound(JSONObject input) {
     name=input.getString("name");
     path=input.getString("location");
-    sound= new SoundFile(primaryWindow, rootPath+path);
+    sound= new SoundFile(source, source.rootPath+path);
   }
   StageSound(String Name, String location) {
     name=Name;
     path=location;
-    sound= new SoundFile(primaryWindow, rootPath+path);
+    sound= new SoundFile(source, source.rootPath+path);
   }
 
   JSONObject save() {

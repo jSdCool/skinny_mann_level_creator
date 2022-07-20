@@ -17,15 +17,15 @@ class SetVariable extends LogicOutputComponent {
   }
   void tick() {
     if (inputTerminal2)
-      level.variables.set(variableNumber, inputTerminal1);
+      source.level.variables.set(variableNumber, inputTerminal1);
   }
   void draw() {
     super.draw();
-    fill(0);
-    textSize(15);
-    textAlign(LEFT, CENTER);
-    text("data", x+5-camPos, y+16-camPosY);
-    text("set", x+5-camPos, y+56-camPosY);
+    source.fill(0);
+    source.textSize(15);
+    source.textAlign(LEFT, CENTER);
+    source.text("data", x+5-source.camPos, y+16-source.camPosY);
+    source.text("set", x+5-source.camPos, y+56-source.camPosY);
   }
   JSONObject save() {
     JSONObject component=super.save();

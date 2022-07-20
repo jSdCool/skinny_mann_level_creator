@@ -50,7 +50,7 @@ class Coin extends StageComponent {//ground component
     Group group=getGroup();
     if (!group.visable)
       return;
-    float playx=player1.getX(), playy=player1.getY();
+    float playx=source.player1.getX(), playy=source.player1.getY();
     boolean collected;
     if (editingBlueprint) {
       collected=false;
@@ -60,10 +60,10 @@ class Coin extends StageComponent {//ground component
       else
         collected=coins.get(coinId);
     }
-    float x2=(x+group.xOffset)-drawCamPosX;
+    float x2=(x+group.xOffset)-source.drawCamPosX;
     if (!collected) {
-      drawCoin(Scale*x2, Scale*((y+group.yOffset)+drawCamPosY), Scale*3);
-      if (Math.sqrt(Math.pow(playx-drawCamPosX-x2, 2)+Math.pow(playy-(y+group.yOffset), 2))<30) {
+      source.drawCoin(source.Scale*x2, source.Scale*((y+group.yOffset)+source.drawCamPosY), source.Scale*3);
+      if (Math.sqrt(Math.pow(playx-source.drawCamPosX-x2, 2)+Math.pow(playy-(y+group.yOffset), 2))<30) {
         coins.set(coinId, true);
         coinCount++;
       }
@@ -74,15 +74,15 @@ class Coin extends StageComponent {//ground component
     Group group=getGroup();
     if (!group.visable)
       return;
-    float playx=player1.getX(), playy=player1.getY(), playz=player1.z;
+    float playx=source.player1.getX(), playy=source.player1.getY(), playz=source.player1.z;
     boolean collected=coins.get(coinId);
 
     if (!collected) {
-      translate((x+group.xOffset), (y+group.yOffset), (z+group.zOffset));
-      rotateY(radians(coinRotation));
-      shape(coin3D);
-      rotateY(radians(-coinRotation));
-      translate(-(x+group.xOffset), -(y+group.yOffset), -(z+group.zOffset));
+      source.translate((x+group.xOffset), (y+group.yOffset), (z+group.zOffset));
+      source.rotateY(source.radians(source.coinRotation));
+      source.shape(source.coin3D);
+      source.rotateY(source.radians(-source.coinRotation));
+      source.translate(-(x+group.xOffset), -(y+group.yOffset), -(z+group.zOffset));
       if (Math.sqrt(Math.pow(playx-(x+group.xOffset), 2)+Math.pow(playy-(y+group.yOffset), 2)+Math.pow(playz-(z+group.zOffset), 2))<35) {
         coins.set(coinId, true);
         coinCount++;

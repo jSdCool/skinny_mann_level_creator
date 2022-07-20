@@ -48,19 +48,19 @@ class DethPlane extends StageComponent {//ground component
     Group group=getGroup();
     if (!group.visable)
       return;
-    fill(-114431);
-    rect(Scale*((x+group.xOffset)-drawCamPosX)-1, Scale*((y+group.yOffset)+drawCamPosY)-1, Scale*dx+2, Scale*dy+2);
+    source.fill(-114431);
+    source.rect(source.Scale*((x+group.xOffset)-source.drawCamPosX)-1, source.Scale*((y+group.yOffset)+source.drawCamPosY)-1, source.Scale*dx+2, source.Scale*dy+2);
   }
 
   void draw3D() {
     Group group=getGroup();
     if (!group.visable)
       return;
-    fill(-114431);
-    strokeWeight(0);
-    translate((x+group.xOffset)+dx/2, (y+group.yOffset)+dy/2, (z+group.zOffset)+dz/2);
-    box(dx, dy, dz);
-    translate(-1*((x+group.xOffset)+dx/2), -1*((y+group.yOffset)+dy/2), -1*((z+group.zOffset)+dz/2));
+    source.fill(-114431);
+    source.strokeWeight(0);
+    source.translate((x+group.xOffset)+dx/2, (y+group.yOffset)+dy/2, (z+group.zOffset)+dz/2);
+    source.box(dx, dy, dz);
+    source.translate(-1*((x+group.xOffset)+dx/2), -1*((y+group.yOffset)+dy/2), -1*((z+group.zOffset)+dz/2));
   }
 
   boolean colide(float x, float y, boolean c) {

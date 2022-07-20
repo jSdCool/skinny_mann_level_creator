@@ -25,13 +25,13 @@ class SoundBox extends StageComponent {
     Group group=getGroup();
     if (!group.visable)
       return;
-    drawSoundBox((x+group.xOffset)-drawCamPosX, (y+group.yOffset)+drawCamPosY);
-    if (player1.getX()>=(x+group.xOffset)-30&&player1.getX()<=(x+group.xOffset)+30&&player1.y>=(y+group.yOffset)-30&&player1.getY()<(y+group.yOffset)+30) {
-      displayText="Press E";
-      displayTextUntill=millis()+100;
-      if (E_pressed) {
+    source.drawSoundBox((x+group.xOffset)-source.drawCamPosX, (y+group.yOffset)+source.drawCamPosY);
+    if (source.player1.getX()>=(x+group.xOffset)-30&&source.player1.getX()<=(x+group.xOffset)+30&&source.player1.y>=(y+group.yOffset)-30&&source.player1.getY()<(y+group.yOffset)+30) {
+      source.displayText="Press E";
+      source.displayTextUntill=source.millis()+100;
+      if (source.E_pressed) {
         try {
-          StageSound sound = level.sounds.get(soundKey);
+          StageSound sound = source.level.sounds.get(soundKey);
           if (!sound.sound.isPlaying()) {
             sound.sound.play();
           }

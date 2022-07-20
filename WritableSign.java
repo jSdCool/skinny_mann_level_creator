@@ -40,18 +40,18 @@ class WritableSign extends StageComponent {
     Group group=getGroup();
     if (!group.visable)
       return;
-    drawSign(Scale*((x+group.xOffset)-drawCamPosX), Scale*((y+group.yOffset)+drawCamPosY), Scale);
+    source.drawSign(source.Scale*((x+group.xOffset)-source.drawCamPosX), source.Scale*((y+group.yOffset)+source.drawCamPosY), source.Scale);
 
-    float playx=player1.getX(), playy=player1.getY();
+    float playx=source.player1.getX(), playy=source.player1.getY();
     if (playx>(x+group.xOffset)-35&&playx<(x+group.xOffset)+35&&playy>(y+group.yOffset)-40&&playy<(y+group.yOffset)) {//display the press e message to the player
-      fill(255);
-      textSize(Scale*20);
-      displayText="Press E";
-      displayTextUntill=millis()+100;
+      source.fill(255);
+      source.textSize(source.Scale*20);
+      source.displayText="Press E";
+      source.displayTextUntill=source.millis()+100;
 
-      if (E_pressed) {
-        E_pressed=false;
-        viewingItemContents=true;
+      if (source.E_pressed) {
+        source.E_pressed=false;
+        source.viewingItemContents=true;
       }
     }
   }
@@ -59,17 +59,17 @@ class WritableSign extends StageComponent {
     Group group=getGroup();
     if (!group.visable)
       return;
-    drawSign((x+group.xOffset), (y+group.yOffset), (z+group.zOffset), Scale);
+    source.drawSign((x+group.xOffset), (y+group.yOffset), (z+group.zOffset), source.Scale);
 
-    float playx=player1.getX(), playy=player1.getY();
-    if (playx>(x+group.xOffset)-35&&playx<(x+group.xOffset)+35&&playy>(y+group.yOffset)-40&&playy<(y+group.yOffset)&& player1.z >= (z+group.zOffset)-20 && player1.z <= (z+group.zOffset)+20) {
-      fill(255);
-      textSize(20);
-      displayText="Press E";
-      displayTextUntill=millis()+100;
-      if (E_pressed) {
-        E_pressed=false;
-        viewingItemContents=true;
+    float playx=source.player1.getX(), playy=source.player1.getY();
+    if (playx>(x+group.xOffset)-35&&playx<(x+group.xOffset)+35&&playy>(y+group.yOffset)-40&&playy<(y+group.yOffset)&& source.player1.z >= (z+group.zOffset)-20 && source.player1.z <= (z+group.zOffset)+20) {
+      source.fill(255);
+      source.textSize(source.Scale*20);
+      source.displayText="Press E";
+      source.displayTextUntill=source.millis()+100;
+      if (source.E_pressed) {
+        source.E_pressed=false;
+        source.viewingItemContents=true;
       }
     }
   }

@@ -51,18 +51,18 @@ class HoloTriangle extends StageComponent {//ground component
     Group group=getGroup();
     if (!group.visable)
       return;
-    fill(ccolor);
+    source.fill(ccolor);
     if (direction==0) {
-      triangle(Scale*((x+group.xOffset)-drawCamPosX), Scale*((y+group.yOffset)+drawCamPosY), Scale*((dx+group.xOffset)-drawCamPosX), Scale*((dy+group.yOffset)+drawCamPosY), Scale*((dx+group.xOffset)-drawCamPosX), Scale*((y+group.yOffset)+drawCamPosY));
+      source.triangle(source.Scale*((x+group.xOffset)-source.drawCamPosX), source.Scale*((y+group.yOffset)+source.drawCamPosY), source.Scale*((dx+group.xOffset)-source.drawCamPosX), source.Scale*((dy+group.yOffset)+source.drawCamPosY), source.Scale*((dx+group.xOffset)-source.drawCamPosX), source.Scale*((y+group.yOffset)+source.drawCamPosY));
     }
     if (direction==1) {
-      triangle(Scale*((x+group.xOffset)-drawCamPosX), Scale*((y+group.yOffset)+drawCamPosY), Scale*((x+group.xOffset)-drawCamPosX), Scale*((dy+group.yOffset)+drawCamPosY), Scale*((dx+group.xOffset)-drawCamPosX), Scale*((y+group.yOffset)+drawCamPosY));
+      source.triangle(source.Scale*((x+group.xOffset)-source.drawCamPosX), source.Scale*((y+group.yOffset)+source.drawCamPosY), source.Scale*((x+group.xOffset)-source.drawCamPosX), source.Scale*((dy+group.yOffset)+source.drawCamPosY), source.Scale*((dx+group.xOffset)-source.drawCamPosX), source.Scale*((y+group.yOffset)+source.drawCamPosY));
     }
     if (direction==2) {
-      triangle(Scale*((x+group.xOffset)-drawCamPosX), Scale*((y+group.yOffset)+drawCamPosY), Scale*((dx+group.xOffset)-drawCamPosX), Scale*((dy+group.yOffset)+drawCamPosY), Scale*((x+group.xOffset)-drawCamPosX), Scale*((dy+group.yOffset)+drawCamPosY));
+      source.triangle(source.Scale*((x+group.xOffset)-source.drawCamPosX), source.Scale*((y+group.yOffset)+source.drawCamPosY), source.Scale*((dx+group.xOffset)-source.drawCamPosX), source.Scale*((dy+group.yOffset)+source.drawCamPosY), source.Scale*((x+group.xOffset)-source.drawCamPosX), source.Scale*((dy+group.yOffset)+source.drawCamPosY));
     }
     if (direction==3) {
-      triangle(Scale*((x+group.xOffset)-drawCamPosX), Scale*((dy+group.yOffset)+drawCamPosY), Scale*((dx+group.xOffset)-drawCamPosX), Scale*((dy+group.yOffset)+drawCamPosY), Scale*((dx+group.xOffset)-drawCamPosX), Scale*((y+group.yOffset)+drawCamPosY));
+      source.triangle(source.Scale*((x+group.xOffset)-source.drawCamPosX), source.Scale*((dy+group.yOffset)+source.drawCamPosY), source.Scale*((dx+group.xOffset)-source.drawCamPosX), source.Scale*((dy+group.yOffset)+source.drawCamPosY), source.Scale*((dx+group.xOffset)-source.drawCamPosX), source.Scale*((y+group.yOffset)+source.drawCamPosY));
     }
   }
 
@@ -70,11 +70,11 @@ class HoloTriangle extends StageComponent {//ground component
     Group group=getGroup();
     if (!group.visable)
       return;
-    fill(ccolor);
-    strokeWeight(0);
-    translate((x+group.xOffset)+dx/2, (y+group.yOffset)+dy/2, z+dz/2);
-    box(dx, dy, dz);
-    translate(-1*((x+group.xOffset)+dx/2), -1*((y+group.yOffset)+dy/2), -1*(z+dz/2));
+    source.fill(ccolor);
+    source.strokeWeight(0);
+    source.translate((x+group.xOffset)+dx/2, (y+group.yOffset)+dy/2, z+dz/2);
+    source.box(dx, dy, dz);
+    source.translate(-1*((x+group.xOffset)+dx/2), -1*((y+group.yOffset)+dy/2), -1*(z+dz/2));
   }
 
   boolean colide(float x, float y, boolean c) {
