@@ -15,7 +15,8 @@ class SetYOffset extends LogicOutputComponent {
     super(data.getFloat("x"), data.getFloat("y"), "y-offset", lb, data.getJSONArray("connections"));
     groupNumber=data.getInt("group number");
     offset=data.getFloat("offset");
-    button.setText("y-offset "+source.level.groupNames.get(groupNumber)+" by "+offset);
+    button.setText("y-offset "+level.groupNames.get(groupNumber)+" by "+offset);
+    
   }
   void tick() {
     if (inputTerminal1) {

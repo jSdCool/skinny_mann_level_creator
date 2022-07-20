@@ -15,7 +15,7 @@ class SetZOffset extends LogicOutputComponent {
     super(data.getFloat("x"), data.getFloat("y"), "z-offset", lb, data.getJSONArray("connections"));
     groupNumber=data.getInt("group number");
     offset=data.getFloat("offset");
-    button.setText("z-offset "+source.level.groupNames.get(groupNumber)+" by "+offset);
+    button.setText("z-offset "+level.groupNames.get(groupNumber)+" by "+offset);
   }
   void tick() {
     if (inputTerminal1) {

@@ -13,7 +13,7 @@ class SetVisibility extends LogicOutputComponent {
   SetVisibility(JSONObject data, LogicBoard lb, Level level) {
     super(data.getFloat("x"), data.getFloat("y"), "set visable", lb, data.getJSONArray("connections"));
     groupNumber=data.getInt("group number");
-    button.setText("  visibility of "+source.level.groupNames.get(groupNumber));
+    button.setText("  visibility of "+level.groupNames.get(groupNumber));
   }
   void tick() {
     if (inputTerminal1) {
