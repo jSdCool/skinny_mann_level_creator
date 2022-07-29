@@ -56,8 +56,8 @@ static skinny_mann_level_creator source;
       groupNames.add("group 0");
       groups.add(new Group());
     }
-    source.players[currentPlayer].x=SpawnX;
-    source.players[currentPlayer].y=SpawnY;
+    source.players[source.currentPlayer].x=SpawnX;
+    source.players[source.currentPlayer].y=SpawnY;
     source.respawnX=(int)RewspawnX;
     source.respawnY=(int)RespawnY;
     source.respawnStage=source.currentStageIndex;

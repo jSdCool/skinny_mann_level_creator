@@ -47,7 +47,7 @@ class Interdimentional_Portal extends StageComponent {//ground component
     Group group=getGroup();
     if (!group.visable)
       return;
-    float playx=source.players[currentPlayer].getX(), playy=source.players[currentPlayer].getY();
+    float playx=source.players[source.currentPlayer].getX(), playy=source.players[source.currentPlayer].getY();
     source.drawPortal(source.Scale*((x+group.xOffset)-source.drawCamPosX), source.Scale*((y+group.yOffset)+source.drawCamPosY), source.Scale*1);
     if ((playx>(x+group.xOffset)-25&&playx<(x+group.xOffset)+25&&playy>(y+group.yOffset)-50&&playy<(y+group.yOffset)+60)) {
       source.fill(255);
@@ -65,10 +65,10 @@ class Interdimentional_Portal extends StageComponent {//ground component
       source.background(0);
       if (linkZ!=-1) {
         source.setPlayerPosZ=(int)linkZ;
-        source.players[currentPlayer].z=linkZ;
+        source.players[source.currentPlayer].z=linkZ;
         source.tpCords[2]=linkZ;
       }
-      source.players[currentPlayer].setX(linkX).setY(linkY);
+      source.players[source.currentPlayer].setX(linkX).setY(linkY);
       source.setPlayerPosTo=true;
       source.tpCords[0]=(int)linkX;
       source.tpCords[1]=(int)linkY;
@@ -80,12 +80,12 @@ class Interdimentional_Portal extends StageComponent {//ground component
     Group group=getGroup();
     if (!group.visable)
       return;
-    float playx=source.players[currentPlayer].getX(), playy=source.players[currentPlayer].getY();
+    float playx=source.players[source.currentPlayer].getX(), playy=source.players[source.currentPlayer].getY();
 
     source.translate(0, 0, z);
     source.drawPortal((x+group.xOffset), (y+group.yOffset), 1);
     source.translate(0, 0, -z);
-    if ((playx>(x+group.xOffset)-25&&playx<(x+group.xOffset)+25&&playy>(y+group.yOffset)-50&&playy<(y+group.yOffset)+60&& source.players[currentPlayer].z >= z-20 && source.players[currentPlayer].z <= z+20)) {
+    if ((playx>(x+group.xOffset)-25&&playx<(x+group.xOffset)+25&&playy>(y+group.yOffset)-50&&playy<(y+group.yOffset)+60&& source.players[source.currentPlayer].z >= z-20 && source.players[source.currentPlayer].z <= z+20)) {
       source.fill(255);
       source.textSize(20);
       source.displayText="Press E";
@@ -101,10 +101,10 @@ class Interdimentional_Portal extends StageComponent {//ground component
       source.background(0);
       if (linkZ!=-1) {
         source.setPlayerPosZ=(int)linkZ;
-        source.players[currentPlayer].z=linkZ;
+        source.players[source.currentPlayer].z=linkZ;
         source.tpCords[2]=linkZ;
       }
-      source.players[currentPlayer].setX(linkX).setY(linkY);
+      source.players[source.currentPlayer].setX(linkX).setY(linkY);
       source.setPlayerPosTo=true;
       source.tpCords[0]=(int)linkX;
       source.tpCords[1]=(int)linkY;

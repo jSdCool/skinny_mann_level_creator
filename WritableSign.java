@@ -42,7 +42,7 @@ class WritableSign extends StageComponent {
       return;
     source.drawSign(source.Scale*((x+group.xOffset)-source.drawCamPosX), source.Scale*((y+group.yOffset)+source.drawCamPosY), source.Scale);
 
-    float playx=source.players[currentPlayer].getX(), playy=source.players[currentPlayer].getY();
+    float playx=source.players[source.currentPlayer].getX(), playy=source.players[source.currentPlayer].getY();
     if (playx>(x+group.xOffset)-35&&playx<(x+group.xOffset)+35&&playy>(y+group.yOffset)-40&&playy<(y+group.yOffset)) {//display the press e message to the player
       source.fill(255);
       source.textSize(source.Scale*20);
@@ -61,8 +61,8 @@ class WritableSign extends StageComponent {
       return;
     source.drawSign((x+group.xOffset), (y+group.yOffset), (z+group.zOffset), source.Scale);
 
-    float playx=source.players[currentPlayer].getX(), playy=source.players[currentPlayer].getY();
-    if (playx>(x+group.xOffset)-35&&playx<(x+group.xOffset)+35&&playy>(y+group.yOffset)-40&&playy<(y+group.yOffset)&& source.players[currentPlayer].z >= (z+group.zOffset)-20 && source.players[currentPlayer].z <= (z+group.zOffset)+20) {
+    float playx=source.players[source.currentPlayer].getX(), playy=source.players[source.currentPlayer].getY();
+    if (playx>(x+group.xOffset)-35&&playx<(x+group.xOffset)+35&&playy>(y+group.yOffset)-40&&playy<(y+group.yOffset)&& source.players[source.currentPlayer].z >= (z+group.zOffset)-20 && source.players[source.currentPlayer].z <= (z+group.zOffset)+20) {
       source.fill(255);
       source.textSize(source.Scale*20);
       source.displayText="Press E";

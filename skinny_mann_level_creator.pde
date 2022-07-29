@@ -22,7 +22,17 @@ void setup() {
   greenScaler=loadShape("data/modles/green scaler/obj.obj");
   blueScaler=loadShape("data/modles/blue scaler/obj.obj");
   yellowScaler=loadShape("data/modles/yellow scaler/obj.obj");
-
+  
+  players[0]=new Player(20, 699, 1, 0);
+  players[1]=new Player(20, 699, 1, 1);
+  players[2]=new Player(20, 699, 1, 2);
+  players[3]=new Player(20, 699, 1, 3);
+  players[4]=new Player(20, 699, 1, 4);
+  players[5]=new Player(20, 699, 1, 5);
+  players[6]=new Player(20, 699, 1, 6);
+  players[7]=new Player(20, 699, 1, 7);
+  players[8]=new Player(20, 699, 1, 8);
+  players[9]=new Player(20, 699, 1, 9);
 
   initlizeButtons();
   sourceInitilize();
@@ -31,16 +41,7 @@ boolean startup=true, editing_level=true, player1_moving_right=false, player1_mo
 String file_path, new_name="my_level", GAME_version="0.6.1_Early_Access", EDITOR_version="0.0.3_EAc", rootPath="", coursorr="", newFileName="", newFileType="2D", stageType="", author="your name here", displayText="", fileToCoppyPath="";
 //int player1 []={20,700,1,0,1,0}; // old player data
 Player players[] =new Player[10];
-players[0]=new Player(20, 699, 1, 0);
-players[1]=new Player(20, 699, 1, 1);
-players[2]=new Player(20, 699, 1, 2);
-players[3]=new Player(20, 699, 1, 3);
-players[4]=new Player(20, 699, 1, 4);
-players[5]=new Player(20, 699, 1, 5);
-players[6]=new Player(20, 699, 1, 6);
-players[7]=new Player(20, 699, 1, 7);
-players[8]=new Player(20, 699, 1, 8);
-players[9]=new Player(20, 699, 1, 9);
+
 int camPos=0, camPosY=0, death_cool_down, start_down, eadgeScroleDist=300, respawnX=20, respawnY=700, spdelay=0, Color=0, RedPos=0, BluePos=0, GreenPos=0, RC=0, GC=0, BC=0, grid_size=10, filesScrole=0, overviewSelection=-1, portalIndex1, stageIndex, preSI, respawnStage, setPlayerPosX, setPlayerPosY, setPlayerPosZ, startingDepth=0, totalDepth=300, respawnZ=50, coinRotation=0, coinCount=0, gmillis=0, eadgeScroleDistV=250, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, drawCamPosX=0, drawCamPosY;
 int buttonMin=0, buttonMax=0, coinsIndex, triangleMode=0, selectedIndex=-1, viewingItemIndex=-1, currentBluieprintIndex=0, logicBoardIndex, connectingFromIndex, movingLogicIndex, current3DTransformMode=1, transformComponentNumber,currentPlayer=0;
 float[]tpCords=new float[3];
