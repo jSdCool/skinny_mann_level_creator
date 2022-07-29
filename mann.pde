@@ -1,12 +1,44 @@
-void draw_mann(float x, float y, int pose, float scale, String shirt_color) {
+void draw_mann(float x, float y, int pose, float scale, int shirt_color) {
   strokeWeight(0);
-  if (shirt_color.equals("red")) {
+  if (shirt_color==0) {//red
     fill(255, 0, 0);
     stroke(255, 0, 0);
   }
-  if (shirt_color.equals("green")) {
+  if (shirt_color==1) {//green
     fill(0, 181, 0);
     stroke(0, 181, 0);
+  }
+  if (shirt_color==2) {//blue
+    fill(0, 29, 255);
+    stroke(0, 29, 255);
+  }
+  if (shirt_color==3) {//yellow
+    fill(255,226,0);
+    stroke(255,226,0);
+  }
+  if (shirt_color==4) {//magenta
+    fill(232, 0, 221);
+    stroke(232, 0, 221);
+  }
+  if (shirt_color==5) {//mint
+    fill(0, 232, 121);
+    stroke(0, 232, 121);
+  }
+  if (shirt_color==6) {//orange
+    fill(252, 156, 0);
+    stroke(252, 156, 0);
+  }
+  if (shirt_color==7) {//pink
+    fill(255, 149, 153);
+    stroke(255, 149, 153);
+  }
+  if (shirt_color==8) {//maroon
+    fill(64, 12, 12);
+    stroke(64, 12, 12);
+  }
+  if (shirt_color==9) {//purple
+    fill(139, 0, 255);
+    stroke(139, 0, 255);
   }
 
   if (pose==1) {
@@ -189,17 +221,49 @@ void draw_mann(float x, float y, int pose, float scale, String shirt_color) {
   }
 }
 
-void draw_mann_3D(float x, float y, float z, int pose, float scale, String shirt_color) {
+void draw_mann_3D(float x, float y, float z, int pose, float scale, int shirt_color) {
   translate(x, y, z);
   rotateY(radians(90));
   strokeWeight(0);
-  if (shirt_color.equals("red")) {
+  if (shirt_color==0) {//red
     fill(255, 0, 0);
     stroke(255, 0, 0);
   }
-  if (shirt_color.equals("green")) {
+  if (shirt_color==1) {//green
     fill(0, 181, 0);
     stroke(0, 181, 0);
+  }
+  if (shirt_color==2) {//blue
+    fill(0, 29, 255);
+    stroke(0, 29, 255);
+  }
+  if (shirt_color==3) {//yellow
+    fill(255,226,0);
+    stroke(255,226,0);
+  }
+  if (shirt_color==4) {//magenta
+    fill(232, 0, 221);
+    stroke(232, 0, 221);
+  }
+  if (shirt_color==5) {//mint
+    fill(0, 232, 121);
+    stroke(0, 232, 121);
+  }
+  if (shirt_color==6) {//orange
+    fill(252, 156, 0);
+    stroke(252, 156, 0);
+  }
+  if (shirt_color==7) {//pink
+    fill(255, 149, 153);
+    stroke(255, 149, 153);
+  }
+  if (shirt_color==8) {//maroon
+    fill(64, 12, 12);
+    stroke(64, 12, 12);
+  }
+  if (shirt_color==9) {//purple
+    fill(139, 0, 255);
+    stroke(139, 0, 255);
   }
 
   translate(0, -42.5*scale, 0);

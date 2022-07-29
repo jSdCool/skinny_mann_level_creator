@@ -1,9 +1,9 @@
 class Player {
   public float x, y, z=0, scale, animationCooldown, verticalVelocity=0;
   int pose=1;
-  String shirt;
+  int shirt;
   boolean jumping=false;
-  Player(float X, float Y, float Scale, String Color) {
+  Player(float X, float Y, float Scale, int Color) {
     x=X;
     y=Y;
     scale=Scale;
@@ -44,7 +44,7 @@ class Player {
   public float getAnimationCooldown() {
     return  animationCooldown;
   }
-  public String getColor() {
+  public int getColor() {
     return shirt;
   }
   public String toString() {

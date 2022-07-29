@@ -30,7 +30,7 @@ void setup() {
 boolean startup=true, editing_level=true, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, loading=false, newLevel=false, simulating=false, entering_file_path=false, coursor=false, level_complete=false, dead=false, entering_name=false, cam_left=false, cam_right=false, drawing=false, draw=false, extra=false, ground=false, check_point=false, goal=false, deleteing=false, delete=false, moving_player=false, grid_mode=false, holo_gram=false, editingStage=false, levelOverview=false, newFile=false, drawCoins=false, drawingPortal=false, drawingPortal2=false, drawingPortal3=false, E_pressed=false, saveColors=false, sloap=false, loopThread2=true, cam_up=false, cam_down=false, holoTriangle=false, dethPlane=false, setPlayerPosTo=false, e3DMode=false, WPressed=false, SPressed=false, draw3DSwitch1=false, draw3DSwitch2=false, checkpointIn3DStage=false, shadow3D=true, tutorialMode=false, drawingSign=false, selecting=false, viewingItemContents=false, loadingBlueprint=false, creatingNewBlueprint=false, editingBlueprint=false, selectingBlueprint=false, placingSound=false, editinglogicBoard=false, connectingLogic=false, connecting=false, moveLogicComponents=false, movingLogicComponent, placingAndGate=false, placingOrGate=false, placingXorGate=false, placingNandGate=false, placingNorGate=false, placingXnorGate=false, placingTestLogic=false, placingOnSingal=false, placingReadVariable=false, placingSetVaravle=false, placingSetVisibility=false, placingXOffset=false, placingYOffset=false, placingLogicButton=false, placingDelay=false, placingZOffset, pnttst, settingPlayerSpawn=false, translateXaxis=false, translateYaxis=false, translateZaxis=false, w3D=false, a3D=false, s3D=false, d3D=false, space3D=false, shift3D=false,placing3Dsetter=false,placing3Dreader;
 String file_path, new_name="my_level", GAME_version="0.6.1_Early_Access", EDITOR_version="0.0.3_EAc", rootPath="", coursorr="", newFileName="", newFileType="2D", stageType="", author="your name here", displayText="", fileToCoppyPath="";
 //int player1 []={20,700,1,0,1,0}; // old player data
-Player player1 =new Player(20, 699, 1, "red");
+Player player1 =new Player(20, 699, 1, 0);
 int camPos=0, camPosY=0, death_cool_down, start_down, eadgeScroleDist=300, respawnX=20, respawnY=700, spdelay=0, Color=0, RedPos=0, BluePos=0, GreenPos=0, RC=0, GC=0, BC=0, grid_size=10, filesScrole=0, overviewSelection=-1, portalIndex1, stageIndex, preSI, respawnStage, setPlayerPosX, setPlayerPosY, setPlayerPosZ, startingDepth=0, totalDepth=300, respawnZ=50, coinRotation=0, coinCount=0, gmillis=0, eadgeScroleDistV=250, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, drawCamPosX=0, drawCamPosY;
 int buttonMin=0, buttonMax=0, coinsIndex, triangleMode=0, selectedIndex=-1, viewingItemIndex=-1, currentBluieprintIndex=0, logicBoardIndex, connectingFromIndex, movingLogicIndex, current3DTransformMode=1, transformComponentNumber;
 float[]tpCords=new float[3];
@@ -443,7 +443,7 @@ void draw() {
     }
   }
   if (settingPlayerSpawn) {
-    draw_mann(mouseX, mouseY, 1, 1, "red");
+    draw_mann(mouseX, mouseY, 1, 1, 0);
     fill(0);
     textSize(35);
     textAlign(CENTER, CENTER);
@@ -466,6 +466,18 @@ void draw() {
   if (millis()<gmillis) {
     glitchEffect();
   }
+  fill(-9131009);
+  rect(180,100,400,140);
+  draw_mann(200, 200, 1, 1, 0);
+  draw_mann(240, 200, 1, 1, 1);
+  draw_mann(280, 200, 1, 1, 2);
+  draw_mann(320, 200, 1, 1, 3);
+  draw_mann(360, 200, 1, 1, 4);
+  draw_mann(400, 200, 1, 1, 5);
+  draw_mann(440, 200, 1, 1, 6);
+  draw_mann(480, 200, 1, 1, 7);
+  draw_mann(520, 200, 1, 1, 8);
+  draw_mann(560, 200, 1, 1, 9);
 
   disEngageHUDPosition();
 }//end of draw
