@@ -48,9 +48,9 @@ static skinny_mann_level_creator source;
     Group group=getGroup();
     if (!group.visable)
       return;
-    float playx=source.player1.getX();
+    float playx=source.players[currentPlayer].getX();
     boolean po=false;
-    if (playx>=(x+group.xOffset)-5 && playx<= (x+group.xOffset)+5 && (y+group.yOffset)-50 <= source.player1.getY() && (y+group.yOffset)>=source.player1.getY()-10) {
+    if (playx>=(x+group.xOffset)-5 && playx<= (x+group.xOffset)+5 && (y+group.yOffset)-50 <= source.players[currentPlayer].getY() && (y+group.yOffset)>=source.players[currentPlayer].getY()-10) {
       source.respawnX=(int)x;
       source.respawnY=(int)y;
       source.respawnStage=source.currentStageIndex;
@@ -74,12 +74,12 @@ static skinny_mann_level_creator source;
     if (!group.visable)
       return;
     //noStroke();
-    float playx=source.player1.getX();
+    float playx=source.players[currentPlayer].getX();
     boolean po=false;
-    if (playx>=(x+group.xOffset)-20 && playx<= (x+group.xOffset)+20 && (y+group.yOffset)-50 <= source.player1.getY() && (y+group.yOffset)>=source.player1.getY()-10 && source.player1.z >= (z+group.zOffset)-20 && source.player1.z <= (z+group.zOffset)+20) {
+    if (playx>=(x+group.xOffset)-20 && playx<= (x+group.xOffset)+20 && (y+group.yOffset)-50 <= source.players[currentPlayer].getY() && (y+group.yOffset)>=source.players[currentPlayer].getY()-10 && source.players[currentPlayer].z >= (z+group.zOffset)-20 && source.players[currentPlayer].z <= (z+group.zOffset)+20) {
       source.respawnX=(int)x;
       source.respawnY=(int)y;
-      source.respawnZ=(int)source.player1.z;
+      source.respawnZ=(int)source.players[currentPlayer].z;
       source.respawnStage=source.stageIndex;
       source.checkpointIn3DStage=true;
       po=true;

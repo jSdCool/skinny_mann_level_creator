@@ -49,7 +49,7 @@ class SWoff3D extends StageComponent {//ground component
     if (!group.visable)
       return;
     source.draw3DSwitch2((x+group.xOffset), (y+group.yOffset), (z+group.zOffset), source.Scale);
-    if (source.player1.x>=(x+group.xOffset)-10&&source.player1.x<=(x+group.xOffset)+10&&source.player1.y >=(y+group.yOffset)-10&&source.player1.y<= (y+group.yOffset)+2 && source.player1.z >= (z+group.zOffset)-10 && source.player1.z <= (z+group.zOffset)+10) {
+    if (source.players[currentPlayer].x>=(x+group.xOffset)-10&&source.players[currentPlayer].x<=(x+group.xOffset)+10&&source.players[currentPlayer].y >=(y+group.yOffset)-10&&source.players[currentPlayer].y<= (y+group.yOffset)+2 && source.players[currentPlayer].z >= (z+group.zOffset)-10 && source.players[currentPlayer].z <= (z+group.zOffset)+10) {
       source.e3DMode=false;
       source.WPressed=false;
       source.SPressed=false;

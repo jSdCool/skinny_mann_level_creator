@@ -1078,10 +1078,10 @@ void GUImouseClicked() {
     if (moving_player) {//if moving the player
       if (mouseX >=buttonMin && mouseX <= buttonMax && mouseY >= 40 && mouseY <= 90) {
       } else {//set the players new position
-        player1.setX(mouseX+camPos);
-        player1.setY(mouseY-camPosY);
+        players[currentPlayer].setX(mouseX+camPos);
+        players[currentPlayer].setY(mouseY-camPosY);
         if (level.stages.get(currentStageIndex).type.equals("3Dstage")) {
-          player1.z=startingDepth;
+          players[currentPlayer].z=startingDepth;
         }
         tpCords[0]=mouseX+camPos;
         tpCords[1]=mouseY-camPosY;

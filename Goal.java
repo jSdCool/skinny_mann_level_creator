@@ -49,7 +49,7 @@ class Goal extends StageComponent {//ground component
     source.rect(source.Scale*(x2+50), source.Scale*(y2+source.drawCamPosY), source.Scale*50, source.Scale*50);
     source.rect(source.Scale*(x2+150), source.Scale*(y2+source.drawCamPosY), source.Scale*50, source.Scale*50);
 
-    float px =source.player1.getX(), py=source.player1.getY();
+    float px =source.players[currentPlayer].getX(), py=source.players[currentPlayer].getY();
 
     if (px >= x2+source.drawCamPosX && px <= x2+source.drawCamPosX + 250 && py >= y2 - 50 && py <= y2 + 50) {
       if (!source.level_complete) {

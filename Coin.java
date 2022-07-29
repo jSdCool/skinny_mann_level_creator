@@ -50,7 +50,7 @@ class Coin extends StageComponent {//ground component
     Group group=getGroup();
     if (!group.visable)
       return;
-    float playx=source.player1.getX(), playy=source.player1.getY();
+    float playx=source.players[currentPlayer].getX(), playy=source.players[currentPlayer].getY();
     boolean collected;
     if (source.editingBlueprint) {
       collected=false;
@@ -74,7 +74,7 @@ class Coin extends StageComponent {//ground component
     Group group=getGroup();
     if (!group.visable)
       return;
-    float playx=source.player1.getX(), playy=source.player1.getY(), playz=source.player1.z;
+    float playx=source.players[currentPlayer].getX(), playy=source.players[currentPlayer].getY(), playz=source.players[currentPlayer].z;
     boolean collected=source.coins.get(coinId);
 
     if (!collected) {
