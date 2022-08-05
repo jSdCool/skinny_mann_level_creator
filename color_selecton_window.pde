@@ -9,7 +9,7 @@ class ToolBox extends PApplet {
   public int redVal=0, greenVal=0, blueVal=0, CC=0;
   int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset, variableScroll=0, groupScroll=0;
   String page="colors", newGroopName="";
-  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton, testLogicPlaceButton, constantOnButton, setVariableButton, readVariableButton, setVisabilityButton, xOffsetButton, yOffsetButton, increase, increaseMore, increaseAlot, decrease, decreaseMore, decreaseAlot, nextGroup, prevGroup, variablesAndGroups, variablesUP, variablesDOWN, groupsUP, groupsDOWN, addVariable, addGroup, typeGroopName, logicButtonButton, runLoad, delayButton, zOffsetButton, logicHelpButton, move3DButton, size3DButton,set3DButton,read3DButton;
+  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton, testLogicPlaceButton, constantOnButton, setVariableButton, readVariableButton, setVisabilityButton, xOffsetButton, yOffsetButton, increase, increaseMore, increaseAlot, decrease, decreaseMore, decreaseAlot, nextGroup, prevGroup, variablesAndGroups, variablesUP, variablesDOWN, groupsUP, groupsDOWN, addVariable, addGroup, typeGroopName, logicButtonButton, runLoad, delayButton, zOffsetButton, logicHelpButton, move3DButton, size3DButton,set3DButton,read3DButton,levelSettingsPage,multyplayerModeSpeedrunButton,multyplayerModeCoOpButton,minplayersIncrease,minPlayersDecrease,maxplayersIncrease,maxplayersDecrease;
   boolean typingSign=false, settingSkyColor=false, typingGroopName=false;
 
   public void settings() {
@@ -23,6 +23,7 @@ class ToolBox extends PApplet {
     selectionPage=new Button(this, 260, 50, 100, 50, "selection");
     stageSettings=new Button(this, 365, 50, 100, 50, "stage settings");
     variablesAndGroups=new Button(this, 470, 50, 100, 50, "variables/groups");
+    levelSettingsPage=new Button(this, 575, 50, 100, 50, "level settings");
 
     toggle3DMode=new Button(this, 820, 40+100, 50, 50, "  3D  ", 255, 203).setStrokeWeight(5).setHoverText("toggle 3D mode");
     switch3D1=new Button(this, 880, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("turn 3D on switch");
@@ -94,6 +95,14 @@ class ToolBox extends PApplet {
     addGroup=new Button(this, 640, 190, 30, 30, "+");
     typeGroopName=new Button(this, 680, 190, 400, 30);
     runLoad=new Button(this, 500, 550, 200, 50, "load").setHoverText("run the load logic board");
+    
+    
+    multyplayerModeSpeedrunButton=new Button(this, 220,190,80,30,"speed run",255,#F6FF03);
+    multyplayerModeCoOpButton=new Button(this, 320,190,80,30,"co-op",255,100);
+    minplayersIncrease=new Button(this, 230,240,30,30,">");
+    minPlayersDecrease=new Button(this, 160,240,30,30,"<");
+    maxplayersIncrease=new Button(this, 230,290,30,30,">");
+    maxplayersDecrease=new Button(this, 160,290,30,30,"<");
   }
 
 
@@ -162,6 +171,7 @@ class ToolBox extends PApplet {
       selectionPage.draw();
       stageSettings.draw();
       variablesAndGroups.draw();
+      levelSettingsPage.draw();
       if (settingSkyColor)
         setSkyColor.draw();
     }//end of if page is colors
@@ -172,6 +182,7 @@ class ToolBox extends PApplet {
       selectionPage.draw();
       stageSettings.draw();
       variablesAndGroups.draw();
+      levelSettingsPage.draw();
 
       if (editingStage) {
 
@@ -1035,6 +1046,7 @@ class ToolBox extends PApplet {
       selectionPage.draw();
       stageSettings.draw();
       variablesAndGroups.draw();
+      levelSettingsPage.draw();
 
       if (selectedIndex==-1) {//if nothing is selected
         fill(0);
@@ -1223,6 +1235,7 @@ class ToolBox extends PApplet {
       selectionPage.draw();
       stageSettings.draw();
       variablesAndGroups.draw();
+      levelSettingsPage.draw();
       if (editingStage) {
         fill(0);
         textSize(25);
@@ -1246,6 +1259,7 @@ class ToolBox extends PApplet {
       selectionPage.draw();
       stageSettings.draw();
       variablesAndGroups.draw();
+      levelSettingsPage.draw();
       fill(0);
       textSize(25);
       textAlign(LEFT, CENTER);
@@ -1291,6 +1305,57 @@ class ToolBox extends PApplet {
         runLoad.drawHoverText();
       }//end of editing level
     }//end of variables and groups
+    if(page.equals("level settings")){
+      background(#BA90FF);
+      colorPage.draw();
+      toolsPage.draw();
+      selectionPage.draw();
+      stageSettings.draw();
+      variablesAndGroups.draw();
+      levelSettingsPage.draw();
+      
+      if(level==null){
+        textAlign(CENTER,CENTER);
+        fill(0);
+        textSize(25);
+        text("no level loaded",width/2,height/2);
+      }else{
+       textSize(20);
+       fill(0);
+       textAlign(LEFT,CENTER);
+       text("level name: "+level.name,50,150);
+       text("multyplayer mode:",50,200);
+       if(level.multyplayerMode==1){
+        multyplayerModeCoOpButton.setColor(255,100);
+        multyplayerModeSpeedrunButton.setColor(255,#F6FF03);
+       }
+       if(level.multyplayerMode==2){
+        multyplayerModeCoOpButton.setColor(255,#F6FF03);
+        multyplayerModeSpeedrunButton.setColor(255,100);
+       }
+       
+       multyplayerModeCoOpButton.draw();
+       multyplayerModeSpeedrunButton.draw();
+       
+       if(level.multyplayerMode==2){
+        textSize(20);
+       fill(0);
+       textAlign(LEFT,CENTER);
+       text("min players:",50,250);
+       text("max players:",50,300);
+       text(level.minPlayers,200,250);
+       text(level.maxPLayers,200,300);
+       if(level.minPlayers<level.maxPLayers)
+       minplayersIncrease.draw();
+       if(level.minPlayers>2)
+       minPlayersDecrease.draw();
+       if(level.maxPLayers<10)
+       maxplayersIncrease.draw();
+       if(level.maxPLayers>level.minPlayers)
+       maxplayersDecrease.draw();
+       }
+      }
+    }//end of page is level settings
   }//end of draw
 
   public void mouseClicked() {
@@ -1348,6 +1413,9 @@ class ToolBox extends PApplet {
     }
     if (variablesAndGroups.isMouseOver()) {
       page="variables and groups";
+    }
+    if (levelSettingsPage.isMouseOver()) {
+      page="level settings";
     }
 
     if (page.equals("tools")) {
@@ -2030,6 +2098,30 @@ class ToolBox extends PApplet {
         }
       }//end of editing a level
     }//end if page is varioables and groups
+    if(page.equals("level settings")){
+      if(multyplayerModeSpeedrunButton.isMouseOver()){
+        level.multyplayerMode=1;
+      }
+      if(multyplayerModeCoOpButton.isMouseOver()){
+        level.multyplayerMode=2;
+      }
+      if(level.multyplayerMode==2){
+ 
+       if(level.minPlayers<level.maxPLayers&&minplayersIncrease.isMouseOver()){
+         level.minPlayers++;
+       }
+       if(level.minPlayers>2&&minPlayersDecrease.isMouseOver()){
+         level.minPlayers--;
+       }
+       if(level.maxPLayers<10&&maxplayersIncrease.isMouseOver()){
+         level.maxPLayers++;
+       }
+       if(level.maxPLayers>level.minPlayers&&maxplayersDecrease.isMouseOver()){
+         level.maxPLayers--;
+       }
+       }
+      
+    }//end of page is level settings
   }
 
   public void mouseDragged() {
@@ -2158,10 +2250,6 @@ class ToolBox extends PApplet {
       fill(255, 0, 0);
       stroke(255, 0, 0);
     }
-    if (shirt_color.equals("green")) {
-      fill(0, 181, 0);
-      stroke(0, 181, 0);
-    }
 
     if (pose==1) {
       rect(x-10*scale, y-55*scale, scale*20, scale*25);
@@ -2178,168 +2266,5 @@ class ToolBox extends PApplet {
       rect(x+4*scale, y-10*scale, scale*6, scale*10);
     }
 
-    if (pose==2) {
-      rect(x-10*scale, y-55*scale, scale*20, scale*25);
-      fill(-17813);
-      stroke(-17813);
-      rect(x-15*scale, y-75*scale, scale*30, scale*20);
-      fill(-16763137);
-      stroke(-16763137);
-      rect(x-10*scale, y-30*scale, scale*6, scale*10);
-      rect(x+4*scale, y-30*scale, scale*6, scale*10);
-      rect(x-12*scale, y-20*scale, scale*6, scale*10);
-      rect(x+6*scale, y-20*scale, scale*6, scale*10);
-      rect(x-14*scale, y-10*scale, scale*6, scale*10);
-      rect(x+8*scale, y-10*scale, scale*6, scale*10);
-    }
-
-    if (pose==3) {
-      rect(x-10*scale, y-55*scale, scale*20, scale*25);
-      fill(-17813);
-      stroke(-17813);
-      rect(x-15*scale, y-75*scale, scale*30, scale*20);
-      fill(-16763137);
-      stroke(-16763137);
-      rect(x-10*scale, y-30*scale, scale*6, scale*10);
-      rect(x+4*scale, y-30*scale, scale*6, scale*10);
-      rect(x-13*scale, y-20*scale, scale*6, scale*10);
-      rect(x+7*scale, y-20*scale, scale*6, scale*10);
-      rect(x-18*scale, y-10*scale, scale*6, scale*10);
-      rect(x+12*scale, y-10*scale, scale*6, scale*10);
-    }
-    if (pose==4) {
-      rect(x-10*scale, y-55*scale, scale*20, scale*25);
-      fill(-17813);
-      stroke(-17813);
-      rect(x-15*scale, y-75*scale, scale*30, scale*20);
-      fill(-16763137);
-      stroke(-16763137);
-      rect(x-12*scale, y-30*scale, scale*6, scale*10);
-      rect(x+6*scale, y-30*scale, scale*6, scale*10);
-      rect(x-16*scale, y-20*scale, scale*6, scale*10);
-      rect(x+10*scale, y-20*scale, scale*6, scale*10);
-      rect(x-19*scale, y-10*scale, scale*6, scale*10);
-      rect(x+15*scale, y-10*scale, scale*6, scale*10);
-    }
-
-    if (pose==5) {
-      rect(x-10*scale, y-55*scale, scale*20, scale*25);
-      fill(-17813);
-      stroke(-17813);
-      rect(x-15*scale, y-75*scale, scale*30, scale*20);
-      fill(-16763137);
-      stroke(-16763137);
-      rect(x-10*scale, y-30*scale, scale*6, scale*10);
-      rect(x+4*scale, y-30*scale, scale*6, scale*10);
-      rect(x-13*scale, y-20*scale, scale*6, scale*10);
-      rect(x+7*scale, y-20*scale, scale*6, scale*10);
-      rect(x-18*scale, y-10*scale, scale*6, scale*10);
-      rect(x+12*scale, y-10*scale, scale*6, scale*10);
-    }
-
-    if (pose==6) {
-      rect(x-10*scale, y-55*scale, scale*20, scale*25);
-      fill(-17813);
-      stroke(-17813);
-      rect(x-15*scale, y-75*scale, scale*30, scale*20);
-      fill(-16763137);
-      stroke(-16763137);
-      rect(x-10*scale, y-30*scale, scale*6, scale*10);
-      rect(x+4*scale, y-30*scale, scale*6, scale*10);
-      rect(x-12*scale, y-20*scale, scale*6, scale*10);
-      rect(x+6*scale, y-20*scale, scale*6, scale*10);
-      rect(x-14*scale, y-10*scale, scale*6, scale*10);
-      rect(x+8*scale, y-10*scale, scale*6, scale*10);
-    }
-
-    if (pose==7) {
-      rect(x-10*scale, y-55*scale, scale*20, scale*25);
-      fill(-17813);
-      stroke(-17813);
-      rect(x-15*scale, y-75*scale, scale*30, scale*20);
-      fill(-16763137);
-      stroke(-16763137);
-      rect(x-10*scale, y-30*scale, scale*6, scale*10);
-      rect(x+4*scale, y-30*scale, scale*6, scale*10);
-      rect(x-10*scale, y-20*scale, scale*6, scale*10);
-      rect(x+4*scale, y-20*scale, scale*6, scale*10);
-      rect(x-10*scale, y-10*scale, scale*6, scale*10);
-      rect(x+4*scale, y-10*scale, scale*6, scale*10);
-    }
-
-    if (pose==8) {
-      rect(x-10*scale, y-55*scale, scale*20, scale*25);
-      fill(-17813);
-      stroke(-17813);
-      rect(x-15*scale, y-75*scale, scale*30, scale*20);
-      fill(-16763137);
-      stroke(-16763137);
-      rect(x-10*scale, y-30*scale, scale*6, scale*10);
-      rect(x+4*scale, y-30*scale, scale*6, scale*10);
-      rect(x-8*scale, y-20*scale, scale*6, scale*10);
-      rect(x+2*scale, y-20*scale, scale*6, scale*10);
-      rect(x-6*scale, y-10*scale, scale*6, scale*10);
-      rect(x+1*scale, y-10*scale, scale*6, scale*10);
-    }
-
-    if (pose==9) {
-      rect(x-10*scale, y-55*scale, scale*20, scale*25);
-      fill(-17813);
-      stroke(-17813);
-      rect(x-15*scale, y-75*scale, scale*30, scale*20);
-      fill(-16763137);
-      stroke(-16763137);
-      rect(x-10*scale, y-30*scale, scale*6, scale*10);
-      rect(x+4*scale, y-30*scale, scale*6, scale*10);
-      rect(x-7*scale, y-20*scale, scale*6, scale*10);
-      rect(x+1*scale, y-20*scale, scale*6, scale*10);
-      rect(x-2*scale, y-10*scale, scale*6, scale*10);
-      rect(x-4*scale, y-10*scale, scale*6, scale*10);
-    }
-
-    if (pose==10) {
-      rect(x-10*scale, y-55*scale, scale*20, scale*25);
-      fill(-17813);
-      stroke(-17813);
-      rect(x-15*scale, y-75*scale, scale*30, scale*20);
-      fill(-16763137);
-      stroke(-16763137);
-      rect(x-8*scale, y-30*scale, scale*6, scale*10);
-      rect(x+2*scale, y-30*scale, scale*6, scale*10);
-      rect(x-4*scale, y-20*scale, scale*6, scale*10);
-      rect(x-4*scale, y-20*scale, scale*6, scale*10);
-      rect(x+2*scale, y-10*scale, scale*6, scale*10);
-      rect(x-7*scale, y-10*scale, scale*6, scale*10);
-    }
-
-    if (pose==11) {
-      rect(x-10*scale, y-55*scale, scale*20, scale*25);
-      fill(-17813);
-      stroke(-17813);
-      rect(x-15*scale, y-75*scale, scale*30, scale*20);
-      fill(-16763137);
-      stroke(-16763137);
-      rect(x-10*scale, y-30*scale, scale*6, scale*10);
-      rect(x+4*scale, y-30*scale, scale*6, scale*10);
-      rect(x-7*scale, y-20*scale, scale*6, scale*10);
-      rect(x+1*scale, y-20*scale, scale*6, scale*10);
-      rect(x-2*scale, y-10*scale, scale*6, scale*10);
-      rect(x-4*scale, y-10*scale, scale*6, scale*10);
-    }
-
-    if (pose==12) {
-      rect(x-10*scale, y-55*scale, scale*20, scale*25);
-      fill(-17813);
-      stroke(-17813);
-      rect(x-15*scale, y-75*scale, scale*30, scale*20);
-      fill(-16763137);
-      stroke(-16763137);
-      rect(x-10*scale, y-30*scale, scale*6, scale*10);
-      rect(x+4*scale, y-30*scale, scale*6, scale*10);
-      rect(x-8*scale, y-20*scale, scale*6, scale*10);
-      rect(x+2*scale, y-20*scale, scale*6, scale*10);
-      rect(x-6*scale, y-10*scale, scale*6, scale*10);
-      rect(x+1*scale, y-10*scale, scale*6, scale*10);
-    }
   }
 }//end of ColorSelectorScreen class
