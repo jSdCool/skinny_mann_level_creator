@@ -546,6 +546,7 @@ void mouseClicked() {
         terain.setFloat("spawn pointY", 700);
         terain.setInt("mainStage", -1);
         terain.setInt("coins", 0);
+        terain.setString("author",author);
         mainIndex.setJSONObject(0, terain);
         levelOverview=true;
         level=new Level(mainIndex);

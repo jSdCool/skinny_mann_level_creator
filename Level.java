@@ -30,6 +30,7 @@ static skinny_mann_level_creator source;
     name=job.getString("name");
     createdVersion=job.getString("game version");
     source.author=job.getString("author");
+    System.out.println("author: "+source.author);
     source.currentStageIndex=mainStage;
     if (job.isNull("number of variable")) {
       System.out.println("setting up variables because none exsisted before");
