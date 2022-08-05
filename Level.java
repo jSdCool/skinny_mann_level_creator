@@ -6,12 +6,12 @@ import java.util.HashMap;
 
 class Level implements Serializable{
 static skinny_mann_level_creator source;
-  ArrayList<Stage> stages=new ArrayList<>();
-  ArrayList<LogicBoard> logicBoards=new ArrayList<>();
-  ArrayList<Boolean> variables=new ArrayList<>();
-  ArrayList<Group> groups=new ArrayList<>();
-  ArrayList<String> groupNames=new ArrayList<>();
-  public int mainStage, numOfCoins, levelID, numlogicBoards=0, loadBoard, tickBoard, levelCompleteBoard;
+  public ArrayList<Stage> stages=new ArrayList<>();
+  public ArrayList<LogicBoard> logicBoards=new ArrayList<>();
+  public ArrayList<Boolean> variables=new ArrayList<>();
+  public ArrayList<Group> groups=new ArrayList<>();
+  public ArrayList<String> groupNames=new ArrayList<>();
+  public int mainStage, numOfCoins, levelID, numlogicBoards=0, loadBoard, tickBoard, levelCompleteBoard, multyplayerMode=1, maxPLayers=2, minPlayers=2;
   public String name, createdVersion;
   public float SpawnX, SpawnY, RewspawnX, RespawnY;
   public HashMap<String, StageSound> sounds=new HashMap<>();
@@ -56,6 +56,15 @@ static skinny_mann_level_creator source;
       System.out.println("no groups found, creating default");
       groupNames.add("group 0");
       groups.add(new Group());
+    }
+    if(!job.isNull("multyplayer mode")){
+      multyplayerMode=job.getInt("multyplayer mode");
+    }
+    if(!job.isNull("max players")){
+      maxPLayers=job.getInt("max players");
+    }
+    if(!job.isNull("min players")){
+      minPlayers=job.getInt("min players");
     }
     source.players[source.currentPlayer].x=SpawnX;
     source.players[source.currentPlayer].y=SpawnY;
@@ -137,6 +146,9 @@ static skinny_mann_level_creator source;
     head.setString("game version", source.GAME_version);
     head.setString("author", source.author);
     head.setInt("number of variable", variables.size());
+    head.setInt("multyplayer mode", multyplayerMode);
+    head.setInt("max players", maxPLayers);
+    head.setInt("min players", minPlayers);
     JSONArray grps=new JSONArray();
     for (int i=0; i<groupNames.size(); i++) {
       grps.setString(i, groupNames.get(i));
