@@ -1363,13 +1363,13 @@ class ToolBox extends PApplet {
        text(level.maxPLayers,200,300);
        currentNumberOfPlayers=level.maxPLayers;
        if(level.minPlayers<level.maxPLayers)
-       minplayersIncrease.draw();
+         minplayersIncrease.draw();
        if(level.minPlayers>2)
-       minPlayersDecrease.draw();
+         minPlayersDecrease.draw();
        if(level.maxPLayers<10)
-       maxplayersIncrease.draw();
+         maxplayersIncrease.draw();
        if(level.maxPLayers>level.minPlayers)
-       maxplayersDecrease.draw();
+         maxplayersDecrease.draw();
        }
       }
     }//end of page is level settings
@@ -1753,10 +1753,12 @@ class ToolBox extends PApplet {
            if(currentPlayer>0&&prevousPlayerButton.isMouseOver()){
              currentPlayer--;
              currentStageIndex=players[currentPlayer].stage;
+             e3DMode=players[currentPlayer].in3D;
            }
           if(currentPlayer<level.maxPLayers-1&&nextPlayerButton.isMouseOver()){
             currentPlayer++;
              currentStageIndex=players[currentPlayer].stage;
+             e3DMode=players[currentPlayer].in3D;
           }
           
         }
