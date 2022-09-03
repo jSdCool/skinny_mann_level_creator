@@ -2,7 +2,7 @@ class Player {
   public float x, y, z=0, scale, animationCooldown, verticalVelocity=0;
   public int pose=1,stage=0;
   int shirt;
-  boolean jumping=false;
+  boolean jumping=false,in3D;
   Player(float X, float Y, float Scale, int Color) {
     x=X;
     y=Y;

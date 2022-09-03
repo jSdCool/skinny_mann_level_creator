@@ -7,12 +7,18 @@ void settings() {
 void setup() {
   textSize(80);//make text not fuzzy
   frameRate(60);//limmit the frame rate
+  println("setting window title");
   surface.setTitle("skinny mann level creator");//set the window title
+  println("initilizing 2nd window");
   scr2 =new ToolBox(millis());//initilize the tool box window
+  println("loading saved colors");
   colors=loadJSONArray("data/colors.json");//load saved colors
+  println("starting physics thread");
   thread("thrdCalc2");//start the physics thread
+  println("loading 3D coin moddle");
   coin3D=loadShape("data/modles/coin/tinker.obj");//load the 3d coin modle
   coin3D.scale(3);
+  println("loading 3D arrows and scaler moddles");
   redArrow=loadShape("data/modles/red arrow/arrow.obj");
   greenArrow=loadShape("data/modles/green arrow/arrow.obj");
   blueArrow=loadShape("data/modles/blue arrow/arrow.obj");
@@ -23,6 +29,7 @@ void setup() {
   blueScaler=loadShape("data/modles/blue scaler/obj.obj");
   yellowScaler=loadShape("data/modles/yellow scaler/obj.obj");
   
+  println("initilizing players");
   players[0]=new Player(20, 699, 1, 0);
   players[1]=new Player(20, 699, 1, 1);
   players[2]=new Player(20, 699, 1, 2);
@@ -34,8 +41,11 @@ void setup() {
   players[8]=new Player(20, 699, 1, 8);
   players[9]=new Player(20, 699, 1, 9);
 
-  initlizeButtons();
-  sourceInitilize();
+  println("initilizing buttons");
+  initlizeButtons();//initilize all the buttons
+  println("setting source variables");
+  sourceInitilize();//set the source variable in all classes that require it
+  println("setip complete");
 }
 boolean startup=true, editing_level=true, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, loading=false, newLevel=false, simulating=false, entering_file_path=false, coursor=false, level_complete=false, dead=false, entering_name=false, cam_left=false, cam_right=false, drawing=false, draw=false, extra=false, ground=false, check_point=false, goal=false, deleteing=false, delete=false, moving_player=false, grid_mode=false, holo_gram=false, editingStage=false, levelOverview=false, newFile=false, drawCoins=false, drawingPortal=false, drawingPortal2=false, drawingPortal3=false, E_pressed=false, saveColors=false, sloap=false, loopThread2=true, cam_up=false, cam_down=false, holoTriangle=false, dethPlane=false, setPlayerPosTo=false, e3DMode=false, WPressed=false, SPressed=false, draw3DSwitch1=false, draw3DSwitch2=false, checkpointIn3DStage=false, shadow3D=true, tutorialMode=false, drawingSign=false, selecting=false, viewingItemContents=false, loadingBlueprint=false, creatingNewBlueprint=false, editingBlueprint=false, selectingBlueprint=false, placingSound=false, editinglogicBoard=false, connectingLogic=false, connecting=false, moveLogicComponents=false, movingLogicComponent, placingAndGate=false, placingOrGate=false, placingXorGate=false, placingNandGate=false, placingNorGate=false, placingXnorGate=false, placingTestLogic=false, placingOnSingal=false, placingReadVariable=false, placingSetVaravle=false, placingSetVisibility=false, placingXOffset=false, placingYOffset=false, placingLogicButton=false, placingDelay=false, placingZOffset, pnttst, settingPlayerSpawn=false, translateXaxis=false, translateYaxis=false, translateZaxis=false, w3D=false, a3D=false, s3D=false, d3D=false, space3D=false, shift3D=false,placing3Dsetter=false,placing3Dreader;
 String file_path, new_name="my_level", GAME_version="0.7.0_Early_Access", EDITOR_version="0.0.4_EAc", rootPath="", coursorr="", newFileName="", newFileType="2D", stageType="", author="your name here", displayText="", fileToCoppyPath="";

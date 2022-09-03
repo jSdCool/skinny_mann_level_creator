@@ -77,10 +77,15 @@ void stageLevelDraw() {
           viewingItemIndex=i;//set the cuurent viewing item to this element
         }
       }
-
+      players[currentPlayer].in3D=true;
       for(int i=0;i<currentNumberOfPlayers;i++){
-        if(players[i].stage==currentStageIndex)//if this player is on the same stage as the userser then
-        draw_mann(Scale*(players[i].getX()-camPos), Scale*(players[i].getY()+camPosY), players[i].getPose(), Scale*players[i].getScale(), players[i].getColor());//draw the outher players
+        if(players[i].stage==currentStageIndex&&i!=currentPlayer){//if this player is on the same stage as the userser then
+          if(players[i].in3D){
+            draw_mann_3D(players[i].x, players[i].y, players[i].z, players[i].getPose(), players[i].getScale(), players[i].getColor());//draw the player
+          }else{
+            draw_mann(Scale*(players[i].getX()-camPos), Scale*(players[i].getY()+camPosY), players[i].getPose(), Scale*players[i].getScale(), players[i].getColor());//draw the outher players
+          }
+        }
       }
 
       draw_mann_3D(players[currentPlayer].x, players[currentPlayer].y, players[currentPlayer].z, players[currentPlayer].getPose(), players[currentPlayer].getScale(), players[currentPlayer].getColor());//draw the player
