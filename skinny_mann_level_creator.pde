@@ -43,7 +43,7 @@ String file_path, new_name="my_level", GAME_version="0.7.0_Early_Access", EDITOR
 Player players[] =new Player[10];
 
 int camPos=0, camPosY=0, death_cool_down, start_down, eadgeScroleDist=300, respawnX=20, respawnY=700, spdelay=0, Color=0, RedPos=0, BluePos=0, GreenPos=0, RC=0, GC=0, BC=0, grid_size=10, filesScrole=0, overviewSelection=-1, portalIndex1, stageIndex, preSI, respawnStage, setPlayerPosX, setPlayerPosY, setPlayerPosZ, startingDepth=0, totalDepth=300, respawnZ=50, coinRotation=0, coinCount=0, gmillis=0, eadgeScroleDistV=250, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, drawCamPosX=0, drawCamPosY;
-int buttonMin=0, buttonMax=0, coinsIndex, triangleMode=0, selectedIndex=-1, viewingItemIndex=-1, currentBluieprintIndex=0, logicBoardIndex, connectingFromIndex, movingLogicIndex, current3DTransformMode=1, transformComponentNumber,currentPlayer=0;
+int buttonMin=0, buttonMax=0, coinsIndex, triangleMode=0, selectedIndex=-1, viewingItemIndex=-1, currentBluieprintIndex=0, logicBoardIndex, connectingFromIndex, movingLogicIndex, current3DTransformMode=1, transformComponentNumber,currentPlayer=0,currentNumberOfPlayers=1;
 float[]tpCords=new float[3];
 JSONArray mainIndex, colors;
 JSONObject portalStage1, portalStage2;
@@ -524,6 +524,9 @@ void mouseClicked() {
         }
         level=new Level(mainIndex);
         level.logicBoards.get(level.loadBoard).superTick();
+        if(level.multyplayerMode==2){
+          currentNumberOfPlayers=level.maxPLayers; 
+        }
         return;
       }
     }

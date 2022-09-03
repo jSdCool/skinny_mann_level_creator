@@ -1328,6 +1328,7 @@ class ToolBox extends PApplet {
        if(level.multyplayerMode==1){
         multyplayerModeCoOpButton.setColor(255,100);
         multyplayerModeSpeedrunButton.setColor(255,#F6FF03);
+        currentNumberOfPlayers=1;
        }
        if(level.multyplayerMode==2){
         multyplayerModeCoOpButton.setColor(255,#F6FF03);
@@ -1345,6 +1346,7 @@ class ToolBox extends PApplet {
        text("max players:",50,300);
        text(level.minPlayers,200,250);
        text(level.maxPLayers,200,300);
+       currentNumberOfPlayers=level.maxPLayers;
        if(level.minPlayers<level.maxPLayers)
        minplayersIncrease.draw();
        if(level.minPlayers>2)

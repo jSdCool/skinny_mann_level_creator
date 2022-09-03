@@ -1,6 +1,6 @@
 class Player {
   public float x, y, z=0, scale, animationCooldown, verticalVelocity=0;
-  int pose=1;
+  public int pose=1,stage=0;
   int shirt;
   boolean jumping=false;
   Player(float X, float Y, float Scale, int Color) {
