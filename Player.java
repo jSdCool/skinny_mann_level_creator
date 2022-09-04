@@ -1,5 +1,5 @@
 import java.io.Serializable;
-public class Player implements Serializable{
+class Player implements Serializable{
   public float x, y, z=0, scale, animationCooldown, verticalVelocity=0;
   public int pose=1,stage=0;
   int shirt;
