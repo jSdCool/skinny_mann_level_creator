@@ -43,4 +43,6 @@ static skinny_mann_level_creator source;
   void setGroup(int grp) {
     group=grp;
   }
+  
+  void worldInteractions(int data){}
 }

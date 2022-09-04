@@ -334,7 +334,10 @@ void stageEditGUI() {
       int index=colid_index(mouseX+camPos, mouseY-camPosY, current);//get the index of the elemtn the mouse is currently over
       if (index==-1) {//if the mouse was over nothing then do nothing
       } else {
-        current.parts.remove(index);//remove the object the mosue was over
+        StageComponent removed = current.parts.remove(index);//remove the object the mosue was over
+        if(current.interactables.contains(removed)){
+          current.interactables.remove(removed);
+        }
       }
       delete=false;
     }//end of delete
@@ -518,6 +521,7 @@ void stageEditGUI() {
       } else {
         current.parts.add(new LogicButton((int)mouseX+camPos, (int)mouseY-camPosY));
       }
+        current.interactables.add(current.parts.get(current.parts.size()-1));
       draw=false;
     }
 
@@ -693,7 +697,10 @@ void stageEditGUI() {
         int index=colid_index(mouseX+camPos, mouseY-camPosY, level.stages.get(currentStageIndex));//figure out what thing the mouse is over
         if (index==-1) {//if the mouse is over nothing then do nothing
         } else {
-          current.parts.remove(index);//remove the thing
+          StageComponent removed = current.parts.remove(index);//remove the object the mosue was over
+          if(current.interactables.contains(removed)){
+            current.interactables.remove(removed);
+          }
         }
         delete=false;
       }
@@ -1617,7 +1624,10 @@ void mouseClicked3D() {
       Point3D testPoint = genMousePoint(i);
       int deleteIndex=colid_index(testPoint.x, testPoint.y, testPoint.z, level.stages.get(currentStageIndex));
       if (deleteIndex!=-1){
-        level.stages.get(currentStageIndex).parts.remove(deleteIndex);
+        StageComponent removed = level.stages.get(currentStageIndex).parts.remove(deleteIndex);
+        if(level.stages.get(currentStageIndex).interactables.contains(removed)){
+          level.stages.get(currentStageIndex).interactables.remove(removed);
+        }
         break;
       }
     } 

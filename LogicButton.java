@@ -49,12 +49,14 @@ class LogicButton extends StageComponent {//ground component
     Group group=getGroup();
     if (!group.visable)
       return;
-    boolean state=false;
-    if (variable!=-1) {
-      if (source.players[source.currentPlayer].x>=(x+group.xOffset)-10&&source.players[source.currentPlayer].x<=(x+group.xOffset)+10&&source.players[source.currentPlayer].y >=(y+group.yOffset)-10&&source.players[source.currentPlayer].y<= (y+group.yOffset)+2) {
-        source.level.variables.set(variable, true);
-      } else {
-        source.level.variables.set(variable, false);
+    if (source.level.multyplayerMode==2) {
+      boolean state=false;
+      if (variable!=-1) {
+        if (source.players[source.currentPlayer].x>=(x+group.xOffset)-10&&source.players[source.currentPlayer].x<=(x+group.xOffset)+10&&source.players[source.currentPlayer].y >=(y+group.yOffset)-10&&source.players[source.currentPlayer].y<= (y+group.yOffset)+2) {
+          source.level.variables.set(variable, true);
+        } else {
+          source.level.variables.set(variable, false);
+        }
       }
     }
     if (variable!=-1) {
@@ -67,12 +69,14 @@ class LogicButton extends StageComponent {//ground component
     Group group=getGroup();
     if (!group.visable)
       return;
-    boolean state=false;
-    if (variable!=-1) {
-      if (source.players[source.currentPlayer].x>=(x+group.xOffset)-10&&source.players[source.currentPlayer].x<=(x+group.xOffset)+10&&source.players[source.currentPlayer].y >=(y+group.yOffset)-10&&source.players[source.currentPlayer].y<= (y+group.yOffset)+2 && source.players[source.currentPlayer].z >= (z+group.zOffset)-10 && source.players[source.currentPlayer].z <= (z+group.zOffset)+10) {
-        source.level.variables.set(variable, true);
-      } else {
-        source.level.variables.set(variable, false);
+    if (source.level.multyplayerMode==2) {
+      boolean state=false;
+      if (variable!=-1) {
+        if (source.players[source.currentPlayer].x>=(x+group.xOffset)-10&&source.players[source.currentPlayer].x<=(x+group.xOffset)+10&&source.players[source.currentPlayer].y >=(y+group.yOffset)-10&&source.players[source.currentPlayer].y<= (y+group.yOffset)+2 && source.players[source.currentPlayer].z >= (z+group.zOffset)-10 && source.players[source.currentPlayer].z <= (z+group.zOffset)+10) {
+          source.level.variables.set(variable, true);
+        } else {
+          source.level.variables.set(variable, false);
+        }
       }
     }
     if (variable!=-1) {
@@ -99,5 +103,30 @@ class LogicButton extends StageComponent {//ground component
 
   int getDataI() {
     return variable;
+  }
+
+  /**this instance of this function al;lows the button to test if a player is standing on it
+   
+   @param data the index of the stage the button is in
+   */
+  void worldInteractions(int data) {
+    if (variable!=-1)
+      for (int i=0; i<source.currentNumOfPlayers; i++) {
+        Player cp=source.players[i];
+        if (cp.stage!=data)//test if the player is in the same stage as the button
+          continue;
+        if (cp.in3D) {//test if the player is in 3d mode
+          if (cp.x>=(x+group.xOffset)-10&&cp.x<=(x+group.xOffset)+10&&cp.y >=(y+group.yOffset)-10&&cp.y<= (y+group.yOffset)+2 && cp.z >= (z+group.zOffset)-10 && cp.z <= (z+group.zOffset)+10) {
+            source.level.variables.set(variable, true);
+            return;
+          }
+        } else {
+          if (cp.x>=(x+group.xOffset)-10&&cp.x<=(x+group.xOffset)+10&&cp.y >=(y+group.yOffset)-10&&cp.y<= (y+group.yOffset)+2) {
+            source.level.variables.set(variable, true);
+            return;
+          }
+        }
+      }
+    source.level.variables.set(variable, false);
   }
 }

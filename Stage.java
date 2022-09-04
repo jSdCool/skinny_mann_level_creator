@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 class Stage implements Serializable{
   static skinny_mann_level_creator source;
-  public ArrayList<StageComponent> parts = new ArrayList<>();
+  public ArrayList<StageComponent> parts = new ArrayList<>(),interactables=new ArrayList<>();
   public boolean is3D=false;
   public String type, name;
   public int stageID, skyColor=-9131008;
@@ -75,6 +75,7 @@ class Stage implements Serializable{
           }
           if (otype.equals("logic button")) {
             parts.add(new LogicButton(ob, is3D));
+            interactables.add(parts.get(parts.size()-1));
           }
         }
         catch(Throwable e) {

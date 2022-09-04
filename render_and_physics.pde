@@ -37,6 +37,7 @@ void stageLevelDraw() {
         viewingItemIndex=i;//set the cuurent viewing item to this element
       }
     }
+    players[currentPlayer].in3D=false;
     for(int i=currentNumberOfPlayers-1;i>=0;i--){
       if(players[i].stage==currentStageIndex)//if this player is on the same stage as the userser then
       draw_mann(Scale*(players[i].getX()-camPos), Scale*(players[i].getY()+camPosY), players[i].getPose(), Scale*players[i].getScale(), players[i].getColor());//draw the outher players
