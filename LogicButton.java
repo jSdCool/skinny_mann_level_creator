@@ -49,8 +49,9 @@ class LogicButton extends StageComponent {//ground component
     Group group=getGroup();
     if (!group.visable)
       return;
+    boolean state=false;
     if (source.level.multyplayerMode==2) {
-      boolean state=false;
+      
       if (variable!=-1) {
         if (source.players[source.currentPlayer].x>=(x+group.xOffset)-10&&source.players[source.currentPlayer].x<=(x+group.xOffset)+10&&source.players[source.currentPlayer].y >=(y+group.yOffset)-10&&source.players[source.currentPlayer].y<= (y+group.yOffset)+2) {
           source.level.variables.set(variable, true);
@@ -69,8 +70,9 @@ class LogicButton extends StageComponent {//ground component
     Group group=getGroup();
     if (!group.visable)
       return;
+    boolean state=false;
     if (source.level.multyplayerMode==2) {
-      boolean state=false;
+      
       if (variable!=-1) {
         if (source.players[source.currentPlayer].x>=(x+group.xOffset)-10&&source.players[source.currentPlayer].x<=(x+group.xOffset)+10&&source.players[source.currentPlayer].y >=(y+group.yOffset)-10&&source.players[source.currentPlayer].y<= (y+group.yOffset)+2 && source.players[source.currentPlayer].z >= (z+group.zOffset)-10 && source.players[source.currentPlayer].z <= (z+group.zOffset)+10) {
           source.level.variables.set(variable, true);
@@ -110,18 +112,20 @@ class LogicButton extends StageComponent {//ground component
    @param data the index of the stage the button is in
    */
   void worldInteractions(int data) {
+    Group group=getGroup();
+    if (!group.visable)
+      return;
     if (variable!=-1)
-      for (int i=0; i<source.currentNumOfPlayers; i++) {
-        Player cp=source.players[i];
-        if (cp.stage!=data)//test if the player is in the same stage as the button
+      for (int i=0; i<source.currentNumberOfPlayers; i++) {
+        if (source.players[i].stage!=data)//test if the player is in the same stage as the button
           continue;
-        if (cp.in3D) {//test if the player is in 3d mode
-          if (cp.x>=(x+group.xOffset)-10&&cp.x<=(x+group.xOffset)+10&&cp.y >=(y+group.yOffset)-10&&cp.y<= (y+group.yOffset)+2 && cp.z >= (z+group.zOffset)-10 && cp.z <= (z+group.zOffset)+10) {
+        if (source.players[i].in3D) {//test if the player is in 3d mode
+          if (source.players[i].x>=(x+group.xOffset)-10&&source.players[i].x<=(x+group.xOffset)+10&&source.players[i].y >=(y+group.yOffset)-10&&source.players[i].y<= (y+group.yOffset)+2 && source.players[i].z >= (z+group.zOffset)-10 && source.players[i].z <= (z+group.zOffset)+10) {
             source.level.variables.set(variable, true);
             return;
           }
         } else {
-          if (cp.x>=(x+group.xOffset)-10&&cp.x<=(x+group.xOffset)+10&&cp.y >=(y+group.yOffset)-10&&cp.y<= (y+group.yOffset)+2) {
+          if (source.players[i].x>=(x+group.xOffset)-10&&source.players[i].x<=(x+group.xOffset)+10&&source.players[i].y >=(y+group.yOffset)-10&&source.players[i].y<= (y+group.yOffset)+2) {
             source.level.variables.set(variable, true);
             return;
           }
