@@ -90,6 +90,7 @@ void stageLevelDraw() {
       }
 
       draw_mann_3D(players[currentPlayer].x, players[currentPlayer].y, players[currentPlayer].z, players[currentPlayer].getPose(), players[currentPlayer].getScale(), players[currentPlayer].getColor());//draw the player
+      players[currentPlayer].stage=currentStageIndex;
 
         if (shadow3D) {//if the 3D shadow is enabled
         float shadowAltitude=players[currentPlayer].y;
@@ -138,6 +139,7 @@ void stageLevelDraw() {
         draw_mann(Scale*(players[i].getX()-camPos), Scale*(players[i].getY()+camPosY), players[i].getPose(), Scale*players[i].getScale(), players[i].getColor());//draw the outher players
       }
       draw_mann(Scale*(players[currentPlayer].getX()-camPos), Scale*(players[currentPlayer].getY()+camPosY), players[currentPlayer].getPose(), Scale*players[currentPlayer].getScale(), players[currentPlayer].getColor());//draw the player
+      players[currentPlayer].stage=currentStageIndex;
     }
   }
 
@@ -779,6 +781,13 @@ void playerPhysics() {
   } else {
     if (logicTickingThread.isAlive()) {//if the ticking thread is running when we dont want it to be
       logicTickingThread.shouldRun=false;//then stop it
+    }
+  }
+  
+  //activate world interaction on all stage components that require it
+  for(int i=0;i<level.stages.size();i++){
+    for(int j=0;j<level.stages.get(i).interactables.size();j++){
+     level.stages.get(i).interactables.get(j).worldInteractions(i); 
     }
   }
 }
