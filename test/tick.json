@@ -370,5 +370,32 @@
     "y": 830,
     "type": "set var",
     "connections": []
+  },
+  {
+    "variable number": 16,
+    "x": 335,
+    "y": 986,
+    "type": "read var",
+    "connections": [{
+      "index": 33,
+      "terminal": 0
+    }]
+  },
+  {
+    "sound key": "boop3",
+    "x": 523,
+    "y": 1003,
+    "type": "play sound",
+    "connections": []
+  },
+  {
+    "variable number": 17,
+    "x": 346,
+    "y": 1040,
+    "type": "read var",
+    "connections": [{
+      "index": 33,
+      "terminal": 1
+    }]
   }
 ]

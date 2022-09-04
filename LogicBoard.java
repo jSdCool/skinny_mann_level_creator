@@ -59,7 +59,7 @@ static skinny_mann_level_creator source;
         components.add(new SetZOffset(component, this, level));
       }
       if( type.equals("play sound")){
-        components.add(new LogicPlaySound(component,this,level);
+        components.add(new LogicPlaySound(component,this,level));
       }
     }
   }

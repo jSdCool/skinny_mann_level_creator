@@ -9,7 +9,7 @@ class ToolBox extends PApplet {
   public int redVal=0, greenVal=0, blueVal=0, CC=0;
   int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset, variableScroll=0, groupScroll=0;
   String page="colors", newGroopName="";
-  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton, testLogicPlaceButton, constantOnButton, setVariableButton, readVariableButton, setVisabilityButton, xOffsetButton, yOffsetButton, increase, increaseMore, increaseAlot, decrease, decreaseMore, decreaseAlot, nextGroup, prevGroup, variablesAndGroups, variablesUP, variablesDOWN, groupsUP, groupsDOWN, addVariable, addGroup, typeGroopName, logicButtonButton, runLoad, delayButton, zOffsetButton, logicHelpButton, move3DButton, size3DButton,set3DButton,read3DButton,levelSettingsPage,multyplayerModeSpeedrunButton,multyplayerModeCoOpButton,minplayersIncrease,minPlayersDecrease,maxplayersIncrease,maxplayersDecrease,prevousPlayerButton,nextPlayerButton;
+  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton, testLogicPlaceButton, constantOnButton, setVariableButton, readVariableButton, setVisabilityButton, xOffsetButton, yOffsetButton, increase, increaseMore, increaseAlot, decrease, decreaseMore, decreaseAlot, nextGroup, prevGroup, variablesAndGroups, variablesUP, variablesDOWN, groupsUP, groupsDOWN, addVariable, addGroup, typeGroopName, logicButtonButton, runLoad, delayButton, zOffsetButton, logicHelpButton, move3DButton, size3DButton,set3DButton,read3DButton,levelSettingsPage,multyplayerModeSpeedrunButton,multyplayerModeCoOpButton,minplayersIncrease,minPlayersDecrease,maxplayersIncrease,maxplayersDecrease,prevousPlayerButton,nextPlayerButton,playLogicSoundButton;
   boolean typingSign=false, settingSkyColor=false, typingGroopName=false;
 
   public void settings() {
@@ -81,6 +81,7 @@ class ToolBox extends PApplet {
     logicHelpButton=new Button(this, 100, 200, 50, 50, "?", 255, 203).setStrokeWeight(5).setHoverText("help");
     set3DButton=new Button(this, 160, 200, 50, 50, "s 3D", 255, 203).setStrokeWeight(5).setHoverText("set the state of 3D mode");
     read3DButton=new Button(this, 220, 200, 50, 50, "r 3D", 255, 203).setStrokeWeight(5).setHoverText("read the state of 3D mode");
+    playLogicSoundButton=new Button(this, 280, 200, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("play sounds woth logic");
 
     increase=new Button(this, width/2+180, height*0.5, 50, 50, "+", 255, 203).setStrokeWeight(5);
     increaseMore=new Button(this, width/2+240, height*0.5, 50, 50, "++", 255, 203).setStrokeWeight(5);
@@ -1023,6 +1024,13 @@ class ToolBox extends PApplet {
           read3DButton.setColor(255, 203);
         }
         read3DButton.draw();
+        if (placingPlaySoundLogic) {
+          playLogicSoundButton.setColor(255, #F2F258);
+        } else {
+          playLogicSoundButton.setColor(255, 203);
+        }
+        playLogicSoundButton.draw();
+        drawSpeakericon(this,playLogicSoundButton.x+playLogicSoundButton.lengthX/2,playLogicSoundButton.y+playLogicSoundButton.lengthY/2,0.5);
 
         //draw hover text
         connectLogicButton.drawHoverText();
@@ -1048,6 +1056,7 @@ class ToolBox extends PApplet {
         logicHelpButton.drawHoverText();
         read3DButton.drawHoverText();
         set3DButton.drawHoverText();
+        playLogicSoundButton.drawHoverText();
       } else {
         fill(0);
         textSize(20);
@@ -1220,6 +1229,30 @@ class ToolBox extends PApplet {
             decreaseMore.draw();
           if (logicThing.getData()>100)
             decreaseAlot.draw();
+            
+        } else if (type.equals("play sound")) {
+          if (level.sounds.size()==0) {
+            fill(0);
+            textSize(20);
+            textAlign(CENTER, CENTER);
+            text("this level does not have any sounds currently", width/2, height/2);
+          } else {
+            String[] keys=new String[0];
+            keys=level.sounds.keySet().toArray(keys);
+            int currenti=logicThing.getData();
+            fill(0);
+            textSize(25);
+            if(currenti<0){
+              text("no sound selected", width/2, height*0.4);
+            }else{
+              text("current sound: "+keys[currenti], width/2, height*0.4);
+            }
+              if (currenti>0)
+                prevSound.draw();
+              if (currenti<keys.length-1)
+                nextSound.draw();
+            
+          }
         } else {
           fill(0);
           textSize(20);
@@ -1915,6 +1948,10 @@ class ToolBox extends PApplet {
           turnThingsOff();
           placing3Dsetter=true;
         }
+        if(playLogicSoundButton.isMouseOver()){
+          turnThingsOff();
+          placingPlaySoundLogic=true;
+        }
       }//end of edditing logic board
     }//end of tools
 
@@ -2068,6 +2105,18 @@ class ToolBox extends PApplet {
           }
           if (decreaseAlot.isMouseOver()&&curval>100) {
             logicThing.setData(logicThing.getData()-100);
+          }
+        } else if (type.equals("play sound")) {
+          if (level.sounds.size()==0) {
+          } else {
+            String[] keys=new String[0];
+            keys=level.sounds.keySet().toArray(keys);
+            int current=logicThing.getData();
+           
+            if (current>0&&prevSound.isMouseOver())
+              logicThing.setData(current-1);
+            if (current<keys.length-1&&nextSound.isMouseOver())
+              logicThing.setData(current+1);
           }
         }
         if (editingStage) {

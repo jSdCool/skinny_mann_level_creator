@@ -39,23 +39,24 @@ class LogicPlaySound extends LogicOutputComponent {
   }
   JSONObject save() {
     JSONObject component=super.save();
-    component.setString("sound key", soundkey);
+    component.setString("sound key", soundKey);
     return component;
   }
   void setData(int data) {
     String[] keys=new String[0];
-    keys=level.sounds.keySet().toArray(keys);
+    keys=source.level.sounds.keySet().toArray(keys);
     soundKey=keys[data];
     button.setText("  play sound: "+soundKey);
   }
   int getData() {
     String[] keys=new String[0];
-    keys=level.sounds.keySet().toArray(keys);
+    keys=source.level.sounds.keySet().toArray(keys);
     for (int i=0; i<keys.length; i++) {
       if (keys[i].equals(soundKey)) {
         return i;
       }
     }
+    return -1;
   }
 
   void draw() {
