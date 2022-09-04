@@ -58,6 +58,9 @@ static skinny_mann_level_creator source;
       if (type.equals("z-offset")) {
         components.add(new SetZOffset(component, this, level));
       }
+      if( type.equals("play sound")){
+        components.add(new LogicPlaySound(component,this,level);
+      }
     }
   }
   LogicBoard(String name) {
