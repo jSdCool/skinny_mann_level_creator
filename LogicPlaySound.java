@@ -11,7 +11,7 @@ class LogicPlaySound extends LogicOutputComponent {
   }
 
   LogicPlaySound(JSONObject data, LogicBoard lb, Level level) {
-    super(data.getFloat("x"), data.getFloat("y"), "set visable", lb, data.getJSONArray("connections"));
+    super(data.getFloat("x"), data.getFloat("y"), "play sound", lb, data.getJSONArray("connections"));
     soundKey=data.getString("sound key");
     button.setText("  play sound: "+soundKey);
   }

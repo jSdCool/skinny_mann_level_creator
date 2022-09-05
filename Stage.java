@@ -8,7 +8,7 @@ class Stage implements Serializable{
   public ArrayList<StageComponent> parts = new ArrayList<>(),interactables=new ArrayList<>();
   public boolean is3D=false;
   public String type, name;
-  public int stageID, skyColor=-9131008;
+  public int stageID, skyColor=-9131009;
   Stage(JSONArray file) {//single varible instance for a stage
     load(file);
   }

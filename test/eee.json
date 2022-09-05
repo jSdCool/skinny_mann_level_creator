@@ -142,12 +142,5 @@
     "group number": 0,
     "type": "x-offset",
     "connections": []
-  },
-  {
-    "sound key": "boop",
-    "x": 97,
-    "y": 267,
-    "type": "set visable",
-    "connections": []
   }
 ]

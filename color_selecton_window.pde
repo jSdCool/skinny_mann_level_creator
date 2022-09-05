@@ -2149,6 +2149,7 @@ class ToolBox extends PApplet {
         }//end of clicked on skyColorB1
         if (resetSkyColor.isMouseOver()) {
           level.stages.get(currentStageIndex).skyColor=#74ABFF;
+          println(#74ABFF);
         }//end of clicked on reset sky color
       }//end of editing stage
     }//end of page is stage settings

@@ -12,7 +12,7 @@ class Pulse extends LogicComponent {
   }
 
   Pulse(JSONObject data, LogicBoard lb) {
-    super(data.getFloat("x"), data.getFloat("y"), "delay", lb, data.getJSONArray("connections"));
+    super(data.getFloat("x"), data.getFloat("y"), "pulse", lb, data.getJSONArray("connections"));
     
   }
 

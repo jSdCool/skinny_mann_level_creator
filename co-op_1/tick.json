@@ -54,56 +54,80 @@
     "x": 71,
     "y": 317,
     "type": "read var",
-    "connections": []
+    "connections": [{
+      "index": 45,
+      "terminal": 0
+    }]
   },
   {
     "variable number": 3,
-    "x": 72,
-    "y": 371,
+    "x": 65,
+    "y": 448,
     "type": "read var",
-    "connections": []
+    "connections": [{
+      "index": 46,
+      "terminal": 0
+    }]
   },
   {
     "variable number": 4,
-    "x": 63,
-    "y": 428,
+    "x": 60,
+    "y": 556,
     "type": "read var",
-    "connections": []
+    "connections": [{
+      "index": 47,
+      "terminal": 0
+    }]
   },
   {
     "variable number": 5,
-    "x": 63,
-    "y": 489,
+    "x": 30,
+    "y": 702,
     "type": "read var",
-    "connections": []
+    "connections": [{
+      "index": 48,
+      "terminal": 0
+    }]
   },
   {
     "variable number": 6,
-    "x": 63,
-    "y": 542,
+    "x": 21,
+    "y": 833,
     "type": "read var",
-    "connections": []
+    "connections": [{
+      "index": 49,
+      "terminal": 0
+    }]
   },
   {
     "variable number": 7,
-    "x": 71,
-    "y": 600,
+    "x": 23,
+    "y": 940,
     "type": "read var",
-    "connections": []
+    "connections": [{
+      "index": 50,
+      "terminal": 0
+    }]
   },
   {
     "variable number": 8,
-    "x": 64,
-    "y": 644,
+    "x": 43,
+    "y": 1070,
     "type": "read var",
-    "connections": []
+    "connections": [{
+      "index": 51,
+      "terminal": 0
+    }]
   },
   {
     "variable number": 9,
-    "x": 64,
-    "y": 702,
+    "x": 53,
+    "y": 1199,
     "type": "read var",
-    "connections": []
+    "connections": [{
+      "index": 52,
+      "terminal": 0
+    }]
   },
   {
     "x": 1003,
@@ -294,6 +318,10 @@
       {
         "index": 13,
         "terminal": 1
+      },
+      {
+        "index": 58,
+        "terminal": 0
       }
     ]
   },
@@ -309,6 +337,10 @@
       },
       {
         "index": 14,
+        "terminal": 1
+      },
+      {
+        "index": 58,
         "terminal": 1
       }
     ]
@@ -326,6 +358,10 @@
       {
         "index": 15,
         "terminal": 1
+      },
+      {
+        "index": 62,
+        "terminal": 0
       }
     ]
   },
@@ -342,6 +378,10 @@
       {
         "index": 16,
         "terminal": 1
+      },
+      {
+        "index": 63,
+        "terminal": 0
       }
     ]
   },
@@ -358,6 +398,10 @@
       {
         "index": 17,
         "terminal": 1
+      },
+      {
+        "index": 64,
+        "terminal": 0
       }
     ]
   },
@@ -373,6 +417,10 @@
       },
       {
         "index": 18,
+        "terminal": 1
+      },
+      {
+        "index": 60,
         "terminal": 1
       }
     ]
@@ -390,13 +438,17 @@
       {
         "index": 19,
         "terminal": 1
+      },
+      {
+        "index": 65,
+        "terminal": 0
       }
     ]
   },
   {
     "variable number": 17,
-    "x": 702,
-    "y": 1185,
+    "x": 682,
+    "y": 1195,
     "type": "read var",
     "connections": [
       {
@@ -405,6 +457,10 @@
       },
       {
         "index": 20,
+        "terminal": 1
+      },
+      {
+        "index": 61,
         "terminal": 1
       }
     ]
@@ -464,5 +520,198 @@
     "y": 1140,
     "type": "set var",
     "connections": []
+  },
+  {
+    "x": 280,
+    "y": 303,
+    "type": "pulse",
+    "connections": [{
+      "index": 37,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 278,
+    "y": 423,
+    "type": "pulse",
+    "connections": [{
+      "index": 38,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 270,
+    "y": 533,
+    "type": "pulse",
+    "connections": [{
+      "index": 39,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 270,
+    "y": 658,
+    "type": "pulse",
+    "connections": [{
+      "index": 40,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 270,
+    "y": 790,
+    "type": "pulse",
+    "connections": [{
+      "index": 41,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 270,
+    "y": 910,
+    "type": "pulse",
+    "connections": [{
+      "index": 42,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 270,
+    "y": 1042,
+    "type": "pulse",
+    "connections": [{
+      "index": 43,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 270,
+    "y": 1184,
+    "type": "pulse",
+    "connections": [{
+      "index": 44,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 2067,
+    "y": 496,
+    "group number": 3,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 1909,
+    "y": 515,
+    "type": "NOR",
+    "connections": [{
+      "index": 53,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 1777,
+    "y": 478,
+    "type": "AND",
+    "connections": [
+      {
+        "index": 54,
+        "terminal": 1
+      },
+      {
+        "index": 53,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 1582,
+    "y": 379,
+    "type": "AND",
+    "connections": [{
+      "index": 55,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 1582,
+    "y": 606,
+    "type": "AND",
+    "connections": [{
+      "index": 55,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 1397,
+    "y": 308,
+    "type": "AND",
+    "connections": [{
+      "index": 56,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 1394,
+    "y": 412,
+    "type": "AND",
+    "connections": [{
+      "index": 56,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 1398,
+    "y": 551,
+    "type": "AND",
+    "connections": [{
+      "index": 57,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 1392,
+    "y": 667,
+    "type": "AND",
+    "connections": [{
+      "index": 57,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 1171,
+    "y": 453,
+    "type": "NOR",
+    "connections": [{
+      "index": 59,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 1172,
+    "y": 593,
+    "type": "NOR",
+    "connections": [{
+      "index": 59,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 1169,
+    "y": 747,
+    "type": "NOR",
+    "connections": [{
+      "index": 60,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 1165,
+    "y": 1024,
+    "type": "NOR",
+    "connections": [{
+      "index": 61,
+      "terminal": 0
+    }]
   }
 ]
