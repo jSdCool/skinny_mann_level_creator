@@ -1,0 +1,468 @@
+[
+  {"name": "tick"},
+  {
+    "variable number": 0,
+    "x": 81,
+    "y": 105,
+    "type": "read var",
+    "connections": [{
+      "index": 2,
+      "terminal": 0
+    }]
+  },
+  {
+    "variable number": 1,
+    "x": 76,
+    "y": 203,
+    "type": "read var",
+    "connections": [{
+      "index": 2,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 300,
+    "y": 121,
+    "type": "AND",
+    "connections": [
+      {
+        "index": 3,
+        "terminal": 0
+      },
+      {
+        "index": 4,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 584,
+    "y": 89,
+    "group number": 1,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 566,
+    "y": 179,
+    "group number": 2,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "variable number": 2,
+    "x": 71,
+    "y": 317,
+    "type": "read var",
+    "connections": []
+  },
+  {
+    "variable number": 3,
+    "x": 72,
+    "y": 371,
+    "type": "read var",
+    "connections": []
+  },
+  {
+    "variable number": 4,
+    "x": 63,
+    "y": 428,
+    "type": "read var",
+    "connections": []
+  },
+  {
+    "variable number": 5,
+    "x": 63,
+    "y": 489,
+    "type": "read var",
+    "connections": []
+  },
+  {
+    "variable number": 6,
+    "x": 63,
+    "y": 542,
+    "type": "read var",
+    "connections": []
+  },
+  {
+    "variable number": 7,
+    "x": 71,
+    "y": 600,
+    "type": "read var",
+    "connections": []
+  },
+  {
+    "variable number": 8,
+    "x": 64,
+    "y": 644,
+    "type": "read var",
+    "connections": []
+  },
+  {
+    "variable number": 9,
+    "x": 64,
+    "y": 702,
+    "type": "read var",
+    "connections": []
+  },
+  {
+    "x": 1003,
+    "y": 137,
+    "group number": 4,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 1004,
+    "y": 286,
+    "group number": 5,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 1008,
+    "y": 452,
+    "group number": 6,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 1007,
+    "y": 594,
+    "group number": 7,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 1005,
+    "y": 746,
+    "group number": 8,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 1010,
+    "y": 874,
+    "group number": 9,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 1006,
+    "y": 1017,
+    "group number": 10,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 1006,
+    "y": 1167,
+    "group number": 11,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 851,
+    "y": 139,
+    "type": "NOR",
+    "connections": [
+      {
+        "index": 13,
+        "terminal": 0
+      },
+      {
+        "index": 37,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 848,
+    "y": 285,
+    "type": "NOR",
+    "connections": [
+      {
+        "index": 14,
+        "terminal": 0
+      },
+      {
+        "index": 38,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 838,
+    "y": 455,
+    "type": "NOR",
+    "connections": [
+      {
+        "index": 15,
+        "terminal": 0
+      },
+      {
+        "index": 39,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 836,
+    "y": 596,
+    "type": "NOR",
+    "connections": [
+      {
+        "index": 16,
+        "terminal": 0
+      },
+      {
+        "index": 40,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 838,
+    "y": 725,
+    "type": "NOR",
+    "connections": [
+      {
+        "index": 17,
+        "terminal": 0
+      },
+      {
+        "index": 41,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 828,
+    "y": 870,
+    "type": "NOR",
+    "connections": [
+      {
+        "index": 18,
+        "terminal": 0
+      },
+      {
+        "index": 42,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 831,
+    "y": 1016,
+    "type": "NOR",
+    "connections": [
+      {
+        "index": 19,
+        "terminal": 0
+      },
+      {
+        "index": 43,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 839,
+    "y": 1177,
+    "type": "NOR",
+    "connections": [
+      {
+        "index": 20,
+        "terminal": 0
+      },
+      {
+        "index": 44,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "variable number": 10,
+    "x": 703,
+    "y": 162,
+    "type": "read var",
+    "connections": [
+      {
+        "index": 21,
+        "terminal": 0
+      },
+      {
+        "index": 13,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "variable number": 11,
+    "x": 689,
+    "y": 301,
+    "type": "read var",
+    "connections": [
+      {
+        "index": 22,
+        "terminal": 0
+      },
+      {
+        "index": 14,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "variable number": 12,
+    "x": 696,
+    "y": 477,
+    "type": "read var",
+    "connections": [
+      {
+        "index": 23,
+        "terminal": 0
+      },
+      {
+        "index": 15,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "variable number": 13,
+    "x": 687,
+    "y": 603,
+    "type": "read var",
+    "connections": [
+      {
+        "index": 24,
+        "terminal": 0
+      },
+      {
+        "index": 16,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "variable number": 14,
+    "x": 694,
+    "y": 781,
+    "type": "read var",
+    "connections": [
+      {
+        "index": 25,
+        "terminal": 0
+      },
+      {
+        "index": 17,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "variable number": 15,
+    "x": 694,
+    "y": 883,
+    "type": "read var",
+    "connections": [
+      {
+        "index": 26,
+        "terminal": 0
+      },
+      {
+        "index": 18,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "variable number": 16,
+    "x": 700,
+    "y": 1043,
+    "type": "read var",
+    "connections": [
+      {
+        "index": 27,
+        "terminal": 0
+      },
+      {
+        "index": 19,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "variable number": 17,
+    "x": 702,
+    "y": 1185,
+    "type": "read var",
+    "connections": [
+      {
+        "index": 28,
+        "terminal": 0
+      },
+      {
+        "index": 20,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "variable number": 10,
+    "x": 478,
+    "y": 298,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "variable number": 11,
+    "x": 474,
+    "y": 405,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "variable number": 12,
+    "x": 472,
+    "y": 520,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "variable number": 13,
+    "x": 472,
+    "y": 652,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "variable number": 14,
+    "x": 472,
+    "y": 776,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "variable number": 15,
+    "x": 472,
+    "y": 904,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "variable number": 16,
+    "x": 472,
+    "y": 1032,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "variable number": 17,
+    "x": 472,
+    "y": 1140,
+    "type": "set var",
+    "connections": []
+  }
+]

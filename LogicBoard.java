@@ -61,6 +61,9 @@ static skinny_mann_level_creator source;
       if( type.equals("play sound")){
         components.add(new LogicPlaySound(component,this,level));
       }
+      if (type.equals("pulse")){
+        components.add(new Pulse(component,this));
+      }
     }
   }
   LogicBoard(String name) {
