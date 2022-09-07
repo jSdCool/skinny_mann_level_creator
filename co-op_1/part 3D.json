@@ -1,0 +1,18 @@
+[
+  {
+    "name": "part 3D",
+    "sky color": -9131009,
+    "type": "3Dstage"
+  },
+  {
+    "dx": 1200,
+    "color": -16732415,
+    "dy": 80,
+    "dz": 300,
+    "x": 0,
+    "y": 640,
+    "z": 0,
+    "type": "ground",
+    "group": -1
+  }
+]

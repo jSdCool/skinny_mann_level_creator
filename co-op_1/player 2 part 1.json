@@ -230,5 +230,14 @@
     "y": 480,
     "type": "holo",
     "group": 11
+  },
+  {
+    "link Index": 4,
+    "x": 1130,
+    "y": 620,
+    "type": "interdimentional Portal",
+    "linkY": 600,
+    "linkX": 40,
+    "group": 3
   }
 ]

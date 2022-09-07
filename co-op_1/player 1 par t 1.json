@@ -28,5 +28,14 @@
     "y": 660,
     "type": "WritableSign",
     "group": -1
+  },
+  {
+    "link Index": 5,
+    "x": 530,
+    "y": 610,
+    "type": "interdimentional Portal",
+    "linkY": 620,
+    "linkX": 30,
+    "group": 3
   }
 ]

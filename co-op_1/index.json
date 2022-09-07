@@ -1,7 +1,7 @@
 [
   {
     "mainStage": 0,
-    "coins": 22,
+    "coins": 34,
     "min players": 2,
     "author": "your name here",
     "level_id": 947111594,
@@ -18,12 +18,15 @@
       "p1 I5",
       "p1 I6",
       "p1 I7",
-      "p1 I8"
+      "p1 I8",
+      "p2 p2 pt1",
+      "p2 p1 pt 1",
+      "part 2 portals"
     ],
     "game version": "0.7.0_Early_Access",
     "spawnY": 659,
     "max players": 2,
-    "number of variable": 20,
+    "number of variable": 21,
     "name": "co-op_1",
     "spawn pointX": 41,
     "spawn pointY": 659,
@@ -43,6 +46,21 @@
     "name": "player 2 part 1",
     "location": "/player 2 part 1.json",
     "type": "stage"
+  },
+  {
+    "name": "player 2 part 2",
+    "location": "/player 2 part 2.json",
+    "type": "stage"
+  },
+  {
+    "name": "player 1 part 2",
+    "location": "/player 1 part 2.json",
+    "type": "stage"
+  },
+  {
+    "name": "part 3D",
+    "location": "/part 3D.json",
+    "type": "3Dstage"
   },
   {
     "name": "load",
