@@ -66,8 +66,10 @@ static skinny_mann_level_creator source;
     if(!job.isNull("min players")){
       minPlayers=job.getInt("min players");
     }
-    source.players[source.currentPlayer].x=SpawnX;
-    source.players[source.currentPlayer].y=SpawnY;
+    for(int i=0;i<10;i++){
+      source.players[i].x=SpawnX;
+      source.players[i].y=SpawnY;
+    }
     source.respawnX=(int)RewspawnX;
     source.respawnY=(int)RespawnY;
     source.respawnStage=source.currentStageIndex;
