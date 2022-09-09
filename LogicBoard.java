@@ -64,6 +64,12 @@ static skinny_mann_level_creator source;
       if (type.equals("pulse")){
         components.add(new Pulse(component,this));
       }
+      if(type.equals("read 3D")){
+         components.add(new Read3DMode(component,this)); 
+      }
+      if(type.equals("  set 3D  ")){
+         components.add(new Set3DMode(component,this)); 
+      }
     }
   }
   LogicBoard(String name) {

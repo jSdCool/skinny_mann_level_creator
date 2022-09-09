@@ -10,7 +10,7 @@ class Set3DMode extends LogicOutputComponent {
     super(x, y, "  set 3D  ", lb);
   }
 
-  Set3DMode(JSONObject data, LogicBoard lb, Level level) {
+  Set3DMode(JSONObject data, LogicBoard lb) {
     super(data.getFloat("x"), data.getFloat("y"), "  set 3D  ", lb, data.getJSONArray("connections"));
   }
   void tick() {
