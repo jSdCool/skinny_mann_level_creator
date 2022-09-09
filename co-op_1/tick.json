@@ -807,5 +807,37 @@
       "index": 73,
       "terminal": 0
     }]
+  },
+  {
+    "variable number": 21,
+    "x": 669,
+    "y": 1501,
+    "type": "read var",
+    "connections": [
+      {
+        "index": 76,
+        "terminal": 0
+      },
+      {
+        "index": 77,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 804,
+    "y": 1489,
+    "type": "NOR",
+    "connections": [{
+      "index": 77,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 939,
+    "y": 1486,
+    "group number": 15,
+    "type": "set visable",
+    "connections": []
   }
 ]

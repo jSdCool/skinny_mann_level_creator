@@ -68,10 +68,10 @@ class Interdimentional_Portal extends StageComponent {//ground component
         source.players[source.currentPlayer].z=linkZ;
         source.tpCords[2]=linkZ;
       }
-      source.players[source.currentPlayer].setX(linkX).setY(linkY);
+      source.players[source.currentPlayer].setX(linkX).setY(linkY+48);
       source.setPlayerPosTo=true;
       source.tpCords[0]=(int)linkX;
-      source.tpCords[1]=(int)linkY;
+      source.tpCords[1]=(int)linkY+48;
       source.gmillis=source.millis()+850;
     }
   }
