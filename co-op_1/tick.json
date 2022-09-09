@@ -839,5 +839,69 @@
     "group number": 15,
     "type": "set visable",
     "connections": []
+  },
+  {
+    "variable number": 22,
+    "x": 671,
+    "y": 1638,
+    "type": "read var",
+    "connections": [
+      {
+        "index": 79,
+        "terminal": 0
+      },
+      {
+        "index": 80,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 795,
+    "y": 1617,
+    "type": "NOR",
+    "connections": [{
+      "index": 80,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 931,
+    "y": 1610,
+    "group number": 16,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "variable number": 23,
+    "x": 656,
+    "y": 1759,
+    "type": "read var",
+    "connections": [
+      {
+        "index": 82,
+        "terminal": 0
+      },
+      {
+        "index": 83,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 804,
+    "y": 1733,
+    "type": "NOR",
+    "connections": [{
+      "index": 83,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 931,
+    "y": 1740,
+    "group number": 17,
+    "type": "set visable",
+    "connections": []
   }
 ]
