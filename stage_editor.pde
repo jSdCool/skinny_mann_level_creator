@@ -889,25 +889,25 @@ void stageEditGUI() {
 
           if (grid_mode) {//Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size
             if (translateZaxis) {
-              ct.z=initalObjectPos.z-Math.round((initalMousePoint.z-mousePoint.z)*1.0/grid_size)*grid_size;
+              ct.z=(int)initalObjectPos.z-Math.round((initalMousePoint.z-mousePoint.z)*1.0/grid_size)*grid_size;
             }
             if (translateXaxis) {
-              ct.x=initalObjectPos.x-Math.round((initalMousePoint.x-mousePoint.x)*1.0/grid_size)*grid_size;
+              ct.x=(int)initalObjectPos.x-Math.round((initalMousePoint.x-mousePoint.x)*1.0/grid_size)*grid_size;
               ;
             }
             if (translateYaxis) {
-              ct.y=initalObjectPos.y-Math.round((initalMousePoint.y-mousePoint.y)*1.0/grid_size)*grid_size;
+              ct.y=(int)initalObjectPos.y-Math.round((initalMousePoint.y-mousePoint.y)*1.0/grid_size)*grid_size;
               ;
             }
           } else {
             if (translateZaxis) {
-              ct.z=initalObjectPos.z-(initalMousePoint.z-mousePoint.z);
+              ct.z=(int)initalObjectPos.z-(initalMousePoint.z-mousePoint.z);
             }
             if (translateXaxis) {
-              ct.x=initalObjectPos.x-(initalMousePoint.x-mousePoint.x);
+              ct.x=(int)initalObjectPos.x-(initalMousePoint.x-mousePoint.x);
             }
             if (translateYaxis) {
-              ct.y=initalObjectPos.y-(initalMousePoint.y-mousePoint.y);
+              ct.y=(int)initalObjectPos.y-(initalMousePoint.y-mousePoint.y);
             }
           }
         }//end of 3d transform mode is move
