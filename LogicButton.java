@@ -98,6 +98,18 @@ class LogicButton extends StageComponent {//ground component
     }
     return false;
   }
+  
+  boolean colide(float x, float y, float z, boolean c) {
+    Group group=getGroup();
+    if (!group.visable)
+      return false;
+    if (c) {
+      if (x >= (this.x+group.xOffset) - 20 && x <= (this.x+group.xOffset) + 20 && y >= (this.y+group.yOffset) - 10 && y <= (this.y+group.yOffset) && z >= (this.z+group.zOffset) - 20 && z <= (this.z+group.zOffset) + 20) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   void setData(int data) {
     variable=data;

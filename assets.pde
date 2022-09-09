@@ -150,7 +150,7 @@ void drawLogicButton(PApplet screen, float x, float y, float Scale, boolean pres
 }
 void drawLogicButton(float x, float y, float z, float Scale, boolean pressed) {
   fill(196);
-  strokeWeight(0);
+  //strokeWeight(0);
   translate(x, y-2.5, z);
   box(40, 5, 40);
   fill(#FC2121);
