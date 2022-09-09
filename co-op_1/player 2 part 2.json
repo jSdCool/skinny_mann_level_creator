@@ -177,5 +177,14 @@
     "y": 480,
     "type": "logic button",
     "group": -1
+  },
+  {
+    "link Index": 6,
+    "x": 4460,
+    "y": 430,
+    "type": "interdimentional Portal",
+    "linkY": 160,
+    "linkX": 50,
+    "group": 14
   }
 ]

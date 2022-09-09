@@ -1,7 +1,7 @@
 [
   {
     "mainStage": 0,
-    "coins": 34,
+    "coins": 35,
     "min players": 2,
     "author": "your name here",
     "level_id": 947111594,
@@ -21,7 +21,8 @@
       "p1 I8",
       "p2 p2 pt1",
       "p2 p1 pt 1",
-      "part 2 portals"
+      "part 2 portals",
+      "part3 platform1"
     ],
     "game version": "0.7.0_Early_Access",
     "spawnY": 659,

@@ -727,6 +727,10 @@
       {
         "index": 68,
         "terminal": 0
+      },
+      {
+        "index": 74,
+        "terminal": 0
       }
     ]
   },
@@ -742,10 +746,6 @@
       },
       {
         "index": 69,
-        "terminal": 0
-      },
-      {
-        "index": 74,
         "terminal": 0
       }
     ]
