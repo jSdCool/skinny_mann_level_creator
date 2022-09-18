@@ -38,9 +38,9 @@ void stageLevelDraw() {
       }
     }
     players[currentPlayer].in3D=false;
-    for(int i=currentNumberOfPlayers-1;i>=0;i--){
-      if(players[i].stage==currentStageIndex)//if this player is on the same stage as the userser then
-      draw_mann(Scale*(players[i].getX()-camPos), Scale*(players[i].getY()+camPosY), players[i].getPose(), Scale*players[i].getScale(), players[i].getColor());//draw the outher players
+    for (int i=currentNumberOfPlayers-1; i>=0; i--) {
+      if (players[i].stage==currentStageIndex)//if this player is on the same stage as the userser then
+        draw_mann(Scale*(players[i].getX()-camPos), Scale*(players[i].getY()+camPosY), players[i].getPose(), Scale*players[i].getScale(), players[i].getColor());//draw the outher players
     }
 
     draw_mann(Scale*(players[currentPlayer].getX()-camPos), Scale*(players[currentPlayer].getY()+camPosY), players[currentPlayer].getPose(), Scale*players[currentPlayer].getScale(), players[currentPlayer].getColor());//draw this users player
@@ -79,11 +79,11 @@ void stageLevelDraw() {
         }
       }
       players[currentPlayer].in3D=true;
-      for(int i=currentNumberOfPlayers-1;i>=0;i--){
-        if(players[i].stage==currentStageIndex&&i!=currentPlayer){//if this player is on the same stage as the userser then
-          if(players[i].in3D){
+      for (int i=currentNumberOfPlayers-1; i>=0; i--) {
+        if (players[i].stage==currentStageIndex&&i!=currentPlayer) {//if this player is on the same stage as the userser then
+          if (players[i].in3D) {
             draw_mann_3D(players[i].x, players[i].y, players[i].z, players[i].getPose(), players[i].getScale(), players[i].getColor());//draw the player
-          }else{
+          } else {
             draw_mann(Scale*(players[i].getX()), Scale*(players[i].getY()), players[i].getPose(), Scale*players[i].getScale(), players[i].getColor());//draw the outher players
           }
         }
@@ -92,7 +92,7 @@ void stageLevelDraw() {
       draw_mann_3D(players[currentPlayer].x, players[currentPlayer].y, players[currentPlayer].z, players[currentPlayer].getPose(), players[currentPlayer].getScale(), players[currentPlayer].getColor());//draw the player
       players[currentPlayer].stage=currentStageIndex;
 
-        if (shadow3D) {//if the 3D shadow is enabled
+      if (shadow3D) {//if the 3D shadow is enabled
         float shadowAltitude=players[currentPlayer].y;
         boolean shadowHit=false;
         for (int i=0; i<500&&!shadowHit; i++) {//ray cast to find solid ground underneath the player
@@ -131,12 +131,12 @@ void stageLevelDraw() {
           viewingItemIndex=i;//set the cuurent viewing item to this element
         }
       }
-      
+
       players[currentPlayer].in3D=false;
-      
-      for(int i=currentNumberOfPlayers-1;i>=0;i--){
-        if(players[i].stage==currentStageIndex&&!players[i].in3D)//if this player is on the same stage as the userser then
-        draw_mann(Scale*(players[i].getX()-camPos), Scale*(players[i].getY()+camPosY), players[i].getPose(), Scale*players[i].getScale(), players[i].getColor());//draw the outher players
+
+      for (int i=currentNumberOfPlayers-1; i>=0; i--) {
+        if (players[i].stage==currentStageIndex&&!players[i].in3D)//if this player is on the same stage as the userser then
+          draw_mann(Scale*(players[i].getX()-camPos), Scale*(players[i].getY()+camPosY), players[i].getPose(), Scale*players[i].getScale(), players[i].getColor());//draw the outher players
       }
       draw_mann(Scale*(players[currentPlayer].getX()-camPos), Scale*(players[currentPlayer].getY()+camPosY), players[currentPlayer].getPose(), Scale*players[currentPlayer].getScale(), players[currentPlayer].getColor());//draw the player
       players[currentPlayer].stage=currentStageIndex;
@@ -784,13 +784,6 @@ void playerPhysics() {
       logicTickingThread.shouldRun=false;//then stop it
     }
   }
-  
-  //activate world interaction on all stage components that require it
-  for(int i=0;i<level.stages.size();i++){
-    for(int j=0;j<level.stages.get(i).interactables.size();j++){
-     level.stages.get(i).interactables.get(j).worldInteractions(i); 
-    }
-  }
 }
 /**check if a point is inside of a solid object
  
@@ -891,6 +884,12 @@ class LogicThread extends Thread {
         //System.out.println(millis()-lastRun);
         lastRun=millis();//update the time of the last tick
         level.logicBoards.get(level.tickBoard).tick();//tick the logic board
+        //activate world interaction on all stage components that require it
+        for (int i=0; i<level.stages.size(); i++) {
+          for (int j=0; j<level.stages.get(i).interactables.size(); j++) {
+            level.stages.get(i).interactables.get(j).worldInteractions(i);
+          }
+        }
       }
     }
   }
