@@ -9,7 +9,7 @@ class ToolBox extends PApplet {
   public int redVal=0, greenVal=0, blueVal=0, CC=0;
   int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset, variableScroll=0, groupScroll=0;
   String page="colors", newGroopName="";
-  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton, testLogicPlaceButton, constantOnButton, setVariableButton, readVariableButton, setVisabilityButton, xOffsetButton, yOffsetButton, increase, increaseMore, increaseAlot, decrease, decreaseMore, decreaseAlot, nextGroup, prevGroup, variablesAndGroups, variablesUP, variablesDOWN, groupsUP, groupsDOWN, addVariable, addGroup, typeGroopName, logicButtonButton, runLoad, delayButton, zOffsetButton, logicHelpButton, move3DButton, size3DButton,set3DButton,read3DButton,levelSettingsPage,multyplayerModeSpeedrunButton,multyplayerModeCoOpButton,minplayersIncrease,minPlayersDecrease,maxplayersIncrease,maxplayersDecrease,prevousPlayerButton,nextPlayerButton,playLogicSoundButton,pulseButton;
+  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton, testLogicPlaceButton, constantOnButton, setVariableButton, readVariableButton, setVisabilityButton, xOffsetButton, yOffsetButton, increase, increaseMore, increaseAlot, decrease, decreaseMore, decreaseAlot, nextGroup, prevGroup, variablesAndGroups, variablesUP, variablesDOWN, groupsUP, groupsDOWN, addVariable, addGroup, typeGroopName, logicButtonButton, runLoad, delayButton, zOffsetButton, logicHelpButton, move3DButton, size3DButton,set3DButton,read3DButton,levelSettingsPage,multyplayerModeSpeedrunButton,multyplayerModeCoOpButton,minplayersIncrease,minPlayersDecrease,maxplayersIncrease,maxplayersDecrease,prevousPlayerButton,nextPlayerButton,playLogicSoundButton,pulseButton,randomButton;
   boolean typingSign=false, settingSkyColor=false, typingGroopName=false;
 
   public void settings() {
@@ -83,6 +83,7 @@ class ToolBox extends PApplet {
     read3DButton=new Button(this, 220, 200, 50, 50, "r 3D", 255, 203).setStrokeWeight(5).setHoverText("read the state of 3D mode");
     playLogicSoundButton=new Button(this, 280, 200, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("play sounds woth logic");
     pulseButton=new Button(this, 340, 200, 50, 50, "pulse", 255, 203).setStrokeWeight(5).setHoverText("generates a 1 tick pulse");
+    randomButton= new Button(this, 400, 200, 50, 50, "random", 255, 203).setStrokeWeight(5).setHoverText("sets its output randomly each tick");
 
     increase=new Button(this, width/2+180, height*0.5, 50, 50, "+", 255, 203).setStrokeWeight(5);
     increaseMore=new Button(this, width/2+240, height*0.5, 50, 50, "++", 255, 203).setStrokeWeight(5);
@@ -1038,6 +1039,14 @@ class ToolBox extends PApplet {
         } else {
           pulseButton.setColor(255, 203);
         }
+        pulseButton.draw();
+        
+        if (placingRandom) {
+          randomButton.setColor(255, #F2F258);
+        } else {
+          randomButton.setColor(255, 203);
+        }
+        randomButton.draw();
 
         //draw hover text
         connectLogicButton.drawHoverText();
@@ -1065,6 +1074,7 @@ class ToolBox extends PApplet {
         set3DButton.drawHoverText();
         playLogicSoundButton.drawHoverText();
         pulseButton.drawHoverText();
+        randomButton.drawHoverText();
       } else {
         fill(0);
         textSize(20);
@@ -1963,6 +1973,10 @@ class ToolBox extends PApplet {
         if(pulseButton.isMouseOver()){
           turnThingsOff();
           placingPulse=true;
+        }
+        if(randomButton.isMouseOver()){
+          turnThingsOff();
+          placingRandom=true;
         }
       }//end of edditing logic board
     }//end of tools
