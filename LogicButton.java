@@ -144,7 +144,8 @@ class LogicButton extends StageComponent {//ground component
             }
           }
         }
-      source.level.variables.set(variable, false);
+      if (variable!=-1)
+        source.level.variables.set(variable, false);
     }
   }
 }
