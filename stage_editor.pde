@@ -1300,7 +1300,7 @@ void mouseClicked3D() {
         if (Float.isNaN(direction)) {//ckeck if the direction is NaN
           direction=cos(rx_z)/abs(cos(rx_z));//use another silly method to get the direction
         }
-        level.stages.get(currentStageIndex).parts.add(new Ground(testPoint.x-5+5*direction, testPoint.y-5, testPoint.z-5, 10, 10, 10, Color));//create the new object
+        level.stages.get(currentStageIndex).parts.add(new Ground((int)(testPoint.x-5+5*direction), (int)(testPoint.y-5), (int)(testPoint.z-5), 10, 10, 10, Color));//create the new object
         break;
       }
       omp.y=testPoint.y;//change the current testing y value
@@ -1309,7 +1309,7 @@ void mouseClicked3D() {
         if (Float.isNaN(direction)) {//if the direction is NaN
           direction=sin(ry_xz)/abs(sin(ry_xz));//use another silly method to get the direction
         }
-        level.stages.get(currentStageIndex).parts.add(new Ground(testPoint.x-5, testPoint.y-5+5*direction, testPoint.z-5, 10, 10, 10, Color));//create the new object
+        level.stages.get(currentStageIndex).parts.add(new Ground((int)(testPoint.x-5), (int)(testPoint.y-5+5*direction), (int)(testPoint.z-5), 10, 10, 10, Color));//create the new object
         break;
       }
       omp.z=testPoint.z;//change the current testing z value
@@ -1318,7 +1318,7 @@ void mouseClicked3D() {
         if (Float.isNaN(direction)) {//if the diretion is nan
           direction=sin(rx_z)/abs(sin(rx_z));//use another silly method to get the direction
         }
-        level.stages.get(currentStageIndex).parts.add(new Ground(testPoint.x-5, testPoint.y-5, testPoint.z-5+5*direction, 10, 10, 10, Color));//create the new object
+        level.stages.get(currentStageIndex).parts.add(new Ground((int)(testPoint.x-5), (int)(testPoint.y-5), (int)(testPoint.z-5+5*direction), 10, 10, 10, Color));//create the new object
         break;
       }
     }
@@ -1338,7 +1338,7 @@ void mouseClicked3D() {
         if (Float.isNaN(direction)) {
           direction=cos(rx_z)/abs(cos(rx_z));
         }
-        level.stages.get(currentStageIndex).parts.add(new Holo(testPoint.x-5+5*direction, testPoint.y-5, testPoint.z-5, 10, 10, 10, Color));
+        level.stages.get(currentStageIndex).parts.add(new Holo((int)(testPoint.x-5+5*direction), (int)(testPoint.y-5), (int)(testPoint.z-5), 10, 10, 10, Color));
         break;
       }
       omp.y=testPoint.y;
@@ -1347,7 +1347,7 @@ void mouseClicked3D() {
         if (Float.isNaN(direction)) {
           direction=sin(ry_xz)/abs(sin(ry_xz));
         }
-        level.stages.get(currentStageIndex).parts.add(new Holo(testPoint.x-5, testPoint.y-5+5*direction, testPoint.z-5, 10, 10, 10, Color));
+        level.stages.get(currentStageIndex).parts.add(new Holo((int)(testPoint.x-5), (int)(testPoint.y-5+5*direction), (int)(testPoint.z-5), 10, 10, 10, Color));
         break;
       }
       omp.z=testPoint.z;
@@ -1356,7 +1356,7 @@ void mouseClicked3D() {
         if (Float.isNaN(direction)) {
           direction=sin(rx_z)/abs(sin(rx_z));
         }
-        level.stages.get(currentStageIndex).parts.add(new Holo(testPoint.x-5, testPoint.y-5, testPoint.z-5+5*direction, 10, 10, 10, Color));
+        level.stages.get(currentStageIndex).parts.add(new Holo((int)(testPoint.x-5), (int)(testPoint.y-5), (int)(testPoint.z-5+5*direction), 10, 10, 10, Color));
         break;
       }
     }
@@ -1376,7 +1376,7 @@ void mouseClicked3D() {
         if (Float.isNaN(direction)) {//ckeck if the direction is NaN
           direction=cos(rx_z)/abs(cos(rx_z));//use another silly method to get the direction
         }
-        level.stages.get(currentStageIndex).parts.add(new CheckPoint(testPoint.x+5*direction, testPoint.y, testPoint.z));//create the new object
+        level.stages.get(currentStageIndex).parts.add(new CheckPoint((int)(testPoint.x+5*direction), (int)(testPoint.y), (int)(testPoint.z)));//create the new object
         break;
       }
       omp.y=testPoint.y;//change the current testing y value
@@ -1385,7 +1385,7 @@ void mouseClicked3D() {
         if (Float.isNaN(direction)) {//if the direction is NaN
           direction=sin(ry_xz)/abs(sin(ry_xz));//use another silly method to get the direction
         }
-        level.stages.get(currentStageIndex).parts.add(new CheckPoint(testPoint.x, testPoint.y, testPoint.z));//create the new object
+        level.stages.get(currentStageIndex).parts.add(new CheckPoint((int)(testPoint.x), (int)(testPoint.y), (int)(testPoint.z)));//create the new object
         break;
       }
       omp.z=testPoint.z;//change the current testing z value
@@ -1394,7 +1394,7 @@ void mouseClicked3D() {
         if (Float.isNaN(direction)) {//if the diretion is nan
           direction=sin(rx_z)/abs(sin(rx_z));//use another silly method to get the direction
         }
-        level.stages.get(currentStageIndex).parts.add(new CheckPoint(testPoint.x, testPoint.y, testPoint.z+5*direction));//create the new object
+        level.stages.get(currentStageIndex).parts.add(new CheckPoint((int)(testPoint.x), (int)(testPoint.y), (int)(testPoint.z+5*direction)));//create the new object
         break;
       }
     }
@@ -1414,7 +1414,7 @@ void mouseClicked3D() {
         if (Float.isNaN(direction)) {//ckeck if the direction is NaN
           direction=cos(rx_z)/abs(cos(rx_z));//use another silly method to get the direction
         }
-        level.stages.get(currentStageIndex).parts.add(new Coin(testPoint.x+30*direction, testPoint.y, testPoint.z, level.numOfCoins));//create the new object
+        level.stages.get(currentStageIndex).parts.add(new Coin((int)(testPoint.x+30*direction), (int)(testPoint.y), (int)(testPoint.z), level.numOfCoins));//create the new object
         coins.add(false);
         level.numOfCoins++;
         break;
@@ -1425,7 +1425,7 @@ void mouseClicked3D() {
         if (Float.isNaN(direction)) {//if the direction is NaN
           direction=sin(ry_xz)/abs(sin(ry_xz));//use another silly method to get the direction
         }
-        level.stages.get(currentStageIndex).parts.add(new Coin(testPoint.x, testPoint.y+30*direction, testPoint.z, level.numOfCoins));//create the new object
+        level.stages.get(currentStageIndex).parts.add(new Coin((int)(testPoint.x), (int)(testPoint.y+30*direction), (int)(testPoint.z), level.numOfCoins));//create the new object
         coins.add(false);
         level.numOfCoins++;
         break;
@@ -1436,7 +1436,7 @@ void mouseClicked3D() {
         if (Float.isNaN(direction)) {//if the diretion is nan
           direction=sin(rx_z)/abs(sin(rx_z));//use another silly method to get the direction
         }
-        level.stages.get(currentStageIndex).parts.add(new Coin(testPoint.x, testPoint.y, testPoint.z+30*direction, level.numOfCoins));//create the new object
+        level.stages.get(currentStageIndex).parts.add(new Coin((int)(testPoint.x), (int)(testPoint.y), (int)(testPoint.z+30*direction), level.numOfCoins));//create the new object
         coins.add(false);
         level.numOfCoins++;
         break;
@@ -1458,7 +1458,7 @@ void mouseClicked3D() {
         if (Float.isNaN(direction)) {//ckeck if the direction is NaN
           direction=cos(rx_z)/abs(cos(rx_z));//use another silly method to get the direction
         }
-        level.stages.get(currentStageIndex).parts.add(new SWon3D(testPoint.x+20*direction, testPoint.y, testPoint.z));//create the new object
+        level.stages.get(currentStageIndex).parts.add(new SWon3D((int)(testPoint.x+20*direction), (int)(testPoint.y), (int)(testPoint.z)));//create the new object
         coins.add(false);
         level.numOfCoins++;
         break;
@@ -1469,7 +1469,7 @@ void mouseClicked3D() {
         if (Float.isNaN(direction)) {//if the direction is NaN
           direction=sin(ry_xz)/abs(sin(ry_xz));//use another silly method to get the direction
         }
-        level.stages.get(currentStageIndex).parts.add(new SWon3D(testPoint.x, testPoint.y, testPoint.z));//create the new object
+        level.stages.get(currentStageIndex).parts.add(new SWon3D((int)(testPoint.x), (int)(testPoint.y), (int)(testPoint.z)));//create the new object
         coins.add(false);
         level.numOfCoins++;
         break;
@@ -1480,7 +1480,7 @@ void mouseClicked3D() {
         if (Float.isNaN(direction)) {//if the diretion is nan
           direction=sin(rx_z)/abs(sin(rx_z));//use another silly method to get the direction
         }
-        level.stages.get(currentStageIndex).parts.add(new SWon3D(testPoint.x, testPoint.y, testPoint.z+20*direction));//create the new object
+        level.stages.get(currentStageIndex).parts.add(new SWon3D((int)(testPoint.x), (int)(testPoint.y), (int)(testPoint.z+20*direction)));//create the new object
         coins.add(false);
         level.numOfCoins++;
         break;
@@ -1502,7 +1502,7 @@ void mouseClicked3D() {
         if (Float.isNaN(direction)) {//ckeck if the direction is NaN
           direction=cos(rx_z)/abs(cos(rx_z));//use another silly method to get the direction
         }
-        level.stages.get(currentStageIndex).parts.add(new SWoff3D(testPoint.x+20*direction, testPoint.y, testPoint.z));//create the new object
+        level.stages.get(currentStageIndex).parts.add(new SWoff3D((int)(testPoint.x+20*direction), (int)(testPoint.y), (int)(testPoint.z)));//create the new object
         coins.add(false);
         level.numOfCoins++;
         break;
@@ -1513,7 +1513,7 @@ void mouseClicked3D() {
         if (Float.isNaN(direction)) {//if the direction is NaN
           direction=sin(ry_xz)/abs(sin(ry_xz));//use another silly method to get the direction
         }
-        level.stages.get(currentStageIndex).parts.add(new SWoff3D(testPoint.x, testPoint.y, testPoint.z));//create the new object
+        level.stages.get(currentStageIndex).parts.add(new SWoff3D((int)testPoint.x, (int)testPoint.y, (int)testPoint.z));//create the new object
         coins.add(false);
         level.numOfCoins++;
         break;
@@ -1524,7 +1524,7 @@ void mouseClicked3D() {
         if (Float.isNaN(direction)) {//if the diretion is nan
           direction=sin(rx_z)/abs(sin(rx_z));//use another silly method to get the direction
         }
-        level.stages.get(currentStageIndex).parts.add(new SWoff3D(testPoint.x, testPoint.y, testPoint.z+20*direction));//create the new object
+        level.stages.get(currentStageIndex).parts.add(new SWoff3D((int)(testPoint.x), (int)(testPoint.y), (int)(testPoint.z+20*direction)));//create the new object
         coins.add(false);
         level.numOfCoins++;
         break;
@@ -1546,7 +1546,7 @@ void mouseClicked3D() {
         if (Float.isNaN(direction)) {//ckeck if the direction is NaN
           direction=cos(rx_z)/abs(cos(rx_z));//use another silly method to get the direction
         }
-        level.stages.get(currentStageIndex).parts.add(new WritableSign(testPoint.x+35*direction, testPoint.y, testPoint.z));//create the new object
+        level.stages.get(currentStageIndex).parts.add(new WritableSign((int)(testPoint.x+35*direction), (int)(testPoint.y), (int)(testPoint.z)));//create the new object
         coins.add(false);
         level.numOfCoins++;
         break;
@@ -1557,7 +1557,7 @@ void mouseClicked3D() {
         if (Float.isNaN(direction)) {//if the direction is NaN
           direction=sin(ry_xz)/abs(sin(ry_xz));//use another silly method to get the direction
         }
-        level.stages.get(currentStageIndex).parts.add(new WritableSign(testPoint.x, testPoint.y, testPoint.z));//create the new object
+        level.stages.get(currentStageIndex).parts.add(new WritableSign((int)(testPoint.x), (int)(testPoint.y), (int)(testPoint.z)));//create the new object
         coins.add(false);
         level.numOfCoins++;
         break;
@@ -1568,7 +1568,7 @@ void mouseClicked3D() {
         if (Float.isNaN(direction)) {//if the diretion is nan
           direction=sin(rx_z)/abs(sin(rx_z));//use another silly method to get the direction
         }
-        level.stages.get(currentStageIndex).parts.add(new WritableSign(testPoint.x, testPoint.y, testPoint.z+5*direction));//create the new object
+        level.stages.get(currentStageIndex).parts.add(new WritableSign((int)(testPoint.x), (int)(testPoint.y), (int)(testPoint.z+5*direction)));//create the new object
         coins.add(false);
         level.numOfCoins++;
         break;
@@ -1590,7 +1590,7 @@ void mouseClicked3D() {
         if (Float.isNaN(direction)) {//ckeck if the direction is NaN
           direction=cos(rx_z)/abs(cos(rx_z));//use another silly method to get the direction
         }
-        level.stages.get(currentStageIndex).parts.add(new LogicButton(testPoint.x+20*direction, testPoint.y, testPoint.z));//create the new object
+        level.stages.get(currentStageIndex).parts.add(new LogicButton((int)(testPoint.x+20*direction), (int)(testPoint.y), (int)(testPoint.z)));//create the new object
         coins.add(false);
         level.numOfCoins++;
         break;
@@ -1601,7 +1601,7 @@ void mouseClicked3D() {
         if (Float.isNaN(direction)) {//if the direction is NaN
           direction=sin(ry_xz)/abs(sin(ry_xz));//use another silly method to get the direction
         }
-        level.stages.get(currentStageIndex).parts.add(new LogicButton(testPoint.x, testPoint.y, testPoint.z));//create the new object
+        level.stages.get(currentStageIndex).parts.add(new LogicButton((int)(testPoint.x), (int)(testPoint.y), (int)(testPoint.z)));//create the new object
         coins.add(false);
         level.numOfCoins++;
         break;
@@ -1612,7 +1612,7 @@ void mouseClicked3D() {
         if (Float.isNaN(direction)) {//if the diretion is nan
           direction=sin(rx_z)/abs(sin(rx_z));//use another silly method to get the direction
         }
-        level.stages.get(currentStageIndex).parts.add(new LogicButton(testPoint.x, testPoint.y, testPoint.z+20*direction));//create the new object
+        level.stages.get(currentStageIndex).parts.add(new LogicButton((int)(testPoint.x), (int)(testPoint.y), (int)(testPoint.z+20*direction)));//create the new object
         coins.add(false);
         level.numOfCoins++;
         break;
