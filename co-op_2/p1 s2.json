@@ -610,5 +610,81 @@
     "linkY": 600,
     "linkX": 80,
     "group": -1
+  },
+  {
+    "color": -16777215,
+    "rotation": 1,
+    "y1": -6710,
+    "x1": 930,
+    "y2": -6620,
+    "x2": 1020,
+    "type": "holoTriangle",
+    "group": -1
+  },
+  {
+    "color": -16777215,
+    "rotation": 0,
+    "y1": -6710,
+    "x1": 840,
+    "y2": -6620,
+    "x2": 930,
+    "type": "holoTriangle",
+    "group": -1
+  },
+  {
+    "dx": 20,
+    "color": -16777215,
+    "dy": 170,
+    "x": 910,
+    "y": -6880,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 20,
+    "color": -16777215,
+    "dy": 170,
+    "x": 930,
+    "y": -6880,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "color": -16777215,
+    "rotation": 1,
+    "y1": -6710,
+    "x1": 150,
+    "y2": -6620,
+    "x2": 240,
+    "type": "holoTriangle",
+    "group": -1
+  },
+  {
+    "color": -16777215,
+    "rotation": 0,
+    "y1": -6710,
+    "x1": 60,
+    "y2": -6620,
+    "x2": 150,
+    "type": "holoTriangle",
+    "group": -1
+  },
+  {
+    "dx": 20,
+    "color": -16777215,
+    "dy": 170,
+    "x": 130,
+    "y": -6880,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 20,
+    "color": -16777215,
+    "dy": 170,
+    "x": 150,
+    "y": -6880,
+    "type": "holo",
+    "group": -1
   }
 ]

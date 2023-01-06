@@ -887,19 +887,20 @@ void stageEditGUI() {
           rotateX(radians(90));
           translate(-(ct.x+ct.dx/2), -(ct.y+ct.dy), -(ct.z+ct.dz/2));
 
+          //translte objects in 3D
           if (grid_mode) {//Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size
             if (translateZaxis) {
-              ct.z=(int)initalObjectPos.z-Math.round((initalMousePoint.z-mousePoint.z)*1.0/grid_size)*grid_size;
+              ct.z=(int)Math.round((initalObjectPos.z-initalMousePoint.z+mousePoint.z)*1.0/grid_size)*grid_size;
             }
             if (translateXaxis) {
-              ct.x=(int)initalObjectPos.x-Math.round((initalMousePoint.x-mousePoint.x)*1.0/grid_size)*grid_size;
+              ct.x=(int)Math.round((initalObjectPos.x-initalMousePoint.x+mousePoint.x)*1.0/grid_size)*grid_size;
               ;
             }
             if (translateYaxis) {
-              ct.y=(int)initalObjectPos.y-Math.round((initalMousePoint.y-mousePoint.y)*1.0/grid_size)*grid_size;
+              ct.y=(int)Math.round((initalObjectPos.y-initalMousePoint.y+mousePoint.y)*1.0/grid_size)*grid_size;
               ;
             }
-          } else {
+          } else {//if not in grid mdoe
             if (translateZaxis) {
               ct.z=(int)initalObjectPos.z-(initalMousePoint.z-mousePoint.z);
             }
@@ -966,6 +967,7 @@ void stageEditGUI() {
           rotateX(radians(90));
           translate(-(ct.x+ct.dx/2), -(ct.y+ct.dy), -(ct.z+ct.dz/2));
 
+          //scaling of objects in 3D 
           if (grid_mode) {
             if (transformComponentNumber==1) {
               if (translateZaxis) {
@@ -1001,7 +1003,7 @@ void stageEditGUI() {
                 }
               }
             }
-          } else {
+          } else {//if not in grid mode
             if (transformComponentNumber==1) {
               if (translateZaxis) {
                 if (initialObjectDim.z-(initalMousePoint.z-mousePoint.z) > 0)

@@ -1,7 +1,7 @@
 [
   {
     "mainStage": 0,
-    "coins": 88,
+    "coins": 158,
     "min players": 3,
     "author": "jSdCool",
     "level_id": 68542958,
@@ -9,12 +9,18 @@
     "groups": [
       "group 0",
       "start gate",
-      "start gate 2"
+      "start gate 2",
+      "p1 pt3 platform",
+      "p2 pt3 platform",
+      "p3 pt3 platform",
+      "pt3 box1",
+      "pt3 box2",
+      "pt3 walkway"
     ],
     "game version": "0.7.0_Early_Access",
     "spawnY": 629,
     "max players": 3,
-    "number of variable": 5,
+    "number of variable": 11,
     "name": "co-op_2",
     "spawn pointX": 85,
     "spawn pointY": 629,
