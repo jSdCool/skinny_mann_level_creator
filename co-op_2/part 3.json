@@ -1720,5 +1720,16 @@
     "z": 2718,
     "type": "logic button",
     "group": -1
+  },
+  {
+    "link Index": 6,
+    "linkZ": 0,
+    "x": 6600,
+    "y": 550,
+    "z": 3200,
+    "type": "interdimentional Portal",
+    "linkY": 580,
+    "linkX": 280,
+    "group": -1
   }
 ]

@@ -1,7 +1,7 @@
 [
   {
     "mainStage": 0,
-    "coins": 158,
+    "coins": 169,
     "min players": 3,
     "author": "jSdCool",
     "level_id": 68542958,
@@ -50,6 +50,11 @@
     "name": "part 3",
     "location": "/part 3.json",
     "type": "3Dstage"
+  },
+  {
+    "name": "final",
+    "location": "/final.json",
+    "type": "stage"
   },
   {
     "name": "load",
