@@ -12,28 +12,33 @@
     "spawnY": 700
   },
   {
+    "name": "1-1",
+    "location": "/1-1.json",
+    "type": "stage"
+  },
+  {
     "name": "level_2",
-    "location": "\\level_2.json",
+    "location": "/level_2.json",
     "type": "stage"
   },
   {
     "name": "level_3",
-    "location": "\\level_3.json",
+    "location": "/level_3.json",
     "type": "stage"
   },
   {
     "name": "LEVEL_4",
-    "location": "\\LEVEL_4.json",
+    "location": "/LEVEL_4.json",
     "type": "stage"
   },
   {
     "name": "Level_5",
-    "location": "\\Level_5.json",
+    "location": "/Level_5.json",
     "type": "stage"
   },
   {
     "name": "test",
-    "location": "\\test.json",
+    "location": "/test.json",
     "type": "stage"
   }
 ]
